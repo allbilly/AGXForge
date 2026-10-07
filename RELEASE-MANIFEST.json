@@ -267,7 +267,7 @@
   "transformed": 3,
   "archive": 74
  },
- "bytes_total": 98789774,
+ "bytes_total": 98789754,
  "string_references_not_followed": {
   "isa/g17-bit-spec.jsonl": "tools/g17formspecgen.py",
   "isa/g17-certification.jsonl": "tools/g17isamap.py",
@@ -288,7 +288,7 @@
    "post_export_note": "revised in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "CITATION.cff": {
-   "sha256": "76edf5daba71ed0eee00aa842bf6d31202face91906c21531b636b5096631155",
+   "sha256": "f8e81098a497ede9be6b5341b70954732a55e2c87ad04d44c8eeb1b052f5c62f",
    "bytes": 1097,
    "origin": "overlay",
    "provenance": "release-authored",
@@ -1405,8 +1405,8 @@
    "provenance": "project source and writing"
   },
   "docs/g17-technical-reference.pdf": {
-   "sha256": "55ae0ffc779905cd04013ed126442c2393048c410b7803dc327d2650c7143086",
-   "bytes": 1050705,
+   "sha256": "d7bb746fb1b6ce960bdec761e1aa539b61d730676ef5e394d49f64839522811b",
+   "bytes": 1050685,
    "origin": "committed",
    "reason": "seed",
    "provenance": "project source and writing",
