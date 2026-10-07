@@ -1,5 +1,10 @@
 # AGXForge
 
+This fork adds a hardware-tested **base M1/G13G Asahi path**: scalar compilation,
+native DRM execution and validated Qwen2.5-0.5B inference. See the
+[Asahi examples and supported scope](examples/asahi/README.md). The original G17
+release is described below; native M1 macOS execution remains future work.
+
 **A native compiler and runtime for the Apple M5 GPU (G17) and the tensor units in its cores, built on a machine
 model recovered and checked by measurement.** AGXForge compiles its own IR to G17 machine code: instruction
 selection, register allocation, encoder, and the object, metadata and container the Metal path loads. The same code

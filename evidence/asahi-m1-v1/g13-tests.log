@@ -1,0 +1,19 @@
+python3 -m unittest discover -s test/g13 -v
+test_bits_select_float_arithmetic_without_apple_tools (test_compiler.Compiler.test_bits_select_float_arithmetic_without_apple_tools) ... ok
+test_every_selected_kernel_checks_capabilities (test_compiler.Compiler.test_every_selected_kernel_checks_capabilities) ... ok
+test_integer_subtraction_selects_negation_bit (test_compiler.Compiler.test_integer_subtraction_selects_negation_bit) ... ok
+test_model_kernel_builders_have_linux_compilation (test_compiler.Compiler.test_model_kernel_builders_have_linux_compilation) ... ok
+test_spills_and_shared_memory_are_rejected (test_compiler.Compiler.test_spills_and_shared_memory_are_rejected) ... ok
+test_ssa_and_terminators_are_checked (test_compiler.Compiler.test_ssa_and_terminators_are_checked) ... ok
+test_unsupported_ir_and_attributes_fail_before_execution (test_compiler.Compiler.test_unsupported_ir_and_attributes_fail_before_execution) ... ok
+test_bad_bindings_and_launch_fail_before_native_calls (test_compiler.Contract.test_bad_bindings_and_launch_fail_before_native_calls) ... ok
+test_shader_declarations_are_checked (test_compiler.Contract.test_shader_declarations_are_checked) ... ok
+test_branch_boundaries_and_truncation (test_compiler.Encoding.test_branch_boundaries_and_truncation) ... ok
+test_independent_mesa_golden_bytes (test_compiler.Encoding.test_independent_mesa_golden_bytes) ... ok
+test_register_views_and_uniform_extent (test_compiler.Encoding.test_register_views_and_uniform_extent) ... ok
+test_reject_silent_modifier_or_immediate_loss (test_compiler.Encoding.test_reject_silent_modifier_or_immediate_loss) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.035s
+
+OK

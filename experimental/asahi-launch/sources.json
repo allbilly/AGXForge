@@ -1,0 +1,44 @@
+{
+  "agxforge": {
+    "revision": "c6a3b22c23f7668a6139b6194ba82ee27587da52"
+  },
+  "mesa": {
+    "revision": "e24dc5bd1e7fe6101bdc866fb16a15a8fcae1aae",
+    "files": {
+      "cmdbuf.xml": "6bc10b31f5519584e28af65be046d35cae09dfa1fc94222bd11897f2cb1ad21a",
+      "hk_cmd_dispatch.c": "72b355507830a84705da3bfdb63507b22ee34ecd5bef3830e9beed408a25f0dd",
+      "agx_device.c": "0f7304919dc4cd0a274817d4d02fa9e90941195cc07b2e8e17c27758c3ea7132",
+      "agx_usc.h": "8a7b49fc48d2518b3b97fb9028441aa8ffc0ee3bd295ffefceff2a14e4c9cc3c",
+      "agx_pack.c": "f594448db4ccfe5d4f98f849c3f1e08b662264702f5de40a4c97d34be180cf00"
+    },
+    "repository": "https://github.com/mirror/mesa"
+  },
+  "applegpu": {
+    "repository": "https://github.com/dougallj/applegpu",
+    "revision": "28dd80468d4a6c94fa4dac34ed488196f5fedc5f",
+    "local_changes": "package-relative imports only",
+    "files": {
+      "applegpu.py": "986f6c6ec5547c5f61e357c7c0df614cb05b3382eed705d4ef7a79c4d3a2c46f",
+      "fma.py": "bc342220f04fc20227d7915af3163bf116daa9e16c49d45da8d876c20f96d539",
+      "srgb.py": "21aafd33b0134634ec5a7bd2ec38370b876658855e83d348fe0f3b4957068205",
+      "LICENSE": "53fb6880ee8dd5ff3470ac16823d1d017e811a7e9fd731227169a2cf95da440e"
+    }
+  },
+  "kernel": {
+    "repository": "https://github.com/AsahiLinux/linux",
+    "revision": "ce9f2eba72c061a50b2d790450e90af3439d8c24",
+    "uapi_sha256": "69fe416b7294dfec4794217bd11379effd53caff4e86010bb803f1b34bdf5e89"
+  },
+  "local_native_reference": {
+    "path": "/home/asahi/applegpu/experimental/asahi.py",
+    "sha256": "e48743e523aef02e25ac65f7ced593a19d9ce59dc7426bd9ec171058cde36c26",
+    "note": "Existing Mesa 25.3.6 ADD/MUL shader bytes and G13G USC/CDM sequence; no runtime import or retained-process address replay."
+  },
+  "qwen_architecture_reference": {
+    "repository": "https://github.com/huggingface/transformers",
+    "revision": "ff704ffd47d800e31b31f2f81a5a2952fb0fbf71",
+    "path": "src/transformers/models/qwen2/modeling_qwen2.py",
+    "sha256": "1ca484d22356b2efd13ce03faaad818a5fe95d6b374a2192a90709d87b0ec463",
+    "note": "Source review only, not a Transformers execution comparison. FP64 oracle is independently implemented."
+  }
+}

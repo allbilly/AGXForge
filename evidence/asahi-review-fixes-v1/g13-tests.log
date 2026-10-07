@@ -1,0 +1,31 @@
+test_bits_select_float_arithmetic_without_apple_tools (test_compiler.Compiler.test_bits_select_float_arithmetic_without_apple_tools) ... ok
+test_every_selected_kernel_checks_capabilities (test_compiler.Compiler.test_every_selected_kernel_checks_capabilities) ... ok
+test_integer_subtraction_selects_negation_bit (test_compiler.Compiler.test_integer_subtraction_selects_negation_bit) ... ok
+test_model_kernel_builders_have_linux_compilation (test_compiler.Compiler.test_model_kernel_builders_have_linux_compilation) ... ok
+test_spills_and_shared_memory_are_rejected (test_compiler.Compiler.test_spills_and_shared_memory_are_rejected) ... ok
+test_ssa_and_terminators_are_checked (test_compiler.Compiler.test_ssa_and_terminators_are_checked) ... ok
+test_unsupported_ir_and_attributes_fail_before_execution (test_compiler.Compiler.test_unsupported_ir_and_attributes_fail_before_execution) ... ok
+test_bad_bindings_and_launch_fail_before_native_calls (test_compiler.Contract.test_bad_bindings_and_launch_fail_before_native_calls) ... ok
+test_shader_declarations_are_checked (test_compiler.Contract.test_shader_declarations_are_checked) ... ok
+test_branch_boundaries_and_truncation (test_compiler.Encoding.test_branch_boundaries_and_truncation) ... ok
+test_independent_mesa_golden_bytes (test_compiler.Encoding.test_independent_mesa_golden_bytes) ... ok
+test_register_views_and_uniform_extent (test_compiler.Encoding.test_register_views_and_uniform_extent) ... ok
+test_reject_silent_modifier_or_immediate_loss (test_compiler.Encoding.test_reject_silent_modifier_or_immediate_loss) ... ok
+test_close_is_idempotent_and_prevents_reallocation (test_review_regressions.ClosedExecutor.test_close_is_idempotent_and_prevents_reallocation) ... ok
+test_closed_buffer_rejects_access_and_native_record (test_review_regressions.ClosedExecutor.test_closed_buffer_rejects_access_and_native_record) ... ok
+test_closed_executor_rejects_native_operations (test_review_regressions.ClosedExecutor.test_closed_executor_rejects_native_operations) ... ok
+test_accept_reachable_counter_caps (test_review_regressions.LoopSafety.test_accept_reachable_counter_caps) ... ok
+test_reject_16_bit_counter_overflow (test_review_regressions.LoopSafety.test_reject_16_bit_counter_overflow) ... ok
+test_reject_narrowing_counter_transfers (test_review_regressions.LoopSafety.test_reject_narrowing_counter_transfers) ... ok
+test_complete_bundle_passes (test_review_regressions.ScalarEvidence.test_complete_bundle_passes) ... ok
+test_empty_output_cannot_pass (test_review_regressions.ScalarEvidence.test_empty_output_cannot_pass) ... ok
+test_missing_all_or_one_result_checks_fails (test_review_regressions.ScalarEvidence.test_missing_all_or_one_result_checks_fails) ... ok
+test_missing_output_artifacts_fail (test_review_regressions.ScalarEvidence.test_missing_output_artifacts_fail) ... ok
+test_result_check_in_wrong_directory_fails (test_review_regressions.ScalarEvidence.test_result_check_in_wrong_directory_fails) ... ok
+test_result_check_must_match_summary (test_review_regressions.ScalarEvidence.test_result_check_must_match_summary) ... ok
+test_wrong_output_cannot_pass (test_review_regressions.ScalarEvidence.test_wrong_output_cannot_pass) ... ok
+
+----------------------------------------------------------------------
+Ran 26 tests in 0.055s
+
+OK

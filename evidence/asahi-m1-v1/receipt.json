@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "timestamp_utc": "2026-10-07T12:19:44.257788+00:00",
+  "target": "base M1 G13G B1 / native Asahi DRM",
+  "status": "PASS for declared Asahi coverage",
+  "bundles": {
+    "smoke": {
+      "path": "results/asahi-smoke",
+      "status": "PASS",
+      "launches": 81,
+      "tensor_checks": 0,
+      "artifact_manifest": "results/asahi-smoke/artifact-sha256.json",
+      "artifact_manifest_sha256": "cfa4d7bfd2192b5698e141117447e9f1ad4b6eca464543ef0a6f6f8b2c0900bd",
+      "artifacts": 1218
+    },
+    "isa": {
+      "path": "results/asahi-isa",
+      "status": "PASS",
+      "launches": 26,
+      "tensor_checks": 0,
+      "artifact_manifest": "results/asahi-isa/artifact-sha256.json",
+      "artifact_manifest_sha256": "d8a4180ffb30a64b2d29963a19672ecab917ac52f34004df62af76fb2e25f05f",
+      "artifacts": 371
+    },
+    "kernels": {
+      "path": "results/asahi-kernels",
+      "status": "PASS",
+      "launches": 57,
+      "tensor_checks": 0,
+      "artifact_manifest": "results/asahi-kernels/artifact-sha256.json",
+      "artifact_manifest_sha256": "c737231753c026ff311917c07ea91ef601837902374fb8a76f69d65527283b01",
+      "artifacts": 868
+    },
+    "model": {
+      "path": "results/asahi-model",
+      "status": "PASS",
+      "launches": 3780,
+      "tensor_checks": 2754,
+      "artifact_manifest": "results/asahi-model/artifact-sha256.json",
+      "artifact_manifest_sha256": "60b5252322a6280037a7d6d9a342df0866c13cc0f8240e9cafb0ec6cd41cbccc",
+      "artifacts": 31980
+    },
+    "model-relocated": {
+      "path": "results/asahi-model-relocated",
+      "status": "PASS",
+      "launches": 3780,
+      "tensor_checks": 2754,
+      "artifact_manifest": "results/asahi-model-relocated/artifact-sha256.json",
+      "artifact_manifest_sha256": "425f96e95f361adeeb2a0102a8c00fdd478fe863bc6c4a1060754f2c6aedf728",
+      "artifacts": 31980
+    }
+  },
+  "hardware_free": {
+    "g13_tests": 13,
+    "status": "PASS"
+  },
+  "probe": {
+    "node": "/dev/dri/renderD128",
+    "generation": 13,
+    "variant": 71,
+    "revision": 17,
+    "chip_id": 33027,
+    "features": 1,
+    "vm_start": 16384,
+    "vm_end": 549755781120,
+    "kernel_min": 536870912,
+    "status": "PASS",
+    "gpu_execution": "NOT_RUN",
+    "resource_cycles": 100
+  },
+  "model": {
+    "checkpoint": "Qwen/Qwen2.5-0.5B-Instruct",
+    "checkpoint_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "input_tokens": [
+      9707,
+      11,
+      12890
+    ],
+    "next_tokens": [
+      271,
+      358,
+      369,
+      264,
+      1661,
+      2618
+    ],
+    "generated_tokens": [
+      369,
+      264,
+      1661,
+      2618
+    ],
+    "generated_text": " for a good job",
+    "positions_per_run": 6,
+    "dispatches_per_run": 3780,
+    "tensors_per_position": 459,
+    "logit_error_bound": "0.05 + 0.003 * abs(FP64 reference)",
+    "max_logit_abs_error": 0.0007221746327967793,
+    "cpu_tensor_fallbacks": [],
+    "prefill": "tokenwise",
+    "capacity_tested": 32
+  },
+  "relocation": {
+    "status": "PASS",
+    "va_slots": [
+      0,
+      7
+    ],
+    "usc_exec_bases": [
+      68719476736,
+      98784247808
+    ],
+    "tensor_pairs": 2754,
+    "all_tensor_bits_identical": true,
+    "all_program_descriptors_identical": true
+  },
+  "reference_disabled": {
+    "native_run_status": "COMPLETED_UNVERIFIED",
+    "comparison_status": "PASS against recorded verified GPU tensors",
+    "gpu_tensors_bit_identical": 459,
+    "dispatches": 630,
+    "va_slot": 11,
+    "reference_factory_and_checkpoint_floats_raise_if_called": true,
+    "evidence_directory": "results/asahi-model-no-reference",
+    "guard_script": "no-reference-run.py"
+  },
+  "g17": {
+    "retained_suite_status": "FAIL on Linux: Apple decoder/frameworks and macOS tools unavailable",
+    "attempted_test_cases": 149,
+    "modules": 16,
+    "modules_passed": 7,
+    "modules_failed": 9,
+    "g17_source_changed": false,
+    "m5_gpu_execution": "NOT_RUN"
+  },
+  "macos_native": {
+    "status": "NOT_IMPLEMENTED / NOT_RUN",
+    "reason": "Asahi-first scope; no M1 macOS layout measurements or hardware runner"
+  },
+  "metal_m1": {
+    "status": "NOT_IMPLEMENTED / NOT_RUN"
+  },
+  "unsupported": [
+    "G13 matrix lowering",
+    "shared memory/SIMD cooperation",
+    "atomics",
+    "spills",
+    "nested loops/arbitrary CFGs",
+    "additional M1-family GPU profiles",
+    "unmeasured macOS builds"
+  ],
+  "fault_recovery": "NOT_TESTED: a timeout is not recovery; stop and establish a known-good health test before resuming",
+  "baseline_sources": "../../experimental/asahi-launch/sources.json",
+  "commands": [
+    "make asahi-tools",
+    "make g13-test",
+    "build/asahi/00_probe --repeat 100",
+    ".venv-asahi/bin/python examples/asahi/smoke.py --output results/asahi-smoke",
+    ".venv-asahi/bin/python examples/asahi/verify_isa.py --output results/asahi-isa",
+    "OPENBLAS_NUM_THREADS=1 .venv-asahi/bin/python examples/asahi/verify_kernels.py --output results/asahi-kernels",
+    "OPENBLAS_NUM_THREADS=1 .venv-asahi/bin/python examples/asahi/qwen.py --verify --token-ids 9707,11,12890 --generate 4 --output results/asahi-model",
+    "OPENBLAS_NUM_THREADS=1 .venv-asahi/bin/python examples/asahi/qwen.py --verify --token-ids 9707,11,12890 --generate 4 --va-slot 7 --output results/asahi-model-relocated",
+    "OPENBLAS_NUM_THREADS=1 .venv-asahi/bin/python results/asahi-validation/no-reference-run.py",
+    "OPENBLAS_NUM_THREADS=1 .venv-asahi/bin/python tools/release_tests.py -j 4 --timeout 60",
+    ".venv-asahi/bin/python tools/asahi_evidence.py <bundle> --manifest <new-manifest-file>"
+  ]
+}

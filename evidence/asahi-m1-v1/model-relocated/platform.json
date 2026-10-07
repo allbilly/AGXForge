@@ -1,0 +1,46 @@
+{
+  "system": "Linux",
+  "kernel": {
+    "system": "Linux",
+    "node": "fedora",
+    "release": "7.1.13+",
+    "version": "#3 SMP PREEMPT_DYNAMIC Sun Oct  4 20:34:19 HKT 2026",
+    "machine": "aarch64",
+    "processor": ""
+  },
+  "model": "Apple MacBook Air (M1, 2020)",
+  "page_bytes": 16384,
+  "python": "3.14.7",
+  "driver": "asahi",
+  "render_node": "/dev/dri/renderD128",
+  "params": {
+    "features": 1,
+    "generation": 13,
+    "variant": 71,
+    "revision": 17,
+    "chip_id": 33027,
+    "vm_start": 16384,
+    "vm_end": 549755781120,
+    "kernel_min_bytes": 536870912,
+    "max_commands": 64,
+    "max_attachments": 16,
+    "timestamp_hz": 1000000000,
+    "dies": 1,
+    "clusters": 1,
+    "cores_per_cluster": 8,
+    "max_khz": 1278000,
+    "drm_major": 0,
+    "drm_minor": 0,
+    "drm_patch": 0,
+    "usc_exec_base": 98784247808,
+    "kernel_start": 515396042752,
+    "vm_id": 1,
+    "queue_id": 1,
+    "core_masks": [
+      254
+    ]
+  },
+  "packages": "mesa-dri-drivers-26.2.3-1.fc44.aarch64\nmesa-vulkan-drivers-26.2.3-1.fc44.aarch64\nkernel-headers-7.1.13-402.asahi.fc44.aarch64\nlibdrm-2.4.134-1.fc44.aarch64",
+  "compiler": "cc (GCC) 16.2.1 20260819 (Red Hat 16.2.1-2)\nCopyright (C) 2026 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.",
+  "repository_revision": "c6a3b22c23f7668a6139b6194ba82ee27587da52"
+}

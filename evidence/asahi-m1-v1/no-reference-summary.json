@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "timestamp_utc": "2026-10-07T12:12:41.896614+00:00",
+  "status": "COMPLETED_UNVERIFIED",
+  "input_tokens": [
+    9707
+  ],
+  "generated_tokens": [
+    271
+  ],
+  "checks": [
+    {
+      "position": 0,
+      "token": 9707,
+      "next_token": 271,
+      "tensors": 0,
+      "status": "COMPLETED_UNVERIFIED",
+      "top_token_matches": null,
+      "host_execution_seconds": 1.8295207850005681
+    }
+  ],
+  "tensor_fallbacks": [],
+  "executor": "native Asahi DRM",
+  "prefill": "tokenwise",
+  "verified": false,
+  "bounds": {
+    "embedding": [
+      0,
+      0
+    ],
+    "norm": [
+      0.003,
+      0.003
+    ],
+    "projection": [
+      0.005,
+      0.003
+    ],
+    "rope": [
+      0.005,
+      0.003
+    ],
+    "cache": [
+      0.005,
+      0.003
+    ],
+    "scores": [
+      0.01,
+      0.005
+    ],
+    "probs": [
+      0.0005,
+      0.005
+    ],
+    "attention": [
+      0.005,
+      0.003
+    ],
+    "residual": [
+      0.01,
+      0.003
+    ],
+    "activation": [
+      0.01,
+      0.005
+    ],
+    "logits": [
+      0.05,
+      0.003
+    ]
+  },
+  "dispatches": 630,
+  "completed_positions": 1,
+  "text": "\n\n",
+  "teardown": "clean"
+}

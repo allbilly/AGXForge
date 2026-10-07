@@ -1,0 +1,46 @@
+{
+  "embedding": {
+    "tensors": 6,
+    "max_abs_error": 0
+  },
+  "norm": {
+    "tensors": 294,
+    "max_abs_error": 0.0026166931858071507
+  },
+  "projection": {
+    "tensors": 1008,
+    "max_abs_error": 0.004402158290758962
+  },
+  "rope": {
+    "tensors": 288,
+    "max_abs_error": 0.00029198956860998493
+  },
+  "cache": {
+    "tensors": 288,
+    "max_abs_error": 0.00029128766945385465
+  },
+  "scores": {
+    "tensors": 144,
+    "max_abs_error": 0.0032762424141310476
+  },
+  "probs": {
+    "tensors": 144,
+    "max_abs_error": 1.7636047346225592e-05
+  },
+  "attention": {
+    "tensors": 144,
+    "max_abs_error": 0.00029128766945385465
+  },
+  "residual": {
+    "tensors": 288,
+    "max_abs_error": 0.005990068877963495
+  },
+  "activation": {
+    "tensors": 144,
+    "max_abs_error": 0.0021819074099926894
+  },
+  "logits": {
+    "tensors": 6,
+    "max_abs_error": 0.0007221746327967793
+  }
+}

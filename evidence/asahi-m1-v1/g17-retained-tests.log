@@ -1,0 +1,246 @@
+FAIL test_g17abi.py (rc 1)
+........E..................................................
+======================================================================
+ERROR: test_instruction_declarations_match_independent_vendor_decoder (test_g17abi.CompilerABI.test_instruction_declarations_match_independent_vendor_decoder)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/asahi/AGXForge/test/test_g17abi.py", line 114, in test_instruction_declarations_match_independent_vendor_decoder
+    decoded = g17packedcheck.decode(p.code)
+  File "/home/asahi/AGXForge/tools/g17packedcheck.py", line 121, in decode
+    for off, size, opcode, tokens in _decode_cached(code, decoder)]
+                                     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/asahi/AGXForge/tools/g17packedcheck.py", line 96, in _decode_cached
+    r = subprocess.run([decoder, f.name, "0", str(len(code)), "--expr"],
+                       check=True, capture_output=True, text=True, timeout=30)
+  File "/usr/lib64/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/home/asahi/AGXForge/tools/agx3dis', '/tmp/tmphvudhzw8.bin', '0', '150', '--expr']' returned non-zero exit status 1.
+
+----------------------------------------------------------------------
+Ran 59 tests in 5.674s
+
+FAILED (errors=1)
+
+FAIL test_g17gpulock.py (rc 1)
+.E.sss.....
+======================================================================
+ERROR: test_native_command_buffer_refuses_when_lock_file_cannot_open (test_g17gpulock.NoDispatchPathBypassesIt.test_native_command_buffer_refuses_when_lock_file_cannot_open)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/asahi/AGXForge/test/test_g17gpulock.py", line 144, in test_native_command_buffer_refuses_when_lock_file_cannot_open
+    subprocess.run(["xcrun", "clang", "-fobjc-arc", "-I", TOOLS,
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    "-framework", "Foundation", "-framework", "Metal",
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    source, "-o", binary], check=True, capture_output=True)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib64/python3.14/subprocess.py", line 555, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib64/python3.14/subprocess.py", line 1039, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib64/python3.14/subprocess.py", line 1990, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'xcrun'
+
+----------------------------------------------------------------------
+Ran 11 tests in 2.769s
+
+FAILED (errors=1, skipped=3)
+
+FAIL test_g17inferencelower.py (rc 1)
+~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                              accumulate=accumulate, transA=transA, transB=transB, a_type=a_type,
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<12 lines>...
+                              **({} if hoist is None else dict(hoist=dict(hoist))),
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                              **({} if kloop_chunk is None else dict(kloop_chunk=kloop_chunk)))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/asahi/AGXForge/agxforge/g17/tlower.py", line 712, in lower
+    pro = bytearray(indexgen.prologue(lane, m, col, t1, t2, [r for r in (idxA, idxB, idxC) if r is not None],
+                    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                      [ld for r, ld in ((idxA, lda), (idxB, ldb), (idxC, ldc)) if r is not None]))
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/asahi/AGXForge/agxforge/g17/indexgen.py", line 39, in prologue
+    out += read_sr_lane(lane, slot=0)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/home/asahi/AGXForge/agxforge/g17/indexgen.py", line 21, in read_sr_lane
+    d = list(model.decode(bytes(u), 0)); assert d and d[0].opcode and d[0].opcode.id == 14060 and names[d[0].values[0][1]] == 'R%dL' % dest and names[d[0].values[2][1]] == 'SR_SIMD_ELEM' and d[0].values[1][1] == (slot + 1) << 20, d
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: []
+
+----------------------------------------------------------------------
+Ran 0 tests in 2.004s
+
+FAILED (errors=1)
+
+FAIL test_g17mmasaturate.py (rc 1)
+E..
+======================================================================
+ERROR: test_both_spellings_are_reproduced_byte_for_byte (test_g17mmasaturate.SaturatingInt8.test_both_spellings_are_reproduced_byte_for_byte)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/asahi/AGXForge/test/test_g17mmasaturate.py", line 25, in test_both_spellings_are_reproduced_byte_for_byte
+    self.assertEqual(mmaenc.mma(0, 10, 8, 0, **common), (10384, APPLE_PLAIN))
+                     ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/asahi/AGXForge/agxforge/g17/mmaenc.py", line 135, in mma
+    return op, encode(op, vals)
+               ~~~~~~^^^^^^^^^^
+  File "/home/asahi/AGXForge/agxforge/g17/mmaenc.py", line 48, in encode
+    fields, tpl, base, dec = _tables(op)
+                             ~~~~~~~^^^^
+  File "/home/asahi/AGXForge/agxforge/g17/mmaenc.py", line 37, in _tables
+    dec = list(model.decode(ref, 0))[0]
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.109s
+
+FAILED (errors=1)
+
+FAIL test_g17tensorchain.py (rc 1)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                              accumulate=accumulate, transA=transA, transB=transB, a_type=a_type,
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<12 lines>...
+                              **({} if hoist is None else dict(hoist=dict(hoist))),
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                              **({} if kloop_chunk is None else dict(kloop_chunk=kloop_chunk)))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/asahi/AGXForge/agxforge/g17/tlower.py", line 712, in lower
+    pro = bytearray(indexgen.prologue(lane, m, col, t1, t2, [r for r in (idxA, idxB, idxC) if r is not None],
+                    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                      [ld for r, ld in ((idxA, lda), (idxB, ldb), (idxC, ldc)) if r is not None]))
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/asahi/AGXForge/agxforge/g17/indexgen.py", line 39, in prologue
+    out += read_sr_lane(lane, slot=0)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/home/asahi/AGXForge/agxforge/g17/indexgen.py", line 21, in read_sr_lane
+    d = list(model.decode(bytes(u), 0)); assert d and d[0].opcode and d[0].opcode.id == 14060 and names[d[0].values[0][1]] == 'R%dL' % dest and names[d[0].values[2][1]] == 'SR_SIMD_ELEM' and d[0].values[1][1] == (slot + 1) << 20, d
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: []
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.814s
+
+FAILED (failures=1)
+
+FAIL test_g17tensorcommonruntime.py (rc 1)
+E
+======================================================================
+ERROR: setUpClass (test_g17tensorcommonruntime.TensorCommonRuntime)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/asahi/AGXForge/test/test_g17tensorcommonruntime.py", line 22, in setUpClass
+    subprocess.run(["clang", "-fobjc-arc", "-O2", "-Wall", "-Wextra", "-Werror",
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    "-framework", "Foundation", "-framework", "Metal", "-o", str(cls.worker),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    str(ROOT / "tools/g17commonworker.m")], cwd=ROOT, check=True,
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                   capture_output=True, timeout=30)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib64/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['clang', '-fobjc-arc', '-O2', '-Wall', '-Wextra', '-Werror', '-framework', 'Foundation', '-framework', 'Metal', '-o', '/tmp/g17-tensor-worker-test-glozfo6e/common-worker', '/home/asahi/AGXForge/tools/g17commonworker.m']' returned non-zero exit status 1.
+
+----------------------------------------------------------------------
+Ran 0 tests in 0.033s
+
+FAILED (errors=1)
+
+FAIL test_g17tensorfeedmodes.py (rc 1)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                              accumulate=accumulate, transA=transA, transB=transB, a_type=a_type,
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<12 lines>...
+                              **({} if hoist is None else dict(hoist=dict(hoist))),
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                              **({} if kloop_chunk is None else dict(kloop_chunk=kloop_chunk)))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/asahi/AGXForge/agxforge/g17/tlower.py", line 712, in lower
+    pro = bytearray(indexgen.prologue(lane, m, col, t1, t2, [r for r in (idxA, idxB, idxC) if r is not None],
+                    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                      [ld for r, ld in ((idxA, lda), (idxB, ldb), (idxC, ldc)) if r is not None]))
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/asahi/AGXForge/agxforge/g17/indexgen.py", line 39, in prologue
+    out += read_sr_lane(lane, slot=0)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/home/asahi/AGXForge/agxforge/g17/indexgen.py", line 21, in read_sr_lane
+    d = list(model.decode(bytes(u), 0)); assert d and d[0].opcode and d[0].opcode.id == 14060 and names[d[0].values[0][1]] == 'R%dL' % dest and names[d[0].values[2][1]] == 'SR_SIMD_ELEM' and d[0].values[1][1] == (slot + 1) << 20, d
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: []
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.425s
+
+FAILED (failures=13)
+
+FAIL test_g17tensorfeedtable.py (rc 1)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                              accumulate=accumulate, transA=transA, transB=transB, a_type=a_type,
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<12 lines>...
+                              **({} if hoist is None else dict(hoist=dict(hoist))),
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                              **({} if kloop_chunk is None else dict(kloop_chunk=kloop_chunk)))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/asahi/AGXForge/agxforge/g17/tlower.py", line 712, in lower
+    pro = bytearray(indexgen.prologue(lane, m, col, t1, t2, [r for r in (idxA, idxB, idxC) if r is not None],
+                    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                      [ld for r, ld in ((idxA, lda), (idxB, ldb), (idxC, ldc)) if r is not None]))
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/asahi/AGXForge/agxforge/g17/indexgen.py", line 39, in prologue
+    out += read_sr_lane(lane, slot=0)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/home/asahi/AGXForge/agxforge/g17/indexgen.py", line 21, in read_sr_lane
+    d = list(model.decode(bytes(u), 0)); assert d and d[0].opcode and d[0].opcode.id == 14060 and names[d[0].values[0][1]] == 'R%dL' % dest and names[d[0].values[2][1]] == 'SR_SIMD_ELEM' and d[0].values[1][1] == (slot + 1) << 20, d
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: []
+
+----------------------------------------------------------------------
+Ran 13 tests in 1.673s
+
+FAILED (failures=27)
+
+FAIL test_g17tensorsaturate.py (rc 1)
+e.Saturate.test_the_default_wraps)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/asahi/AGXForge/test/test_g17tensorsaturate.py", line 25, in test_the_default_wraps
+    self.assertTrue(all(i.values[2][1] == 9 for i in int8_mmas() if i.opcode.id == 10384))
+                                                     ~~~~~~~~~^^
+  File "/home/asahi/AGXForge/test/test_g17tensorsaturate.py", line 13, in int8_mmas
+    body = tlower.lower(32, 32, 64, 64, 32, 32, a_type="int8", b_type="int8", **kw)[0]
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/asahi/AGXForge/agxforge/g17/tlower.py", line 712, in lower
+    pro = bytearray(indexgen.prologue(lane, m, col, t1, t2, [r for r in (idxA, idxB, idxC) if r is not None],
+                    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                      [ld for r, ld in ((idxA, lda), (idxB, ldb), (idxC, ldc)) if r is not None]))
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/asahi/AGXForge/agxforge/g17/indexgen.py", line 39, in prologue
+    out += read_sr_lane(lane, slot=0)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/home/asahi/AGXForge/agxforge/g17/indexgen.py", line 21, in read_sr_lane
+    d = list(model.decode(bytes(u), 0)); assert d and d[0].opcode and d[0].opcode.id == 14060 and names[d[0].values[0][1]] == 'R%dL' % dest and names[d[0].values[2][1]] == 'SR_SIMD_ELEM' and d[0].values[1][1] == (slot + 1) << 20, d
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: []
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.224s
+
+FAILED (failures=3)
+
+16 modules, 149 tests, 9 failed

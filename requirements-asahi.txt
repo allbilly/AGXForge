@@ -1,0 +1,5 @@
+# Model execution/independent numerical verification and checkpoint download.
+# The C helper, handwritten examples and hardware-free G13 tests use stdlib only.
+numpy==2.5.3
+tokenizers==0.23.2
+huggingface-hub==1.33.0

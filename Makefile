@@ -57,3 +57,34 @@ check: examples test
 
 platform:
 	$(PYTHON) tools/g17platform.py --check
+
+# Independent Linux/G13 bring-up. Does not build Apple's G17 tools.
+ASAHI_CC ?= cc
+ASAHI_CFLAGS ?= -O2 -g -std=c11 -Wall -Wextra -Werror
+ASAHI_SRC = agxforge/runtime/asahi.c agxforge/runtime/asahi_launch.c
+ASAHI_HEADERS = agxforge/runtime/asahi.h agxforge/runtime/asahi_internal.h
+.PHONY: asahi-tools asahi-probe asahi-smoke asahi-kernels asahi-isa g13-test
+asahi-tools: build/asahi/libagxforge_asahi.so build/asahi/00_probe
+
+build/asahi/libagxforge_asahi.so: $(ASAHI_SRC) $(ASAHI_HEADERS)
+	mkdir -p build/asahi
+	$(ASAHI_CC) $(ASAHI_CFLAGS) -fPIC -shared -o $@ $(ASAHI_SRC)
+
+build/asahi/00_probe: examples/asahi/00_probe.c $(ASAHI_SRC) $(ASAHI_HEADERS)
+	mkdir -p build/asahi
+	$(ASAHI_CC) $(ASAHI_CFLAGS) -Iagxforge/runtime -o $@ $< $(ASAHI_SRC)
+
+asahi-probe: asahi-tools
+	build/asahi/00_probe
+
+asahi-smoke: asahi-tools
+	$(PYTHON) examples/asahi/smoke.py --output results/asahi-smoke
+
+g13-test:
+	$(PYTHON) -m unittest discover -s test/g13 -v
+
+asahi-kernels: asahi-tools
+	$(PYTHON) examples/asahi/verify_kernels.py --output results/asahi-kernels
+
+asahi-isa: asahi-tools
+	$(PYTHON) examples/asahi/verify_isa.py --output results/asahi-isa

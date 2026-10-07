@@ -16,3 +16,13 @@ results/g17-encoder-demo/
 
 # tooling session artifacts
 .codex-security/
+build/asahi/
+results/asahi-smoke/
+.venv-asahi/
+models/asahi/
+results/asahi-model/
+results/asahi-kernels/
+results/asahi-isa/
+results/asahi-model-relocated/
+results/asahi-model-no-reference/
+results/asahi-validation/
