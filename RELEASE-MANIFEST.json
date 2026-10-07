@@ -267,7 +267,7 @@
   "transformed": 3,
   "archive": 74
  },
- "bytes_total": 98793099,
+ "bytes_total": 98793021,
  "string_references_not_followed": {
   "isa/g17-bit-spec.jsonl": "tools/g17formspecgen.py",
   "isa/g17-certification.jsonl": "tools/g17isamap.py",
@@ -7408,12 +7408,14 @@
    "provenance": "release-authored"
   },
   "tools/tensorops-model/fp4_convert_probe.log": {
-   "sha256": "37e68081a08d9c3cc7425833c200a08fb1add5a880ed1dc362f2684373006aae",
-   "bytes": 4070,
+   "sha256": "219d1825db3dcbc05a3cfacb8ebd26045518248d407d344d9da1cfe3d6eece35",
+   "bytes": 3992,
    "origin": "committed",
    "reason": "link",
    "via": "docs/g17-tensorops-machine-model.md",
-   "provenance": "project source and writing"
+   "provenance": "project source and writing",
+   "post_export_edit": "redacted a local filesystem path from a retained log",
+   "post_export_note": "revised in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "tools/tensorops-model/fp4_scalar_convert_probe.log": {
    "sha256": "9d183c98c31b861458942ca93810564d14bbbcbe073117303b50119077831d37",

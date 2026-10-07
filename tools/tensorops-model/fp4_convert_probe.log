@@ -17,10 +17,10 @@ air.convert.f.v8f6e3m2.f.v8f32                       native_compile_failed | EXC
 air.convert.f.v8f6e3m2.f.v8f16                       native_compile_failed | EXC_BAD_ACCESS KERN_INVALID_ADDRESS at 0x00000000 @ AGCLLVMAirBuiltins::buildConvert(llvm::Value**, llvm::StringRef)
 air.convert.f.v8f6e3m2.f.v8bf16                      native_compile_failed | EXC_BAD_ACCESS KERN_INVALID_ADDRESS at 0x00000000 @ AGCLLVMAirBuiltins::buildConvert(llvm::Value**, llvm::StringRef)
 Traceback (most recent call last):
-  File "/Users/spencer/Downloads/triad-b16rule/results/g17-tensorops-recon-v1/fp4_convert_probe.py", line 35, in <module>
+  File "results/g17-tensorops-recon-v1/fp4_convert_probe.py", line 35, in <module>
     kern(f'fcv_f32_{fmt}_s', 'f32', fmt); kern(f'fcv_{fmt}_f32_s', fmt, 'f32')
     ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/spencer/Downloads/triad-b16rule/results/g17-tensorops-recon-v1/fp4_convert_probe.py", line 20, in kern
+  File "results/g17-tensorops-recon-v1/fp4_convert_probe.py", line 20, in kern
     nm = f'air.convert.f.{dst}.f.{src}'; dt, st = LL[dst], LL[src]; ldt = 'i32' if False else st
                                                            ~~^^^^^
 KeyError: 'f4e2m1'
