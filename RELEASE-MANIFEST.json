@@ -267,7 +267,7 @@
   "transformed": 3,
   "archive": 74
  },
- "bytes_total": 98793021,
+ "bytes_total": 98793005,
  "string_references_not_followed": {
   "isa/g17-bit-spec.jsonl": "tools/g17formspecgen.py",
   "isa/g17-certification.jsonl": "tools/g17isamap.py",
@@ -1335,7 +1335,7 @@
    "post_export_note": "revised in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "docs/execution-validation.md": {
-   "sha256": "28136f299c3b4dc898d62c5facf2b9c1060753fad0a98e8c90c8b1e3e27e4ca6",
+   "sha256": "14a85e6a356f9ebc0fb74a08c5df3e94e809614efc5eed02b452ffa83fd43fe4",
    "bytes": 6947,
    "origin": "committed",
    "reason": "seed",
@@ -1386,7 +1386,7 @@
    "provenance": "project source and writing"
   },
   "docs/findings.md": {
-   "sha256": "18fe3fa34e18d16ee7cb20f961c1bfd36869d60d9d65daea2a4773e467d0a928",
+   "sha256": "a87e01c6e5591893df74b849fe8ce4053126270ebb65b7220f909e66c06cf12b",
    "bytes": 6892,
    "origin": "committed",
    "reason": "seed",
@@ -1403,8 +1403,8 @@
    "provenance": "project source and writing"
   },
   "docs/g17-technical-reference.pdf": {
-   "sha256": "7dd14758aa1c55a5c776705e885f2f24b8c4dc3453bf7a74e537a481f1adf6fc",
-   "bytes": 1050670,
+   "sha256": "55ae0ffc779905cd04013ed126442c2393048c410b7803dc327d2650c7143086",
+   "bytes": 1050705,
    "origin": "committed",
    "reason": "seed",
    "provenance": "project source and writing",
@@ -1445,8 +1445,8 @@
    "post_export_note": "revised in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "docs/tex/ch/00-brief.tex": {
-   "sha256": "648dbc079e2c71f524540022d57951e6a6ac5376b9e0e2c82c98183a0865454a",
-   "bytes": 15209,
+   "sha256": "2118c80af9b6a567eba8ef085bb91c51d7c73179e3b9c86507022783600bc020",
+   "bytes": 15207,
    "origin": "committed",
    "reason": "seed",
    "provenance": "project source and writing",
@@ -1454,8 +1454,8 @@
    "post_export_note": "revised in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "docs/tex/ch/01-device.tex": {
-   "sha256": "b983881a4ef78ad52b30da26789b333d9d5312651258189d93ae1e5247532a9b",
-   "bytes": 18147,
+   "sha256": "e566de3123f9146f6b29bf432ac516bfcee690bcd4aa12ed34c47fba85ba1a1d",
+   "bytes": 18145,
    "origin": "committed",
    "reason": "seed",
    "provenance": "project source and writing",
@@ -1463,8 +1463,8 @@
    "post_export_note": "revised in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "docs/tex/ch/02-registers.tex": {
-   "sha256": "43bdb72c61247e9918b6df8150451f183c3cf39bacd9668c8ac2daf127db0b18",
-   "bytes": 37108,
+   "sha256": "f83c5ce75a28ffe36d38dd2f95154eb7ff8dd6a1fc8af06b253c8dccd8e4e8df",
+   "bytes": 37107,
    "origin": "committed",
    "reason": "seed",
    "provenance": "project source and writing",
@@ -1472,8 +1472,8 @@
    "post_export_note": "revised in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "docs/tex/ch/03-encoding.tex": {
-   "sha256": "ceb766c8d6699562a2612d3aed4a73a73f0c201e93ac3a29993a9bec9e9c1998",
-   "bytes": 39115,
+   "sha256": "4a7f5e59286335ecfcc8cb4711c49f43a049982bb71c345669c833db8133ba70",
+   "bytes": 39114,
    "origin": "committed",
    "reason": "seed",
    "provenance": "project source and writing",
@@ -1481,8 +1481,8 @@
    "post_export_note": "revised in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "docs/tex/ch/04-scalar.tex": {
-   "sha256": "2692781e294e65161aa3fc569f139addd974c94892443bddacc47add6622b9df",
-   "bytes": 28886,
+   "sha256": "506dce146d635439ad132ae460edeb107c749c616034ab42b6e8d08ba30afd64",
+   "bytes": 28884,
    "origin": "committed",
    "reason": "seed",
    "provenance": "project source and writing",
@@ -1490,8 +1490,8 @@
    "post_export_note": "revised in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "docs/tex/ch/05-control.tex": {
-   "sha256": "9a250296232d1969315e279b8be540dc27a37293d8b46396870b081eab45e18e",
-   "bytes": 14425,
+   "sha256": "b411216b35f3a9f6790c64c8b821b39762acaf2ab1899710998e84cf97a91a61",
+   "bytes": 14424,
    "origin": "committed",
    "reason": "seed",
    "provenance": "project source and writing",
@@ -1508,8 +1508,8 @@
    "post_export_note": "revised in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "docs/tex/ch/07-memory.tex": {
-   "sha256": "b87bd42ae5aa03a8d0bf4c6481cf0aefba0e2dbd540d59fdb89bf509af4561fe",
-   "bytes": 38272,
+   "sha256": "f4e64a83f6aeafa59fa3576fe4485b0cdb675eae46578fe655c17b1976c41384",
+   "bytes": 38266,
    "origin": "committed",
    "reason": "seed",
    "provenance": "project source and writing",
@@ -1517,8 +1517,8 @@
    "post_export_note": "revised in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "docs/tex/ch/08-cross-lane.tex": {
-   "sha256": "daecf05af8f9c39c8fe5a6373f83cf5b41ab358335ce92d52f24700861a291b1",
-   "bytes": 8235,
+   "sha256": "44a7245e6b9dce53c6053fa12fc40b51907b8c1d14eb2c74dfcda0ee84242440",
+   "bytes": 8234,
    "origin": "committed",
    "reason": "seed",
    "provenance": "project source and writing",
@@ -1526,8 +1526,8 @@
    "post_export_note": "revised in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "docs/tex/ch/09-synchronization.tex": {
-   "sha256": "40036bc1a93908c5e272bbd9a96aaab5662753082f54aff60b206b20d7263bb2",
-   "bytes": 31387,
+   "sha256": "9596070ad70ee4c45b709ae72dee8bf5e8002f26b55a618e1569233622eb7f7c",
+   "bytes": 31383,
    "origin": "committed",
    "reason": "seed",
    "provenance": "project source and writing",
@@ -1535,8 +1535,8 @@
    "post_export_note": "revised in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "docs/tex/ch/10-tensor-unit.tex": {
-   "sha256": "6cbbd8dccaac1bdc9a873b930be3ba9384875ef2a89f14792d625be863fc5ad2",
-   "bytes": 81715,
+   "sha256": "4134c5d276997cc212ea162a66ec271299fb32d90d3ca1b4f7cc374d486f64a2",
+   "bytes": 81701,
    "origin": "committed",
    "reason": "seed",
    "provenance": "project source and writing",
@@ -1544,8 +1544,8 @@
    "post_export_note": "revised in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "docs/tex/ch/11-image.tex": {
-   "sha256": "6d704f6b6339fdfffe4edfa77b55ecfe51cdc0f23b39817e98f398b3192a9067",
-   "bytes": 28633,
+   "sha256": "edd5c713a8990c7b5bdacf206e86c9ae98aae7be28f66bcd8bef7eda3b1786b1",
+   "bytes": 28632,
    "origin": "committed",
    "reason": "seed",
    "provenance": "project source and writing",
@@ -1571,8 +1571,8 @@
    "post_export_note": "revised in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "docs/tex/ch/14-open-questions.tex": {
-   "sha256": "5892cf052c320e58d76159a82ece4f51b49c0fc79c79d9108000af2701f69e1a",
-   "bytes": 9543,
+   "sha256": "e069a3f00ecc1b6a7a5671cdb3009c4aa8bdf32cd85de1d11104fb34f1bb3f10",
+   "bytes": 9540,
    "origin": "committed",
    "reason": "seed",
    "provenance": "project source and writing",
@@ -1580,8 +1580,8 @@
    "post_export_note": "revised in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "docs/tex/ch/15-compiling.tex": {
-   "sha256": "71a216e934bb80a2870ec1463ff2624af0603acb7f97729b5bbc938f038047af",
-   "bytes": 9112,
+   "sha256": "e2dd08ff2a929472eb8562841211bc0d207767f5f71590c608d4f0f609de0c94",
+   "bytes": 9110,
    "origin": "committed",
    "reason": "seed",
    "provenance": "project source and writing",
@@ -1598,8 +1598,8 @@
    "post_export_note": "revised in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "docs/tex/ch/17-executing.tex": {
-   "sha256": "3afc9e8d7177de81990f2bea7f73c69a286bb437f1016b48bfc903db2ff76831",
-   "bytes": 10695,
+   "sha256": "d2608e59b09226f7ecab3222ea5c7c9fe9fc61b57d32a8983222b879fcfe15ba",
+   "bytes": 10694,
    "origin": "committed",
    "reason": "seed",
    "provenance": "project source and writing",
@@ -1607,8 +1607,8 @@
    "post_export_note": "revised in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "docs/tex/ch/a-corrections.tex": {
-   "sha256": "0a3285f1385e2024dea7bbbaea37ff7824acc8acaaf265287d90565cd40414a3",
-   "bytes": 27289,
+   "sha256": "88799fea58e679201b7bdc86911838d7648e8ae118aa9cd46a5ee319ec5b49e7",
+   "bytes": 27287,
    "origin": "committed",
    "reason": "seed",
    "provenance": "project source and writing"
@@ -1623,8 +1623,8 @@
    "post_export_note": "revised in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "docs/tex/ch/c-opcodes.tex": {
-   "sha256": "b9434a16949d63014fe0bb89d75ff976bfb08bd4366aeac2d5f5da8dd3fb4053",
-   "bytes": 1814,
+   "sha256": "2b5c3a85997f788bdc75c0f6454546e3b9eccf134b5afe463c2918027dc664c1",
+   "bytes": 1813,
    "origin": "committed",
    "reason": "seed",
    "provenance": "project source and writing"
@@ -1637,14 +1637,14 @@
    "provenance": "project source and writing"
   },
   "docs/tex/fig/bypass.tex": {
-   "sha256": "079267c3ed10a9a420f91f8bcb3f2f02200ff033660e50976ee4cd95ca7b8591",
+   "sha256": "2ff504b8ccf770d2e1e1209ac75244e6fcc7f07996662a694c877dd90d75ba67",
    "bytes": 3255,
    "origin": "committed",
    "reason": "seed",
    "provenance": "project source and writing"
   },
   "docs/tex/fig/compile-routes.tex": {
-   "sha256": "c0d5ffe6268454e6c6db0786a52b91879527796c2b2c8781bfe73e907da843a0",
+   "sha256": "69c217e57598c99ef82c8f1777ad6d503104eb0ef7282353348ad9185065d082",
    "bytes": 1661,
    "origin": "committed",
    "reason": "seed",
@@ -1672,8 +1672,8 @@
    "provenance": "project source and writing"
   },
   "docs/tex/fig/scoreboard.tex": {
-   "sha256": "19c63df9a9af5b706c7f49d75ff8724fac5cc3b9361adcccfee36c6e86fda90a",
-   "bytes": 4030,
+   "sha256": "56111a621de09edb39c4504b4b024288119fa5e6fd5be02bc3643b69d36bcdcc",
+   "bytes": 4029,
    "origin": "committed",
    "reason": "seed",
    "provenance": "project source and writing",
@@ -1702,8 +1702,8 @@
    "provenance": "project source and writing"
   },
   "docs/tex/preamble.tex": {
-   "sha256": "fce0b3d0f4b2cc0f51703b03beb67939cec10a1b8b7a085ee84f4185d709eddd",
-   "bytes": 10174,
+   "sha256": "55d509486b2c6933352877ae945650017e05e6748d941bf2a6984a0416c4087e",
+   "bytes": 10173,
    "origin": "committed",
    "reason": "seed",
    "provenance": "project source and writing"
@@ -2347,8 +2347,8 @@
    "provenance": "measurement receipts"
   },
   "examples/README.md": {
-   "sha256": "69828d1bfc752032fb2814e8691c637ebf18eb2dafd4a51d8d169762ab48cf3e",
-   "bytes": 17532,
+   "sha256": "0220e48aeb5368f61fc48317524bf338209312bc137d1aef132e21a93b434953",
+   "bytes": 17530,
    "origin": "overlay",
    "overlay_source": "release/overlay/examples/README.md",
    "provenance": "release-authored",
@@ -7517,8 +7517,8 @@
    "post_export_note": "authored in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "docs/tex/fig/backend-stages.tex": {
-   "sha256": "2e527c5bc466bff61113362d924582e0592b2d2fed01039e520fae7a410aae6e",
-   "bytes": 2711,
+   "sha256": "fb6bfa7aa707177c8dfc274009c3860d355bdccb89b716ee95b197a352a2e873",
+   "bytes": 2710,
    "origin": "overlay",
    "provenance": "release-authored",
    "post_export_edit": "figure added for the public release",
@@ -7541,7 +7541,7 @@
    "post_export_note": "authored in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "docs/tex/fig/evidence-flow.tex": {
-   "sha256": "607c46ae5e53be625a4c2ab2e0ac65beaa8c20786252eb7a614cc096bc3bdc70",
+   "sha256": "9f39b486aff3decdaa2ff1649b222bea88048c40e91fe3a3d6fa802d5c8ea646",
    "bytes": 2134,
    "origin": "overlay",
    "provenance": "release-authored",
@@ -7573,8 +7573,8 @@
    "post_export_note": "authored in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "docs/tex/fig/feed-modes.tex": {
-   "sha256": "6d1840a938e3d62467bb6c5428de22514d0ef925dc0a928b74e20c625ea52ae9",
-   "bytes": 2056,
+   "sha256": "7556290cc6a486d8b2cdff197746ae4c116f43194b922ef99bb3d880a97cfdb4",
+   "bytes": 2054,
    "origin": "overlay",
    "provenance": "release-authored",
    "post_export_edit": "figure added for the public release",
@@ -7597,7 +7597,7 @@
    "post_export_note": "authored in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "docs/tex/fig/image-container.tex": {
-   "sha256": "b0c8e09261b8c1eb930d1c0b0c6bfd31d5f7689bd9d5e11687414c0eebf5978d",
+   "sha256": "5e7b7a4416eb2085f83723ed0218cc8bc40660003c4e31ae09472bd23ad2ab86",
    "bytes": 2696,
    "origin": "overlay",
    "provenance": "release-authored",
@@ -7621,7 +7621,7 @@
    "post_export_note": "authored in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "docs/tex/fig/submit-sequence.tex": {
-   "sha256": "e0daec90d801423c9b3323572994afadab97b669b754abf1221894c9a9343317",
+   "sha256": "1b03fd49e5d202da22ee1e78494b8a7df4c7a9a4971e9c83f1810633d5968f2b",
    "bytes": 3110,
    "origin": "overlay",
    "provenance": "release-authored",
