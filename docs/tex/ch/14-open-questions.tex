@@ -56,13 +56,13 @@ bear on residency or ordering.
 \section{Memory and synchronization}\label{sec:memory-synchronization-chapters}
 
 \begin{itemize}
-\item Out-of-range store behaviour on hardware; other load forms and resource kinds out of range (MM~\mm{17} rule 34, \cref{sec:out-of-range-accesses-observed}).
+\item Out-of-range store behavior on hardware; other load forms and resource kinds out of range (MM~\mm{17} rule 34, \cref{sec:out-of-range-accesses-observed}).
 \item Negative displacement; misaligned scalar access legality (\code{isa/g17-addressing-rules.json}).
 \item Why Apple's compiler uses the index add, not the displacement, for unsigned \code{tid + k} (\code{isa/g17-addressing-rules.json}).
 \item Displacement units of the \op{17256} (MM~\mm{25.141.18}).
 \item Whether a masked-off load issues its access (no observable; \code{isa/g17-predication.json}).
 \item Meaning of the threadgroup load's sensitive bits byte4{[}3{]}, byte4{[}4{]}, byte6{[}4{]} (\code{isa/g17-execution-tgbits-results.json}).
-\item Hardware behaviour for a threadgroup-memory declaration over 32 KiB, which Metal accepts (MM~\mm{25.147}).
+\item Hardware behavior for a threadgroup-memory declaration over 32 KiB, which Metal accepts (MM~\mm{25.147}).
 \item Imageblock with more than one simdgroup or threadgroup; the store's operand-1 bit-4 flag; the read's 0x2000800000 word
   (MM~\mm{25.145.2}, MM~\mm{25.96}, MM~\mm{25.104.2}).
 \item \op{12352} and \op{13276} address space (MM~\mm{25.144.1}).
@@ -77,7 +77,7 @@ bear on residency or ordering.
 \item Function of barrier-token variants 0x400 and 0x60000502 (MM~\mm{25.141.20}).
 \item Overlap and ordering of multiple command records in one below-Metal Submit beyond the self-accumulation shape
   (\code{docs/g17-first-dispatch-trials.md}).
-\item Barrier behaviour in other partial threadgroup sizes and with inactive lanes (\code{docs/g17-first-dispatch-trials.md}).
+\item Barrier behavior in other partial threadgroup sizes and with inactive lanes (\code{docs/g17-first-dispatch-trials.md}).
 \end{itemize}
 
 \section{Tensor unit and performance}\label{sec:tensor-unit-performance}

@@ -73,7 +73,7 @@ Metal (reference chapter 15); this workflow does not run them.
 **Purpose.** One coordinate rule of the tensor unit, a small calculation, and the rival reading that a retained GPU
 run rejected. The rule: when an MMA's accumulator is fed straight into the next MMA as its B operand, lane l, slot j
 is read as canonical B row `k = 4*(l>>4) + ((l>>1)&3) + 8*(j>>2)`, but that register holds canonical D row
-`rotl1(k)`. Whether the consumer sees the logical operand depends on how the producer labelled its rows.
+`rotl1(k)`. Whether the consumer sees the logical operand depends on how the producer labeled its rows.
 
 **Kind.** Part 1 is arithmetic. Part 2 is a **simulation**: the package's MMA arithmetic model, run on the CPU, against
 an output the GPU recorded (MM 25.103). Nothing is compiled or dispatched.
@@ -93,7 +93,7 @@ python3 examples/tensor_feed_rule.py
 ```
 slot 4: B row 8 reads a register that holds canonical D row rotl1(8) = 1; this compiler stored application row 8 there
   logical operand (this compiler's packing)        differs from the GPU in    0 of 1024 elements, max |error| 0
-  row-rotated operand (section 132's relabelling)  differs from the GPU in 1024 of 1024 elements, max |error| 289.8
+  row-rotated operand (section 132's relabeling)  differs from the GPU in 1024 of 1024 elements, max |error| 289.8
 dispatch receipt: feed_B_half (rotated reference) FAILED; neg_B_identity (same program, logical reference) passed
 verdict: the hardware output is the logical product bit for bit; the rotated reading is rejected
 ```

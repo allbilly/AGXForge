@@ -9,7 +9,7 @@ negate, take the absolute value of, or \emph{release} the value; some forms do n
 Fields can name R0–R143, but the hardware executes only R0–R125 (\cref{sec:namespace,fig:register-file}). Some fields are narrower than
 the namespace: certain forms can name only R0–R15, and others cannot name particular registers at all
 (\cref{sec:narrow-fields-narrow,sec:encoding-holes}). Register choice has to satisfy each form's constraints, which a
-graph colouring over one homogeneous register file does not capture. Lifetime is encoded in the instruction and applies
+graph coloring over one homogeneous register file does not capture. Lifetime is encoded in the instruction and applies
 per lane, under the execution mask. The last reader of a value marks it released, and no hardware mechanism notices a
 later read (\crefrange{sec:operand-modifiers}{sec:loops-loop-variable-rule}). When kernels are composed, a value
 live across a region boundary, such as a loop header, a fused stage or a second GEMM, must not be released before that
@@ -347,7 +347,7 @@ nonzero value (measured, MM~\mm{25.145}; the emulator admits such reads only in 
 
 Apple's compiler reads released registers in one place. Its legacy simdgroup MMA programs release R0 and R1
 (address arithmetic) and then issue \op{2842} with accumulator R0\_R1 (Apple's compiler
-emits, \code{agxforge/g17/releasecheck.py}). The checker treats this as a zero initialisation and exempts it; the exemption records what Apple
+emits, \code{agxforge/g17/releasecheck.py}). The checker treats this as a zero initialization and exempts it; the exemption records what Apple
 emits, and the read itself was not measured. The checker treats Apple's 6,594 corpus programs as ground
 truth and is required to report zero findings on them; this exemption, one for cross-lane value operands and a few
 path-sensitivity rules were each added for a named false positive there (\code{agxforge/g17/releasecheck.py}).

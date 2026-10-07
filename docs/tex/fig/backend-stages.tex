@@ -11,7 +11,7 @@
     type; a matrix product is one operation, \code{tensor\_matmul}.};
 
   \node[st, below=of ir] (sel) {\textbf{\code{cc.select}}\\[-1pt]{\footnotesize instruction selection}};
-  \node[note, right=of sel] {Uses a form only if its fields are mapped and its behaviour was
+  \node[note, right=of sel] {Uses a form only if its fields are mapped and its behavior was
     measured. Anything else is refused by name: "no measured metadata layout for 5 bindings".};
 
   \node[st, below=of sel] (tl) {\textbf{\code{tlower}}\\[-1pt]{\footnotesize tensor lowering}};

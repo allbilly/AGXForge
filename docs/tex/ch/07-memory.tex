@@ -244,8 +244,8 @@ The masking experiment needed a load that faults, to separate a suppressed acces
 each in a fresh process so that a device loss would cost only that process. All completed with status 0 and returned 0,
 and an in-bounds control returned its data.
 
-Out-of-range store behaviour has not been measured. A timing driver once read and wrote up to 2.78~MB
-outside its buffers, with uncharacterised effect (MM~\mm{17} rule 34). The emulator refuses a store outside a buffer; that
+Out-of-range store behavior has not been measured. A timing driver once read and wrote up to 2.78~MB
+outside its buffers, with uncharacterized effect (MM~\mm{17} rule 34). The emulator refuses a store outside a buffer; that
 refusal is a limit of the model (\code{tools/g17emu.py}).
 
 Through Metal, one BIF0 read page fault came from a \code{regprobe\_multi} tensor-kernel probe whose configuration was not
@@ -326,7 +326,7 @@ MM~\mm{25.145.2}). The coordinate register packs x in its low 16 bits and y in i
 x = 32, outside a 32-wide tile, completed on hardware (it was not scored; MM~\mm{25.104.2}).
 
 Finding the imageblock store's wait bit took eleven rounds on hardware (MM~\mm{25.96}, MM~\mm{25.104}). The target was a
-tensor GEMM, every byte from this compiler, that stages its output through the imageblock. In every round a neighbour
+tensor GEMM, every byte from this compiler, that stages its output through the imageblock. In every round a neighbor
 read returned the reader's own value or 0, and three separate defects produced that result.
 
 First, the store released its coordinate register (operand 6 = 16) while the following read
@@ -335,11 +335,11 @@ all 32 lanes to element 0 (measured, MM~\mm{6}; \code{isa/g17-imageblock-dseries
 operand 6 from liveness.
 
 With the coordinate kept, the x offset (operand 7 = 1) still had no visible effect in a tensor
-program. Apple's compiler never uses it for a neighbour. It computes \code{(tid.x + 1) \& 31} with \op{10289} and
-\op{435} and reads with operand 7 = 0, and this compiler addresses the neighbour the same way, by an explicit column
+program. Apple's compiler never uses it for a neighbor. It computes \code{(tid.x + 1) \& 31} with \op{10289} and
+\op{435} and reads with operand 7 = 0, and this compiler addresses the neighbor the same way, by an explicit column
 (measured, MM~\mm{25.104.2}).
 
-Apple's tensor kernel then read its neighbour on all 32 lanes and this compiler's did not. The only
+Apple's tensor kernel then read its neighbor on all 32 lanes and this compiler's did not. The only
 field-level difference was the store's operand 1, Apple's 0x80000010 against this compiler's 0x01000010. Swapping it
 alone moved the result both ways, and bit 31 decided: 0x80000010 and 0x81000010 passed, 0x00000010 and 0x01000010
 failed. The reading recorded at the time, that bit 31 selects storage other lanes can read, was later refuted
@@ -353,7 +353,7 @@ storing a freshly loaded value (its load fills slot 7) would carry bit 31, was c
 the hardware runs of that kernel (\code{h[t] = 5t + 3}, a device barrier, \code{v = h[t \textasciicircum{} 1]}, an own-pixel store of v, read back), three per arm.
 
 \begin{xltabular}{\linewidth}{@{}>{\hsize=1.19\hsize}X>{\hsize=0.81\hsize}X@{}}
-\caption{Imageblock store operand 1 against lanes that read their neighbour's value correctly, in Apple's kernel that stores a
+\caption{Imageblock store operand 1 against lanes that read their neighbor's value correctly, in Apple's kernel that stores a
 freshly loaded value. Three runs per arm.}\label{tab:imageblock-wait-arms}\\
 \toprule
 store operand 1 & lanes correct \\

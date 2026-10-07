@@ -185,7 +185,7 @@ Per-lane divergent loop bounds & 146 bytes: bound loaded from A{[}lane{]}, runti
 3, \op{458} at byte 120 with displacement
 −82 to byte 38; byte-identical code under two input profiles & bounds 1,3 alternating gave 7, 22, 9, 24, \dots{} 69, 84; reversed gave 21,
 8, 23, 10, \dots{} 83, 70: each lane computed lane + 7 × A{[}lane{]} beside
-neighbours with different trip counts & per-lane divergent trip counts in one simdgroup \\*
+neighbors with different trip counts & per-lane divergent trip counts in one simdgroup \\*
 Runtime loop cap and zero bound & the same 146 bytes & bounds 5,3: every lane i + 21 (over-cap lanes stopped at three trips);
 bounds 0,3: even lanes i + 7, odd lanes i + 21 & the cap clamps; this emitted loop tests at the bottom, so a zero bound
 still runs the body once \\*

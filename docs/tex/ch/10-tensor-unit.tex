@@ -344,7 +344,7 @@ positions (measured, re-verified, MM~\mm{3}). Check on lane 22: \code{rotl1(7) =
 The 16-bit MMA, \op{5106}, its no-C sibling and the fp32 × fp32 MMA, \op{5098}, use the same destination layout.
 Destinations measured in different kernels can still differ by \code{rotl1} on the row index at all 256 positions, the
 same rotation Apple's cooperative-tensor coordinates carry (MM~\mm{3}, MM~\mm{19}). \Cref{sec:coordinate-systems}
-traces this to the producing kernel's row labelling, which also accounts for the feed-mode relabellings of
+traces this to the producing kernel's row labeling, which also accounts for the feed-mode relabelings of
 \cref{sec:chaining-feed-modes}.
 
 For other operand types (measured, MM~\mm{3}, MM~\mm{19}):
@@ -404,7 +404,7 @@ MM~\mm{7}). No hardware transposition is involved (MM~\mm{19}).
 \end{enumerate}
 
 Apple-compiled \code{simdgroup\_matrix} code uses \emph{canonical packing}: A, B and D are packed canonically, so an
-application row of A or D is the same canonical row. The chaining relabellings were measured on such kernels
+application row of A or D is the same canonical row. The chaining relabelings were measured on such kernels
 (MM~\mm{3}, MM~\mm{13}).
 
 This compiler uses \emph{B-row packing} for every tile, A, B and the C/D tile it loads and stores: lane l, slot j holds
@@ -443,7 +443,7 @@ that register holds canonical D row \code{rotl1(k)}.
 of them through both conventions. For lane 0, slot 4, canonical D row 1 is
 read as B row 8; this compiler's producer placed application row \code{m(0) + 8 = 8} of D in that slot, so the consumer
 receives D row 8 as B row 8. With canonical packing the same register carries D row 1, and \code{rotl1(8) = 1}. A D fed
-as A needs no relabelling in either convention, because the consumer's A is packed the way the producer packed D.
+as A needs no relabeling in either convention, because the consumer's A is packed the way the producer packed D.
 
 \begin{longtable}{@{}lllll@{}}
 \caption{Three slots in canonical coordinates and in the two packing conventions, for a D tile fed as the next B.}\label{tab:coordinate-example}\\
@@ -484,7 +484,7 @@ D   = acc
 \input{fig/reduction-tree}
 
 The first stage (\cref{fig:reduction-tree}) adds adjacent products, so \code{(-0) * 1}, with every
-other product zero, gives \code{+0}: the pair stage adds a neighbouring \code{+0} first under RNE, and a model with
+other product zero, gives \code{+0}: the pair stage adds a neighboring \code{+0} first under RNE, and a model with
 \code{(-0) + (-0) = -0} mispredicts (measured, MM~\mm{5}). The second stage pairs partial sums eight apart. The
 accumulator then enters before the four partial sums, within one issue. The from-zero form, \op{5107}, follows the same tree without C and starts the chain from q0 ("starts from the first reduced
 group rather than an encoded zero tuple", MM~\mm{0.3}).
@@ -513,8 +513,8 @@ normal half values).
 
 \begin{lstlisting}
 C first (the measured rule):
-  acc = RNE32(1 + 3 eps)       = 1 + 4 eps     1.5 ulp is a tie; RNE picks the even neighbour, 2 ulp
-  acc = RNE32(1 + 4 eps + 3 eps) = 1 + 8 eps   3.5 ulp is a tie; RNE picks the even neighbour, 4 ulp
+  acc = RNE32(1 + 3 eps)       = 1 + 4 eps     1.5 ulp is a tie; RNE picks the even neighbor, 2 ulp
+  acc = RNE32(1 + 4 eps + 3 eps) = 1 + 8 eps   3.5 ulp is a tie; RNE picks the even neighbor, 4 ulp
 C last (any order that sums the q terms first):
   q_0 + q_1 = 6 eps exactly;  RNE32(1 + 6 eps) = 1 + 6 eps   3 ulp, representable
 \end{lstlisting}
@@ -743,7 +743,7 @@ once.
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item In kernels that pack A and D canonically (Apple-compiled \code{simdgroup\_matrix} code), register-direct chaining is
-  exact in all four modes with fixed relabellings: 1,596 of 1,596 random chained pairs over four modes, five operand
+  exact in all four modes with fixed relabelings: 1,596 of 1,596 random chained pairs over four modes, five operand
   forms and grids from 1 × 1 to 4 × 4, extended to 304 of 304 over eight grids and five transpose combinations (measured,
   MM~\mm{13}, MM~\mm{0.10}):
 
@@ -756,11 +756,11 @@ once.
 
   A logical \code{A2 . D1} through the B feed then needs A2 loaded with its k index permuted by \code{rotl1} (wrong in 20 of 20
   trials without it), and matches the unpermuted product to rounding, not bit for bit, because the permutation changes
-  the association order. In the transposed feeds the accumulator C must carry the same relabelling (MM~\mm{17} rules 9–11).
+  the association order. In the transposed feeds the accumulator C must carry the same relabeling (MM~\mm{17} rules 9–11).
 \item In kernels that use B-row packing for every tile (this compiler's \code{tlower} emission), every feed reads the
   logical operand bit for bit (measured, MM~\mm{25.103}): B computes \code{A2 . D}, At computes \code{D\textasciicircum{}T . B2}, Bt computes
-  \code{A2 . D\textasciicircum{}T}. The test was preregistered with the relabelled product as the prediction and the logical
-  product as the control expected to fail. The relabelled reference failed in every arm, with maximum errors of 290 (B), 305 (At) and 477 (Bt), and the logical product was bit-exact. The two references differ on
+  \code{A2 . D\textasciicircum{}T}. The test was preregistered with the relabeled product as the prediction and the logical
+  product as the control expected to fail. The relabeled reference failed in every arm, with maximum errors of 290 (B), 305 (At) and 477 (Bt), and the logical product was bit-exact. The two references differ on
   1,024, 1,024 and 896 of 1,024 elements (Bt's remaining 128 are columns where \code{rotl1(c) = c}), so the test could
   separate them. Decoded, At differs from A only in operand 5 (the type field with the transpose bit) and, off the
   diagonal, the fed register. The domain is one square stage (M = N = 32, K = 64), one simdgroup, no accumulate, with
@@ -777,7 +777,7 @@ Feeds measured in other configurations:
   MM~\mm{25.125.2}; M32 and M16, 3 of 3 each; swapped-tile and claims-no-C controls fail on 1,024 of 1,024). At M32 it removes
   eight fp32 C loads and the producer's eight stores but splits the consumer into two accumulator groups; the
   instruction count is unchanged (192).
-\item In hand-authored AIR (Apple's labelling), int8 accumulators, including register-resident requantized
+\item In hand-authored AIR (Apple's labeling), int8 accumulators, including register-resident requantized
   chains, chain through all four modes with the half chain's rotations, 272 of 272 runs (measured, MM~\mm{3}, MM~\mm{11}).
 \item Across a quantize boundary inside a hidden-chunk loop, transposed consumers read \code{Pt.W} (nn), \code{P.W}
   (tn), \code{Pt.Wt} (nt) and \code{P.Wt} (tt), exact in 12 runs (measured, MM~\mm{25.45}).
@@ -936,7 +936,7 @@ No vendor route tested produced a hardware unpack, pack or MMA for fp4 (e2m1) or
 and Apple's compiler, MM~\mm{0.11}, MM~\mm{20}, MM~\mm{25.94}). After a software decode the ordinary fp16 or
 bf16 use of the 16-bit MMA applies; the decode costs about 24 instructions per value in Apple's newer backend and about 4 in MLX's bit
 trick. Packed fp4 and fp6 tokens crash \code{buildConvert}; \code{air.pack} and \code{air.unpack} crash \code{buildPack};
-\code{air.quantize\_pack} crashes \code{NumericPackUnpackPass}. This compiler has not built the software operand unpack, and its fp16-subnormal behaviour is unmeasured
+\code{air.quantize\_pack} crashes \code{NumericPackUnpackPass}. This compiler has not built the software operand unpack, and its fp16-subnormal behavior is unmeasured
 (MM~\mm{0.14}).
 
 The scaled \code{matmul2d} form is MX-style: a \code{ue8m0}
@@ -1153,7 +1153,7 @@ processes) & \cref{sec:ordering-enable} \\
 6, 34 (strides from element size; buffer sizing) & \cref{sec:tensor-memory-path} \\
 7, 32 (threadgroup barrier for hand-off; never recompute a shared stage) & \cref{sec:across-simdgroups} \\
 8, 29 (\code{execution\_simdgroups<N>}; \code{relaxed\_precision}) & \cref{sec:it-reached} \\
-9–13 (feed relabellings, scoped by MM~\mm{25.103}; forwarding domain; the
+9–13 (feed relabelings, scoped by MM~\mm{25.103}; forwarding domain; the
 compatibility oracle) & \cref{sec:chaining-feed-modes} \\
 14–16, 18, 21–22 (zero K padding; fp32 truncation; int32 wrap and
 saturation; destinations and conversions) & \cref{sec:arithmetic-semantics-supported} \\

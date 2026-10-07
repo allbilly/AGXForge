@@ -216,7 +216,7 @@ NaN 0x7e00.
 
 \op{798} (\code{ffma.f16.l12}, 12 bytes) computes binary16 a * b + c rounded once (measured,
 MM~\mm{25.196}). The test ran 196,608 triples in three cases: the whole finite binary16 range by bit pattern, and two
-cancelling cases with 24,000 subnormal results each. None differs from binary16(a * b + c) computed exactly, while the
+canceling cases with 24,000 subnormal results each. None differs from binary16(a * b + c) computed exactly, while the
 multiply-then-add control differs on 6,246 to 54,951 per case; with both addends taken from the two halves of one packed
 word, 0 of 196,608 differ.
 
@@ -252,7 +252,7 @@ Every measured conversion that can round uses RNE except float to integer, which
 fp32 to bfloat also returns a signed zero for a subnormal input (\cref{tab:conversions}).
 
 \begin{xltabular}{\linewidth}{@{}>{\hsize=0.69\hsize}XX>{\hsize=1.41\hsize}X>{\hsize=0.86\hsize}X@{}}
-\caption{Rounding and edge behaviour of the measured conversions.}\label{tab:conversions}\\
+\caption{Rounding and edge behavior of the measured conversions.}\label{tab:conversions}\\
 \toprule
 Conversion & Form & Rounding and edges & Standing \\
 \midrule

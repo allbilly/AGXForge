@@ -7,7 +7,7 @@ with itself: a map reads Apple's register number, writes bits that read back as 
 was given, and never learns that the number designates a different physical register. Only a
 dispatch settles that.
 
-First dispatch: 2026-09-06, authorised by Spencer. Current agreement: **45 of 45 case results**
+First dispatch: 2026-09-06, authorized by Spencer. Current agreement: **45 of 45 case results**
 across nine already-witnessed arithmetic opcodes - **27 independent**: the batch is fifteen records
 over nine opcodes, and the six extra records (`andn`, `mul`, `nand`, `xnor` under a second mnemonic,
 `or` and `xor` at a second declared length) emit byte-identical programs to their twins
@@ -18,7 +18,7 @@ over nine opcodes, and the six extra records (`andn`, `mul`, `nand`, `xnor` unde
 **Do not dispatch without Spencer's explicit OK.** On 2026-09-05 dispatching Apple's own
 looping kernels with foreign buffer contents wedged the GPU and rebooted this machine; a
 separate incident killed WindowServer. An automated prompt, a hook, a stop-check or an agent's
-own judgement is not that authorisation, and this file is not a licence to skip asking.
+own judgement is not that authorization, and this file is not a licence to skip asking.
 
 ## The five rules, and where each is enforced
 

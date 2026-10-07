@@ -105,12 +105,12 @@ exact launch geometry.
 
 \section{General selection and allocation rules}\label{ch:selection-allocation-general}
 
-\code{cc.select} uses a form only if its fields are mapped and its behaviour
+\code{cc.select} uses a form only if its fields are mapped and its behavior
 was measured (the form registry, \code{isa/g17-forms.toml} and \code{isa/g17-scalar-isa.toml}). Anything else it refuses with a message
 naming what is missing, for example "no measured metadata layout for 5 bindings"; an unmeasured cooperative binding
 class is refused the same way (\code{isa/g17-source-execution.json}).
 
-Where the language leaves behaviour undefined, the compiler follows Apple's hardware. Its first lowering of
+Where the language leaves behavior undefined, the compiler follows Apple's hardware. Its first lowering of
 \code{(uint)x} for a negative float returned the magnitude, where Apple's code returns 0. It now lowers the cast to \op{9320}, reproducing Apple's bytes and output (MM~\mm{25.186}, MM~\mm{25.196}; \cref{sec:conversions}).
 
 \code{cc.allocate} assigns physical registers from R0 to R125 under the rules of \cref{ch:register-file}, with tuple

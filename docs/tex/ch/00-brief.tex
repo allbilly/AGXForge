@@ -7,7 +7,7 @@ work through Apple's private IOGPU interfaces and Metal is never loaded (\cref{f
 come from one Apple M5 Pro with 20 GPU cores and 48~GB of memory (MM~\mm{22}, MM~\mm{25.91}); \cref{sec:measured-part-software}
 gives the platform and which records name the OS build.\label{sec:part-software}
 
-\section{Recovered behaviour}\label{sec:has-been-recovered}
+\section{Recovered behavior}\label{sec:has-been-recovered}
 
 Apple documents the GPU and its tensor unit, the neural accelerator, only at the Metal interface. Below that
 interface:
@@ -107,7 +107,7 @@ op5107  R24..R31 <- 0x01000000, 1, R20_R21_R22_R23, 0, 2, R68_R69_R70_R71, 0, 2
 
 \begin{itemize}
 \item \textbf{D, R24–R31,} is an eight-register fp32 accumulator group holding the output tile at application rows
-  0–15, columns 0–15. The compiler packs every tile with the hardware's B lane map, so its labelling of these registers
+  0–15, columns 0–15. The compiler packs every tile with the hardware's B lane map, so its labeling of these registers
   differs from the instruction's canonical one by a one-bit rotation of the row index. A is packed the same way, and
   the product is correct in application coordinates (\cref{sec:coordinate-systems}).
 \item \textbf{A, R20–R23, and B, R68–R71,} are four-register fragments of 16-bit values. Type code 2 means half.

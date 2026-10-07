@@ -61,8 +61,8 @@
   \draw[->, ink!50] (0,3.2) -- (10,3.2) node[right, font=\scriptsize\itshape] {time};
   \end{scope}
 \end{tikzpicture}
-\caption{Late values and their waits, as the control words specify them. A dot is an instruction's issue; grey is
-an instruction held at issue by its wait mask; a coloured bar is a scoreboard slot that a producer has published and
+\caption{Late values and their waits, as the control words specify them. A dot is an instruction's issue; gray is
+an instruction held at issue by its wait mask; a colored bar is a scoreboard slot that a producer has published and
 whose value has not yet arrived. A dashed arrow is a slot's arrival releasing its waiter. The control words in (a) are read
 from the running example's bytes (the low 32 bits of operand 1: bits 20–23 publish slot + 1, bits 24–31 are the
 wait mask). Panel (b) is the measured missing-wait experiment. Positions on the time axis are schematic; only the

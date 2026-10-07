@@ -100,7 +100,7 @@ therefore read 0, and detecting them takes a sentinel or poison value; a zero-fi
 An atomic return published on the wrong slot was first found in decoded bytes and then confirmed on hardware
 (MM~\mm{25.115}, \code{docs/g17-first-dispatch-trials.md}). This compiler's residency probe counts arrivals with \op{10094} and reads the returned old value. At S = 256 simdgroups every arrival read 1 (a returned 0, plus
 one) while the departure maximum was 256. Two explanations fit: simultaneous same-address atomics combine and each requester sees the pre-combine
-value (first recorded, later withdrawn), or the consumer read the register before the return arrived. The decoded bytes favoured the second. Marking the atomic's result late
+value (first recorded, later withdrawn), or the consumer read the register before the return arrived. The decoded bytes favored the second. Marking the atomic's result late
 gave its consumer, \op{10279}, this compiler's load-use wait, mask 0b10000000, slot 7, because this
 compiler's loads fill slot 7. But the atomic's operand 1 bits 20--23 were 1: it filled slot 0, copied from Apple's
 witnesses, where Apple's first consumer waits on bit 24 (120 of 120 corpus instances). The consumer waited on a slot the
@@ -183,7 +183,7 @@ Apple's decoder). A fused attention merge built on the pattern was bit-exact at 
 rounds each, with NaN-poisoned rows (costs in \cref{ch:performance}).
 
 The imageblock barrier is the threadgroup barrier at scope 532 (\cref{sec:imageblock-per-core-tile}). The emulator admits it only for one simdgroup in
-lockstep; more than one simdgroup was never witnessed (MM~\mm{25.145.2}). A barrier inside an exec-mask region is not modelled
+lockstep; more than one simdgroup was never witnessed (MM~\mm{25.145.2}). A barrier inside an exec-mask region is not modeled
 there either (\code{tools/g17emu.py}).
 
 Encoder-level barriers come from a static read of the AGX user driver (decoder, MM~\mm{25.141.20}); their costs are measured
@@ -355,7 +355,7 @@ program that synchronizes threadgroups through an atomic counter (MM~\mm{25.197}
 
 A threadgroup barrier is the only mechanism at this scope (\cref{sec:barriers-fences}); same-value writes by
 several simdgroups are harmless by construction (no schedule changes the bytes), and shipped code relies on that: the fused attention appends a
-new K/V row from every simdgroup of every threadgroup and each reads its own copy back (modelling rule, MM~\mm{25.197}).
+new K/V row from every simdgroup of every threadgroup and each reads its own copy back (modeling rule, MM~\mm{25.197}).
 
 \subsection*{Threadgroups of one dispatch}
 
@@ -385,7 +385,7 @@ a spin-waiting grid of them must not be sized from either number (\cref{sec:resi
 \subsection*{Dispatches}
 
 In the tested configurations threadgroups were dispatched in order and no spinning threadgroup gave way to a producer
-dispatched after it (MM~\mm{25.141.1}; \cref{sec:forward-progress-in-order}). No guarantee of that behaviour has been
+dispatched after it (MM~\mm{25.141.1}; \cref{sec:forward-progress-in-order}). No guarantee of that behavior has been
 established, so a program cannot depend on preemption. A serial encoder places
 a barrier token after every dispatch; a concurrent encoder lets a dependent kernel start early, but its threadgroups queue
 behind all of the producer's, so only the producer's last-wave tail overlaps (measured, MM~\mm{25.141.1}; costs \cref{ch:performance}).

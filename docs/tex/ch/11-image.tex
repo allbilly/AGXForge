@@ -171,7 +171,7 @@ In a submission below Metal the register count also travels in the launch state,
 
 Every Apple MMA program carries a second program, \code{agc.main.constant\_program} (with a \code{.cfg} suffix when
 it branches), which runs once per dispatch, as one thread, before the main program, and computes thread-invariant values
-into uniform registers that main reads (Apple's compiler emits; modelled and checked against Apple's GPU, MM~\mm{25.120},
+into uniform registers that main reads (Apple's compiler emits; modeled and checked against Apple's GPU, MM~\mm{25.120},
 MM~\mm{25.179}, \cref{sec:constants-uniforms}). Its inputs are binding entries read by \op{14061}: for the k-th buffer,
 halfwords 8 + 4k and 10 + 4k hold its 64-bit pointer, low word then high word, in all 21 constant programs examined
 (MM~\mm{25.59}, MM~\mm{25.179}; the two sections' notations agree, \cref{app:a}). MM~\mm{25.113} read this metadata as a

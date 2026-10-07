@@ -39,7 +39,7 @@ of its own corpus.
 
 The same bias then turned up three levels further down, each exposed by the previous fix:
 
-- **the form.** `form_bits` characterised a bit by flipping it in **one** instance, `raws[0]`.
+- **the form.** `form_bits` characterized a bit by flipping it in **one** instance, `raws[0]`.
   op586's b3.3 changes the opcode at 2 of 24 real instances and an operand's kind at 22; one
   base point saw nothing, and that bit was 221 of op586's 222 near misses. `g17diff` had spread
   twelve bases since it was written; the discipline had been dropped here.

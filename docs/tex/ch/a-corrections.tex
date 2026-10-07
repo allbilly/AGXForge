@@ -124,13 +124,13 @@ H5 (destination keep flag) open & MM~\mm{20} & Set implies the next MMA writes t
 Saturation with transposes, chains, high registers not run & MM~\mm{20} & Saturation holds under transpose; clips once per issue in a chain & MM~\mm{25.42}, MM~\mm{25.89} \\
 fp32 operand subnormals flush to zero & recon 5 via MM~\mm{19}; \code{tensorops\_model.py} line 12 docstring & Low 13 bits cleared only; subnormals kept & MM~\mm{5}, MM~\mm{19} \\
 Destination layout is a property of the opcode & recon 100 via MM~\mm{19} & One map; \code{pos\_b(k,c) = pos(rotl1(k), c)}; the difference is the
-producing kernel's row labelling & MM~\mm{3}, MM~\mm{19} \\
+producing kernel's row labeling & MM~\mm{3}, MM~\mm{19} \\
 The hardware performs the matrix-to-fragment transposition & MM~\mm{19} & No tile-layout unit; ALU address arithmetic makes the layout & MM~\mm{7}, MM~\mm{19} \\
 MMA high flag bits are an eight-slot result ring & recon 14 via MM~\mm{19} & An 8-bit wait mask over eight load slots & MM~\mm{6}, MM~\mm{19} \\
 Two MMA hazards (stored result to register consumer; back-to-back MMAs) & recon 112 via MM~\mm{19} & An artifact of how the host scoped the dispatch (\code{dim}) & MM~\mm{19}, MM~\mm{17} rule 5 \\
 \code{matmul2d} allows one \code{run()} per kernel; chain must cross a
 kernel boundary & recon 108, 121 via MM~\mm{19} & Slice offsets misread; single-kernel chain works & MM~\mm{19} \\
-Feed relabellings are instruction properties & MM~\mm{0.10}, MM~\mm{13}, MM~\mm{17} rules 9–11 (unscoped text) & Only for kernels that pack A and D canonically; under this
+Feed relabelings are instruction properties & MM~\mm{0.10}, MM~\mm{13}, MM~\mm{17} rules 9–11 (unscoped text) & Only for kernels that pack A and D canonically; under this
 compiler's B-row packing the feeds read the logical operand (\cref{sec:coordinate-systems}) & MM~\mm{25.103} \\
 Two reduction axes follow different orders & recon 120 via MM~\mm{19} & One rule: per-lane chain then butterfly over the axis lane bits & MM~\mm{12}, MM~\mm{19} \\
 Reduction sums run descending & recon 19 via MM~\mm{19} & Direction belongs to the compiled object (fast-math) & MM~\mm{12}, MM~\mm{19} \\

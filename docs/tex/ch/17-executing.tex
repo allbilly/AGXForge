@@ -151,7 +151,7 @@ pipeline configuration & Metal derives it from the image's metadata & the runner
 speed & decode at 1.14–1.22× the rate of mlx-lm's \code{generate\_step} (MM~\mm{25.190}) & slower than matched Metal blocks and MPS; no advantage either way
 against the full-model Metal control \\*
 not established & why Apple's code for the same kernels is faster & a speedup from bypassing Metal (the two paths differ in submission, guards, padding and
-transfers); behaviour across OS updates (the IOGPU interfaces are private); reproduction outside this project; an
+transfers); behavior across OS updates (the IOGPU interfaces are private); reproduction outside this project; an
 experiment that only this path can run (MM~\mm{25.210.9}) \\*
 \bottomrule
 \end{xltabular}
