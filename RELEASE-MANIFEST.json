@@ -267,7 +267,7 @@
   "transformed": 3,
   "archive": 74
  },
- "bytes_total": 98793005,
+ "bytes_total": 98789774,
  "string_references_not_followed": {
   "isa/g17-bit-spec.jsonl": "tools/g17formspecgen.py",
   "isa/g17-certification.jsonl": "tools/g17isamap.py",
@@ -328,8 +328,8 @@
    "post_export_note": "revised in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "README.md": {
-   "sha256": "514eb291d2980f6986ee3bdfaf5e9b6f9aabb5a316daf233e3221ba6a9c6c545",
-   "bytes": 14154,
+   "sha256": "6904610c65756e25f0e871166d626ffe41276474cecbfd29f4cc520fb4a9bb4c",
+   "bytes": 10924,
    "origin": "overlay",
    "overlay_source": "release/overlay/README.md",
    "provenance": "release-authored",
@@ -346,11 +346,13 @@
    "post_export_note": "revised in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "THIRD-PARTY-NOTICES.md": {
-   "sha256": "0ae3108c264aa751e2ba9ecb2dd8d15f8222aa6a85ca10687b45211bf869d3ff",
+   "sha256": "4a804e3a992ea3d094ae1b669fb452d948c6e9c5e1554fc23ec1a9d3e3dfbd86",
    "bytes": 1894,
    "origin": "overlay",
    "overlay_source": "release/overlay/THIRD-PARTY-NOTICES.md",
-   "provenance": "release-authored"
+   "provenance": "release-authored",
+   "post_export_edit": "condensed for the public release",
+   "post_export_note": "revised in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "agxforge/__init__.py": {
    "sha256": "fe323d6cba10dc6b0bdad66c25e185eb991f59df83d24e84f110098cb2719b93",
@@ -1335,8 +1337,8 @@
    "post_export_note": "revised in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "docs/execution-validation.md": {
-   "sha256": "14a85e6a356f9ebc0fb74a08c5df3e94e809614efc5eed02b452ffa83fd43fe4",
-   "bytes": 6947,
+   "sha256": "187cc159458ac78354e788c0e35cb2cbb84b476598015f24f2f2cf994112877d",
+   "bytes": 6946,
    "origin": "committed",
    "reason": "seed",
    "provenance": "project source and writing",

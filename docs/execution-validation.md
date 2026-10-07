@@ -18,7 +18,7 @@ over nine opcodes, and the six extra records (`andn`, `mul`, `nand`, `xnor` unde
 **Do not dispatch without Spencer's explicit OK.** On 2026-09-05 dispatching Apple's own
 looping kernels with foreign buffer contents wedged the GPU and rebooted this machine; a
 separate incident killed WindowServer. An automated prompt, a hook, a stop-check or an agent's
-own judgement is not that authorization, and this file is not a licence to skip asking.
+own judgment is not that authorization, and this file is not a license to skip asking.
 
 ## The five rules, and where each is enforced
 
