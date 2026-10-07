@@ -1,0 +1,55 @@
+{
+ "format": "g17-belowmetal-capture-repeat-v1",
+ "date": "2026-10-05",
+ "section": "MM 25.213",
+ "platform": {
+  "os": "27.0.1",
+  "build": "26A434",
+  "gpu": "Apple M5 Pro (H17s)",
+  "agx_driver": "AGXG17X 360.34.5",
+  "iogpu_family": "162.11"
+ },
+ "instrument": "tools/g17capturerepeat.py (the retained authored A/B control through Metal, Frida attached passively), compared with tools/g17capturediff.py against evidence/g17-belowmetal-preflight/authored-pair-metal/passive-submit-with-requests.json (macOS 26.6.2, 25G83)",
+ "gpu_dispatched": "through Metal only; nothing submitted below Metal",
+ "runs": [
+  {
+   "bias": 1,
+   "passed": true,
+   "answers": [
+    {
+     "bias": 1,
+     "status": 4,
+     "exact_64": 64,
+     "sentinel_192": 192
+    }
+   ]
+  },
+  {
+   "bias": 2,
+   "passed": true,
+   "answers": [
+    {
+     "bias": 2,
+     "status": 4,
+     "exact_64": 64,
+     "sentinel_192": 192
+    }
+   ]
+  }
+ ],
+ "result": {
+  "compared": 44,
+  "with_stable_differences": 25,
+  "changed": {
+   "allocation requests (selector 9)": 19,
+   "shmem_kernel": 1,
+   "shmem_segment": 1,
+   "submit_record": 1,
+   "window_0x10000000000": 1,
+   "window_0x10000090000": 1,
+   "window_0x100000b0000": 1
+  }
+ },
+ "conclusion": "Metal's own Submit for the same control differs between the two OS builds beyond run-to-run variation in 25 of 44 captured structures: the 64-byte Submit record, 19 of 29 selector-9 allocation requests, the kernel command buffer and segment list, the launch packet window and the driver's code region. The below-Metal runtime writes these structures as recorded on 25G83, so its layouts are not shown to hold on 26A434, and it was not dispatched there. Whether each difference is a format change or a per-boot value is not separated here.",
+ "capture_sha256": "f028f549e2494e11eaa9bcb72babd5ab3d6df471dea610b459c576f48e67eeb2"
+}

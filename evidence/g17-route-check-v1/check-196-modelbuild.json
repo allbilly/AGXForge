@@ -1,0 +1,27 @@
+{
+ "config": "CHECK.json",
+ "deliver": "gpu-deliver",
+ "bits": 4,
+ "graph": "results/g17-model-internlm2/graph_q4_check_196/graph.json",
+ "build": "graph.json: 172 dispatches, act 507.0 MB, weights 3976 MB",
+ "bundles": 11,
+ "bundles_outside_deliver_root": [],
+ "check": {
+  "tokens": 2,
+  "simulator": [
+   14016,
+   350
+  ],
+  "gpu": [
+   14016,
+   350
+  ],
+  "identical": true
+ },
+ "prefill_check": {
+  "prompt_len": 196,
+  "route": "mma",
+  "ok": true
+ },
+ "ok": true
+}

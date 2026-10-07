@@ -1,0 +1,23 @@
+\chapter{Opcode index}\label{app:c}
+
+\Cref{tab:opcode-index} lists every opcode this document mentions, as \href{https://github.com/sbryngelson/AGXForge/blob/main/isa/g17-opcode-glossary.json}{the opcode glossary} records it. The names are
+this project's and describe the measured function; Apple's spellings are not used. \emph{Standing} here is the
+glossary's own confidence scale (MM~\mm{0.16}). It can lag the newer sections that \cref{app:b} reads, and the daggers
+there mark such opcodes.
+\begin{itemize}
+\item \emph{executed}: the behaviour confirmed by running it on this GPU.
+\item \emph{compiled}: seen in compiled code, including programs that ran correctly, without its own semantics
+  separately confirmed.
+\item \emph{static}: known only from Apple's tables or the corpus.
+\item \emph{unconfirmed}: a partial identification whose name says what is known and marks what is not.
+\end{itemize}
+The two vocabularies are different scales, not different spellings. The closest counterparts: \cref{app:b}'s
+\emph{measured} is \emph{executed} here (its \emph{measured (receipt fit)} is weaker, a replay that is not independent
+evidence); its \emph{whole-program} and \emph{Apple's compiler emits} are \emph{compiled}. \emph{static} and \emph{unconfirmed} have no counterpart there, because \cref{app:b} lists only
+opcodes whose function the sources state.
+A few opcodes the chapters mention have no glossary entry; the table marks them, and the chapter that mentions one says what is known.
+"Discussed in" gives the one or two sections that treat the opcode most; the last column gives up to four machine-model sections.
+
+% The table is generated on every build from the glossary and from where the chapters mention each opcode
+% (tools/g17docs.py --write-opindex, run by docs/tex/Makefile).
+\input{opindex}

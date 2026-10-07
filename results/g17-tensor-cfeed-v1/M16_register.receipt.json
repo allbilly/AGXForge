@@ -1,0 +1,130 @@
+{
+  "status": "passed",
+  "kind": "tensor_gemm",
+  "name": "tensor_gemm_generic_runtime_demo",
+  "shape": {
+    "M": 16,
+    "N": 64,
+    "K": 64,
+    "K2": null,
+    "lda": 64,
+    "ldb": 64,
+    "ldc": 64,
+    "a_type": "half",
+    "b_type": "half",
+    "c_type": "float",
+    "simdgroups": 1,
+    "grid": [
+      32,
+      1,
+      1
+    ],
+    "threadgroup": [
+      32,
+      1,
+      1
+    ],
+    "epilogue": null,
+    "stages": null,
+    "accumulate": null,
+    "saturate": null,
+    "composition": "gemm_generic",
+    "a2_type": null,
+    "b2_type": null,
+    "K3": null,
+    "weight_offset_b": null,
+    "weight_offsets_b": null
+  },
+  "queries": [
+    {
+      "sequence": 1,
+      "status": "passed",
+      "output_sha256": "8c091116a270184f3062423316dd827eaa1c33625dfb297fc03fe6f2d8ea7237",
+      "mismatched_elements": 0,
+      "max_abs_vs_reference": 0.0,
+      "gpu_seconds": 2.4416665837634355e-05,
+      "reference_bit_exact": true,
+      "bytes": 4096,
+      "reference_max_abs": 0.0,
+      "reference_bound": 0.0,
+      "accumulated_error_max_abs": null,
+      "reference_within_bound": true,
+      "boundary_guard": true,
+      "readonly_inputs": true
+    },
+    {
+      "sequence": 2,
+      "status": "passed",
+      "output_sha256": "8c091116a270184f3062423316dd827eaa1c33625dfb297fc03fe6f2d8ea7237",
+      "mismatched_elements": 0,
+      "max_abs_vs_reference": 0.0,
+      "gpu_seconds": 2.2125001123640686e-05,
+      "reference_bit_exact": true,
+      "bytes": 4096,
+      "reference_max_abs": 0.0,
+      "reference_bound": 0.0,
+      "accumulated_error_max_abs": null,
+      "reference_within_bound": true,
+      "boundary_guard": true,
+      "readonly_inputs": true
+    },
+    {
+      "sequence": 3,
+      "status": "passed",
+      "output_sha256": "8c091116a270184f3062423316dd827eaa1c33625dfb297fc03fe6f2d8ea7237",
+      "mismatched_elements": 0,
+      "max_abs_vs_reference": 0.0,
+      "gpu_seconds": 2.212499748566188e-05,
+      "reference_bit_exact": true,
+      "bytes": 4096,
+      "reference_max_abs": 0.0,
+      "reference_bound": 0.0,
+      "accumulated_error_max_abs": null,
+      "reference_within_bound": true,
+      "boundary_guard": true,
+      "readonly_inputs": true
+    }
+  ],
+  "load_only": {
+    "status": 0,
+    "load_only": true,
+    "gpu_dispatched": false
+  },
+  "worker": {
+    "sha256": "37d6e04d8a4790801bb2a23b4cbfc3320864c2fc01af5deac425135d18f07790",
+    "path": "/var/folders/87/3bdx8kv90w303c5vnp4h6sk80000gn/T/g17-tensor-worker-bin-z_i14xfu/common-worker"
+  },
+  "source": {
+    "commit": "1ebe72b5ed6c034011d9cf08db579004c49475bb",
+    "files": {
+      "triad/g17/cc.py": "1a7067c28bd8a8197349b7c3ea6e20fd380f7b9557e2d57191d0b7572068dc52",
+      "triad/g17/mdgen.py": "7f46a58d43fa28870db4f1937a84059908f27e2ca9eb001b15df6157c0c2a8e5",
+      "triad/g17/scanlink.py": "6e461861c51b7fd3bad23b0485dce6c5df6faa5c752310298e701299fab21faf",
+      "triad/g17/tensormetadata.py": "8c15de354ecea3710d1de9b366af417ca1e64c33ae27c80f2c65996ab4fdb2c3",
+      "triad/g17/runtime.py": "d007b9c9b36cfa64b20d42fe7e30caf1f00d8a88f043010bde7bd107ecd78893",
+      "triad/g17/ir.py": "46ce5a64b904dfed5e82275f736948cdac8faa9df1a656febcaeb7200da14f2f",
+      "triad/g17/tensorreduce.py": "118bd40f9ffe28eb5adc2e5508edcf76e163689c541d8b5243e07ab623a2f2d5",
+      "triad/g17/tensor.py": "a2a70d27ba841d47df25f9ef7793c3fc916a5a3e4e79c781a5277526bc8be9c7",
+      "triad/g17/tensorgemm.py": "4424d2f812ff64fc2a6185f3abc861549791be75feb127df5af66e36fb4afcf2",
+      "triad/g17/registerdomain.py": "e2f8669f5f2b9fc96dd09973e74767717e2dc80a5007adc89ec2dd39a8b39b84",
+      "tools/g17commonworker.m": "424e34da9316e5231fbbdce168c69e801ba5c14d12054d8c7755642582df7951",
+      "tools/g17tensorcommonruntime.py": "73067e19e56aeba7d2216d68b96e461051ef2f0a529d1018d7d956c6b7c3c121"
+    }
+  },
+  "files": {
+    "manifest.json": "f2a9a0d74ab3e72427b98398d5bdb71d765372e12b56274d5bf1cf761447be48",
+    "scan.arc.metallib": "f537596487604d8f397c8c385903bb5576096e2adbd9fad304e9aee24c57a9e0",
+    "scan.lib.metallib": "ef04a2b6cb75b59d577a976b48f9ca55faa517b5786ef69688707f3894380ecb",
+    "scan.o": "eb6026cef0dde363197c6266274c994c47f33e10329d59eaed8b6b191f60dd05",
+    "program.bin": "81efd0ef450d9379308c748b7e63cafa329145536e9bd373dd9eb1c991fcd8e5",
+    "a.f16": "3db70f6bb276ce622a2bd022bd73370787c1d8c9377b9f5ae6328085175c603d",
+    "b.f16": "d834892afdec5fea9674736d26b707615594565d833fa86201799dbef5e944b0",
+    "c.f32": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+  },
+  "gpu_dispatched": true,
+  "weight_offset_b": null,
+  "reference_stages": null,
+  "reference": "instruction-level RNE32 MMA with C-first accumulation (section 136) plus FP32 add",
+  "gpu_diagnostics_unchanged": true,
+  "composition": "generic"
+}

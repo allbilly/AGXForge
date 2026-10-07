@@ -1,0 +1,208 @@
+\chapter{Summary}\label{ch:work-brief}
+
+This document describes the instruction encoding and semantics of the Apple M5 GPU (the G17) and the path by which
+work reaches it below Metal. From that description the project built a compiler that emits native
+G17 code, and two ways to run it: one through Metal, one below it, where the project's runtime submits
+work through Apple's private IOGPU interfaces and Metal is never loaded (\cref{fig:bypass}). The measurements
+come from one Apple M5 Pro with 20 GPU cores and 48~GB of memory (MM~\mm{22}, MM~\mm{25.91}); \cref{sec:measured-part-software}
+gives the platform and which records name the OS build.\label{sec:part-software}
+
+\section{Recovered behaviour}\label{sec:has-been-recovered}
+
+Apple documents the GPU and its tensor unit, the neural accelerator, only at the Metal interface. Below that
+interface:
+
+\begin{itemize}
+\item The usable register namespace ends at R125, and an instruction naming any register from R126 to R143
+  is dropped whole, without an error (\cref{sec:namespace}). Register operands carry a lifetime modifier, and in a few
+  forms the encoding fixes it (\cref{tab:fixed-modifiers}). A \emph{release} clears the lane's value as it is read.
+  Controlled probes then read zero, but that is not established in general, so a later reader must not rely on it
+  (\cref{sec:release-does}).
+\item Instruction lengths are even, from 2 to 22 bytes. Apple's code uses every even length from 2 to 16, plus 18- and
+  22-byte forms such as \op{10909} and \op{14661}; no 20-byte instruction has been seen. One opcode can appear at several
+  lengths. Operands are linear functions of
+  scattered bits, recovered as field maps. The tensor-instruction encoder reproduces 800 of 800 compiler-emitted
+  instructions byte for byte. Of the \val{named-instructions} opcodes the project names, \val{executed-instructions} are confirmed by execution
+  (\cref{ch:instruction-encoding}).
+\item Apple's decoder admits ten tensor MMA forms. The mapping from each lane's registers to matrix elements
+  was measured with one-hot probes over 6,651 dispatches. For half inputs, the exact reduction order of one 16 × 16 × 16
+  multiply-accumulate, including where the accumulator enters, reproduces 5,120 of 5,120 tile elements bit for bit.
+  A sequential chain, a balanced tree and an exactly rounded sum each match fewer than 2,800. For bfloat and
+  truncated-fp32 inputs only a few extreme cases were measured (\cref{sec:arithmetic-semantics-supported}). Clearing one
+  metadata byte, the unit's enable, makes every tensor MMA write zeros (\cref{sec:ordering-enable}). Ordering uses no
+  wait instruction. The producer of a late value names one of eight scoreboard slots, and the consumer carries an
+  eight-bit wait mask; if the slot's bit is left out, the consumer reads the register before the value lands, and in
+  the measured tensor case it reads zeros (\cref{ch:synchronization}).
+\item Every byte across 421 delivered archives has a known source. Apple's loader requires 148
+  constants, and the meaning of 12 of their bytes is still open. Metal checks the container's format and does not inspect the code in it (\cref{ch:kernel-metadata-image}).
+\item The launch words, the Submit record, the kernel entry and the completion path below Metal are recovered
+  (\cref{ch:submission-below-metal}). With them the native runtime runs MiniLM-L6 retrieval and Qwen2.5-0.5B generation
+  without Metal, on resource graphs of the four measured sizes, from 3~MiB to 1~GiB (\cref{sec:measured-graphs-generalizes}).
+\end{itemize}
+
+\section{Two ways to run a program}\label{sec:project-authors-two}
+
+The project builds the object, metadata and container around the native instruction bytes, an executor
+for each path (\code{tools/g17decodegen.m} through Metal, the native runtime below it) and the checkers, among them the
+released-register check and the CPU emulator (\cref{app:d}).
+
+\input{fig/bypass}
+
+Through Metal (\cref{ch:through-metal}), the project hands Metal an image, and Metal builds the pipeline from its
+archived code and submits the work. Below Metal (\cref{ch:below-metal-native}), the native runtime takes the program
+bytes directly. It uploads them, writes each launch's resource and launch state, builds the Submit records and calls
+IOGPU itself; no Metal pipeline, command buffer or device exists in that process. Both paths run on IOGPU, the AGX
+kernel driver and the firmware.
+
+The compiler's encoders, its whole-program
+checks and the CPU emulator decode programs with Apple's G17 decoder, loaded from \code{GPUCompiler.framework}
+(\cref{ch:instruction-encoding}). That decoder is not used when the GPU runs a program, but it is the reason compiling and
+validating currently require macOS. Metal source first passes through Apple's \code{xcrun metal} front end on its way to the
+project's IR (\cref{ch:source-native-program}).
+
+\section{The running example}\label{sec:one-program-ir}
+
+The running example computes a 17 × 19 × 16 matrix product, half-precision inputs and fp32 output, and then adds 1.0
+to one output element. Recompiling the IR reproduces the program that ran below Metal byte for byte: 1,232 bytes, SHA-256 \hash{8bb67a3c65919cb7fa9a6f2e70d152cb2d8086fba0cade7437f18d1d8114c667},
+register count 76.
+
+The source is seven lines of the project's IR: three buffers, \code{tensor\_matmul(A, B, C, M=17, N=19, K=16)}, a
+load, an fp32 add and a store (\cref{ch:running-example-through}).
+
+The 17 × 19 output does not divide into 16 × 16 tiles, so the product is two tile rows by two tile columns, and
+the second row and column are partial. The compiler emits 101 instructions, grouped by phase in \cref{tab:example-phases}.
+
+\begin{xltabular}{\linewidth}{@{}l>{\hsize=1.10\hsize}X>{\hsize=0.90\hsize}X@{}}
+\caption{The example program's 101 instructions by phase, as read with Apple's decoder.}\label{tab:example-phases}\\
+\toprule
+Phase & Instructions & What they do \\
+\midrule
+\endfirsthead
+\tablecontinued{3}
+\toprule
+Phase & Instructions & What they do \\
+\midrule
+\endhead
+addresses & one \op{14060} reading the lane index, then
+shifts, ANDs and adds & compute each lane's row, column and byte offset
+(\cref{sec:fragment-layouts}) \\*
+masks & 20 \op{612} and \op{437} & enable only the 17 rows and 19 columns that exist
+(\cref{sec:masks-predicated-memory}) \\*
+loads & 4 \op{12674} and 4 \op{12675} & gather two A and two B fragments, eight bytes per lane each \\*
+multiply & 4 \op{5107} & one per output tile, since K = 16 is one slice \\*
+stores & 2 \op{17257} and 6 \op{17258} & write the four tiles, masked where partial \\*
+epilogue & \op{14059}, \op{12682}, \op{11842}, \op{998}, \op{17229}, \op{684} & add 1.0 to one element \\*
+\bottomrule
+\end{xltabular}
+
+The first \op{5107} is the ten bytes \hash{a70405112204a4620202}, which Apple's decoder prints as:
+
+\begin{lstlisting}
+op5107  R24..R31 <- 0x01000000, 1, R20_R21_R22_R23, 0, 2, R68_R69_R70_R71, 0, 2
+        D        operand 1         A fragment      lifetime, type   B fragment   lifetime, type
+\end{lstlisting}
+
+\begin{itemize}
+\item \textbf{D, R24–R31,} is an eight-register fp32 accumulator group holding the output tile at application rows
+  0–15, columns 0–15. The compiler packs every tile with the hardware's B lane map, so its labelling of these registers
+  differs from the instruction's canonical one by a one-bit rotation of the row index. A is packed the same way, and
+  the product is correct in application coordinates (\cref{sec:coordinate-systems}).
+\item \textbf{A, R20–R23, and B, R68–R71,} are four-register fragments of 16-bit values. Type code 2 means half.
+\item \textbf{Operand 1, 0x01000000,} is the destination's raw operand, which older notes call the flags word. Its
+  bit 24 means wait for scoreboard slot 0. All eight tensor loads write slot 0. Each
+  load's own control word, 0x01100000, both publishes slot 0 and waits on it (\cref{sec:scoreboard-publish-wait,sec:scoreboard}). On an MMA
+  whose loads fill slot 7, clearing the matching wait bit made the multiply read its fragments before the loads landed,
+  and it produced zeros (measured on a separate slot-7 program, MM~\mm{6}).
+\item \textbf{The 1 that follows it} is constant; no encoding bit varies it (\cref{sec:field-maps}).
+\end{itemize}
+
+Each fragment is read by two of the four MMAs, and the second read releases it (\cref{tab:example-mma-releases}). Each output element sums 16
+products in a fixed tree, adjacent pairs and then pairs eight apart, rounding to nearest-even fp32 at every step (the
+rule fitted on half inputs, which this program uses). The program uses the from-zero form, with no C input, so the
+sum starts from the first of the tree's four partial sums; the accumulating form adds C first
+(\cref{sec:arithmetic-semantics-supported}).
+
+The epilogue orders its late values through the scoreboard.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item The \op{14059} of the threadgroup position publishes slot 0.
+\item The \op{12682} waits on slot 0 for its index register and publishes slot 7.
+\item The \op{998} waits on slot 7 for the loaded value.
+\item The store needs no wait: its value comes from an ALU instruction, and ALU results are interlocked (\cref{sec:dependences-issue-scalar}).
+\end{enumerate}
+
+Alongside the code, the compiler reports what an executor needs: the three bindings with their element types, which
+binding is written, the 24 distinct (opcode, length) forms used, an empty constant pool, the register count and
+the system registers read. The project's image-building code turns that into the object, metadata, library and archive Metal loads (\cref{ch:kernel-metadata-image}).
+
+The program was then run on the GPU below Metal (measured; \code{docs/g17-first-dispatch-trials.md}, "A second authored tensor program
+below Metal"). The native runtime wrote the program at allocation 0, offset 0x6c0. Relative to the first tensor
+program it had run, the resource graph changed in nine fields: two view offsets, one C pointer, two binding pointers, the kernel
+word at offset 0x3f8 (from 0xa to 0xc), and the A, B and C windows, which became 544, 608 and
+1,292 bytes, exactly 17 × 16 halves, 16 × 19 halves and 17 × 19 floats.
+
+Three fresh processes each submitted the program through IOGPU with no Metal loaded. In each, 323 of 323 fp32 outputs
+were bit-exact, inputs and guards were intact, both completion callbacks arrived and no recovery event occurred. The
+outputs hash to \hash{ec43027260f5a0b8dd59526c17102ffe00066852f10af42a91103c36e778faf6}, the same as an independently
+computed reference and as the earlier run through Metal (\cref{ch:submission-below-metal}).
+
+\section{Applications}\label{sec:understanding-supports}
+
+InternLM2.5-1.8B decodes on the compiler's kernels, run through Metal. Single stream at a 1,024-token context, it runs
+at 1.14× the decode rate of mlx-lm's \code{generate\_step}; the
+\href{https://github.com/sbryngelson/AGXForge/blob/main/docs/demonstrations.md}{demonstrations document} gives the other models and
+workloads with their baselines. MiniLM-L6 sentence retrieval and Qwen2.5-0.5B-Instruct generation ran through the native
+submission path. Each stage was checked against a CPU recomputation from its GPU inputs, and each output against the
+original checkpoint evaluated in FP64 (MM~\mm{25.210}; \cref{ch:below-metal-native}). The compiler
+was also run on code it was not written for. Of the 125 sources that compiled from a fixed set of 197 (the census) when it
+was run on the hardware, 101 have run and been checked, and none crashes the driver (MM~\mm{25.149.1}); today's front end
+and backend compile 128 of the 197 (\cref{ch:source-native-program}).
+
+A CPU emulator, working from the program bytes, executes one position of a shipped batched-decode graph and of
+single-stream decode, dispatch by dispatch. All 316 and all 172 dispatches match the GPU byte for byte, as does a
+16~MB prefill slice (MM~\mm{25.197}).
+
+\section{Limits of the evidence}\label{sec:where-evidence-stops}
+
+The InternLM2 decode lead over mlx-lm (\cref{sec:understanding-supports}) comes from the kernels. In a matched study,
+Apple's compiler, given the same kernels, ran them 10–15 percent faster with identical tokens, so the lead does not show
+that native instruction control is needed. The tensor-unit kernels were not part of that study (MM~\mm{25.211}).
+
+Below Metal, MiniLM and Qwen run with checked results, but more slowly than Apple's paths: the matched MiniLM FFN and
+attention blocks take 2.427 and 3.815~ms against Metal's 1.797 and 1.962~ms (MM~\mm{25.210.5}). One auxiliary control
+in the native-path validation fails. Qwen's prefix logits, compared with an FP64 model that uses the same half-precision
+projections, deviate by up to 0.097, and 10,658 elements fall outside the bound \code{0.025 + 0.002 * abs(reference)}
+(\cref{ch:below-metal-native}).
+
+Because validation uses Apple's decoder (\cref{sec:project-authors-two}), and the project's own decoder for its
+programs was started and then paused, nothing here establishes portability (MM~\mm{25.209}).
+
+\section{Conventions}\label{sec:read-this-document}
+
+Rules and measurements in Part~\ref{part:i} carry one of these evidence tags.
+
+\begin{itemize}
+\item \emph{measured}: run on this GPU and compared with an independent reference, with a control that could have failed;
+\item \emph{measured (receipt fit)}: a recorded GPU output matched one candidate semantics among rivals; the replay checks
+  consistency and is not independent evidence;
+\item \emph{whole-program}: seen only inside programs verified bit-exact on the GPU, not run in isolation;
+\item \emph{bounded negative}: searched for within a stated bound and not found; nothing is claimed beyond the bound;
+\item \emph{Apple's compiler emits}: read from Apple's compiled code, which shows that a pattern works but leaves open
+  whether the hardware requires it;
+\item \emph{decoder}: what Apple's decoder prints or admits, with no execution behind it;
+\item \emph{compile-witnessed}: a register number or form witnessed by compiling a source, with no dispatch confirming
+  its values;
+\item \emph{driver, static read}: read from the driver's code, not executed;
+\item \emph{emulated}: run in the project's CPU emulator, which is checked against Apple's GPU;
+\item \emph{this compiler}: a choice the project's compiler makes;
+\item \emph{open}: unresolved.
+\end{itemize}
+
+Opcodes are named first and numbered second, as in "\op{12674}". The numbers are
+Apple's opcode ids. The names are this project's, chosen by measured function, and are not Apple's spellings
+(\cref{app:c}). Registers are written by hardware number (R0–R125), with their role stated where it matters.
+
+Open questions are stated next to the rule they qualify and indexed in \cref{ch:not-known-index}. In Part~\ref{part:i}
+a chapter with several open questions collects them in a paragraph headed \textbf{Not known}, and an \textbf{Evidence} list at the
+end of a chapter, or of a long section, gathers the machine-model sections it cites.

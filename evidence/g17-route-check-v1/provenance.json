@@ -1,0 +1,27 @@
+{
+ "format": "g17-route-check-v1",
+ "date": "2026-10-05",
+ "purpose": "examples/README.md workflow 3's route run end to end on the GPU, through Metal, from a fresh clone of the release",
+ "platform": {
+  "os": "27.0.1",
+  "build": "26A434",
+  "gpu": "Apple M5 Pro (H17s)",
+  "agx_driver": "AGXG17X 360.34.5",
+  "iogpu_family": "162.11"
+ },
+ "release_commit": "cc65c5165879d000c65e66782171b1b871bb333f",
+ "source_fixes": "the release at that commit with two fixes applied, since committed: the archive's loader tool version per OS (agxforge/g17/container.py) and g17q4graph prepare's base record",
+ "deliver": {
+  "verified": 358,
+  "delivered": 220,
+  "command": "python3 tools/g17deliver.py build --bits 4 --cap 2048 --out DELIVER --attn-variants kvvec+hwexp2 --kinds qmv,norm,head,attn,gen,norm_rows,prefill_mma_rego,qmm,residual_rows,swiglu_rows,fold_rows"
+ },
+ "files": {
+  "check-196-modelbuild.json": "g17modelbuild --check 2 on the study's config (spec removed), 196-token prompt: GPU and simulator tokens, prefill check",
+  "kernels-1792.json": "g17twin kernels: each bundle and its Apple-compiled twin on the same buffers",
+  "e2e-1792-rows.json": "g17twin e2e, three arms alternating, 2 repetitions, on a new 1,792-token prompt",
+  "prompt-1792-provenance.json": "g17promptids: the prompt's text hash, template and tokenizer hashes (text: MM 25.141, first 6,371 characters)",
+  "config-1792.json": "the config of step 2"
+ },
+ "scope": "a check that the route runs, not a remeasurement: a new prompt, two repetitions at load 5-6, a later OS than the study's; GPU arms only through Metal; the below-Metal path was not dispatched (its launch layouts are unmeasured on this OS)"
+}

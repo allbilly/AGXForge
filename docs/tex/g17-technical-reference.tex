@@ -1,0 +1,79 @@
+% The G17 technical reference.
+% Build: latexmk -lualatex g17-technical-reference.tex   (from docs/tex)
+\documentclass[11pt, letterpaper, oneside, open=any, numbers=noenddot]{scrreprt}
+\input{preamble}
+
+% Revision stamp: the Makefile writes revision.tex from git before each build.
+\InputIfFileExists{revision}{}{\newcommand{\docrevision}{unversioned build}\newcommand{\docrevdate}{}}
+\hypersetup{pdfauthor={Spencer Bryngelson}, pdfsubject={An independently recovered model of the Apple M5 GPU
+  (G17) and its tensor unit, and the compiler and runtime built on it}}
+
+\title{\Huge The G17 technical reference}
+\subtitle{An independently recovered model of the Apple M5 GPU and its tensor unit,\\
+and the compiler and runtime built on it}
+\author{Spencer Bryngelson}
+\date{Manuscript\\[2pt]\small AGXForge revision \code{\docrevision}\ifx\docrevdate\empty\else, \docrevdate\fi}
+\publishers{\small The AGXForge project: a native compiler for the Apple M5 GPU\\
+\url{https://github.com/sbryngelson/AGXForge}}
+
+\begin{document}
+\maketitle
+
+\addchap*{About this document}
+
+This model of the G17 GPU and its in-core tensor unit was built without Apple documentation. Each rule cites the
+evidence that established it, tagged with one of the statement kinds defined in \cref{sec:read-this-document}. The
+\href{https://github.com/sbryngelson/AGXForge/blob/main/docs/demonstrations.md}{demonstrations document} reports application results. The
+\href{https://github.com/sbryngelson/AGXForge/blob/main/docs/g17-tensorops-machine-model.md}{machine model} (MM) is the
+evidence record; a citation such as MM~\mm{25.91} links to the section that establishes a claim, and an opcode, as in
+\op{5107}, links to its entry in \cref{app:c}.
+
+For a first reading, start with the Summary (\cref{ch:work-brief}). Its running example traces one program the project
+compiled from IR to instruction bytes and runs it through Metal and through the project's IOGPU runtime
+(\cref{sec:one-program-ir}). The compiler's handling of that program is followed in \cref{ch:running-example-through}.
+The tensor layouts and arithmetic are in \crefrange{sec:fragment-layouts}{sec:arithmetic-semantics-supported}, register
+chaining between MMAs in \cref{sec:chaining-feed-modes}, and native execution in
+\cref{ch:below-metal-native,ch:image-result-validated}.
+
+\paragraph{Tools used.} Claude Code, Anthropic's coding agent, was used throughout the project to help reverse-engineer
+the device and its instruction set, and to write this document and the evidence record.
+
+\tableofcontents
+
+\setcounter{chapter}{-1}
+\include{ch/00-brief}
+\part{The machine}\label{part:i}
+\include{ch/01-device}
+\include{ch/02-registers}
+\include{ch/03-encoding}
+\include{ch/04-scalar}
+\include{ch/05-control}
+\include{ch/06-special-registers}
+\include{ch/07-memory}
+\include{ch/08-cross-lane}
+\include{ch/09-synchronization}
+\include{ch/10-tensor-unit}
+\include{ch/11-image}
+\include{ch/12-performance}
+\include{ch/13-submission}
+\include{ch/14-open-questions}
+\part{Compilation, delivery and execution}\label{part:ii}
+\include{ch/15-compiling}
+\include{ch/16-delivering}
+\include{ch/17-executing}
+\appendix
+\crefalias{chapter}{appendix}
+\include{ch/a-corrections}
+\include{ch/b-scalar}
+\include{ch/c-opcodes}
+\include{ch/d-code-locations}
+
+\addchap*{Colophon}
+
+Built from AGXForge revision \code{\docrevision}\ifx\docrevdate\empty\else{} (\docrevdate)\fi. The \LaTeX{} source is in
+\code{docs/tex}, one file per chapter; \code{make -C docs/tex} writes the revision stamp and rebuilds this PDF with
+Lua\LaTeX{}. \code{tools/g17docs.py --check} checks that each machine-model citation names a real
+section and each cross-reference has a target, and that opcodes are named beside their numbers. The text is set in Libertinus and
+Inconsolata. Figures are drawn in TikZ, and the fragment map is generated from the measured formula.
+
+\end{document}

@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use AGXForge or its findings, please cite it as below."
+title: "AGXForge: a native compiler and runtime for the Apple M5 GPU (G17)"
+abstract: >-
+  AGXForge compiles its own IR to Apple M5 (G17) GPU machine code - instruction
+  selection, register allocation, encoder, and the object, metadata and container
+  the Metal path loads - on a machine model recovered and checked by measurement.
+  The same code runs through Metal and below Metal, the latter with AGXForge's
+  runtime writing the launch state and submitting through Apple's private IOGPU
+  interface. The release carries the compiler, the runtime, the recovered ISA
+  tables, a technical reference, and the measurement receipts behind every claim.
+type: software
+authors:
+  - family-names: Bryngelson
+    given-names: Spencer
+    email: sbryngelson@gmail.com
+repository-code: "https://github.com/sbryngelson/AGXForge"
+license: MIT
+version: 1.0.0
+date-released: 2026-10-06
+keywords:
+  - Apple silicon
+  - GPU compiler
+  - instruction set recovery
+  - tensor unit
+  - Metal
+  - language model inference

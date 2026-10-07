@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 280" width="1000" height="280" font-family="-apple-system, BlinkMacSystemFont, &#x27;Segoe UI&#x27;, Helvetica, Arial, sans-serif" role="img" aria-label="Lane 0 slot 4 holds D element (1, 0) and is read as B element (8, 0); AGXForge&#x27;s packing puts D row 8 there">
+<title>Lane 0 slot 4 holds D element (1, 0) and is read as B element (8, 0); AGXForge&#x27;s packing puts D row 8 there</title>
+<text x="16" y="26" font-size="15" font-weight="600" fill="#1f2328" text-anchor="start">One register, two meanings: lane 0 of a 16 × 16 accumulator, fed to the next MMA as B</text>
+<text x="16" y="46" font-size="12" font-weight="400" fill="#57606a" text-anchor="start">Technical reference 10.5. The hardware writes D in one coordinate map and reads B in another.</text>
+<text x="285" y="66" font-size="12" font-weight="400" fill="#8c959f" text-anchor="middle">slot 0</text>
+<text x="355" y="66" font-size="12" font-weight="400" fill="#8c959f" text-anchor="middle">slot 1</text>
+<text x="425" y="66" font-size="12" font-weight="400" fill="#8c959f" text-anchor="middle">slot 2</text>
+<text x="495" y="66" font-size="12" font-weight="400" fill="#8c959f" text-anchor="middle">slot 3</text>
+<text x="565" y="66" font-size="12" font-weight="600" fill="#1f2328" text-anchor="middle">slot 4</text>
+<text x="635" y="66" font-size="12" font-weight="400" fill="#8c959f" text-anchor="middle">slot 5</text>
+<text x="705" y="66" font-size="12" font-weight="400" fill="#8c959f" text-anchor="middle">slot 6</text>
+<text x="775" y="66" font-size="12" font-weight="400" fill="#8c959f" text-anchor="middle">slot 7</text>
+<text x="236" y="100" font-size="13" font-weight="500" fill="#1f2328" text-anchor="end">Canonical D element (hardware)</text>
+<rect x="253" y="76" width="64" height="38" rx="6" fill="none" stroke="#d8dee4" stroke-width="1"/>
+<text x="285" y="100" font-size="13" font-weight="400" fill="#1f2328" text-anchor="middle">(0, 0)</text>
+<rect x="323" y="76" width="64" height="38" rx="6" fill="none" stroke="#d8dee4" stroke-width="1"/>
+<text x="355" y="100" font-size="13" font-weight="400" fill="#1f2328" text-anchor="middle">(0, 1)</text>
+<rect x="393" y="76" width="64" height="38" rx="6" fill="none" stroke="#d8dee4" stroke-width="1"/>
+<text x="425" y="100" font-size="13" font-weight="400" fill="#1f2328" text-anchor="middle">(0, 2)</text>
+<rect x="463" y="76" width="64" height="38" rx="6" fill="none" stroke="#d8dee4" stroke-width="1"/>
+<text x="495" y="100" font-size="13" font-weight="400" fill="#1f2328" text-anchor="middle">(0, 3)</text>
+<rect x="533" y="76" width="64" height="38" rx="6" fill="none" stroke="#d8dee4" stroke-width="1"/>
+<text x="565" y="100" font-size="13" font-weight="700" fill="#1f2328" text-anchor="middle">(1, 0)</text>
+<rect x="603" y="76" width="64" height="38" rx="6" fill="none" stroke="#d8dee4" stroke-width="1"/>
+<text x="635" y="100" font-size="13" font-weight="400" fill="#1f2328" text-anchor="middle">(1, 1)</text>
+<rect x="673" y="76" width="64" height="38" rx="6" fill="none" stroke="#d8dee4" stroke-width="1"/>
+<text x="705" y="100" font-size="13" font-weight="400" fill="#1f2328" text-anchor="middle">(1, 2)</text>
+<rect x="743" y="76" width="64" height="38" rx="6" fill="none" stroke="#d8dee4" stroke-width="1"/>
+<text x="775" y="100" font-size="13" font-weight="400" fill="#1f2328" text-anchor="middle">(1, 3)</text>
+<text x="236" y="148" font-size="13" font-weight="500" fill="#1f2328" text-anchor="end">Read by the next MMA as B element</text>
+<rect x="253" y="124" width="64" height="38" rx="6" fill="none" stroke="#d8dee4" stroke-width="1"/>
+<text x="285" y="148" font-size="13" font-weight="400" fill="#1f2328" text-anchor="middle">(0, 0)</text>
+<rect x="323" y="124" width="64" height="38" rx="6" fill="none" stroke="#d8dee4" stroke-width="1"/>
+<text x="355" y="148" font-size="13" font-weight="400" fill="#1f2328" text-anchor="middle">(0, 1)</text>
+<rect x="393" y="124" width="64" height="38" rx="6" fill="none" stroke="#d8dee4" stroke-width="1"/>
+<text x="425" y="148" font-size="13" font-weight="400" fill="#1f2328" text-anchor="middle">(0, 2)</text>
+<rect x="463" y="124" width="64" height="38" rx="6" fill="none" stroke="#d8dee4" stroke-width="1"/>
+<text x="495" y="148" font-size="13" font-weight="400" fill="#1f2328" text-anchor="middle">(0, 3)</text>
+<rect x="533" y="124" width="64" height="38" rx="6" fill="none" stroke="#d8dee4" stroke-width="1"/>
+<text x="565" y="148" font-size="13" font-weight="700" fill="#1f2328" text-anchor="middle">(8, 0)</text>
+<rect x="603" y="124" width="64" height="38" rx="6" fill="none" stroke="#d8dee4" stroke-width="1"/>
+<text x="635" y="148" font-size="13" font-weight="400" fill="#1f2328" text-anchor="middle">(8, 1)</text>
+<rect x="673" y="124" width="64" height="38" rx="6" fill="none" stroke="#d8dee4" stroke-width="1"/>
+<text x="705" y="148" font-size="13" font-weight="400" fill="#1f2328" text-anchor="middle">(8, 2)</text>
+<rect x="743" y="124" width="64" height="38" rx="6" fill="none" stroke="#d8dee4" stroke-width="1"/>
+<text x="775" y="148" font-size="13" font-weight="400" fill="#1f2328" text-anchor="middle">(8, 3)</text>
+<text x="236" y="196" font-size="13" font-weight="500" fill="#1f2328" text-anchor="end">Canonical packing puts D row</text>
+<rect x="253" y="172" width="64" height="38" rx="6" fill="#f2f1ee" stroke="#b9b8b2" stroke-width="1"/>
+<text x="285" y="196" font-size="13" font-weight="400" fill="#1f2328" text-anchor="middle">0</text>
+<rect x="323" y="172" width="64" height="38" rx="6" fill="#f2f1ee" stroke="#b9b8b2" stroke-width="1"/>
+<text x="355" y="196" font-size="13" font-weight="400" fill="#1f2328" text-anchor="middle">0</text>
+<rect x="393" y="172" width="64" height="38" rx="6" fill="#f2f1ee" stroke="#b9b8b2" stroke-width="1"/>
+<text x="425" y="196" font-size="13" font-weight="400" fill="#1f2328" text-anchor="middle">0</text>
+<rect x="463" y="172" width="64" height="38" rx="6" fill="#f2f1ee" stroke="#b9b8b2" stroke-width="1"/>
+<text x="495" y="196" font-size="13" font-weight="400" fill="#1f2328" text-anchor="middle">0</text>
+<rect x="533" y="172" width="64" height="38" rx="6" fill="#f2f1ee" stroke="#b9b8b2" stroke-width="1"/>
+<text x="565" y="196" font-size="13" font-weight="700" fill="#1f2328" text-anchor="middle">1</text>
+<rect x="603" y="172" width="64" height="38" rx="6" fill="#f2f1ee" stroke="#b9b8b2" stroke-width="1"/>
+<text x="635" y="196" font-size="13" font-weight="400" fill="#1f2328" text-anchor="middle">1</text>
+<rect x="673" y="172" width="64" height="38" rx="6" fill="#f2f1ee" stroke="#b9b8b2" stroke-width="1"/>
+<text x="705" y="196" font-size="13" font-weight="400" fill="#1f2328" text-anchor="middle">1</text>
+<rect x="743" y="172" width="64" height="38" rx="6" fill="#f2f1ee" stroke="#b9b8b2" stroke-width="1"/>
+<text x="775" y="196" font-size="13" font-weight="400" fill="#1f2328" text-anchor="middle">1</text>
+<text x="236" y="244" font-size="13" font-weight="500" fill="#1f2328" text-anchor="end">AGXForge packing puts D row</text>
+<rect x="253" y="220" width="64" height="38" rx="6" fill="#ddebfb" stroke="#2a78d6" stroke-width="1"/>
+<text x="285" y="244" font-size="13" font-weight="400" fill="#1f2328" text-anchor="middle">0</text>
+<rect x="323" y="220" width="64" height="38" rx="6" fill="#ddebfb" stroke="#2a78d6" stroke-width="1"/>
+<text x="355" y="244" font-size="13" font-weight="400" fill="#1f2328" text-anchor="middle">0</text>
+<rect x="393" y="220" width="64" height="38" rx="6" fill="#ddebfb" stroke="#2a78d6" stroke-width="1"/>
+<text x="425" y="244" font-size="13" font-weight="400" fill="#1f2328" text-anchor="middle">0</text>
+<rect x="463" y="220" width="64" height="38" rx="6" fill="#ddebfb" stroke="#2a78d6" stroke-width="1"/>
+<text x="495" y="244" font-size="13" font-weight="400" fill="#1f2328" text-anchor="middle">0</text>
+<rect x="533" y="220" width="64" height="38" rx="6" fill="#ddebfb" stroke="#2a78d6" stroke-width="1"/>
+<text x="565" y="244" font-size="13" font-weight="700" fill="#1f2328" text-anchor="middle">8</text>
+<rect x="603" y="220" width="64" height="38" rx="6" fill="#ddebfb" stroke="#2a78d6" stroke-width="1"/>
+<text x="635" y="244" font-size="13" font-weight="400" fill="#1f2328" text-anchor="middle">8</text>
+<rect x="673" y="220" width="64" height="38" rx="6" fill="#ddebfb" stroke="#2a78d6" stroke-width="1"/>
+<text x="705" y="244" font-size="13" font-weight="400" fill="#1f2328" text-anchor="middle">8</text>
+<rect x="743" y="220" width="64" height="38" rx="6" fill="#ddebfb" stroke="#2a78d6" stroke-width="1"/>
+<text x="775" y="244" font-size="13" font-weight="400" fill="#1f2328" text-anchor="middle">8</text>
+<rect x="530" y="72" width="70" height="190" rx="8" fill="none" stroke="#1f2328" stroke-width="2"/>
+<text x="828" y="186" font-size="12" font-weight="600" fill="#1f2328" text-anchor="start">B row 8 receives D row 1:</text>
+<text x="828" y="202" font-size="12" font-weight="400" fill="#57606a" text-anchor="start">rotated; must be undone</text>
+<text x="828" y="234" font-size="12" font-weight="600" fill="#1f2328" text-anchor="start">B row 8 receives D row 8:</text>
+<text x="828" y="250" font-size="12" font-weight="400" fill="#57606a" text-anchor="start">used directly, no shuffle</text>
+</svg>

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 280" width="1000" height="280" font-family="-apple-system, BlinkMacSystemFont, &#x27;Segoe UI&#x27;, Helvetica, Arial, sans-serif" role="img" aria-label="Decode throughput: mlx-lm 162.2, the AGXForge design with AGXForge&#x27;s compiler 184.5, with Apple&#x27;s compiler 213.4 tokens per second">
+<title>Decode throughput: mlx-lm 162.2, the AGXForge design with AGXForge&#x27;s compiler 184.5, with Apple&#x27;s compiler 213.4 tokens per second</title>
+<text x="16" y="26" font-size="15" font-weight="600" fill="#1f2328" text-anchor="start">Decode throughput, tokens per second (median of 4 repetitions)</text>
+<text x="16" y="46" font-size="12" font-weight="400" fill="#57606a" text-anchor="start">InternLM2.5-1.8B-chat, 4-bit weights, 1,792-token context, one shared 128-token history, all three through Metal</text>
+<line x1="210" y1="70" x2="210" y2="220" stroke="#d8dee4" stroke-width="1"/>
+<text x="210" y="238" font-size="12" font-weight="400" fill="#8c959f" text-anchor="middle">0</text>
+<line x1="332" y1="70" x2="332" y2="220" stroke="#d8dee4" stroke-width="1"/>
+<text x="332" y="238" font-size="12" font-weight="400" fill="#8c959f" text-anchor="middle">50</text>
+<line x1="454" y1="70" x2="454" y2="220" stroke="#d8dee4" stroke-width="1"/>
+<text x="454" y="238" font-size="12" font-weight="400" fill="#8c959f" text-anchor="middle">100</text>
+<line x1="576" y1="70" x2="576" y2="220" stroke="#d8dee4" stroke-width="1"/>
+<text x="576" y="238" font-size="12" font-weight="400" fill="#8c959f" text-anchor="middle">150</text>
+<line x1="698" y1="70" x2="698" y2="220" stroke="#d8dee4" stroke-width="1"/>
+<text x="698" y="238" font-size="12" font-weight="400" fill="#8c959f" text-anchor="middle">200</text>
+<line x1="820" y1="70" x2="820" y2="220" stroke="#d8dee4" stroke-width="1"/>
+<text x="820" y="238" font-size="12" font-weight="400" fill="#8c959f" text-anchor="middle">250</text>
+<text x="198" y="94" font-size="14" font-weight="600" fill="#1f2328" text-anchor="end">mlx-lm</text>
+<text x="198" y="110" font-size="12" font-weight="400" fill="#57606a" text-anchor="end">generate_step</text>
+<path d="M 210 84 h 391.744 a 4 4 0 0 1 4 4 v 16 a 4 4 0 0 1 -4 4 h -391.744 z" fill="#8f8e89"/>
+<text x="617.744" y="101" font-size="14" font-weight="400" fill="#1f2328" text-anchor="start">162.2</text>
+<text x="198" y="142" font-size="14" font-weight="600" fill="#1f2328" text-anchor="end">AGXForge design</text>
+<text x="198" y="158" font-size="12" font-weight="400" fill="#57606a" text-anchor="end">AGXForge compiler</text>
+<path d="M 210 132 h 446.18 a 4 4 0 0 1 4 4 v 16 a 4 4 0 0 1 -4 4 h -446.18 z" fill="#2a78d6"/>
+<text x="672.18" y="149" font-size="14" font-weight="600" fill="#1f2328" text-anchor="start">184.5  ·  1.14× mlx-lm</text>
+<text x="198" y="190" font-size="14" font-weight="600" fill="#1f2328" text-anchor="end">AGXForge design</text>
+<text x="198" y="206" font-size="12" font-weight="400" fill="#57606a" text-anchor="end">Apple&#x27;s compiler</text>
+<path d="M 210 180 h 516.696 a 4 4 0 0 1 4 4 v 16 a 4 4 0 0 1 -4 4 h -516.696 z" fill="#eb6834"/>
+<text x="742.696" y="197" font-size="14" font-weight="600" fill="#1f2328" text-anchor="start">213.4  ·  1.32× mlx-lm</text>
+<text x="16" y="266" font-size="12" font-weight="400" fill="#57606a" text-anchor="start">Per repetition, against mlx-lm: 1.13-1.15× (AGXForge compiler) and 1.31-1.33× (Apple&#x27;s compiler). The design&#x27;s lead survives Apple&#x27;s compiler; it does not need AGXForge&#x27;s instruction control.</text>
+</svg>

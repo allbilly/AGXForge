@@ -1,0 +1,62 @@
+\chapter{Delivery and validation}\label{ch:delivering}
+
+A model reaches the GPU as a graph of images. Six checks stand between the
+compiler's output and a delivered graph, from the encoder reading its own bytes back to a comparison against Apple's
+compiled code (\cref{tab:validation-ladder}).
+
+\section{The image and its checks}\label{ch:image-result-validated}
+
+\code{scanlink.author} writes all of the image's bytes, in the Mach-O object, the metadata, the library and the binary
+archive (MM~\mm{25.147}, MM~\mm{25.148}). The metadata holds the register count, the system registers, the
+bindings and the tensor-unit enable. The byte census of 421 delivered archives and the 148
+constants Apple's loader requires are in \cref{sec:object-library-archive}.
+
+\begin{xltabular}{\linewidth}{@{}l>{\hsize=1.34\hsize}X>{\hsize=0.66\hsize}X@{}}
+\caption{Validation checks in the order they run, with the tool that performs each (MM~\mm{23.6}).}\label{tab:validation-ladder}\\
+\toprule
+Step & Check & Where \\
+\midrule
+\endfirsthead
+\tablecontinued{3}
+\toprule
+Step & Check & Where \\
+\midrule
+\endhead
+1 & every instruction decodes back to what was asked for & the encoders \\*
+2 & the whole body decodes, with one final \op{684}, no
+R126+ operand and no read after release & \code{agxforge/g17/verify.py}, \code{releasecheck.py} \\*
+3 & the contract and metadata agree with the code & \code{scanlink.author} \\*
+4 & the CPU emulator runs the program from its bytes against a reference,
+with the race check & \code{tools/g17emu.py} \\*
+5 & one hardware dispatch per kernel, its output sentinel-filled, compared
+with the reference & \code{tools/g17deliver.py} \\*
+6 & Apple's compiler builds the same source, and the outputs
+are compared with a control input that must differ; this found the \code{(uint)} cast difference
+(\cref{ch:selection-allocation-general}) & \code{tools/g17sourceexec.py} \\*
+\bottomrule
+\end{xltabular}
+
+The emulator of step 4 decodes the bytes rather than the IR, so it tests the bytes that run (MM~\mm{25.195},
+MM~\mm{25.197}). Its default tier, "strict", admits only semantics that an isolated
+receipt executed; the "wp" (whole-program) tier also admits forms whose semantics are known only from whole programs
+verified on hardware. On shipped model graphs it is byte-identical to the GPU after every dispatch for one decode position
+of the batched graph (316 dispatches), one of single-stream decode (172), and the 1,024-token prefill through layers 0
+and 1. Run on Apple's compiled code for 98 census programs, it matches Apple's GPU output on 53, differs on none and refuses 45.
+
+Step 5 runs each kernel on one input set and requires an exact match, except for kernels that use \op{1272}, which no CPU reference reproduces. Those are
+the decode and prefill attention in their \code{hw\_exp2} forms and the fast SwiGLU, and they are checked against an
+enclosure with a wrong-base control (MM~\mm{25.144.5}, MM~\mm{25.183}).
+
+\section{Model graphs}\label{ch:model-graphs}
+
+A model is compiled kernel by kernel and then assembled into a static graph (MM~\mm{25.138}, MM~\mm{25.141.15}).
+\code{tools/g17deliver.py build} compiles each kernel kind a model needs, authors its bundle and dispatches it once.
+The form and layout of each kernel come from the model's entry in \code{agxforge/inference/catalog.py}. The tool
+writes the delivery index, whose contract \code{agxforge/inference/index.py} defines, only if every check passes.
+
+\code{tools/g17q4graph.py build} (the assembler, \code{agxforge/inference/assemble.py}) turns the model's weights
+and a config into \code{graph.json}. The file holds named arenas (one buffer each, with guards) and their initial
+contents, the ordered dispatch list with each binding's arena and offset, and any per-token host writes. For the
+prefill section, which processes the prompt in M-row chunks before decoding starts, it calls \code{agxforge/inference/prefill.py} (MM~\mm{25.142.10}).
+A config (\code{tools/models/*.json}) selects each kernel's variant, so one model has many graphs that differ only in
+their kernels.

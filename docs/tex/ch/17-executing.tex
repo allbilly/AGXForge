@@ -1,0 +1,157 @@
+\chapter{Execution paths}\label{ch:executing}
+
+The same native program runs on two paths (\cref{fig:bypass}).
+
+\section{Execution through Metal}\label{ch:through-metal}
+
+The executor, \code{tools/g17decodegen.m}, loads each bundle's library and
+binary archive. It builds the pipeline with \code{MTLPipelineOptionFailOnBinaryArchiveMiss}, so Metal must use the
+archived code. Patching one constant in GPU memory after the pipeline is built changes the output as predicted
+(MM~\mm{25.147}), so the GPU runs these bytes; whether they are copied or checked again before execution is not
+determined. Metal still derives the pipeline configuration from the metadata the image declares and submits the work.
+
+The executor creates one Metal buffer per arena, writes the arenas' initial contents, and encodes all of a token's
+dispatches into one command buffer. Buffers, bindings and dispatches are fixed before the first token, and each
+stage's output stays on the GPU in an arena that the next stage binds. In pipelined mode the GPU also runs the generation step, which advances
+the position and writes the next token's embedding. The host then commits the token command buffers back to back
+with no wait between them, and reads the generated tokens from a log at the end. With no idle gap between tokens the
+GPU stays at its maximum clock state (MM~\mm{0.15}).
+
+In the current InternLM2.5-1.8B decode graph each of the 24 layers is seven dispatches:
+
+\begin{lstlisting}
+RMSNorm -> qkv projection -> attention (RoPE + KV append + 32 key slices + merge) -> wo projection + residual
+        -> RMSNorm -> w1/w3 projections + SwiGLU -> w2 projection + residual
+\end{lstlisting}
+
+Four more dispatches run per token: the final norm, the vocabulary head, the argmax and the generation step. That
+makes 172 dispatches a token (MM~\mm{25.154}, MM~\mm{25.190}). mlx-lm runs 16 dispatches a layer for the same model
+(MM~\mm{25.142.1}). Qwen3-0.6B and Qwen3-8B also run on this path (MM~\mm{25.188}, MM~\mm{25.204}).
+
+Split-K quantized matrix-vector products read the 4-bit
+weights with K split across lanes and threadgroups, and fuse the residual add or SwiGLU into the same dispatch
+(MM~\mm{25.152}, MM~\mm{25.153}). Attention splits the keys into 32 slices, each a simdgroup with its own running
+softmax, and merges the partial results with a parallel butterfly. Attention for one layer at 128 keys takes
+9.7~µs, against 12.0~µs in MLX (MM~\mm{25.140}, MM~\mm{25.141.14}).
+
+Metal versions of these kernels, compiled by Apple with identical threads, partitions and operation order, are
+bit-identical and 10–15 percent faster (\cref{sec:bounds-real-workloads}); MM~\mm{25.211} has not yet found which
+code difference costs the time.
+
+In batched decode, with up to 16 sequences, the projection dequantizes each 4-bit weight once in registers, then multiplies it against every sequence with tensor MMAs. It computes the
+transpose, \code{Y\textasciicircum{}T = W\textasciicircum{}T X\textasciicircum{}T}, because only B can advance through the key-block index register (MM~\mm{25.166}). The dequantization runs in fp16 on the register-form fp16 fma, \opn{798} (MM~\mm{25.196}).
+Splitting K to about 512 threadgroups raises 16-sequence decode from 1,172 to 1,462 tok/s (MM~\mm{25.185}), and a 32-sequence form runs two 16-row
+halves over one dequantized weight (MM~\mm{25.178}).
+
+Prefill runs the prompt in chunks of up to 512 rows. Its GEMMs run on the tensor unit against persistent fp16 weights.
+Attention keeps its score and probability tiles in registers, and the FFN intermediate is fp16. Short prompts use a
+16-row 4-bit route instead (MM~\mm{25.163}, MM~\mm{25.183}, MM~\mm{25.202}).
+
+\section{Native execution below Metal}\label{ch:below-metal-native}
+
+The native runtime runs a model with no Metal in the process, and it checks that AGXMetal, Apple's Metal driver
+library, is absent (\cref{sec:opening-device-contexts}). Work is submitted through Apple's private
+\code{IOGPU} framework to the installed kernel driver and the GPU firmware (\cref{tab:native-path-ownership}). Two models run on it, MiniLM-L6
+(sentence embeddings) and Qwen2.5-0.5B-Instruct (text generation), each at a fixed checkpoint revision
+(MM~\mm{25.210}).
+
+\begin{xltabular}{\linewidth}{@{}lXX@{}}
+\caption{What the project supplies at each layer of the native path, and what is still Apple's or outside the project (MM~\mm{25.210.9}).}\label{tab:native-path-ownership}\\
+\toprule
+Layer & This project & Still Apple's, or outside \\
+\midrule
+\endfirsthead
+\tablecontinued{3}
+\toprule
+Layer & This project & Still Apple's, or outside \\
+\midrule
+\endhead
+model & graph import, checkpoint conversion, lowering, memory plan & the checkpoints and tokenizers; NumPy and PyTorch for host input and
+validation \\*
+GPU program & every instruction byte, from the compiler of \cref{ch:compiling} & encoding rules recovered with Apple's decoder \\*
+execution & the host worker: uploads, resource and command state, Submit, wait,
+checks & \code{IOGPU.framework}, IOKit, the AGX kernel driver, the firmware, the
+hardware \\*
+\bottomrule
+\end{xltabular}
+
+Both models pass through the same pipeline (MM~\mm{25.210.3}).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item \code{agxforge/g17/inferencegraph.py} reads the checkpoint's tensors into a typed graph and refuses holes,
+  overlaps and mismatched shapes.
+\item \code{tools/g17inferencelower.py} compiles each node with the compiler of \cref{ch:compiling}. MiniLM lowers to
+  170 stages built from 16 distinct bodies, and Qwen to 748 prefill and 916 decode stages built from 28.
+\item A memory planner assigns arenas and gives each slot 256-byte guards.
+\item \code{tools/g17inferencebundle.py} places the schedule into a measured resource graph of 128 MiB for MiniLM or
+  1 GiB for Qwen, and a resident worker runs it with at most three bindings and one Submit per stage.
+\end{enumerate}
+
+For each stage the runner places the stage's program in allocation 0 and writes the stage's launch words (the program
+counter, the shader state, the grid, the threads per threadgroup and up to three buffer pointers). It then builds one
+count-one Submit record with fresh callback blocks, calls IOGPU and waits up to five seconds for both callbacks.
+\Cref{ch:submission-below-metal} documents these launch words and Submit records; the runtime refuses any value
+outside the envelope measured there.
+
+While the model runs, each stage reply carries bits recording that the stage completed, that the weights, guards,
+code and uploaded source are unchanged, and that AGXMetal is still absent. The runner checks the guards of the live
+regions after each stage, and any change in the GPU's recovery or event counters fails the run.
+
+Correctness is checked offline on the captured outputs. Matrix operands travel as half with fp32 accumulation, and the
+checks are against that domain rather than original-fp32 arithmetic. The bounds below were registered before
+the first dispatch and never widened (MM~\mm{25.210.2}).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item The CPU recomputes every stage from the values its GPU predecessor produced, so a stage is checked against
+  its actual input. The bound is \code{2e-5 * (1 + abs(reference))}, and packs, gathers,
+  bias and residual adds must be bit-exact. All 680 MiniLM stages and 9,984 Qwen stage checks pass; drift across the
+  model is outside what this level sees.
+\item Application outputs are checked against the original checkpoint evaluated in FP64. MiniLM's final embedding
+  must be within a maximum error of 0.005 and a cosine of at least 0.999; it measured 1.29e-4, with cosine at least
+  0.9999997786. Against an FP64 model of the same half-transport policy, the bound \code{2e-4 * (1 + abs(reference))}
+  also passes (maximum 8.21e-5). Each Qwen last-row logit vector, with the native tokens teacher-forced, must be within
+  \code{0.05 + 0.003 * abs(reference)}. All 37 vectors fall inside, and all 37 agree on the top token.
+\end{enumerate}
+
+One auxiliary control fails. Against an FP64 model of the same half-projection policy, with the bound
+\code{0.025 + 0.002 * abs(reference)}, Qwen's prefix logits reach a maximum error of 0.097 and 10,658 elements fall
+outside. A replay of the failing prefix traces the excess to a half-rounding boundary in layer 0.
+
+The native path is slower than the matched Metal blocks and MPS (MM~\mm{25.210.5}). The native MiniLM FFN block takes
+2.427~ms against 1.797~ms for its matched Metal block, and the attention block 3.815 against 1.962~ms. In the paired
+comparison with Transformers on MPS, native Qwen decode ran 3.26–3.33 tok/s against MPS's 22.6–49.1; the lowest MPS
+figure is its first request, which includes first-use effects, and its warm requests ran 48–49. Later changes,
+with no MPS run alongside, raised native decode to 5.15–5.32 tok/s in alternation with a build that kept the old guard
+check, and to 4.62 tok/s in a separate replay. A full-model Metal control written in this repository runs the same 28
+programs; its decode frame is 230~ms, of which 33~ms is reported GPU time.
+
+The native path's per-token time has not been divided among its 916 Submits, guard scans and padded transfers.
+\Cref{sec:completion-callbacks-their} gives the FFN block's interval from Submit to completed callback, and replacing
+the host's scalar guard check with a vectorized one made Qwen decode 1.30–1.31× faster.
+
+\section{Comparison of the two paths}\label{ch:comparing-two-paths}
+
+The native path has not been shown to be faster than the path through Metal (\cref{tab:paths-compared}).
+
+\begin{xltabular}{\linewidth}{@{}>{\hsize=0.55\hsize}XX>{\hsize=1.39\hsize}X@{}}
+\caption{The path through Metal and the native path below it, side by side.}\label{tab:paths-compared}\\
+\toprule
+& through Metal & below Metal \\
+\midrule
+\endfirsthead
+\tablecontinued{3}
+\toprule
+& through Metal & below Metal \\
+\midrule
+\endhead
+models & InternLM2.5-1.8B, Qwen3-0.6B, Qwen3-8B & MiniLM-L6, Qwen2.5-0.5B \\*
+pipeline configuration & Metal derives it from the image's metadata & the runner writes it, from measured classes \\*
+speed & decode at 1.14–1.22× the rate of mlx-lm's \code{generate\_step} (MM~\mm{25.190}) & slower than matched Metal blocks and MPS; no advantage either way
+against the full-model Metal control \\*
+not established & why Apple's code for the same kernels is faster & a speedup from bypassing Metal (the two paths differ in submission, guards, padding and
+transfers); behaviour across OS updates (the IOGPU interfaces are private); reproduction outside this project; an
+experiment that only this path can run (MM~\mm{25.210.9}) \\*
+\bottomrule
+\end{xltabular}

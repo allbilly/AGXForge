@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 346" width="1000" height="346" font-family="-apple-system, BlinkMacSystemFont, &#x27;Segoe UI&#x27;, Helvetica, Arial, sans-serif" role="img" aria-label="Two execution paths for the same AGXForge-compiled G17 code: through Metal, and below Metal">
+<title>Two execution paths for the same AGXForge-compiled G17 code: through Metal, and below Metal</title>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#9ba7b4"/></marker></defs>
+<rect x="16" y="28" width="200" height="58" rx="8" fill="#12305a" stroke="#3987e5" stroke-width="1.25"/>
+<text x="116" y="54" font-size="14" font-weight="500" fill="#e6edf3" text-anchor="middle">Python kernel builders</text>
+<text x="116" y="72" font-size="12" font-weight="400" fill="#9ba7b4" text-anchor="middle">AGXForge IR, directly</text>
+<rect x="16" y="112" width="200" height="58" rx="8" fill="#24262a" stroke="#4d5057" stroke-width="1.25"/>
+<text x="116" y="138" font-size="14" font-weight="500" fill="#e6edf3" text-anchor="middle">Metal source</text>
+<text x="116" y="156" font-size="12" font-weight="400" fill="#9ba7b4" text-anchor="middle">Apple front end → AIR</text>
+<rect x="262" y="60" width="196" height="78" rx="8" fill="#12305a" stroke="#3987e5" stroke-width="1.25"/>
+<text x="360" y="96" font-size="14" font-weight="600" fill="#e6edf3" text-anchor="middle">AGXForge compiler</text>
+<text x="360" y="114" font-size="12" font-weight="400" fill="#9ba7b4" text-anchor="middle">selection · allocation · encoding</text>
+<text x="360" y="158" font-size="12" font-weight="400" fill="#9ba7b4" text-anchor="middle">+ object, metadata, container</text>
+<rect x="502" y="70" width="150" height="58" rx="8" fill="#12305a" stroke="#3987e5" stroke-width="1.25"/>
+<text x="577" y="104" font-size="14" font-weight="600" fill="#e6edf3" text-anchor="middle">Native G17 code</text>
+<rect x="700" y="18" width="284" height="62" rx="8" fill="#24262a" stroke="#4d5057" stroke-width="1.25"/>
+<text x="842" y="46" font-size="14" font-weight="500" fill="#e6edf3" text-anchor="middle">Metal: pipelines, command buffers</text>
+<text x="842" y="64" font-size="12" font-weight="400" fill="#9ba7b4" text-anchor="middle">through Metal · every performance result</text>
+<rect x="700" y="118" width="244" height="62" rx="8" fill="#12305a" stroke="#3987e5" stroke-width="1.25"/>
+<text x="822" y="146" font-size="14" font-weight="500" fill="#e6edf3" text-anchor="middle">AGXForge runtime</text>
+<text x="822" y="164" font-size="12" font-weight="400" fill="#9ba7b4" text-anchor="middle">below Metal · launch state, Submit records</text>
+<rect x="262" y="222" width="722" height="48" rx="8" fill="#24262a" stroke="#4d5057" stroke-width="1.25"/>
+<text x="623" y="251" font-size="14" font-weight="500" fill="#e6edf3" text-anchor="middle">Apple IOGPU framework · kernel driver · firmware</text>
+<rect x="262" y="290" width="722" height="44" rx="8" fill="#24262a" stroke="#4d5057" stroke-width="1.25"/>
+<text x="623" y="317" font-size="14" font-weight="600" fill="#e6edf3" text-anchor="middle">M5 GPU and its tensor units</text>
+<path d="M 216 57 L 240 57 L 240 92 L 260 92" fill="none" stroke="#9ba7b4" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#ah)"/>
+<path d="M 216 141 L 240 141 L 240 108 L 260 108" fill="none" stroke="#9ba7b4" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#ah)"/>
+<path d="M 458 99 L 500 99" fill="none" stroke="#9ba7b4" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#ah)"/>
+<path d="M 652 92 L 676 92 L 676 49 L 698 49" fill="none" stroke="#9ba7b4" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#ah)"/>
+<path d="M 652 106 L 676 106 L 676 149 L 698 149" fill="none" stroke="#9ba7b4" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#ah)"/>
+<path d="M 964 80 L 964 220" fill="none" stroke="#9ba7b4" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#ah)"/>
+<path d="M 822 180 L 822 220" fill="none" stroke="#9ba7b4" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#ah)"/>
+<path d="M 623 270 L 623 288" fill="none" stroke="#9ba7b4" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#ah)"/>
+<rect x="16" y="232" width="14" height="14" rx="3" fill="#12305a" stroke="#3987e5" stroke-width="1.25"/>
+<text x="38" y="244" font-size="13" font-weight="400" fill="#e6edf3" text-anchor="start">AGXForge</text>
+<rect x="16" y="258" width="14" height="14" rx="3" fill="#24262a" stroke="#4d5057" stroke-width="1.25"/>
+<text x="38" y="270" font-size="13" font-weight="400" fill="#e6edf3" text-anchor="start">Apple</text>
+<text x="16" y="300" font-size="12" font-weight="400" fill="#9ba7b4" text-anchor="start">MiniLM and Qwen ran below Metal</text>
+<text x="16" y="316" font-size="12" font-weight="400" fill="#9ba7b4" text-anchor="start">with no Metal in the process.</text>
+</svg>
