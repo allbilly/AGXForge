@@ -1,0 +1,47 @@
+% The delivered image, outside in: fat container, its two slices, and the object's
+% sections. Blue: bytes the project authors; grey: the envelope it regenerates.
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=3mm,
+    sect/.style={box, text width=40mm, align=left, font=\scriptsize, minimum height=7mm},
+    auth/.style={sect, draw=ours, fill=ours!10, text=ink},
+    gen/.style={sect, draw=apple, fill=apple!10, text=ink},
+    zero/.style={sect, draw=ink!40, fill=ink!5, text=ink},
+    lbl/.style={tag, align=left, font=\scriptsize}]
+
+  \node[auth] (text) {\code{\_\_text}\\[-1pt]prologue + \code{program.bin} + filler};
+  \node[auth, below=of text] (md) {\code{\_\_GPU\_METADATA}\\[-1pt]FlatBuffers: root table, per-kernel table, binding vectors};
+  \node[gen, below=of md] (ldmd) {\code{\_\_GPU\_LD\_MD}, \code{\_\_GPU\_ARCH\_LD\_MD}\\[-1pt]linker metadata, re-emitted with the envelope};
+  \node[zero, below=of ldmd] (zeroed) {\code{\_\_reflection}, \code{\_\_descriptor},\\[-1pt]\code{\_\_GPU\_STATS\_MD},\\[-1pt]\code{\_\_GPU\_REMARKS\_MD}};
+
+  \begin{scope}[on background layer]
+    \node[draw=ink!70, rounded corners=3pt, inner sep=3mm, fit=(text) (zeroed)] (obj) {};
+  \end{scope}
+  \node[tag, anchor=south west, font=\scriptsize\itshape] at ([yshift=0.5mm]obj.north west)
+    {slice 2: \code{applegpu} Mach-O object};
+
+  \node[gen, above=9mm of obj.north -| text, anchor=south] (air) {slice 1: \code{air64} MetalLib\\[-1pt]built from (name, hash)};
+
+  \begin{scope}[on background layer]
+    \node[draw=ink, rounded corners=4pt, inner sep=3.5mm, fit=(air) (obj)] (fat) {};
+  \end{scope}
+  \node[tag, anchor=south west, font=\scriptsize\bfseries] at ([yshift=0.5mm]fat.north west)
+    {the image: \code{scan.arc.metallib}, a fat container};
+
+  % Authoring tools, to the right of each layer
+  \node[lbl, right=7mm of air] (airt) {\code{g17mtlb.py}};
+  \node[lbl, right=7mm of text] (textt) {\code{g17authorobj.py}\\\code{g17container.py}};
+  \node[lbl, right=7mm of md] (mdt) {\code{g17mdgen.py}};
+  \node[lbl, right=7mm of ldmd] (ldmdt) {\code{g17ldmd.py}};
+  \node[lbl, right=7mm of zeroed] (zerot) {\code{g17arc.py}};
+
+  % Census shares, to the left
+  \node[lbl, left=7mm of text, align=right] {85.6\% authored};
+  \node[lbl, left=7mm of ldmd, align=right] {10.6\% envelope,\\re-emitted};
+  \node[lbl, left=7mm of zeroed, align=right] {3.2\% all zero};
+\end{tikzpicture}
+\caption{The delivered image, outside in, with the tool that authors each layer on the right and the census
+share of \cref{tab:image-census} on the left. Blue: bytes the project authors; grey: the envelope it
+re-emits from the object and the entry name.}
+\label{fig:image-container}
+\end{figure}

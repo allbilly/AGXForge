@@ -6,7 +6,7 @@ dispatch. No register renaming is visible to software. Each register source carr
 negate, take the absolute value of, or \emph{release} the value; some forms do not let the compiler choose it
 (\cref{tab:fixed-modifiers}).
 
-Fields can name R0–R143, but the hardware executes only R0–R125 (\cref{sec:namespace}). Some fields are narrower than
+Fields can name R0–R143, but the hardware executes only R0–R125 (\cref{sec:namespace,fig:register-file}). Some fields are narrower than
 the namespace: certain forms can name only R0–R15, and others cannot name particular registers at all
 (\cref{sec:narrow-fields-narrow,sec:encoding-holes}). Register choice has to satisfy each form's constraints, which a
 graph colouring over one homogeneous register file does not capture. Lifetime is encoded in the instruction and applies
@@ -14,6 +14,8 @@ per lane, under the execution mask. The last reader of a value marks it released
 later read (\crefrange{sec:operand-modifiers}{sec:loops-loop-variable-rule}). When kernels are composed, a value
 live across a region boundary, such as a loop header, a fused stage or a second GEMM, must not be released before that
 boundary in the emitted code.
+
+\input{fig/register-file}
 
 \leadhead{Notation.}
 

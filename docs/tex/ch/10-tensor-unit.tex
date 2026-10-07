@@ -437,7 +437,10 @@ that register holds canonical D row \code{rotl1(k)}.
   operand's K index must then be permuted to undo.
 \end{itemize}
 
-\Cref{tab:coordinate-example} follows three slots through both conventions. For lane 0, slot 4, canonical D row 1 is
+\input{fig/feed-packing}
+
+\Cref{fig:feed-packing} shows all eight slots of lane 0, and \cref{tab:coordinate-example} follows three
+of them through both conventions. For lane 0, slot 4, canonical D row 1 is
 read as B row 8; this compiler's producer placed application row \code{m(0) + 8 = 8} of D in that slot, so the consumer
 receives D row 8 as B row 8. With canonical packing the same register carries D row 1, and \code{rotl1(8) = 1}. A D fed
 as A needs no relabelling in either convention, because the consumer's A is packed the way the producer packed D.
@@ -657,7 +660,10 @@ MM~\mm{25.90}, MM~\mm{25.105.1}.
 \section{Tensor loads and stores}\label{sec:tensor-memory-path}
 
 The tensor unit has no memory port of its own; its fragments are filled and drained by the load and store forms of
-\cref{tab:tensor-load-store}, which use the addressing of \cref{ch:memory} (measured, MM~\mm{0.8}, MM~\mm{7}).
+\cref{tab:tensor-load-store}, which use the addressing of \cref{ch:memory} (\cref{fig:tensor-memory-path}; measured,
+MM~\mm{0.8}, MM~\mm{7}).
+
+\input{fig/tensor-memory-path}
 
 \begin{xltabular}{\linewidth}{@{}XXX@{}}
 \caption{Tensor load and store forms.}\label{tab:tensor-load-store}\\
@@ -723,7 +729,9 @@ buffer from the kernel's own layout (measured, MM~\mm{17} rule 34, as corrected 
 \section{Chaining and the memory bridge}\label{sec:chaining-feed-modes}
 
 The feed modes are A, B, A with transA ("At"), B with transB ("Bt"), and C (the ordinary K chain), all within one
-simdgroup.
+simdgroup (\cref{fig:feed-modes}).
+
+\input{fig/feed-modes}
 
 An fp32 D fed into an fp32 operand needs no instruction (measured, MM~\mm{13}); a 16-bit consumer needs
 exactly eight conversions, \op{1016}, per D tile. The direct chain is bit-identical to the
@@ -814,7 +822,10 @@ Inside one library cooperative scope where both simdgroups take part in both cal
 registers across the two calls. No register state crosses a simdgroup boundary there, or in any other measured case
 (measured, MM~\mm{14}).
 
-A hand-off between simdgroups is a store, a barrier and a load (measured, MM~\mm{14}, MM~\mm{17} rule 7):
+A hand-off between simdgroups is a store, a barrier and a load (\cref{fig:simdgroup-handoff}; measured, MM~\mm{14},
+MM~\mm{17} rule 7):
+
+\input{fig/simdgroup-handoff}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}

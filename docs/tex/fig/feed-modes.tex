@@ -1,0 +1,35 @@
+% The four feed modes of a register-direct chain, and what each costs under the two
+% packing conventions. (Mermaid 0.10 of the machine model, drawn properly.)
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=4mm and 9mm,
+    d/.style={box, draw=ours, fill=ours!14, text width=26mm, align=center, font=\small},
+    m/.style={box, draw=ink!55, text width=54mm, align=left, font=\scriptsize,
+      minimum height=9mm},
+    note/.style={tag, font=\scriptsize, align=left}]
+
+  \node[d] (dd) {\textbf{Producer D}\\[-1pt]{\footnotesize 32 lanes × 8 fp32 slots}};
+
+  \node[m, right=16mm of dd, yshift=15mm]  (fa)  {\textbf{fed as A}\\[-1pt]\code{A\_eff[r][k] = D[r][k]}};
+  \node[m, below=of fa]  (fb)  {\textbf{fed as B}\\[-1pt]\code{B\_eff[k][c] = D[rotl1(k)][c]}};
+  \node[m, below=of fb]  (fat) {\textbf{A, transA}\\[-1pt]\code{A\_eff[r][k] = D[rotl1(k)][rotr1(r)]}};
+  \node[m, below=of fat] (fbt) {\textbf{B, transB}\\[-1pt]\code{B\_eff[k][c] = D[rotl1(c)][k]}};
+
+  \foreach \t in {fa, fb, fat, fbt} \draw[flow] (dd.east) -- (\t.west);
+
+  \node[note, anchor=north west, text width=74mm] at ([yshift=-5mm]fbt.south west)
+    {Above: \textbf{canonical packing} (Apple-compiled \code{simdgroup\_matrix} code), where the
+     four modes carry fixed relabellings --- 1,596 of 1,596 chained pairs exact.\\[2pt]
+     Under \textbf{B-row packing} (this compiler) every feed reads the logical operand bit for
+     bit: B computes \code{A2 . D}, At computes \code{D\textasciicircum T . B2}, Bt computes
+     \code{A2 . D\textasciicircum T}.};
+
+  \node[note, anchor=north, text width=30mm, align=center] at ([yshift=-7mm]dd.south)
+    {An fp32 D into an fp32 operand needs no instruction; a 16-bit consumer needs eight
+     \op{1016} per D tile.};
+\end{tikzpicture}
+\caption{The four feed modes of a register-direct chain. The direct chain is bit-identical to the memory bridge on
+200 of 200 random matrices; which relabelling applies depends on how the producing kernel packed its tiles, not on
+the instruction.}
+\label{fig:feed-modes}
+\end{figure}

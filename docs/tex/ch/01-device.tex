@@ -85,7 +85,10 @@ so macOS (\cref{sec:project-authors-two}).
 \section{Threads, simdgroups, threadgroups and grids}\label{sec:threads-simdgroups-threadgroups}
 
 SIMD width is 32 (measured; \code{threadExecutionWidth} is the driver constant 32 for every pipeline, MM~\mm{25.141.20},
-MM~\mm{25.147}). A tensor fragment is a per-lane register tuple across those 32 lanes (\cref{ch:tensor-unit}).
+MM~\mm{25.147}); \cref{fig:execution-hierarchy} is the hierarchy above it.
+
+\input{fig/execution-hierarchy}
+ A tensor fragment is a per-lane register tuple across those 32 lanes (\cref{ch:tensor-unit}).
 
 \begin{itemize}
 \item A threadgroup holds at most 1,024 threads. \code{maxTotalThreadsPerThreadgroup} is a field of the compiler's reply that
@@ -105,7 +108,9 @@ MM~\mm{25.147}). A tensor fragment is a per-lane register tuple across those 32 
 
 \section{Core resource model}\label{sec:core-logical-resource}
 
-The model in \cref{tab:core-resources} is a \emph{logical} account of measured concurrency: which streams run side by side without slowing each
+\input{fig/core-resources}
+
+The model in \cref{tab:core-resources} and \cref{fig:core-resources} is a \emph{logical} account of measured concurrency: which streams run side by side without slowing each
 other, and which contend. It does not locate or count physical units (MM~\mm{0.2}).
 
 \begin{xltabular}{\linewidth}{@{}>{\hsize=0.65\hsize}X>{\hsize=1.59\hsize}X>{\hsize=0.75\hsize}X@{}}

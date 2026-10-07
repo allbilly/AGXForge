@@ -261,13 +261,13 @@
   "w4-native-inference.jsonl": "31cae468b4c9e9ad4f7f4b5d6743f717e0de977847b6537f3cffd9940b81efe3"
  },
  "counts_by_origin": {
-  "overlay": 17,
+  "overlay": 33,
   "generated": 2,
   "committed": 868,
   "transformed": 3,
   "archive": 74
  },
- "bytes_total": 98706814,
+ "bytes_total": 98793099,
  "string_references_not_followed": {
   "isa/g17-bit-spec.jsonl": "tools/g17formspecgen.py",
   "isa/g17-certification.jsonl": "tools/g17isamap.py",
@@ -328,7 +328,7 @@
    "post_export_note": "revised in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "README.md": {
-   "sha256": "5deb0af666c243141849ab65f17cf2200b00e6dd7791c2b5586ee1ec441a5e08",
+   "sha256": "514eb291d2980f6986ee3bdfaf5e9b6f9aabb5a316daf233e3221ba6a9c6c545",
    "bytes": 14154,
    "origin": "overlay",
    "overlay_source": "release/overlay/README.md",
@@ -1323,7 +1323,7 @@
    "post_export_note": "revised in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "docs/demonstrations.md": {
-   "sha256": "a114133b6745df899cc6ebc154cf4712f30b481e735b4ebb985799805caca9ef",
+   "sha256": "56bcdaad817023db82911faf6f1fab05e53bc36ce74a74451d16b1a544305cd0",
    "bytes": 15321,
    "origin": "transformed",
    "reason": "seed",
@@ -1403,8 +1403,8 @@
    "provenance": "project source and writing"
   },
   "docs/g17-technical-reference.pdf": {
-   "sha256": "1c0d49e4669e378becdfcf7d3d867f1c30c63eee28204c9670ca8bca446dd9c6",
-   "bytes": 1005877,
+   "sha256": "7dd14758aa1c55a5c776705e885f2f24b8c4dc3453bf7a74e537a481f1adf6fc",
+   "bytes": 1050670,
    "origin": "committed",
    "reason": "seed",
    "provenance": "project source and writing",
@@ -1445,8 +1445,8 @@
    "post_export_note": "revised in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "docs/tex/ch/00-brief.tex": {
-   "sha256": "4605fcae62997f656662dd490328858e9bdf815254dc5f98f30e21f3c34e5895",
-   "bytes": 15063,
+   "sha256": "648dbc079e2c71f524540022d57951e6a6ac5376b9e0e2c82c98183a0865454a",
+   "bytes": 15209,
    "origin": "committed",
    "reason": "seed",
    "provenance": "project source and writing",
@@ -1454,8 +1454,8 @@
    "post_export_note": "revised in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "docs/tex/ch/01-device.tex": {
-   "sha256": "58f5feb5aa532c5fefd7f300199c42f0639d9b28850dc1346815e74506819f6e",
-   "bytes": 17997,
+   "sha256": "b983881a4ef78ad52b30da26789b333d9d5312651258189d93ae1e5247532a9b",
+   "bytes": 18147,
    "origin": "committed",
    "reason": "seed",
    "provenance": "project source and writing",
@@ -1463,8 +1463,8 @@
    "post_export_note": "revised in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "docs/tex/ch/02-registers.tex": {
-   "sha256": "568f228dcc5b8eccc4fadf20b980d448599154f1702523eaeb01bfbb72578b99",
-   "bytes": 37063,
+   "sha256": "43bdb72c61247e9918b6df8150451f183c3cf39bacd9668c8ac2daf127db0b18",
+   "bytes": 37108,
    "origin": "committed",
    "reason": "seed",
    "provenance": "project source and writing",
@@ -1472,8 +1472,8 @@
    "post_export_note": "revised in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "docs/tex/ch/03-encoding.tex": {
-   "sha256": "3fd5d72a7a0652e98abfc12f1bba82058b5ea0a540bb394cb1e7e68b82e039b2",
-   "bytes": 39062,
+   "sha256": "ceb766c8d6699562a2612d3aed4a73a73f0c201e93ac3a29993a9bec9e9c1998",
+   "bytes": 39115,
    "origin": "committed",
    "reason": "seed",
    "provenance": "project source and writing",
@@ -1490,8 +1490,8 @@
    "post_export_note": "revised in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "docs/tex/ch/05-control.tex": {
-   "sha256": "e2b39a514543350c01f07107b5ee721d702782b505e8c7b73fe855457d4595c9",
-   "bytes": 14380,
+   "sha256": "9a250296232d1969315e279b8be540dc27a37293d8b46396870b081eab45e18e",
+   "bytes": 14425,
    "origin": "committed",
    "reason": "seed",
    "provenance": "project source and writing",
@@ -1508,8 +1508,8 @@
    "post_export_note": "revised in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "docs/tex/ch/07-memory.tex": {
-   "sha256": "0e723799361f382ea42763d6a5f23efddb490af4c9a1c5d3e7f3bfe83029e637",
-   "bytes": 38216,
+   "sha256": "b87bd42ae5aa03a8d0bf4c6481cf0aefba0e2dbd540d59fdb89bf509af4561fe",
+   "bytes": 38272,
    "origin": "committed",
    "reason": "seed",
    "provenance": "project source and writing",
@@ -1535,8 +1535,8 @@
    "post_export_note": "revised in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "docs/tex/ch/10-tensor-unit.tex": {
-   "sha256": "efcbdb7f6a8936d36e3a63c0fe6bd851182b0fecd6d71ec52580d35b9bb1146d",
-   "bytes": 81454,
+   "sha256": "6cbbd8dccaac1bdc9a873b930be3ba9384875ef2a89f14792d625be863fc5ad2",
+   "bytes": 81715,
    "origin": "committed",
    "reason": "seed",
    "provenance": "project source and writing",
@@ -1544,8 +1544,8 @@
    "post_export_note": "revised in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "docs/tex/ch/11-image.tex": {
-   "sha256": "b71a2bb138884852c5e7cc0d2ae325c2845bf7217a35d2b2006772cff69dbfc5",
-   "bytes": 28575,
+   "sha256": "6d704f6b6339fdfffe4edfa77b55ecfe51cdc0f23b39817e98f398b3192a9067",
+   "bytes": 28633,
    "origin": "committed",
    "reason": "seed",
    "provenance": "project source and writing",
@@ -1553,8 +1553,8 @@
    "post_export_note": "revised in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "docs/tex/ch/12-performance.tex": {
-   "sha256": "1557409a1d0af610235b68d5c41680761b415642808483531c91ad6f6e1566c7",
-   "bytes": 56011,
+   "sha256": "de431c022d33040020d90a0411265903a98e492648722eb2e0616c1fe2dfea54",
+   "bytes": 56073,
    "origin": "committed",
    "reason": "seed",
    "provenance": "project source and writing",
@@ -1562,8 +1562,8 @@
    "post_export_note": "revised in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "docs/tex/ch/13-submission.tex": {
-   "sha256": "1122bd46d562bf4e33ca8efafdeed5e364f093023c7bb8ec8804808f69ab9b7b",
-   "bytes": 16124,
+   "sha256": "42382d4ca739a4ccd57e341c9aa5278e1ff90f19de33a354fec2795a19197208",
+   "bytes": 16198,
    "origin": "committed",
    "reason": "seed",
    "provenance": "project source and writing",
@@ -1580,8 +1580,8 @@
    "post_export_note": "revised in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "docs/tex/ch/15-compiling.tex": {
-   "sha256": "5344b89f65e5271cb719f4a4b0607b9f7adb919d948ae82cf7adb14153fcb131",
-   "bytes": 9042,
+   "sha256": "71a216e934bb80a2870ec1463ff2624af0603acb7f97729b5bbc938f038047af",
+   "bytes": 9112,
    "origin": "committed",
    "reason": "seed",
    "provenance": "project source and writing",
@@ -1672,11 +1672,13 @@
    "provenance": "project source and writing"
   },
   "docs/tex/fig/scoreboard.tex": {
-   "sha256": "51d82bdd0f81c637d176a47a6fc7a85cf6786707b72ef9e5d6338851fbb08161",
-   "bytes": 4029,
+   "sha256": "19c63df9a9af5b706c7f49d75ff8724fac5cc3b9361adcccfee36c6e86fda90a",
+   "bytes": 4030,
    "origin": "committed",
    "reason": "seed",
-   "provenance": "project source and writing"
+   "provenance": "project source and writing",
+   "post_export_edit": "figures added for the public release",
+   "post_export_note": "revised in the release repository after the export from the source revision; the sha256 here is the released content"
   },
   "docs/tex/g17-technical-reference.tex": {
    "sha256": "51ee3ff9e037dd693acf002c404f569d0b1f188fea2031d1e4b0b2e3ae8da2c3",
@@ -7503,6 +7505,134 @@
    "origin": "committed",
    "reason": "seed",
    "provenance": "project source and writing"
+  },
+  "docs/tex/fig/address-spaces.tex": {
+   "sha256": "7c0eb74d1a5c0d52fa45b9d581aefc29ffe5d0c7e744397c275cb408c72a296b",
+   "bytes": 2431,
+   "origin": "overlay",
+   "provenance": "release-authored",
+   "post_export_edit": "figure added for the public release",
+   "post_export_note": "authored in the release repository after the export from the source revision; the sha256 here is the released content"
+  },
+  "docs/tex/fig/backend-stages.tex": {
+   "sha256": "2e527c5bc466bff61113362d924582e0592b2d2fed01039e520fae7a410aae6e",
+   "bytes": 2711,
+   "origin": "overlay",
+   "provenance": "release-authored",
+   "post_export_edit": "figure added for the public release",
+   "post_export_note": "authored in the release repository after the export from the source revision; the sha256 here is the released content"
+  },
+  "docs/tex/fig/core-resources.tex": {
+   "sha256": "bb51275e2f9e73d6fea8d03611d85eda9f8549019916288314ed2d19c1fd24b5",
+   "bytes": 2296,
+   "origin": "overlay",
+   "provenance": "release-authored",
+   "post_export_edit": "figure added for the public release",
+   "post_export_note": "authored in the release repository after the export from the source revision; the sha256 here is the released content"
+  },
+  "docs/tex/fig/decode-breakdown.tex": {
+   "sha256": "40ae07df5e84626d6706e6a3d2fb2ed15944d078bac09f738987d42805bf8d18",
+   "bytes": 2401,
+   "origin": "overlay",
+   "provenance": "release-authored",
+   "post_export_edit": "figure added for the public release",
+   "post_export_note": "authored in the release repository after the export from the source revision; the sha256 here is the released content"
+  },
+  "docs/tex/fig/evidence-flow.tex": {
+   "sha256": "607c46ae5e53be625a4c2ab2e0ac65beaa8c20786252eb7a614cc096bc3bdc70",
+   "bytes": 2134,
+   "origin": "overlay",
+   "provenance": "release-authored",
+   "post_export_edit": "figure added for the public release",
+   "post_export_note": "authored in the release repository after the export from the source revision; the sha256 here is the released content"
+  },
+  "docs/tex/fig/example-tiles.tex": {
+   "sha256": "9d24227090b9f7c363f09fec849cfe1389dbc4857f70ad15997135ee39cddd0a",
+   "bytes": 2392,
+   "origin": "overlay",
+   "provenance": "release-authored",
+   "post_export_edit": "figure added for the public release",
+   "post_export_note": "authored in the release repository after the export from the source revision; the sha256 here is the released content"
+  },
+  "docs/tex/fig/exec-word.tex": {
+   "sha256": "ca34ac539f447d4973ad2601b88eca67dfef3ad99390903c63a2193060c75031",
+   "bytes": 3148,
+   "origin": "overlay",
+   "provenance": "release-authored",
+   "post_export_edit": "figure added for the public release",
+   "post_export_note": "authored in the release repository after the export from the source revision; the sha256 here is the released content"
+  },
+  "docs/tex/fig/execution-hierarchy.tex": {
+   "sha256": "8e3994ad46de71b282423b52f89ce1a1fc32ab46c2d440c792f97d0c90d8d49e",
+   "bytes": 2460,
+   "origin": "overlay",
+   "provenance": "release-authored",
+   "post_export_edit": "figure added for the public release",
+   "post_export_note": "authored in the release repository after the export from the source revision; the sha256 here is the released content"
+  },
+  "docs/tex/fig/feed-modes.tex": {
+   "sha256": "6d1840a938e3d62467bb6c5428de22514d0ef925dc0a928b74e20c625ea52ae9",
+   "bytes": 2056,
+   "origin": "overlay",
+   "provenance": "release-authored",
+   "post_export_edit": "figure added for the public release",
+   "post_export_note": "authored in the release repository after the export from the source revision; the sha256 here is the released content"
+  },
+  "docs/tex/fig/feed-packing.tex": {
+   "sha256": "4f2a9fb3c56f755704e061785ea4203f6d81443685c5dd34c8f8f6c622ea42bf",
+   "bytes": 2506,
+   "origin": "overlay",
+   "provenance": "release-authored",
+   "post_export_edit": "figure added for the public release",
+   "post_export_note": "authored in the release repository after the export from the source revision; the sha256 here is the released content"
+  },
+  "docs/tex/fig/form-lengths.tex": {
+   "sha256": "21f00fb66b75b4c80d41ec4bb941055500e63e4dd32d68a88d92a2f7d2d3c684",
+   "bytes": 2530,
+   "origin": "overlay",
+   "provenance": "release-authored",
+   "post_export_edit": "figure added for the public release",
+   "post_export_note": "authored in the release repository after the export from the source revision; the sha256 here is the released content"
+  },
+  "docs/tex/fig/image-container.tex": {
+   "sha256": "b0c8e09261b8c1eb930d1c0b0c6bfd31d5f7689bd9d5e11687414c0eebf5978d",
+   "bytes": 2696,
+   "origin": "overlay",
+   "provenance": "release-authored",
+   "post_export_edit": "figure added for the public release",
+   "post_export_note": "authored in the release repository after the export from the source revision; the sha256 here is the released content"
+  },
+  "docs/tex/fig/register-file.tex": {
+   "sha256": "96203d8944fa55743a4a8bf74e35c3416859352c488c0e56fea7b5241f16d5c7",
+   "bytes": 3157,
+   "origin": "overlay",
+   "provenance": "release-authored",
+   "post_export_edit": "figure added for the public release",
+   "post_export_note": "authored in the release repository after the export from the source revision; the sha256 here is the released content"
+  },
+  "docs/tex/fig/simdgroup-handoff.tex": {
+   "sha256": "c439180773e17a3ca850c1ffe9ba373a41499a0009abe9ef702816664650f3a2",
+   "bytes": 2480,
+   "origin": "overlay",
+   "provenance": "release-authored",
+   "post_export_edit": "figure added for the public release",
+   "post_export_note": "authored in the release repository after the export from the source revision; the sha256 here is the released content"
+  },
+  "docs/tex/fig/submit-sequence.tex": {
+   "sha256": "e0daec90d801423c9b3323572994afadab97b669b754abf1221894c9a9343317",
+   "bytes": 3110,
+   "origin": "overlay",
+   "provenance": "release-authored",
+   "post_export_edit": "figure added for the public release",
+   "post_export_note": "authored in the release repository after the export from the source revision; the sha256 here is the released content"
+  },
+  "docs/tex/fig/tensor-memory-path.tex": {
+   "sha256": "c23cc937776e3504159e6c0438908161bb8df0bad8c16af9c2055e36706c1ce5",
+   "bytes": 1963,
+   "origin": "overlay",
+   "provenance": "release-authored",
+   "post_export_edit": "figure added for the public release",
+   "post_export_note": "authored in the release repository after the export from the source revision; the sha256 here is the released content"
   }
  }
 }

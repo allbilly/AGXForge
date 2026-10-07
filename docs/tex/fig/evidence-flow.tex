@@ -1,0 +1,46 @@
+% Where the rules in this document come from, and what they constrain.
+% (Mermaid 0.13 of the machine model, drawn properly.)
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=5mm and 11mm,
+    src/.style={box, draw=ink!60, fill=ink!5, text width=38mm, align=left, font=\scriptsize,
+      minimum height=15mm},
+    pol/.style={box, draw=ours, fill=ours!10, text width=38mm, align=left, font=\scriptsize,
+      minimum height=15mm},
+    run/.style={box, draw=native, fill=native!10, text width=38mm, align=left, font=\scriptsize,
+      minimum height=13mm}]
+
+  \node[src] (hw)
+    {\textbf{Measured hardware facts}\\[-1pt]opcodes, register reach, layouts, arithmetic, the
+     scoreboard, throughput};
+  \node[src, below=of hw] (ap)
+    {\textbf{Apple's compiled code}\\[-1pt]AIR lowering, spills, library schedules, fast-math
+     reassociation};
+
+  \node[pol, right=of hw] (cc)
+    {\textbf{This compiler's policy}\\[-1pt]admitted shapes, the memory bridge, named refusals,
+     reserved registers};
+  \node[pol, right=of ap] (abi)
+    {\textbf{Measured Metal object ABI}\\[-1pt]slot 44's enable, slot 29's system-register
+     vector, bindings, entry and prologue};
+
+  \node[run, right=of cc, yshift=-11mm] (rt)
+    {\textbf{Runtime policy}\\[-1pt]one simdgroup, exact grid, guards and reference checks};
+
+  \draw[flow] (hw) -- (cc);
+  \draw[flow] (ap) -- (cc);
+  \draw[flow] (hw) -- (abi);
+  \draw[flow] (ap) -- (abi);
+  \draw[flow] (cc) -- (rt);
+  \draw[flow] (abi) -- (rt);
+
+  \node[tag, font=\scriptsize, anchor=north west, text width=82mm] at ([yshift=-7mm]ap.south west)
+    {Grey: what the machine and Apple's code were observed to do. Blue: what this project then
+     chose. A rule's tag says which of the two it rests on, and \emph{open} marks a question
+     neither settles.};
+\end{tikzpicture}
+\caption{Where the rules in Part~\ref{part:i} come from. Measurement and observation of Apple's code constrain the
+compiler's policy and the object ABI, and those two constrain what the runtime may do; the evidence tags above name
+which kind of standing each rule has.}
+\label{fig:evidence-flow}
+\end{figure}

@@ -70,7 +70,10 @@ The source is seven lines of the project's IR: three buffers, \code{tensor\_matm
 load, an fp32 add and a store (\cref{ch:running-example-through}).
 
 The 17 × 19 output does not divide into 16 × 16 tiles, so the product is two tile rows by two tile columns, and
-the second row and column are partial. The compiler emits 101 instructions, grouped by phase in \cref{tab:example-phases}.
+the second row and column are partial (\cref{fig:example-tiles}).
+
+\input{fig/example-tiles}
+ The compiler emits 101 instructions, grouped by phase in \cref{tab:example-phases}.
 
 \begin{xltabular}{\linewidth}{@{}l>{\hsize=1.10\hsize}X>{\hsize=0.90\hsize}X@{}}
 \caption{The example program's 101 instructions by phase, as read with Apple's decoder.}\label{tab:example-phases}\\
@@ -180,7 +183,10 @@ programs was started and then paused, nothing here establishes portability (MM~\
 
 \section{Conventions}\label{sec:read-this-document}
 
-Rules and measurements in Part~\ref{part:i} carry one of these evidence tags.
+Rules and measurements in Part~\ref{part:i} carry one of these evidence tags, which say where a statement stands in
+\cref{fig:evidence-flow}.
+
+\input{fig/evidence-flow}
 
 \begin{itemize}
 \item \emph{measured}: run on this GPU and compared with an independent reference, with a control that could have failed;

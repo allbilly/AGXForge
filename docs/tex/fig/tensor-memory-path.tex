@@ -1,0 +1,37 @@
+% How a fragment is filled and drained. The tensor unit has no memory port of its
+% own. (Mermaid 0.5 of the machine model, drawn properly.)
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=3mm and 5mm,
+    mem/.style={box, draw=ink!55, fill=ink!5, text width=24mm, align=center, font=\scriptsize,
+      minimum height=10mm},
+    st/.style={box, draw=ours, fill=ours!10, text width=24mm, align=center, font=\scriptsize,
+      minimum height=10mm},
+    eng/.style={box, draw=native, fill=native!10, text width=24mm, align=center, font=\scriptsize,
+      minimum height=10mm},
+    note/.style={tag, font=\scriptsize, align=center}]
+
+  \node[mem] (rm)   {A, B in row-major memory};
+  \node[st, right=of rm]  (idx)  {Scalar ALU\\[-1pt]one address per lane};
+  \node[st, right=of idx] (ld)   {Tensor gather load\\[-1pt]2 or 4 words per lane};
+  \node[st, right=of ld]  (frag) {A or B fragment\\[-1pt]32 lanes × tuple slots};
+  \node[eng, right=of frag] (mma) {Tensor MMA\\[-1pt]16 × 16 × 16};
+
+  \node[eng, below=9mm of mma] (d) {D fragment\\[-1pt]32 lanes × 8 fp32 slots};
+  \node[st, left=of d]  (stq) {Tensor store\\[-1pt]lane addresses + mask};
+  \node[mem, left=of stq] (out) {C in row-major memory};
+
+  \foreach \a/\b in {rm/idx, idx/ld, ld/frag, frag/mma} \draw[flow] (\a) -- (\b);
+  \draw[flow] (mma) -- (d);
+  \draw[flow] (d) -- (stq);
+  \draw[flow] (stq) -- (out);
+
+  \node[note, text width=58mm, anchor=north west] at ([yshift=-6mm]out.south west)
+    {The tensor unit has no memory port of its own: these are the ordinary load and store
+     forms, per-lane gathers through the same addressing and the same eight-slot scoreboard as
+     every other access.};
+\end{tikzpicture}
+\caption{Filling and draining a fragment. Every step between memory and the tensor unit is scalar address
+arithmetic and ordinary per-lane access; the forms and their payloads are in \cref{tab:tensor-load-store}.}
+\label{fig:tensor-memory-path}
+\end{figure}

@@ -50,7 +50,10 @@ In the 216-opcode census, 64 opcodes occur at more than one length: \op{12674} a
 (\code{docs/agx3-oracle.md} section 7). Field positions move with the length: \op{2190}'s operand-1
 high code sits at $2^{24}$ to $2^{28}$ in its 8-byte form, $2^{30}$ to $2^{31}$ in the 16-byte form and $2^{32}$/$2^{36}$ in the 12-byte form (MM~\mm{25.53}); one byte
 offset can mean different fields in loads and stores of different lengths (MM~\mm{25.24}).
-Field maps are therefore kept per form. Before this, the project authored from one map per opcode, and that map had
+Field maps are therefore kept per form (\cref{fig:form-lengths}).
+
+\input{fig/form-lengths}
+ Before this, the project authored from one map per opcode, and that map had
 been probed on an instance of another length for 1,301 of 1,401 per-form specifications; \op{13575}'s 16-byte map, for
 example, reached byte 9 of a 4-byte instruction (MM~\mm{25.88}).
 

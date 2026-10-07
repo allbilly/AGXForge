@@ -1,0 +1,61 @@
+% The one encoding word the exec-mask family and the branches share. Bits are named
+% by byte and bit, as the chapter names them.
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=1mm, y=1mm,
+    bit/.style={draw=ink!40, line width=0.35pt, minimum width=6.4mm, minimum height=6mm,
+      inner sep=0pt, font=\tiny},
+    bl/.style={anchor=east, font=\scriptsize\ttfamily, text=ink!75},
+    hd/.style={font=\tiny, text=ink!55, anchor=south}]
+
+  \def\w{6.6}
+  \foreach \b in {0,...,7} \node[hd] at ({(7-\b)*\w+3.3},3.6) {\b};
+  \node[font=\tiny, text=ink!55, anchor=west] at ({8*\w+2},3.6) {bit};
+
+  % byte 0
+  \node[bl] at (-2,0) {byte 0};
+  \node[bit] at ({(7-4)*\w+3.3},0) [fill=ours!22] {};
+  \node[bit] at ({(7-5)*\w+3.3},0) [fill=native!20] {};
+  \node[bit] at ({(7-6)*\w+3.3},0) [fill=native!20] {};
+  \node[bit] at ({(7-7)*\w+3.3},0) [fill=apple!22] {};
+  \foreach \b in {0,1,2,3} \node[bit] at ({(7-\b)*\w+3.3},0) {};
+
+  % byte 1
+  \node[bl] at (-2,-8) {byte 1};
+  \node[bit] at ({(7-0)*\w+3.3},-8) [fill=ink!12] {};
+  \node[bit] at ({(7-1)*\w+3.3},-8) [fill=ink!12] {};
+  \foreach \b in {4,5,6} \node[bit] at ({(7-\b)*\w+3.3},-8) [fill=ours!40] {};
+  \foreach \b in {2,3,7} \node[bit] at ({(7-\b)*\w+3.3},-8) {};
+
+  % byte 2
+  \node[bl] at (-2,-16) {byte 2};
+  \node[bit] at ({(7-1)*\w+3.3},-16) [fill=ours!40] {};
+  \node[bit] at ({(7-3)*\w+3.3},-16) [fill=apple!22] {};
+  \node[bit] at ({(7-4)*\w+3.3},-16) [fill=ours!22] {};
+  \foreach \b in {5,6,7} \node[bit] at ({(7-\b)*\w+3.3},-16) [fill=ink!12] {};
+  \foreach \b in {0,2} \node[bit] at ({(7-\b)*\w+3.3},-16) {};
+
+  % byte 3
+  \node[bl] at (-2,-24) {byte 3};
+  \foreach \b in {5,7} \node[bit] at ({(7-\b)*\w+3.3},-24) [fill=ink!12] {};
+  \foreach \b in {0,1,2,3,4,6} \node[bit] at ({(7-\b)*\w+3.3},-24) {};
+
+  % Key
+  \node[font=\scriptsize, anchor=north west, text width=66mm, align=left] at ({8*\w+6},3)
+    {\tikz\node[bit, fill=ours!22, minimum width=3mm, minimum height=3mm]{};\ \ \code{b0.4}
+       family or end of program; \code{b2.4} branch or exec form\\[2pt]
+     \tikz\node[bit, fill=native!20, minimum width=3mm, minimum height=3mm]{};\ \ \code{b0.5},
+       \code{b0.6}: \code{kind = b0.5 + 2 × b0.6} --- if, pop, else, while\\[2pt]
+     \tikz\node[bit, fill=apple!22, minimum width=3mm, minimum height=3mm]{};\ \ count, split:
+       \code{b0.7} high, \code{b2.3} low. Codes 00, 01, 10, 11 mean 1, 0, 2, 3 --- a plain
+       2-bit number emits \code{pop 0} for \code{pop 1}\\[2pt]
+     \tikz\node[bit, fill=ours!40, minimum width=3mm, minimum height=3mm]{};\ \
+       \code{b1[4:6]} predicate, an 8-entry lookup; \code{b2.1} inverts it\\[2pt]
+     \tikz\node[bit, fill=ink!12, minimum width=3mm, minimum height=3mm]{};\ \ auxiliary
+       operand 0, meaning \emph{open}};
+\end{tikzpicture}
+\caption{The word the exec-mask family and the branches share. Every field but the auxiliary operand is established;
+hard-coding one value per kind for that operand writes an instruction Apple never emitted for 5.66 percent of its
+14,195 control-flow instructions, and hard-coding zero for 19.38 percent (\cref{tab:exec-family-encoding}).}
+\label{fig:exec-word}
+\end{figure}

@@ -1,0 +1,49 @@
+% Where a decode token's 4.73 ms goes, drawn from tab:decode-time-breakdown.
+% 1 ms = 52 mm.
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=1mm, y=1mm,
+    name/.style={anchor=east, font=\scriptsize},
+    val/.style={anchor=west, font=\scriptsize, text=ink!80},
+    bw/.style={anchor=west, font=\scriptsize, text=ink!55}]
+
+  \node[name] at (0,0)   {FFN (w1, w3, SwiGLU)};
+  \fill[ours!75] (2,-2.4) rectangle (93.5,2.4);
+  \node[val] at (95.5,0) {1.76\,ms};  \node[bw] at (112,0) {257\,GB/s};
+
+  \node[name] at (0,-7)  {w2 + residual};
+  \fill[ours!75] (2,-9.4) rectangle (48.8,-4.6);
+  \node[val] at (95.5,-7) {0.90\,ms}; \node[bw] at (112,-7) {252\,GB/s};
+
+  \node[name] at (0,-14) {attention};
+  \fill[ours!75] (2,-16.4) rectangle (40.5,-11.6);
+  \node[val] at (95.5,-14) {0.74\,ms}; \node[bw] at (112,-14) {144\,GB/s};
+
+  \node[name] at (0,-21) {qkv};
+  \fill[ours!75] (2,-23.4) rectangle (27.0,-18.6);
+  \node[val] at (95.5,-21) {0.48\,ms}; \node[bw] at (112,-21) {236\,GB/s};
+
+  \node[name] at (0,-28) {head};
+  \fill[ours!75] (2,-30.4) rectangle (20.7,-25.6);
+  \node[val] at (95.5,-28) {0.36\,ms}; \node[bw] at (112,-28) {296\,GB/s};
+
+  \node[name] at (0,-35) {wo + residual};
+  \fill[ours!75] (2,-37.4) rectangle (17.6,-32.6);
+  \node[val] at (95.5,-35) {0.30\,ms}; \node[bw] at (112,-35) {188\,GB/s};
+
+  \node[name] at (0,-42) {norms and the rest};
+  \fill[ours!45] (2,-44.4) rectangle (11.4,-39.6);
+  \node[val] at (95.5,-42) {0.18\,ms};
+
+  \draw[ink!45, line width=0.5pt] (2,-48) -- (106,-48);
+  \draw[ink!45, line width=0.5pt] (2,-48) -- (2,-49.6)       node[below, font=\scriptsize, text=ink!65] {0};
+  \draw[ink!45, line width=0.5pt] (28,-48) -- (28,-49.6)     node[below, font=\scriptsize, text=ink!65] {0.5};
+  \draw[ink!45, line width=0.5pt] (54,-48) -- (54,-49.6)     node[below, font=\scriptsize, text=ink!65] {1.0};
+  \draw[ink!45, line width=0.5pt] (80,-48) -- (80,-49.6)     node[below, font=\scriptsize, text=ink!65] {1.5};
+  \draw[ink!45, line width=0.5pt] (106,-48) -- (106,-49.6)   node[below, font=\scriptsize, text=ink!65] {2.0};
+  \node[font=\scriptsize, text=ink!65, anchor=west] at (109,-49) {ms};
+\end{tikzpicture}
+\caption{Where a token goes at a 1K context: 4.73~ms, by part and largest first, with the effective bandwidth each part reaches
+(\cref{tab:decode-time-breakdown}). Only the head streams at the DRAM peak.}
+\label{fig:decode-breakdown}
+\end{figure}

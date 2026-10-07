@@ -292,8 +292,10 @@ pipeline creation.
 
 \section{Object, library and archive bytes}\label{sec:object-library-archive}
 
+\input{fig/image-container}
+
 A bundle's \code{scan.arc.metallib} is a fat container holding an \code{air64} MetalLib and an \code{applegpu} Mach-O
-GPU executable. It is loaded with \code{newBinaryArchiveWithDescriptor} and \code{newComputePipelineStateWithDescriptor} under
+GPU executable (\cref{fig:image-container}). It is loaded with \code{newBinaryArchiveWithDescriptor} and \code{newComputePipelineStateWithDescriptor} under
 \code{MTLPipelineOptionFailOnBinaryArchiveMiss}, which makes Metal use the precompiled code rather than compile the AIR
 (MM~\mm{25.143}). The project's tools author each layer: \code{g17mtlb.py} (the MetalLib), \code{g17container.py} (the Mach-O head and
 AIR tables), \code{g17arc.py} (the archive's \code{\_\_reflection}, \code{\_\_compute}, \code{\_\_descriptor}, \code{\_\_metallib}), \code{g17authorobj.py}

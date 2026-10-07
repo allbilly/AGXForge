@@ -149,7 +149,7 @@ chaining and the library hazard in 10.9, int8 arithmetic in 10.11. Saturation is
 
 | To | Read |
 |---|---|
-| Understand the machine, the compiler and both execution paths | [the technical reference](g17-technical-reference.pdf) (PDF, 186 pages) |
+| Understand the machine, the compiler and both execution paths | [the technical reference](g17-technical-reference.pdf) (PDF, 191 pages) |
 | Check a number, or see every measurement and its history | [the machine model](g17-tensorops-machine-model.md), cited above as MM by section |
 | Run the four example workflows | [examples/README.md](../examples/README.md) |
 | See what this release contains and how it was chosen | [RELEASE.md](../RELEASE.md) |

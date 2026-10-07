@@ -1,0 +1,56 @@
+% The register namespace: what the fields can name against what the hardware runs,
+% and the files beside the general one.
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[y=1mm, x=1mm,
+    seg/.style={draw, line width=0.6pt, align=center, font=\scriptsize, minimum height=8mm},
+    lbl/.style={tag, font=\scriptsize, align=center},
+    side/.style={box, text width=34mm, align=left, font=\scriptsize}]
+
+  % The GPR32 namespace as one bar: 144 names, 126 of them executable.
+  \node[seg, draw=ours, fill=ours!12, minimum width=88mm, anchor=west] at (0,0)
+    (run) {R0--R125\\[-2pt]{\scriptsize execute}};
+  \node[seg, draw=apple, fill=apple!14, minimum width=14mm, anchor=west] at (88,0)
+    (pair) {R126\\[-2pt]R127};
+  \node[seg, draw=ink!45, fill=ink!6, minimum width=30mm, anchor=west] at (102,0)
+    (ext) {R128--R143};
+
+  \node[lbl, above=1.5mm of run] {126 registers the allocator may use};
+
+  % Staggered so the two annotations cannot overprint, each on its own leader.
+  \node[lbl, text width=26mm, anchor=north] at (95,-8) (pairl) {named, not populated};
+  \draw[ink!45, line width=0.4pt] (95,-4) -- (95,-7.6);
+  \node[lbl, text width=38mm, anchor=north] at (117,-17) (extl)
+    {decoder-visible names; every instruction squashed};
+  \draw[ink!45, line width=0.4pt] (117,-4) -- (117,-6) -- (117,-16.6);
+
+  \draw[decorate, decoration={brace, amplitude=4pt, mirror}, line width=0.6pt, color=ink!70]
+    (0,-27) -- (132,-27)
+    node[midway, below=5pt, lbl] {GPR32: 144 names the operand fields can express};
+
+  % The same storage under three other views.
+  \node[side, anchor=north west, draw=ours, fill=ours!8] at (0,-38)
+    (halves) {\textbf{halves} GPR16, 288 members\\R0L, R0H, \dots, R143H; a field counting
+      halves names 2n + h. A 16-bit write leaves the other half alone.};
+  \node[side, anchor=north west, draw=ours, fill=ours!8] at (49,-38)
+    (tuples) {\textbf{tuples} tup2, tup4, 143 / 141 members; tup8\_alignedrc, the eighteen
+      8-aligned groups. A base must be naturally aligned, never rounded.};
+  \node[side, anchor=north west, draw=ours, fill=ours!8] at (98,-38)
+    (tensor) {\textbf{tensor operands} classes 41, 159 and 335: 2-, 4- and 8-register tuples,
+      found nowhere else in the table.};
+
+  % The files that sit beside it.
+  \node[side, anchor=north west, draw=apple, fill=apple!12] at (0,-64)
+    (uni) {\textbf{uniform file} u0, u1, \dots, written once per dispatch by the constant
+      program; in MMA programs u0--u5 are reserved.};
+  \node[side, anchor=north west, draw=apple, fill=apple!12] at (49,-64)
+    (ir) {\textbf{IR32} IR0--IR15. \code{IRGPR32} admits them beside R0--R143, but all 229
+      corpus writes land in ordinary registers.};
+  \node[side, anchor=north west, draw=apple, fill=apple!12] at (98,-64)
+    (flag) {\textbf{FLAGR} FLAG0--FLAG14 plus FLAGTRUE and FLAGFALSE; compact forms reach
+      FLAG0--FLAG6 only.};
+\end{tikzpicture}
+\caption{The register namespace. The operand fields can express 144 general-register names; the measured part
+runs 126 of them. Below, the same storage under its other views, and the files that sit beside it.}
+\label{fig:register-file}
+\end{figure}

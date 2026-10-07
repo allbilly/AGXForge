@@ -1,0 +1,53 @@
+% Grid, threadgroup, simdgroup and lane: what each level owns and what it shares.
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=1mm, y=1mm,
+    lane/.style={draw=ours, fill=ours!15, line width=0.4pt, minimum width=4.6mm,
+      minimum height=5mm, inner sep=0pt, font=\tiny},
+    lvl/.style={tag, font=\scriptsize, align=left, anchor=north west, text width=51mm}]
+
+  % One simdgroup: 32 lanes, drawn as eleven with an ellipsis.
+  \foreach \i in {0,...,7} \node[lane] at ({\i*5.2},0) {};
+  \node[font=\scriptsize, text=ink!60] at (43.6,0) {\dots};
+  \foreach \i in {10,...,12} \node[lane] at ({\i*5.2},0) {};
+  \node[tag, font=\scriptsize, anchor=west] at (70,0) {32 lanes};
+
+  \coordinate (sgA) at (-2.8,-4.2);
+  \coordinate (sgB) at (82,4.2);
+  \begin{scope}[on background layer]
+    \node[draw=ours, rounded corners=2pt, fill=ours!5, inner sep=2mm, fit=(sgA) (sgB)] (sg) {};
+  \end{scope}
+  \node[tag, font=\scriptsize\bfseries, anchor=south west, text=ours]
+    at ([yshift=0.5mm]sg.north west) {simdgroup};
+
+  % The threadgroup holds up to 32 of them.
+  \node[tag, font=\scriptsize, anchor=north west] at (-2.8,-11)
+    {+ up to 31 more simdgroups, 1,024 threads in all};
+  \coordinate (tgA) at (-2.8,-17);
+  \begin{scope}[on background layer]
+    \node[draw=ink!60, rounded corners=3pt, inner sep=3mm, fit=(sg) (tgA)] (tg) {};
+  \end{scope}
+  \node[tag, font=\scriptsize\bfseries, anchor=south west]
+    at ([yshift=0.5mm]tg.north west) {threadgroup};
+
+  \node[tag, font=\scriptsize, anchor=north west] at (-2.8,-28)
+    {+ every other threadgroup, dispatched in threadgroup order};
+  \coordinate (grA) at (-2.8,-34);
+  \begin{scope}[on background layer]
+    \node[draw=ink!40, dashed, rounded corners=3pt, inner sep=3mm, fit=(tg) (grA)] (grid) {};
+  \end{scope}
+  \node[tag, font=\scriptsize\bfseries, anchor=south west]
+    at ([yshift=0.5mm]grid.north west) {grid};
+
+  % What each level owns.
+  \node[lvl] at (95,4) {\textbf{lane} its own 32-bit registers, which never cross a
+    simdgroup};
+  \node[lvl] at (95,-11) {\textbf{simdgroup} cross-lane operations and one eight-slot
+    scoreboard};
+  \node[lvl] at (95,-26) {\textbf{threadgroup} threadgroup memory, at most 32,768 bytes;
+    every hand-off between simdgroups goes through it and a barrier};
+\end{tikzpicture}
+\caption{The execution hierarchy. SIMD width is 32 on every pipeline measured, and a threadgroup holds at most
+1,024 threads.}
+\label{fig:execution-hierarchy}
+\end{figure}

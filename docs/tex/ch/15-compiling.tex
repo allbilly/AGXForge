@@ -1,6 +1,7 @@
 \chapter{The compiler}\label{ch:compiling}
 
-A program reaches native G17 bytes by one of two routes into a shared backend (\cref{fig:compile-routes}). Both routes
+A program reaches native G17 bytes by one of two routes into a shared backend (\cref{fig:compile-routes}; its stages
+are \cref{fig:backend-stages}). Both routes
 check the emitted instructions with Apple's decoder at build time, but the program that runs does not use the decoder.
 
 \section{Input routes}\label{ch:source-native-program}
@@ -99,6 +100,8 @@ release (\cref{ch:image-result-validated}).
 half and read-only and C float and written; an empty constant pool; 101 main instructions; the 24 distinct (opcode,
 length) forms used; the special registers read (the lane index and the threadgroup position); and the requirement of
 exact launch geometry.
+
+\input{fig/backend-stages}
 
 \section{General selection and allocation rules}\label{ch:selection-allocation-general}
 

@@ -17,7 +17,7 @@ Apple's private IOGPU interface. All measurements are from **one M5 Pro (H17s, 4
 
 | | |
 |---|---|
-| **Read** | [the technical reference](docs/g17-technical-reference.pdf) (PDF, 186 pages; [LaTeX source](docs/tex/)), [the demonstrations](docs/demonstrations.md), [the evidence record](docs/g17-tensorops-machine-model.md) |
+| **Read** | [the technical reference](docs/g17-technical-reference.pdf) (PDF, 191 pages; [LaTeX source](docs/tex/)), [the demonstrations](docs/demonstrations.md), [the evidence record](docs/g17-tensorops-machine-model.md) |
 | **Run** | [four example workflows](examples/README.md): compile a tensor product, check a tensor rule against hardware evidence, inspect the decode study, inspect native inference |
 | **Inspect** | [the implementation map](#the-implementation), [what this release contains](RELEASE.md), [provenance of every file](PROVENANCE.md), [RELEASE-MANIFEST.json](RELEASE-MANIFEST.json) |
 

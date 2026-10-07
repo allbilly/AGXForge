@@ -1,0 +1,64 @@
+% The below-Metal submission sequence: what the runner writes, in order, and the
+% driver entry points each step reaches. Red: the project's native runtime;
+% grey: Apple's.
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=3.5mm and 7mm,
+    stage/.style={nat, text width=33mm, align=left, minimum height=8.5mm},
+    detail/.style={tag, text width=86mm, align=left, anchor=west, font=\scriptsize}]
+
+  \node[stage] (dev) {\textbf{1} Device setup};
+  \node[detail, right=of dev] (devd)
+    {AGX user client opens with no entitlement; no \code{MTLDevice} and no AGXMetal in the
+     process. Queue creation calls selectors 7, 16 and 28.};
+
+  \node[stage, below=of dev] (alloc) {\textbf{2} Allocations};
+  \node[detail, right=of alloc] (allocd)
+    {Selector 9 returns a buffer mapped at the same CPU and GPU address. Selector 14 gives the
+     two 16\,KiB shared regions: the kernel page and the segment page.};
+
+  \node[stage, below=of alloc] (code) {\textbf{3} Code placement};
+  \node[detail, right=of code] (coded)
+    {Program bytes upload into allocation 0 at 0x10000000000, from offset 0x6c0, 64-byte
+     aligned; the allocation is immutable after upload.};
+
+  \node[stage, below=of code] (launch) {\textbf{4} Launch state};
+  \node[detail, right=of launch] (launchd)
+    {Program counter written in pieces into allocation 23 (0x40, 0x46, 0x48), shader state at
+     0x42 separately; grid, threadgroup size and buffer pointers into allocations 22, 25
+     and 28.};
+
+  \node[stage, below=of launch] (submit) {\textbf{5} Submit};
+  \node[detail, right=of submit] (submitd)
+    {A 48-byte record naming both page IDs and two fresh callback blocks; consecutive trace IDs;
+     the fire value 0x800000f0 at offset 0x24 of shared region 0. One record goes through
+     \code{IOConnectTrap4}, several through \code{IOConnectCallMethod} selector 0x1d.};
+
+  \node[stage, below=of submit] (done) {\textbf{6} Completion};
+  \node[detail, right=of done] (doned)
+    {A 40-byte notification is dequeued and the referenced block invoked: one scheduled, one
+     completed, in that order.};
+
+  \foreach \a/\b in {dev/alloc, alloc/code, code/launch, launch/submit, submit/done}
+    \draw[flow] (\a) -- (\b);
+
+  \begin{scope}[on background layer]
+    \node[draw=native, dashed, rounded corners=3pt, fill=native!4, inner sep=2.5mm,
+          fit=(dev) (done) (devd) (submitd)] (lane) {};
+  \end{scope}
+
+  \node[band, minimum width=132mm, anchor=north] at ([yshift=-8mm]lane.south)
+    (iogpu) {Apple private \code{IOGPU} framework and IOKit};
+  \node[band, below=3mm of iogpu, minimum width=132mm] (drv) {Apple AGX kernel driver};
+  \node[band, below=3mm of drv, minimum width=132mm] (fw) {Apple GPU firmware};
+
+  \draw[->, line width=1.4pt, color=native] (done.south) -- (done.south |- lane.south)
+    -- (done.south |- iogpu.north);
+  \draw[flow] (iogpu) -- (drv);
+  \draw[flow] (drv) -- (fw);
+
+\end{tikzpicture}
+\caption{The below-Metal submission sequence. Every step inside the dashed box is written by the project's
+runner; the bands below it stay Apple's.}
+\label{fig:submit-sequence}
+\end{figure}

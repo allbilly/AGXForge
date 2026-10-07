@@ -1,0 +1,47 @@
+% Inside the backend: the stages between IR and program bytes, and what each one
+% refuses or checks.
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=3.5mm and 9mm,
+    st/.style={ours, text width=40mm, align=left, font=\small, minimum height=8mm},
+    note/.style={tag, text width=62mm, align=left, anchor=west, font=\scriptsize}]
+
+  \node[st] (ir) {\textbf{IR}\\[-1pt]{\footnotesize SSA over typed values}};
+  \node[note, right=of ir] {A function declares its buffers with a binding index and an element
+    type; a matrix product is one operation, \code{tensor\_matmul}.};
+
+  \node[st, below=of ir] (sel) {\textbf{\code{cc.select}}\\[-1pt]{\footnotesize instruction selection}};
+  \node[note, right=of sel] {Uses a form only if its fields are mapped and its behaviour was
+    measured. Anything else is refused by name: "no measured metadata layout for 5 bindings".};
+
+  \node[st, below=of sel] (tl) {\textbf{\code{tlower}}\\[-1pt]{\footnotesize tensor lowering}};
+  \node[note, right=of tl] {Generates a product body from shape and types: masks for partial
+    tiles, accumulator groups, tensor loads with scoreboard slots and wait masks.};
+
+  \node[st, below=of tl] (alloc) {\textbf{\code{cc.allocate}}\\[-1pt]{\footnotesize register allocation}};
+  \node[note, right=of alloc] {R0--R125 with tuple alignment; lifetime modifiers from liveness;
+    nothing live around a back edge is released; encoding holes avoided by explicit table.};
+
+  \node[st, below=of alloc] (enc) {\textbf{encoder}};
+  \node[note, right=of enc] {Field widths per (opcode, length) form, from the authoring table.};
+
+  \node[st, below=of enc, draw=ink, fill=white] (prog)
+    {\textbf{Native program}\\[-1pt]{\footnotesize bytes, \code{contract()}, \code{abi()}}};
+  \node[note, right=of prog] {Code identity, entry, bindings and instruction inventory; register
+    count, forms, system registers, metadata class and launch.};
+
+  \foreach \a/\b in {ir/sel, sel/tl, tl/alloc, alloc/enc, enc/prog}
+    \draw[flow] (\a) -- (\b);
+
+  % The checks every compile runs, to the left.
+  \node[apple, text width=30mm, align=left, font=\scriptsize, left=9mm of enc]
+    (dec) {Apple's G17 decoder\\[-1pt]{\scriptsize reads back what the encoder wrote}};
+  \draw[flow, <->] (enc) -- (dec);
+  \node[box, draw=ours, fill=ours!8, text width=30mm, align=left, font=\scriptsize,
+        left=9mm of alloc] (chk) {Released-register check\\[-1pt]{\scriptsize and the CPU emulator}};
+  \draw[flow, <->] (alloc) -- (chk);
+\end{tikzpicture}
+\caption{Inside the backend. Each stage refuses what it cannot justify rather than guessing, and every compile
+decodes its own output with Apple's decoder.}
+\label{fig:backend-stages}
+\end{figure}

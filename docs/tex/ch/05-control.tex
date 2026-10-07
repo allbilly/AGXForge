@@ -12,9 +12,12 @@ counter only when the whole simdgroup's state allows. Most conditionals do not b
 
 \section{Execution-mask instructions}\label{sec:execution-mask-family}
 
-The family shares one encoding word (decoder; \code{agxforge/g17/cf.py}, \code{isa/g17-exec-mask.txt}). Bit 4 of byte 0 separates end of program
+The family shares one encoding word (\cref{fig:exec-word}; decoder; \code{agxforge/g17/cf.py},
+\code{isa/g17-exec-mask.txt}). Bit 4 of byte 0 separates end of program
 (\opn{684}, \code{0e 00 00 00}) from the family; bit 4 of byte 2 separates exec forms from branches; kind = b0.5 + 2 × b0.6; and
 b2.1 inverts the predicate (\cref{tab:exec-family-encoding}).
+
+\input{fig/exec-word}
 
 \begin{xltabular}{\linewidth}{@{}lXXX@{}}
 \caption{Exec-family and branch opcodes by kind, inversion bit b2.1 and branch bit b2.4.}\label{tab:exec-family-encoding}\\

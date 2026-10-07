@@ -1,0 +1,44 @@
+% One core's logical resources: what runs beside what, and what contends.
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=3mm and 6mm,
+    unit/.style={box, text width=38mm, align=left, font=\scriptsize, minimum height=10mm},
+    sl/.style={box, draw=ours, fill=ours!12, text width=17mm, align=center,
+      font=\scriptsize, minimum height=8mm}]
+
+  \node[sl] (s0) {SIMD 0};
+  \node[sl, right=3mm of s0] (s1) {SIMD 1};
+  \node[sl, right=3mm of s1] (s2) {SIMD 2};
+  \node[sl, right=3mm of s2] (s3) {SIMD 3};
+  \node[tag, font=\scriptsize, anchor=west, text width=34mm] at ([xshift=4mm]s3.east)
+    {four issue slots: flat to four simdgroups, linear beyond};
+
+  \node[unit, below=7mm of s0.south west, anchor=north west, draw=ours, fill=ours!8]
+    (tu) {\textbf{Tensor unit}, one slot per SIMD\\[-1pt]16 × 16 × 16 per issue; about 5.5
+      simdgroups per core saturate it};
+  \node[unit, right=of tu, draw=ours, fill=ours!8]
+    (alu) {\textbf{fp32 / integer ALU}\\[-1pt]about 128 fp32 lanes per core; fp32 and int32
+      share one port, no dual issue};
+  \node[unit, right=of alu, draw=apple, fill=apple!10]
+    (leg) {\textbf{Legacy simdgroup-matrix}\\[-1pt]overlaps the tensor unit completely;
+      its fp32-accumulate forms contend with fp32 FMA};
+
+  \node[unit, below=of tu, draw=ink!55, fill=ink!5]
+    (sb) {\textbf{Scoreboard}, per simdgroup\\[-1pt]eight slots ordering late values against
+      their consumers};
+  \node[unit, right=of sb, draw=ink!55, fill=ink!5]
+    (ls) {\textbf{Load/store path}\\[-1pt]per-lane addresses; no hidden tile-layout unit};
+  \node[unit, right=of ls, draw=ink!55, fill=ink!5]
+    (tgm) {\textbf{Threadgroup memory}\\[-1pt]57,344 bytes per core, so at most one
+      threadgroup above 28\,KiB is resident};
+
+  \begin{scope}[on background layer]
+    \node[draw=ink, rounded corners=4pt, inner sep=3.5mm, fit=(s0) (s3) (tu) (tgm)] (core) {};
+  \end{scope}
+  \node[tag, font=\scriptsize\bfseries, anchor=south west] at ([yshift=0.5mm]core.north west)
+    {one core};
+\end{tikzpicture}
+\caption{One core, as measured concurrency describes it: which streams run beside each other and which contend.
+This is a logical account and does not locate or count physical units (\cref{tab:core-resources}).}
+\label{fig:core-resources}
+\end{figure}

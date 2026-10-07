@@ -1,0 +1,51 @@
+% Where a load or store can point, and the limit that governs each space.
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=3mm,
+    space/.style={box, draw=ink!55, fill=ink!5, text width=50mm, align=left, font=\scriptsize,
+      minimum height=11mm},
+    lim/.style={tag, font=\scriptsize, align=left, text width=40mm}]
+
+  \node[space] (dev)
+    {\textbf{Device memory}\\[-1pt]named by binding rank; the decoder prints
+     \code{bin(op0, const(K), 8)}};
+  \node[lim, right=5mm of dev] (devl)
+    {No bounds check. A wrong rank returns wrong data with status 0.};
+
+  \node[space, below=of dev] (tg)
+    {\textbf{Threadgroup memory}\\[-1pt]\code{bin(op0, const(K), 2)}, shared by the threadgroup};
+  \node[lim, right=5mm of tg] (tgl)
+    {Apple's compiler refuses past 32{,}768\,B. 57{,}344\,B per core, inferred from a step in
+     run time.};
+
+  \node[space, below=of tg] (ib)
+    {\textbf{Imageblock}\\[-1pt]per-threadgroup tile, addressed by an (x, y) register};
+  \node[lim, right=5mm of ib] (ibl)
+    {x in the low half, y in the high half. The emulator refuses coordinates outside the tile;
+     hardware completed one that was.};
+
+  \node[space, below=of ib] (pool)
+    {\textbf{Constant pool}\\[-1pt]compile-time data in metadata slot 13};
+  \node[lim, right=5mm of pool] (pooll)
+    {Read as \code{bin(op0, const(K), W)} --- the same syntax as a uniform.};
+
+  \node[space, below=of pool] (uni)
+    {\textbf{Uniform file}\\[-1pt]written per dispatch by the constant program};
+  \node[lim, right=5mm of uni] (unil)
+    {Indistinguishable from a pool entry in the operand alone; confusing the two gave six silent
+     wrong answers.};
+
+  \node[space, below=of uni] (tex)
+    {\textbf{Textures}\\[-1pt]reached by message, operands staged in the \opn{4}};
+  \node[lim, right=5mm of tex] (texl)
+    {The staging write names a scoreboard slot; the message waits on it.};
+
+  \draw[decorate, decoration={brace, amplitude=5pt}, line width=0.6pt, color=ink!70]
+    ([xshift=-2mm]dev.north west) -- ([xshift=-2mm]tex.south west)
+    node[midway, left=6pt, tag, text width=26mm, align=right]
+      {one load or store names exactly one of these, plus an index and a displacement};
+\end{tikzpicture}
+\caption{Where an access can point. The opcode fixes the element width; there is no width field, and the
+hardware checks neither the bound nor whether a loaded value has arrived.}
+\label{fig:address-spaces}
+\end{figure}

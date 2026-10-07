@@ -2,7 +2,7 @@
 
 Loads and stores are per lane. Each instruction names a
 base (a device binding, threadgroup memory, the imageblock, or a register-held pointer), an index (a register or an
-immediate) and a byte displacement. The opcode fixes the element width; there is no width field.
+immediate) and a byte displacement (\cref{fig:address-spaces}). The opcode fixes the element width; there is no width field.
 Tensor loads are per-lane gathers through the same load and store machinery and the same eight-slot scoreboard (MM~\mm{7};
 \cref{sec:tensor-memory-path}).
 
@@ -26,6 +26,8 @@ on its load, the dispatch completes with status 0 and returns wrong data.
 \item "Below Metal" means a pure IOGPU submission with no AGXMetal driver loaded
   (\code{docs/g17-first-dispatch-trials.md}; interface in \cref{ch:submission-below-metal}).
 \end{itemize}
+
+\input{fig/address-spaces}
 
 \section{Address computation}\label{sec:address-computation}
 

@@ -709,7 +709,7 @@ of 128 columns takes 143–145~µs = 231–234~GB/s, 1.2 times its 0.120~ms floo
 (42.0 at G 8, 43.3 at G 16); the plateau, about 200~GB/s with cached and cold weights alike, is therefore not set by
 DRAM.
 
-At a 1K context a token takes 4.73~ms, split by part in \cref{tab:decode-time-breakdown} (measured, MM~\mm{25.181}).
+At a 1K context a token takes 4.73~ms, split by part in \cref{tab:decode-time-breakdown} and \cref{fig:decode-breakdown} (measured, MM~\mm{25.181}).
 
 \begin{xltabular}{\linewidth}{@{}>{\hsize=1.20\hsize}Xl>{\hsize=0.80\hsize}Xl@{}}
 \caption{Single-stream decode time per token at a 1K context.}\label{tab:decode-time-breakdown}\\
@@ -731,6 +731,8 @@ attention & 0.74 & 107~MB of KV & 144 \\*
 norms and the rest & 0.18 &  &  \\*
 \bottomrule
 \end{xltabular}
+
+\input{fig/decode-breakdown}
 
 Only the head streams at the DRAM peak. Counters on the decode qmv kernels (measured, MM~\mm{25.144.4}) show the q4 w2
 kernel issue-bound (instruction throughput limiter 77.2 percent, zero memory-stall influence; pinned-weight floor

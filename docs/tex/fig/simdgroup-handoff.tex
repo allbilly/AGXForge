@@ -1,0 +1,51 @@
+% A hand-off between simdgroups: store, barrier, load. No register state crosses.
+% (Mermaid 0.9 of the machine model, drawn properly.)
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=3mm and 7mm,
+    reg/.style={box, draw=ours, fill=ours!12, text width=26mm, align=center, font=\scriptsize,
+      minimum height=8mm},
+    xfer/.style={box, draw=ink!55, fill=ink!5, text width=30mm, align=center, font=\scriptsize,
+      minimum height=8mm},
+    barr/.style={box, draw=native, fill=native!12, text width=30mm, align=center,
+      font=\scriptsize, minimum height=8mm}]
+
+  \node[reg] (r0) {private registers};
+  \node[reg, below=of r0] (m0) {MMA chain};
+  \draw[flow] (r0) -- (m0);
+  \begin{scope}[on background layer]
+    \node[draw=ours, rounded corners=3pt, fill=ours!4, inner sep=2.5mm, fit=(r0) (m0)] (sg0) {};
+  \end{scope}
+  \node[tag, font=\scriptsize\bfseries, text=ours, anchor=south] at ([yshift=0.5mm]sg0.north)
+    {simdgroup 0};
+
+  \node[xfer, right=10mm of sg0, yshift=7mm] (stq)
+    {fragment-order store\\[-1pt]{\scriptsize 16 B per lane (A or B), 32 B (fp32 D)}};
+  \node[barr, below=of stq] (bl) {threadgroup barrier};
+  \node[xfer, below=of bl] (ldq)
+    {fragment-order load\\[-1pt]{\scriptsize same lane, same slot; no relayout exists}};
+  \draw[flow] (stq) -- (bl);
+  \draw[flow] (bl) -- (ldq);
+
+  \node[reg, right=10mm of bl, yshift=6mm] (r1) {private registers};
+  \node[reg, below=of r1] (m1) {MMA chain};
+  \draw[flow] (r1) -- (m1);
+  \begin{scope}[on background layer]
+    \node[draw=ours, rounded corners=3pt, fill=ours!4, inner sep=2.5mm, fit=(r1) (m1)] (sg1) {};
+  \end{scope}
+  \node[tag, font=\scriptsize\bfseries, text=ours, anchor=south] at ([yshift=0.5mm]sg1.north)
+    {simdgroup 1};
+
+  \draw[flow] (sg0.east) -- (stq.west);
+  \draw[flow] (ldq.east) -- (sg1.west);
+
+  \node[tag, font=\scriptsize, anchor=north west, text width=118mm] at ([yshift=-9mm]ldq.south west)
+    {Registers never cross the boundary: simdgroup 1 cannot read simdgroup 0's. Per round, one store,
+     barrier and load cost 38.0~ns at one simdgroup per core, 81.9~ns at 32,
+     100--131~ns at 64, through threadgroup memory; 58--83~ns and 151--161~ns through device
+     memory.};
+\end{tikzpicture}
+\caption{A hand-off between simdgroups is a store, a barrier and a load. No register state crosses a simdgroup
+boundary in any measured case, and the load returns the producer's bits in the same lane and slot.}
+\label{fig:simdgroup-handoff}
+\end{figure}

@@ -4,7 +4,7 @@ A Metal application asks Metal to build a pipeline and encode a command buffer; 
 (AGXMetal) then writes command pages and calls Apple's private \code{IOGPU} framework, which enters the kernel driver. A
 below-Metal process does the same work itself: it allocates GPU memory and shared memory through the AGX driver's user
 client, writes the code, the launch state and the command pages, builds the submission record, and calls the same
-\code{IOGPU} submission function (\cref{tab:apple-layers}). The resident runtime of \cref{ch:below-metal-native}
+\code{IOGPU} submission function (\cref{tab:apple-layers}); \cref{fig:submit-sequence} is that sequence. The resident runtime of \cref{ch:below-metal-native}
 assembles these steps into a model execution.
 
 \begin{xltabular}{\linewidth}{@{}>{\hsize=0.59\hsize}X>{\hsize=1.26\hsize}X>{\hsize=1.15\hsize}X@{}}
@@ -45,6 +45,8 @@ Each claim in this chapter is tagged measured (executed below Metal with a check
 (traced in a live process with Frida, or read from Apple's binary without executing a GPU command) or static (resolved
 by reading the installed \code{IOGPU} code with \code{tools/g17submitinspect.c}). \code{docs/g17-first-dispatch-trials.md}
 is cited as \emph{trials}, with a section title.
+
+\input{fig/submit-sequence}
 
 \section{Device setup}\label{sec:opening-device-contexts}
 

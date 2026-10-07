@@ -1,0 +1,54 @@
+% One opcode at three lengths, with its operand-1 high code in a different place each
+% time: why field maps are kept per form, not per opcode.
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=1mm, y=1mm,
+    strip/.style={draw=ink!45, line width=0.4pt, fill=ink!4},
+    fld/.style={draw=native, line width=0.8pt, fill=native!25},
+    rl/.style={anchor=east, font=\scriptsize, text=ink},
+    hd/.style={font=\tiny, text=ink!55, anchor=south},
+    lenlbl/.style={font=\scriptsize, text=ink!70, anchor=west}]
+
+  \def\b{2.3}    % one bit
+  \def\e{92}     % the strips are drawn to scale to bit 40, then broken
+
+  % Bit ruler over the drawn range.
+  \foreach \t in {0,8,16,24,32,40} {
+    \node[hd] at ({\t*\b},4.0) {\t};
+    \draw[ink!35, line width=0.3pt] ({\t*\b},3.6) -- ({\t*\b},2.9);
+  }
+
+  % 8-byte form: operand-1 high code at bits 24-28.
+  \node[rl] at (-2,0) {8-byte form};
+  \draw[strip] (0,-2.5) rectangle (\e,2.5);
+  \draw[fld]   ({24*\b},-2.5) rectangle ({29*\b},2.5);
+  \node[lenlbl] at ({\e+4},0) {bits 24--28, of 64};
+
+  % 12-byte form: bits 32 and 36.
+  \node[rl] at (-2,-9) {12-byte form};
+  \draw[strip] (0,-11.5) rectangle (\e,-6.5);
+  \draw[fld]   ({32*\b},-11.5) rectangle ({33*\b},-6.5);
+  \draw[fld]   ({36*\b},-11.5) rectangle ({37*\b},-6.5);
+  \node[lenlbl] at ({\e+4},-9) {bits 32 and 36, of 96};
+
+  % 16-byte form: bits 30-31.
+  \node[rl] at (-2,-18) {16-byte form};
+  \draw[strip] (0,-20.5) rectangle (\e,-15.5);
+  \draw[fld]   ({30*\b},-20.5) rectangle ({32*\b},-15.5);
+  \node[lenlbl] at ({\e+4},-18) {bits 30--31, of 128};
+
+  % The break: everything past bit 40 is not drawn.
+  \draw[white, line width=2.2pt] ({\e-3},-21.5) -- ({\e-1},2.0);
+  \draw[ink!45, line width=0.4pt] ({\e-4},-21.5) -- ({\e-2},2.0);
+  \draw[ink!45, line width=0.4pt] ({\e-2},-21.5) -- (\e,2.0);
+
+  \node[font=\scriptsize, anchor=north west, text width=104mm, align=left] at (-18,-27)
+    {The same field --- \op{2190}'s operand-1 high code --- in three of that opcode's forms.
+     64 of the 216 census opcodes occur at more than one length, so a map probed at one length
+     can read the wrong bits at another: before field maps were kept per form, 1,301 of 1,401
+     per-form specifications had been probed on an instance of a different length.};
+\end{tikzpicture}
+\caption{Field positions move with instruction length. Lengths are even, from 2 to 22 bytes, and one opcode can
+occur at several; the strips are drawn to scale to bit 40 and broken there (\cref{tab:length-rules}).}
+\label{fig:form-lengths}
+\end{figure}
