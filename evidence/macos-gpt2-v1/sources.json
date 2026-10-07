@@ -1,0 +1,22 @@
+{
+  "gpt2": [
+    "https://huggingface.co/openai-community/gpt2",
+    "https://github.com/huggingface/transformers/blob/main/src/transformers/models/gpt2/modeling_gpt2.py",
+    "https://github.com/huggingface/transformers/blob/main/src/transformers/activations.py"
+  ],
+  "research_references": [
+    {
+      "url": "https://raw.githubusercontent.com/chaotic-cx/mesa-mirror/mesa-22.2.0/src/asahi/lib/io.h",
+      "sha256": "819153ba47ba556370c2964191bb6af44ccc828801d297159e6a20cb1f2476a5"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chaotic-cx/mesa-mirror/mesa-22.2.0/src/gallium/drivers/asahi/magic.c",
+      "sha256": "ed6928e4ac1e847611d869e68fe761abb402a071280083912dac55057dfc4a23"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/chaotic-cx/mesa-mirror/mesa-24.0.0/src/asahi/lib/cmdbuf.xml",
+      "sha256": "af45fa1382ebb279efe01d908e64207eaeeb1a7fef9ad79b6bddf667338b7ab4"
+    }
+  ],
+  "scope": "Architecture, Conv1D layout, GELU definition, and native fault investigation. No reference implementation is used to supply GPU inference tensors."
+}

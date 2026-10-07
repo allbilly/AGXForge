@@ -2,6 +2,7 @@
 
 | Document | Read it for |
 |---|---|
+| [M1 macOS execution](../examples/macos/README.md) | Verified G13 Metal and direct IOGPU inference, build/run commands and measured limits |
 | [demonstrations.md](demonstrations.md) | the three demonstrations, each with its scope and links into the evidence |
 | [g17-technical-reference.pdf](g17-technical-reference.pdf) | how the machine, its instruction set, the compiler and both execution paths work; every statement cites the evidence record (LaTeX source in [tex/](tex/), `make -C docs/tex` rebuilds it) |
 | [g17-tensorops-machine-model.md](g17-tensorops-machine-model.md) | the evidence record: every measurement in numbered sections ("MM 25.211"), corrections and failed controls kept in place |

@@ -31,10 +31,11 @@ def category(name):
     return "projection"
 
 
-def run(args):
+def run(args, *, executor_factory=Executor, identity_factory=source_identity, executor_name="native Asahi DRM",
+        plan_factory=QwenPlan, model_factory=Qwen, reference_factory=Reference):
     output = args.output; output.mkdir(parents=True, exist_ok=False)
     checkpoint = Checkpoint(args.checkpoint)
-    plan = QwenPlan(checkpoint, args.capacity)
+    plan = plan_factory(checkpoint, args.capacity)
     tokenizer = Tokenizer.from_file(str(args.checkpoint/"tokenizer.json"))
     history = [int(t) for t in args.token_ids.split(",")] if args.token_ids else tokenizer.encode(args.prompt).ids
     if not history or any(t < 0 or t >= plan.vocab for t in history) or len(history)+args.generate-1 > plan.capacity:
@@ -42,16 +43,16 @@ def run(args):
     (output/"checkpoint.json").write_text(json.dumps(checkpoint.receipt(), indent=2)+"\n")
     (output/"plan.json").write_text(json.dumps(plan.descriptor(), indent=2)+"\n")
     (output/"bounds.json").write_text(json.dumps(BOUNDS, indent=2)+"\n")
-    identity = source_identity()
+    identity = identity_factory()
     (output/"source-sha256.json").write_text(json.dumps(identity, indent=2)+"\n")
     report = dict(schema_version=1, timestamp_utc=datetime.now(timezone.utc).isoformat(), status="RUNNING",
                   input_tokens=list(history), generated_tokens=[], checks=[], tensor_fallbacks=[],
-                  executor="native Asahi DRM", prefill="tokenwise", verified=args.verify, bounds=BOUNDS)
-    oracle = Reference(checkpoint, plan) if args.verify else None
+                  executor=executor_name, prefill="tokenwise", verified=args.verify, bounds=BOUNDS)
+    oracle = reference_factory(checkpoint, plan) if args.verify else None
     try:
-        with Executor(timeout_ms=30000, va_slot=args.va_slot) as gpu:
+        with executor_factory(timeout_ms=30000, va_slot=args.va_slot) as gpu:
             (output/"platform.json").write_text(json.dumps(gpu.platform(), indent=2)+"\n")
-            model = Qwen(gpu, checkpoint, plan, output/"launches")
+            model = model_factory(gpu, checkpoint, plan, output/"launches")
             while True:
                 position = model.position
                 token = history[position]
@@ -94,7 +95,7 @@ def run(args):
                 history.append(next_token)
             report.update(dispatches=model.dispatches, completed_positions=model.position,
                           text=tokenizer.decode(report["generated_tokens"]))
-        if source_identity() != identity: raise RuntimeError("sources changed during run")
+        if identity_factory() != identity: raise RuntimeError("sources changed during run")
         report.update(status="PASS" if oracle else "COMPLETED_UNVERIFIED", teardown="clean")
     except BaseException as error:
         report.update(status="FAIL", error=str(error)); raise
@@ -103,9 +104,11 @@ def run(args):
     return report
 
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--checkpoint", type=Path, default=ROOT/"models/asahi/qwen2.5-0.5b")
+def main(*, executor_factory=Executor, identity_factory=source_identity, executor_name="native Asahi DRM", argv=None,
+         plan_factory=QwenPlan, model_factory=Qwen, reference_factory=Reference,
+         default_checkpoint=None, description=None):
+    parser = argparse.ArgumentParser(description=description or __doc__)
+    parser.add_argument("--checkpoint", type=Path, default=default_checkpoint or ROOT/"models/asahi/qwen2.5-0.5b")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--prompt", default="Hello world")
     parser.add_argument("--token-ids", help="fixed token history instead of text")
@@ -113,8 +116,13 @@ if __name__ == "__main__":
     parser.add_argument("--capacity", type=int, default=32)
     parser.add_argument("--va-slot", type=int, choices=range(16), default=0)
     parser.add_argument("--verify", action="store_true", help="check intermediate tensors and logits against FP64")
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
     if not 1 <= args.generate <= args.capacity: parser.error("generate must be 1..capacity")
-    result = run(args)
+    result = run(args, executor_factory=executor_factory, identity_factory=identity_factory,
+                 executor_name=executor_name, plan_factory=plan_factory, model_factory=model_factory,
+                 reference_factory=reference_factory)
     print(f"{result['status']}: {result['completed_positions']} token positions, {result['dispatches']} native dispatches")
     print(result["text"])
+
+
+if __name__ == "__main__": main()

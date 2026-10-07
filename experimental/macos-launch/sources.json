@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "profile": "base M1 G13G / macOS 27.0.1 build 26A434",
+  "applegpu": {
+    "repository": "https://github.com/dougallj/applegpu",
+    "revision": "28dd80468d4a6c94fa4dac34ed488196f5fedc5f",
+    "reviewed": [
+      "hwtestbed.py",
+      "hwtestbed/runner-mac.mm",
+      "hwtestbed/compute.metal",
+      "metallib_replacer.py"
+    ],
+    "use": "binary archive replacement workflow reference; existing ISA vendor unchanged"
+  },
+  "mesa": {
+    "url": "https://raw.githubusercontent.com/chaotic-cx/mesa-mirror/mesa-24.0.0/src/asahi/lib/cmdbuf.xml",
+    "sha256": "af45fa1382ebb279efe01d908e64207eaeeb1a7fef9ad79b6bddf667338b7ab4",
+    "use": "independent USC register and CDM launch field check",
+    "existing_asahi_packet_baseline": "../asahi-launch/sources.json"
+  },
+  "capture": {
+    "format": "AGXC v2",
+    "source": "AGXForge handwritten store through Metal on this machine",
+    "local_path": "results/macos-native-bringup/store.cap",
+    "sha256": "fa0bf7db1d7510a9b74d4aacaf4da9c847daa753a7b99404e9195bb8476feac5",
+    "template": "agxforge/runtime/iogpu-26A434.json",
+    "template_sha256": "fc344b808d12206fcdba0316acdb95a876a13492e98a5cb14ec130be3164e4a0",
+    "scrubbed": [
+      "entire code heap",
+      "userspace Metal-object pointers",
+      "auxiliary userspace blocks",
+      "original program label"
+    ],
+    "scope": "single measured launch envelope; CPU/GPU addresses relocated for each new context"
+  },
+  "sdk": "Xcode macOS SDK: IOKitLib.h, IODataQueueClient.h and Metal.h",
+  "runtime_dependencies": {
+    "metal": [
+      "Foundation",
+      "Metal",
+      "system libraries"
+    ],
+    "iogpu": [
+      "IOKit",
+      "system libraries"
+    ],
+    "iogpu_framework_caveat": "system dependency closure may load Metal.framework; AGXMetal image is refused"
+  },
+  "residency_and_trace_ids": {
+    "repository": "https://github.com/chaotic-cx/mesa-mirror",
+    "revision": "mesa-22.2.0",
+    "files": {
+      "src/asahi/lib/io.h": "819153ba47ba556370c2964191bb6af44ccc828801d297159e6a20cb1f2476a5",
+      "src/asahi/lib/agx_device.c": "9bc7b13a42c875f9550a078df450dc1c330b659c568526a2369d9dd0d3bcf2b6",
+      "src/gallium/drivers/asahi/magic.c": "ed6928e4ac1e847611d869e68fe761abb402a071280083912dac55057dfc4a23"
+    },
+    "use": "independent resource allocation, residency group and global trace-ID range reference; measured offsets remain specific to 26A434"
+  },
+  "notification_ring": {
+    "url": "https://github.com/apple-oss-distributions/IOKitUser/blob/main/IODataQueueClient.c",
+    "sha256": "b35eb049376302b5c5219033715b8109a880772b9ab96473f52d1328fdafb909",
+    "use": "exact-end head/tail indices are valid; implementation not copied"
+  },
+  "local_support": {
+    "command": "make macos-support",
+    "collector": [
+      "tools/macos_support.c",
+      "tools/macos_support.py"
+    ],
+    "cache": "build/macos/iogpu-support.bin",
+    "manifest": "build/macos/iogpu-support.json",
+    "scope": "pipeline creation in a separate Metal process; IOConnectTrap4 refused; bytes generated locally and not distributed",
+    "runtime": "native dispatch process performs no Metal API calls and refuses AGXMetal"
+  }
+}

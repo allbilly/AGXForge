@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "timestamp_utc": "2026-10-07T15:48:51.624054+00:00",
+  "status": "FAIL",
+  "input_tokens": [
+    9707,
+    11,
+    12890
+  ],
+  "generated_tokens": [],
+  "checks": [
+    {
+      "position": 0,
+      "token": 9707,
+      "next_token": 271,
+      "tensors": 459,
+      "status": "PASS",
+      "top_token_matches": true,
+      "host_execution_seconds": 3.531451500000003
+    }
+  ],
+  "tensor_fallbacks": [],
+  "executor": "direct IOGPU G13",
+  "prefill": "tokenwise",
+  "verified": true,
+  "bounds": {
+    "embedding": [
+      0,
+      0
+    ],
+    "norm": [
+      0.003,
+      0.003
+    ],
+    "projection": [
+      0.005,
+      0.003
+    ],
+    "rope": [
+      0.005,
+      0.003
+    ],
+    "cache": [
+      0.005,
+      0.003
+    ],
+    "scores": [
+      0.01,
+      0.005
+    ],
+    "probs": [
+      0.0005,
+      0.005
+    ],
+    "attention": [
+      0.005,
+      0.003
+    ],
+    "residual": [
+      0.01,
+      0.003
+    ],
+    "activation": [
+      0.01,
+      0.005
+    ],
+    "logits": [
+      0.05,
+      0.003
+    ]
+  },
+  "error": "unexpected/error IOGPU completion: kr=0x0 size=40 cookie=0x10944acb0 bit=2 seen=1 start=5082653081958 end=5083158417291 status=0xe reserved=0x0"
+}

@@ -1,0 +1,39 @@
+0000: 62000000                 mov_imm          r0l, 0
+0004: 72051004                 get_sr           r1, sr80 (thread_position_in_grid.x)
+0008: 620900130000             mov_imm          r2, 4864, 0b0
+000e: 522842422400             if_icmp          r0l, ult, r1, r2, 1
+0014: 20c098000000             jmp_exec_none    0xAC
+001a: 720d1004                 get_sr           r3, sr80 (thread_position_in_grid.x)
+001e: 621180030000             mov_imm          r4, 896, 0b0
+0024: 1e15468224000000         imadd            r5, r3, r4, 0
+002c: 621900000000             mov_imm          r6, 0, 0b0
+0032: 621d00000000             mov_imm          r7, 0, 0b0
+0038: 7e214e0a8000             mov              r8, r7
+003e: 7e254c0a8000             mov              r9, r6
+0044: 420800000000             push_exec        r0l, 1
+004a: 0e294a0225000000         iadd             r10, r5, r8
+0052: 8558480e01c01000         device_load      0, i16, x, r11l, u4_u5, r10, unsigned
+005a: 3800                     wait             0
+005c: 2e31006005100000         bfi              r12, 0, r11l, 16
+0064: 0569040e01c01200         device_load      0, i32, x, r13, u2_u3, r8, unsigned
+006c: 3800                     wait             0
+006e: 3ab958a225520200         fmadd32          r14, r12, r13, r9
+0076: 0e3d501200000000         iadd             r15, r8, 1
+007e: 7e215e0a8000             mov              r8, r15
+0084: 7e255c0a8000             mov              r9, r14
+008a: 620580030000             mov_imm          r1, 896, 0b0
+0090: 522c5e222400             while_icmp       r0l, ult, r15, r1, 1
+0096: 00c0b4ffffff             jmp_exec_any     0x4A
+009c: 520e00000000             pop_exec         r0l, 1
+00a2: 4549600e00c01200         device_store     0, i32, x, r9, u0_u1, r3, unsigned, 0
+00aa: 3800                     wait             0
+00ac: 520e00000000             pop_exec         r0l, 1
+00b2: 8800                     stop
+00b4: 0800                     trap
+00b6: 0800                     trap
+00b8: 0800                     trap
+00ba: 0800                     trap
+00bc: 0800                     trap
+00be: 0800                     trap
+00c0: 0800                     trap
+00c2: 0800                     trap

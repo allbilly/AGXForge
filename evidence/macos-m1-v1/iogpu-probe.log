@@ -1,0 +1,23 @@
+{
+  "system": "Darwin",
+  "macos": "27.0.1",
+  "build": "26A434",
+  "gpu": "Apple M1",
+  "driver": "IOGPU",
+  "executor": "direct IOGPU G13",
+  "kernel": {
+    "system": "Darwin",
+    "node": "MacBookAir",
+    "release": "27.0.0",
+    "version": "Darwin Kernel Version 27.0.0: Tue Aug 11 21:05:27 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T8103",
+    "machine": "arm64",
+    "processor": "arm"
+  },
+  "python": "3.14.8",
+  "page_bytes": 16384,
+  "agx_metal_absent": true,
+  "metal_api_calls": 0,
+  "arena_bytes": 33554432,
+  "template_sha256": "fc344b808d12206fcdba0316acdb95a876a13492e98a5cb14ec130be3164e4a0"
+}
+PASS: 3 iogpu resource/profile cycles; no GPU commands submitted

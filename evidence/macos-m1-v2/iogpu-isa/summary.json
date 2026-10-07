@@ -1,0 +1,267 @@
+{
+  "status": "PASS",
+  "scope": "compiler ISA semantics and persistent buffer reuse",
+  "checks": [
+    {
+      "name": "add",
+      "status": "PASS",
+      "atol": 0,
+      "rtol": 0,
+      "nan_policy": "bits",
+      "reused_buffers": false,
+      "fence_completed": true,
+      "canaries_intact": true
+    },
+    {
+      "name": "sub",
+      "status": "PASS",
+      "atol": 0,
+      "rtol": 0,
+      "nan_policy": "bits",
+      "reused_buffers": false,
+      "fence_completed": true,
+      "canaries_intact": true
+    },
+    {
+      "name": "mul",
+      "status": "PASS",
+      "atol": 0,
+      "rtol": 0,
+      "nan_policy": "bits",
+      "reused_buffers": false,
+      "fence_completed": true,
+      "canaries_intact": true
+    },
+    {
+      "name": "and",
+      "status": "PASS",
+      "atol": 0,
+      "rtol": 0,
+      "nan_policy": "bits",
+      "reused_buffers": false,
+      "fence_completed": true,
+      "canaries_intact": true
+    },
+    {
+      "name": "or",
+      "status": "PASS",
+      "atol": 0,
+      "rtol": 0,
+      "nan_policy": "bits",
+      "reused_buffers": false,
+      "fence_completed": true,
+      "canaries_intact": true
+    },
+    {
+      "name": "xor",
+      "status": "PASS",
+      "atol": 0,
+      "rtol": 0,
+      "nan_policy": "bits",
+      "reused_buffers": false,
+      "fence_completed": true,
+      "canaries_intact": true
+    },
+    {
+      "name": "shl",
+      "status": "PASS",
+      "atol": 0,
+      "rtol": 0,
+      "nan_policy": "bits",
+      "reused_buffers": false,
+      "fence_completed": true,
+      "canaries_intact": true
+    },
+    {
+      "name": "shr",
+      "status": "PASS",
+      "atol": 0,
+      "rtol": 0,
+      "nan_policy": "bits",
+      "reused_buffers": false,
+      "fence_completed": true,
+      "canaries_intact": true
+    },
+    {
+      "name": "u32_to_f32",
+      "status": "PASS",
+      "atol": 0,
+      "rtol": 0,
+      "nan_policy": "bits",
+      "reused_buffers": false,
+      "fence_completed": true,
+      "canaries_intact": true
+    },
+    {
+      "name": "i32_to_f32",
+      "status": "PASS",
+      "atol": 0,
+      "rtol": 0,
+      "nan_policy": "bits",
+      "reused_buffers": false,
+      "fence_completed": true,
+      "canaries_intact": true
+    },
+    {
+      "name": "f32_to_u32",
+      "status": "PASS",
+      "atol": 0,
+      "rtol": 0,
+      "nan_policy": "bits",
+      "reused_buffers": false,
+      "fence_completed": true,
+      "canaries_intact": true
+    },
+    {
+      "name": "f32_to_i32",
+      "status": "PASS",
+      "atol": 0,
+      "rtol": 0,
+      "nan_policy": "bits",
+      "reused_buffers": false,
+      "fence_completed": true,
+      "canaries_intact": true
+    },
+    {
+      "name": "bitcast",
+      "status": "PASS",
+      "atol": 0,
+      "rtol": 0,
+      "nan_policy": "bits",
+      "reused_buffers": false,
+      "fence_completed": true,
+      "canaries_intact": true
+    },
+    {
+      "name": "f32_to_f16_rte",
+      "status": "PASS",
+      "atol": 0,
+      "rtol": 0,
+      "nan_policy": "bits",
+      "reused_buffers": false,
+      "fence_completed": true,
+      "canaries_intact": true
+    },
+    {
+      "name": "copy",
+      "status": "PASS",
+      "atol": 0,
+      "rtol": 0,
+      "nan_policy": "bits",
+      "reused_buffers": false,
+      "fence_completed": true,
+      "canaries_intact": true
+    },
+    {
+      "name": "mul",
+      "status": "PASS",
+      "atol": 0,
+      "rtol": 0,
+      "nan_policy": "classification",
+      "reused_buffers": false,
+      "fence_completed": true,
+      "canaries_intact": true
+    },
+    {
+      "name": "fma",
+      "status": "PASS",
+      "atol": 0,
+      "rtol": 0,
+      "nan_policy": "classification",
+      "reused_buffers": false,
+      "fence_completed": true,
+      "canaries_intact": true
+    },
+    {
+      "name": "rcp",
+      "status": "PASS",
+      "atol": 2e-05,
+      "rtol": 0.0002,
+      "nan_policy": "bits",
+      "reused_buffers": false,
+      "fence_completed": true,
+      "canaries_intact": true
+    },
+    {
+      "name": "rsqrt",
+      "status": "PASS",
+      "atol": 2e-05,
+      "rtol": 0.0002,
+      "nan_policy": "bits",
+      "reused_buffers": false,
+      "fence_completed": true,
+      "canaries_intact": true
+    },
+    {
+      "name": "log2",
+      "status": "PASS",
+      "atol": 2e-05,
+      "rtol": 0.0002,
+      "nan_policy": "bits",
+      "reused_buffers": false,
+      "fence_completed": true,
+      "canaries_intact": true
+    },
+    {
+      "name": "exp2",
+      "status": "PASS",
+      "atol": 2e-05,
+      "rtol": 0.0002,
+      "nan_policy": "bits",
+      "reused_buffers": false,
+      "fence_completed": true,
+      "canaries_intact": true
+    },
+    {
+      "name": "dynamic_loop",
+      "status": "PASS",
+      "atol": 0,
+      "rtol": 0,
+      "nan_policy": "bits",
+      "reused_buffers": false,
+      "fence_completed": true,
+      "canaries_intact": true
+    },
+    {
+      "name": "sub",
+      "status": "PASS",
+      "atol": 0,
+      "rtol": 0,
+      "nan_policy": "bits",
+      "reused_buffers": false,
+      "fence_completed": true,
+      "canaries_intact": true
+    },
+    {
+      "name": "sub",
+      "status": "PASS",
+      "atol": 0,
+      "rtol": 0,
+      "nan_policy": "bits",
+      "reused_buffers": true,
+      "fence_completed": true,
+      "canaries_intact": true
+    },
+    {
+      "name": "sub",
+      "status": "PASS",
+      "atol": 0,
+      "rtol": 0,
+      "nan_policy": "bits",
+      "reused_buffers": true,
+      "fence_completed": true,
+      "canaries_intact": true
+    },
+    {
+      "name": "sub",
+      "status": "PASS",
+      "atol": 0,
+      "rtol": 0,
+      "nan_policy": "bits",
+      "reused_buffers": true,
+      "fence_completed": true,
+      "canaries_intact": true
+    }
+  ],
+  "teardown": "clean"
+}

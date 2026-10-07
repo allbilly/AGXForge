@@ -28,15 +28,15 @@ def compare(actual, expected, atol=0, rtol=0):
     return bool(passed), float(np.max(error, initial=0))
 
 
-def run(output):
+def run(output, *, executor_factory=Executor, identity_factory=source_identity, extra_checks=None):
     output = Path(output); output.mkdir(parents=True, exist_ok=False)
-    sources = source_identity()
-    report = dict(schema_version=1, status="RUNNING", scope="AGXForge IR -> G13 -> native Asahi", checks=[])
+    sources = identity_factory()
+    report = dict(schema_version=1, status="RUNNING", scope="AGXForge IR -> G13 -> GPU", checks=[])
     (output / "source-sha256.json").write_text(json.dumps(sources, indent=2) + "\n")
     rng = np.random.default_rng(213)
     gpu = None
     try:
-        with Executor() as gpu:
+        with executor_factory() as gpu:
             (output / "platform.json").write_text(json.dumps(gpu.platform(), indent=2) + "\n")
             def check(spec, data, expected, atol=0, rtol=0, dtype=np.float32):
                 p = spec.compile()
@@ -115,7 +115,8 @@ def run(output):
             check(k.argmax(129), dict(x=logits.tobytes()), np.array([63], np.uint32), dtype=np.uint32)
             a = rng.normal(0, .2, 65).astype(np.float32); up = rng.normal(0, .2, 65).astype(np.float32)
             check(k.vector("swiglu", 65), dict(a=a.tobytes(), b=up.tobytes()), a.astype(np.float64)/(1+np.exp(-a.astype(np.float64)))*up, 2e-5, 2e-4)
-        if sources != source_identity(): raise RuntimeError("sources changed during verification")
+            if extra_checks: extra_checks(check, rng)
+        if sources != identity_factory(): raise RuntimeError("sources changed during verification")
         report["status"] = "PASS"; report["teardown"] = "clean"
     except BaseException as error:
         report.update(status="FAIL", error=str(error)); raise

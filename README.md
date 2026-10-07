@@ -3,7 +3,15 @@
 This fork adds a hardware-tested **base M1/G13G Asahi path**: scalar compilation,
 native DRM execution and validated Qwen2.5-0.5B inference. See the
 [Asahi examples and supported scope](examples/asahi/README.md). The original G17
-release is described below; native M1 macOS execution remains future work.
+release is described below. The [M1 macOS route](examples/macos/README.md) now
+runs the same G13 machine code through Metal, including verified Qwen inference.
+Direct IOGPU also passes the full kernel suite and verified Qwen inference on
+base M1 / build 26A434. Its driver support cache is prepared locally through
+Metal before native execution. See [the macOS receipt](evidence/macos-m1-v2/receipt.json).
+The macOS examples also run FP32 GPT-2, with independent tensor validation and
+a matched [Apple-compiled Metal comparison](examples/macos/README.md#gpt-2-and-compiler-comparison).
+Direct IOGPU has intermittent driver faults; the [GPT-2 receipts](evidence/macos-gpt2-v1/README.md)
+retain its successful runs and failures.
 
 **A native compiler and runtime for the Apple M5 GPU (G17) and the tensor units in its cores, built on a machine
 model recovered and checked by measurement.** AGXForge compiles its own IR to G17 machine code: instruction

@@ -37,10 +37,11 @@ def inputs(operation, n, seed):
     return pack(a), pack(b), expected
 
 
-def run(output, operations=OPERATIONS, sizes=(32, 64, 128), repeats=3, device=None):
+def run(output, operations=OPERATIONS, sizes=(32, 64, 128), repeats=3, device=None,
+        *, executor_factory=Executor, identity_factory=source_identity):
     output = Path(output)
     output.mkdir(parents=True, exist_ok=False)
-    identity = source_identity()
+    identity = identity_factory()
     report = dict(schema_version=1, timestamp_utc=datetime.now(timezone.utc).isoformat(),
                   status="RUNNING", scope="handwritten native G13G scalar execution", checks=[])
     (output / "source-sha256.json").write_text(json.dumps(identity, indent=2) + "\n")
@@ -54,7 +55,7 @@ def run(output, operations=OPERATIONS, sizes=(32, 64, 128), repeats=3, device=No
                     row = dict(operation=operation, threads=n, seed=seed, repetition=repetition, status="NOT_RUN")
                     report["checks"].append(row)
                     # Every test owns a fresh VM/queue/BO set; VA slots vary.
-                    with Executor(device, va_slot=repetition) as gpu:
+                    with executor_factory(device, va_slot=repetition) as gpu:
                         if not (output / "platform.json").exists():
                             (output / "platform.json").write_text(json.dumps(gpu.platform(), indent=2) + "\n")
                         out = gpu.buffer(n * 4, "write")
@@ -73,7 +74,7 @@ def run(output, operations=OPERATIONS, sizes=(32, 64, 128), repeats=3, device=No
                             raise RuntimeError(f"{operation} n={n} seed={seed}: wrong output; suite stopped")
                     row["teardown"] = "clean"
                     (folder / "check.json").write_text(json.dumps(row, indent=2) + "\n")
-        if source_identity() != identity: raise RuntimeError("sources changed during run")
+        if identity_factory() != identity: raise RuntimeError("sources changed during run")
         report["status"] = "PASS"
     except BaseException as error:
         report.update(status="FAIL", error=str(error))
@@ -83,17 +84,18 @@ def run(output, operations=OPERATIONS, sizes=(32, 64, 128), repeats=3, device=No
     return report
 
 
-def main(operation=None):
+def main(operation=None, *, executor_factory=Executor, identity_factory=source_identity, argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, required=True, help="new evidence directory")
     parser.add_argument("--operation", choices=OPERATIONS, default=operation)
     parser.add_argument("--sizes", nargs="+", type=int, default=[32, 64, 128])
     parser.add_argument("--repeats", type=int, default=3)
     parser.add_argument("--device")
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
     if not 1 <= args.repeats <= 100 or any(n < 32 or n > 4096 or n % 32 for n in args.sizes):
         parser.error("repeats 1..100; sizes complete SIMD groups in 32..4096")
-    report = run(args.output, (args.operation,) if args.operation else OPERATIONS, args.sizes, args.repeats, args.device)
+    report = run(args.output, (args.operation,) if args.operation else OPERATIONS, args.sizes, args.repeats, args.device,
+                 executor_factory=executor_factory, identity_factory=identity_factory)
     print(f"{report['status']}: {len(report['checks'])} native dispatches; evidence: {args.output}")
 
 

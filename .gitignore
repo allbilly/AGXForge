@@ -26,3 +26,7 @@ results/asahi-isa/
 results/asahi-model-relocated/
 results/asahi-model-no-reference/
 results/asahi-validation/
+build/macos/
+results/macos-*/
+models/macos/
+.venv-macos/

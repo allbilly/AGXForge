@@ -1,0 +1,4 @@
+Timestamp               Ty Process[PID:TID]
+2026-10-07 23:42:17.004 F  kernel[0:4aecd] (IOGPUFamily) virtual IOReturn IOGPUCommandDescriptor::prepare(uint32_t) <Python> (<private>) : required > max : requiredBytes = <7249395712> preparedBytes : <7249330176> maxWired = <5726633984> maxWiredInternal = <715833344> currentWired = <1420886016>
+2026-10-07 23:42:17.018 F  kernel[0:4aecd] (IOGPUFamily) virtual IOReturn IOGPUCommandDescriptor::prepare(uint32_t) <Python> (<private>) : required > max : requiredBytes = <7249395712> preparedBytes : <7249330176> maxWired = <5726633984> maxWiredInternal = <715833344> currentWired = <1420886016>
+2026-10-07 23:42:17.666 E  kernel[0:52a] (AGXG13G) AGX: Channel error 14

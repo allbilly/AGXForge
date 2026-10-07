@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "timestamp_utc": "2026-10-07T15:55:53.357994+00:00",
+  "status": "PASS",
+  "input_tokens": [
+    9707,
+    11,
+    12890
+  ],
+  "generated_tokens": [
+    369,
+    264,
+    1661,
+    2618
+  ],
+  "checks": [
+    {
+      "position": 0,
+      "token": 9707,
+      "next_token": 271,
+      "tensors": 459,
+      "status": "PASS",
+      "top_token_matches": true,
+      "host_execution_seconds": 3.0587637919998087
+    },
+    {
+      "position": 1,
+      "token": 11,
+      "next_token": 358,
+      "tensors": 459,
+      "status": "PASS",
+      "top_token_matches": true,
+      "host_execution_seconds": 2.9698608750004496
+    },
+    {
+      "position": 2,
+      "token": 12890,
+      "next_token": 369,
+      "tensors": 459,
+      "status": "PASS",
+      "top_token_matches": true,
+      "host_execution_seconds": 2.9078296669995325
+    },
+    {
+      "position": 3,
+      "token": 369,
+      "next_token": 264,
+      "tensors": 459,
+      "status": "PASS",
+      "top_token_matches": true,
+      "host_execution_seconds": 3.0543206669999563
+    },
+    {
+      "position": 4,
+      "token": 264,
+      "next_token": 1661,
+      "tensors": 459,
+      "status": "PASS",
+      "top_token_matches": true,
+      "host_execution_seconds": 2.9086519170004976
+    },
+    {
+      "position": 5,
+      "token": 1661,
+      "next_token": 2618,
+      "tensors": 459,
+      "status": "PASS",
+      "top_token_matches": true,
+      "host_execution_seconds": 2.8056395419998807
+    }
+  ],
+  "tensor_fallbacks": [],
+  "executor": "direct IOGPU G13",
+  "prefill": "tokenwise",
+  "verified": true,
+  "bounds": {
+    "embedding": [
+      0,
+      0
+    ],
+    "norm": [
+      0.003,
+      0.003
+    ],
+    "projection": [
+      0.005,
+      0.003
+    ],
+    "rope": [
+      0.005,
+      0.003
+    ],
+    "cache": [
+      0.005,
+      0.003
+    ],
+    "scores": [
+      0.01,
+      0.005
+    ],
+    "probs": [
+      0.0005,
+      0.005
+    ],
+    "attention": [
+      0.005,
+      0.003
+    ],
+    "residual": [
+      0.01,
+      0.003
+    ],
+    "activation": [
+      0.01,
+      0.005
+    ],
+    "logits": [
+      0.05,
+      0.003
+    ]
+  },
+  "dispatches": 3780,
+  "completed_positions": 6,
+  "text": " for a good job",
+  "teardown": "clean"
+}

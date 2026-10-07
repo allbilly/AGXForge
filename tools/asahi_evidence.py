@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Audit a completed Asahi evidence directory and optionally write its hash manifest.
+"""Audit completed Asahi or M1 macOS evidence and optionally write its hash manifest.
 
 This reads recorded outputs, not the GPU. It never turns missing hardware work
 or COMPLETED_UNVERIFIED into a hardware correctness pass.
@@ -9,15 +9,22 @@ from collections import Counter
 import hashlib
 import json
 from pathlib import Path
+import struct
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 
 def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def audit(root, manifest=None):
+def audit(root, manifest=None, *, expected_executor=None):
     summary = json.loads((root/"summary.json").read_text())
     if summary["status"] != "PASS": raise ValueError("bundle does not record a correctness pass")
     if "verified" in summary and not summary["verified"]: raise ValueError("model was not verified")
+    if expected_executor is not None:
+        platform = json.loads((root/"platform.json").read_text())
+        if summary.get("executor") != expected_executor or platform.get("executor") != expected_executor:
+            raise ValueError("bundle executor differs from requested backend")
     checks = summary["checks"]
     if not checks or any(c["status"] != "PASS" for c in checks): raise ValueError("missing/failed checks")
     launches = list(root.rglob("launch.json"))
@@ -27,10 +34,40 @@ def audit(root, manifest=None):
         launch = json.loads(path.read_text()); p=launch["program"]
         if launch["status"] != "COMPLETED" or not launch.get("fence_completed") or not launch.get("canaries_intact"):
             raise ValueError(f"incomplete/unguarded launch: {path}")
-        if sha(path.parent/"shader.bin") != p["code_sha256"]: raise ValueError(f"shader hash: {path}")
+        executor = launch.get("executor")
+        if expected_executor is not None and executor != expected_executor:
+            raise ValueError(f"launch executor differs from requested backend: {path}")
+        apple_baseline = executor == "Apple-compiled scalar Metal"
+        if not apple_baseline and sha(path.parent/"shader.bin") != p["code_sha256"]: raise ValueError(f"shader hash: {path}")
         if p["logical_threads"] != launch["logical_threads"]: raise ValueError(f"extent mismatch: {path}")
-        for name in ("usc.bin","cdm.bin","drm-command.bin"):
+        state_names = ("metal-archive.bin",) if executor == "G13 machine code through Metal" else ("usc.bin","cdm.bin","drm-command.bin")
+        if apple_baseline:
+            if launch.get("program_role") != "logical graph descriptor; G13 bytes are not executed":
+                raise ValueError("Apple baseline must distinguish MSL execution from G13 descriptors")
+            state_names = ("shader.metal", "metal-library.bin", "metal-archive.bin")
+        if executor == "direct IOGPU G13":
+            state_names = ("usc.bin", "cdm.bin", "iogpu-submit.bin", "iogpu-pages.bin", "uniforms.bin")
+            completion = bytes.fromhex(launch.get("completion", ""))
+            tokens = launch.get("notification_tokens", [])
+            if len(completion) != 80 or len(tokens) != 2 or not all(tokens) or tokens[0] == tokens[1]:
+                raise ValueError("missing native completion tokens/receipt")
+            for index, token in enumerate(tokens):
+                cookie, start, end, status, reserved = struct.unpack_from("<5Q", completion, index*40)
+                if cookie != token or not start or end < start or status or reserved:
+                    raise ValueError("failed native completion notification")
+            buffers = {b["binding"]: b["gpu_address"] for b in launch["buffers"]}
+            pointers = [buffers[b["name"]] for b in sorted(p["bindings"], key=lambda b: b["slot"])]
+            if (path.parent/"uniforms.bin").read_bytes() != struct.pack("<"+"Q"*len(pointers), *pointers):
+                raise ValueError("native uniform pointers disagree with bindings")
+        for name in state_names:
             if sha(path.parent/name) != launch[name]["sha256"]: raise ValueError(f"state hash: {path}")
+        if state_names == ("metal-archive.bin",):
+            from agxforge.g13.metal import code_range
+            archive = (path.parent/"metal-archive.bin").read_bytes()
+            offset, capacity = code_range(archive)
+            code = (path.parent/"shader.bin").read_bytes()
+            if (offset != launch["code_offset"] or capacity != launch["code_capacity"] or
+                    archive[offset:offset+len(code)] != code): raise ValueError("authored shader placement")
     tensor_checks=0
     if "verified" in summary:
         import numpy as np

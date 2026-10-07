@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "timestamp_utc": "2026-10-07T17:13:56.583928+00:00",
+  "status": "PASS",
+  "input_tokens": [
+    9707,
+    11,
+    12890
+  ],
+  "generated_tokens": [
+    369,
+    264
+  ],
+  "checks": [
+    {
+      "position": 0,
+      "token": 9707,
+      "next_token": 271,
+      "tensors": 459,
+      "status": "PASS",
+      "top_token_matches": true,
+      "host_execution_seconds": 3.6063301659996796
+    },
+    {
+      "position": 1,
+      "token": 11,
+      "next_token": 358,
+      "tensors": 459,
+      "status": "PASS",
+      "top_token_matches": true,
+      "host_execution_seconds": 1.9487376669985679
+    },
+    {
+      "position": 2,
+      "token": 12890,
+      "next_token": 369,
+      "tensors": 459,
+      "status": "PASS",
+      "top_token_matches": true,
+      "host_execution_seconds": 2.0754317500013713
+    },
+    {
+      "position": 3,
+      "token": 369,
+      "next_token": 264,
+      "tensors": 459,
+      "status": "PASS",
+      "top_token_matches": true,
+      "host_execution_seconds": 1.8550510840013885
+    }
+  ],
+  "tensor_fallbacks": [],
+  "executor": "G13 machine code through Metal",
+  "prefill": "tokenwise",
+  "verified": true,
+  "bounds": {
+    "embedding": [
+      0,
+      0
+    ],
+    "norm": [
+      0.003,
+      0.003
+    ],
+    "projection": [
+      0.005,
+      0.003
+    ],
+    "rope": [
+      0.005,
+      0.003
+    ],
+    "cache": [
+      0.005,
+      0.003
+    ],
+    "scores": [
+      0.01,
+      0.005
+    ],
+    "probs": [
+      0.0005,
+      0.005
+    ],
+    "attention": [
+      0.005,
+      0.003
+    ],
+    "residual": [
+      0.01,
+      0.003
+    ],
+    "activation": [
+      0.01,
+      0.005
+    ],
+    "logits": [
+      0.05,
+      0.003
+    ]
+  },
+  "dispatches": 2520,
+  "completed_positions": 4,
+  "text": " for a",
+  "teardown": "clean"
+}

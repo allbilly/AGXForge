@@ -1,0 +1,1278 @@
+{
+  "architecture": "gpt2",
+  "capacity": 32,
+  "tensor_operations": "GPU only",
+  "storage": "FP32, original Conv1D layout",
+  "prefill": "token by token through decode kernels",
+  "requirements": {
+    "embedding": [
+      "bf16_storage",
+      "integer",
+      "scalar"
+    ],
+    "position_embedding": [
+      "integer",
+      "scalar"
+    ],
+    "sum": [
+      "bounded_loops",
+      "integer",
+      "scalar"
+    ],
+    "norm_stats": [
+      "approx_math",
+      "bounded_loops",
+      "integer",
+      "scalar"
+    ],
+    "norm_apply": [
+      "scalar"
+    ],
+    "qkv": [
+      "bounded_loops",
+      "integer",
+      "scalar"
+    ],
+    "split": [
+      "integer",
+      "scalar"
+    ],
+    "kv_write": [
+      "integer",
+      "scalar"
+    ],
+    "scores": [
+      "bounded_loops",
+      "integer",
+      "scalar"
+    ],
+    "softmax_max": [
+      "bounded_loops",
+      "integer",
+      "scalar"
+    ],
+    "softmax_exp": [
+      "approx_math",
+      "integer",
+      "scalar"
+    ],
+    "softmax_sum": [
+      "bounded_loops",
+      "integer",
+      "scalar"
+    ],
+    "softmax_normalize": [
+      "approx_math",
+      "integer",
+      "scalar"
+    ],
+    "attend": [
+      "bounded_loops",
+      "integer",
+      "scalar"
+    ],
+    "o": [
+      "bounded_loops",
+      "integer",
+      "scalar"
+    ],
+    "residual": [
+      "scalar"
+    ],
+    "up": [
+      "bounded_loops",
+      "integer",
+      "scalar"
+    ],
+    "gelu": [
+      "approx_math",
+      "scalar"
+    ],
+    "down": [
+      "bounded_loops",
+      "integer",
+      "scalar"
+    ],
+    "logits": [
+      "bounded_loops",
+      "integer",
+      "scalar"
+    ],
+    "argmax": [
+      "bounded_loops",
+      "integer",
+      "scalar"
+    ]
+  },
+  "programs": {
+    "embedding": {
+      "name": "embedding",
+      "bindings": [
+        {
+          "name": "out",
+          "slot": 0,
+          "access": "write",
+          "min_bytes": 3072,
+          "alignment": 4
+        },
+        {
+          "name": "weights",
+          "slot": 1,
+          "access": "read",
+          "min_bytes": 154389504,
+          "alignment": 4
+        },
+        {
+          "name": "params",
+          "slot": 2,
+          "access": "read",
+          "min_bytes": 8,
+          "alignment": 4
+        }
+      ],
+      "register_halfs": 18,
+      "uniform_halfs": 12,
+      "workgroup_size": 32,
+      "entry_offset": 0,
+      "target": "g13g",
+      "abi_version": 1,
+      "reserved_register_halfs": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "builtins": [
+        80
+      ],
+      "bounds_policy": "masked",
+      "numerical": "binary32; hardware FTZ and approximate transcendentals",
+      "origin": "agxforge_ir",
+      "threadgroup_bytes": 0,
+      "scratch_bytes": 0,
+      "logical_threads": 768,
+      "code_sha256": "000a086dbca7dcf994bd2c9d898bae1fa20d8f5cbdd96acdcb92ccac24022a89",
+      "code_bytes": 106,
+      "constants": [],
+      "relocations": [],
+      "helper_required": false
+    },
+    "position_embedding": {
+      "name": "position_embedding",
+      "bindings": [
+        {
+          "name": "out",
+          "slot": 0,
+          "access": "write",
+          "min_bytes": 3072,
+          "alignment": 4
+        },
+        {
+          "name": "weights",
+          "slot": 1,
+          "access": "read",
+          "min_bytes": 3145728,
+          "alignment": 4
+        },
+        {
+          "name": "params",
+          "slot": 2,
+          "access": "read",
+          "min_bytes": 8,
+          "alignment": 4
+        }
+      ],
+      "register_halfs": 18,
+      "uniform_halfs": 12,
+      "workgroup_size": 32,
+      "entry_offset": 0,
+      "target": "g13g",
+      "abi_version": 1,
+      "reserved_register_halfs": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "builtins": [
+        80
+      ],
+      "bounds_policy": "masked",
+      "numerical": "binary32; hardware FTZ and approximate transcendentals",
+      "origin": "agxforge_ir",
+      "threadgroup_bytes": 0,
+      "scratch_bytes": 0,
+      "logical_threads": 768,
+      "code_sha256": "5c1d833fd50a5ece269b177ea831ccf9df31f2aa8749e836d9462fc099c4b5fd",
+      "code_bytes": 106,
+      "constants": [],
+      "relocations": [],
+      "helper_required": false
+    },
+    "sum": {
+      "name": "reduce_sum_1_768",
+      "bindings": [
+        {
+          "name": "out",
+          "slot": 0,
+          "access": "write",
+          "min_bytes": 4,
+          "alignment": 4
+        },
+        {
+          "name": "x",
+          "slot": 1,
+          "access": "read",
+          "min_bytes": 3072,
+          "alignment": 4
+        }
+      ],
+      "register_halfs": 28,
+      "uniform_halfs": 8,
+      "workgroup_size": 32,
+      "entry_offset": 0,
+      "target": "g13g",
+      "abi_version": 1,
+      "reserved_register_halfs": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "builtins": [
+        80
+      ],
+      "bounds_policy": "masked",
+      "numerical": "binary32; hardware FTZ and approximate transcendentals",
+      "origin": "agxforge_ir",
+      "threadgroup_bytes": 0,
+      "scratch_bytes": 0,
+      "logical_threads": 1,
+      "code_sha256": "61be7a4bce26684097dbee068d4bd3f50632a51ec48e411ff7caeb029afca8d0",
+      "code_bytes": 176,
+      "constants": [],
+      "relocations": [],
+      "helper_required": false
+    },
+    "norm_stats": {
+      "name": "layer_norm_stats",
+      "bindings": [
+        {
+          "name": "out",
+          "slot": 0,
+          "access": "write",
+          "min_bytes": 8,
+          "alignment": 4
+        },
+        {
+          "name": "x",
+          "slot": 1,
+          "access": "read",
+          "min_bytes": 3072,
+          "alignment": 4
+        },
+        {
+          "name": "sum",
+          "slot": 2,
+          "access": "read",
+          "min_bytes": 4,
+          "alignment": 4
+        }
+      ],
+      "register_halfs": 40,
+      "uniform_halfs": 12,
+      "workgroup_size": 32,
+      "entry_offset": 0,
+      "target": "g13g",
+      "abi_version": 1,
+      "reserved_register_halfs": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "builtins": [
+        80
+      ],
+      "bounds_policy": "masked",
+      "numerical": "binary32; hardware FTZ and approximate transcendentals",
+      "origin": "agxforge_ir",
+      "threadgroup_bytes": 0,
+      "scratch_bytes": 0,
+      "logical_threads": 1,
+      "code_sha256": "fe0fc310ecb6937903fbab439d6db4d4cd3f9e0bddd0b3095891e75529263130",
+      "code_bytes": 222,
+      "constants": [],
+      "relocations": [],
+      "helper_required": false
+    },
+    "norm_apply": {
+      "name": "layer_norm_apply",
+      "bindings": [
+        {
+          "name": "out",
+          "slot": 0,
+          "access": "write",
+          "min_bytes": 3072,
+          "alignment": 4
+        },
+        {
+          "name": "x",
+          "slot": 1,
+          "access": "read",
+          "min_bytes": 3072,
+          "alignment": 4
+        },
+        {
+          "name": "gain",
+          "slot": 2,
+          "access": "read",
+          "min_bytes": 3072,
+          "alignment": 4
+        },
+        {
+          "name": "bias",
+          "slot": 3,
+          "access": "read",
+          "min_bytes": 3072,
+          "alignment": 4
+        },
+        {
+          "name": "stats",
+          "slot": 4,
+          "access": "read",
+          "min_bytes": 8,
+          "alignment": 4
+        }
+      ],
+      "register_halfs": 26,
+      "uniform_halfs": 20,
+      "workgroup_size": 32,
+      "entry_offset": 0,
+      "target": "g13g",
+      "abi_version": 1,
+      "reserved_register_halfs": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "builtins": [
+        80
+      ],
+      "bounds_policy": "masked",
+      "numerical": "binary32; hardware FTZ and approximate transcendentals",
+      "origin": "agxforge_ir",
+      "threadgroup_bytes": 0,
+      "scratch_bytes": 0,
+      "logical_threads": 768,
+      "code_sha256": "652eaba6292413c424217562ee7683c3130b246eff6686e7ef07d4752f671048",
+      "code_bytes": 138,
+      "constants": [],
+      "relocations": [],
+      "helper_required": false
+    },
+    "qkv": {
+      "name": "conv1d_768_2304",
+      "bindings": [
+        {
+          "name": "out",
+          "slot": 0,
+          "access": "write",
+          "min_bytes": 9216,
+          "alignment": 4
+        },
+        {
+          "name": "x",
+          "slot": 1,
+          "access": "read",
+          "min_bytes": 3072,
+          "alignment": 4
+        },
+        {
+          "name": "weights",
+          "slot": 2,
+          "access": "read",
+          "min_bytes": 7077888,
+          "alignment": 4
+        },
+        {
+          "name": "bias",
+          "slot": 3,
+          "access": "read",
+          "min_bytes": 9216,
+          "alignment": 4
+        }
+      ],
+      "register_halfs": 34,
+      "uniform_halfs": 16,
+      "workgroup_size": 32,
+      "entry_offset": 0,
+      "target": "g13g",
+      "abi_version": 1,
+      "reserved_register_halfs": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "builtins": [
+        80
+      ],
+      "bounds_policy": "masked",
+      "numerical": "binary32; hardware FTZ and approximate transcendentals",
+      "origin": "agxforge_ir",
+      "threadgroup_bytes": 0,
+      "scratch_bytes": 0,
+      "logical_threads": 2304,
+      "code_sha256": "d1a04495658ac7391fc3e24cf676057bf47ec33abdbee19d43ff7ae4982c0f7f",
+      "code_bytes": 204,
+      "constants": [],
+      "relocations": [],
+      "helper_required": false
+    },
+    "split": {
+      "name": "split_qkv",
+      "bindings": [
+        {
+          "name": "q",
+          "slot": 0,
+          "access": "write",
+          "min_bytes": 3072,
+          "alignment": 4
+        },
+        {
+          "name": "k",
+          "slot": 1,
+          "access": "write",
+          "min_bytes": 3072,
+          "alignment": 4
+        },
+        {
+          "name": "v",
+          "slot": 2,
+          "access": "write",
+          "min_bytes": 3072,
+          "alignment": 4
+        },
+        {
+          "name": "packed",
+          "slot": 3,
+          "access": "read",
+          "min_bytes": 9216,
+          "alignment": 4
+        }
+      ],
+      "register_halfs": 22,
+      "uniform_halfs": 16,
+      "workgroup_size": 32,
+      "entry_offset": 0,
+      "target": "g13g",
+      "abi_version": 1,
+      "reserved_register_halfs": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "builtins": [
+        80
+      ],
+      "bounds_policy": "masked",
+      "numerical": "binary32; hardware FTZ and approximate transcendentals",
+      "origin": "agxforge_ir",
+      "threadgroup_bytes": 0,
+      "scratch_bytes": 0,
+      "logical_threads": 768,
+      "code_sha256": "05381c1678ffec3f7b4d8208d5f21be4932d902d1f7d5461c2f8433e1552e3ab",
+      "code_bytes": 142,
+      "constants": [],
+      "relocations": [],
+      "helper_required": false
+    },
+    "kv_write": {
+      "name": "kv_write",
+      "bindings": [
+        {
+          "name": "cache",
+          "slot": 0,
+          "access": "write",
+          "min_bytes": 98304,
+          "alignment": 4
+        },
+        {
+          "name": "x",
+          "slot": 1,
+          "access": "read",
+          "min_bytes": 3072,
+          "alignment": 4
+        },
+        {
+          "name": "params",
+          "slot": 2,
+          "access": "read",
+          "min_bytes": 8,
+          "alignment": 4
+        }
+      ],
+      "register_halfs": 18,
+      "uniform_halfs": 12,
+      "workgroup_size": 32,
+      "entry_offset": 0,
+      "target": "g13g",
+      "abi_version": 1,
+      "reserved_register_halfs": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "builtins": [
+        80
+      ],
+      "bounds_policy": "masked",
+      "numerical": "binary32; hardware FTZ and approximate transcendentals",
+      "origin": "agxforge_ir",
+      "threadgroup_bytes": 0,
+      "scratch_bytes": 0,
+      "logical_threads": 768,
+      "code_sha256": "7b7feac4e15050f53d01e09563a3405a71ce8ea0e3ededcfadf4b0dc7317c175",
+      "code_bytes": 106,
+      "constants": [],
+      "relocations": [],
+      "helper_required": false
+    },
+    "scores": {
+      "name": "attention_scores",
+      "bindings": [
+        {
+          "name": "out",
+          "slot": 0,
+          "access": "write",
+          "min_bytes": 1536,
+          "alignment": 4
+        },
+        {
+          "name": "q",
+          "slot": 1,
+          "access": "read",
+          "min_bytes": 3072,
+          "alignment": 4
+        },
+        {
+          "name": "k",
+          "slot": 2,
+          "access": "read",
+          "min_bytes": 98304,
+          "alignment": 4
+        },
+        {
+          "name": "headmap",
+          "slot": 3,
+          "access": "read",
+          "min_bytes": 48,
+          "alignment": 4
+        },
+        {
+          "name": "params",
+          "slot": 4,
+          "access": "read",
+          "min_bytes": 8,
+          "alignment": 4
+        }
+      ],
+      "register_halfs": 62,
+      "uniform_halfs": 20,
+      "workgroup_size": 32,
+      "entry_offset": 0,
+      "target": "g13g",
+      "abi_version": 1,
+      "reserved_register_halfs": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "builtins": [
+        80
+      ],
+      "bounds_policy": "masked",
+      "numerical": "binary32; hardware FTZ and approximate transcendentals",
+      "origin": "agxforge_ir",
+      "threadgroup_bytes": 0,
+      "scratch_bytes": 0,
+      "logical_threads": 384,
+      "code_sha256": "dcafdfac95073ef2e6910ba6e8116cdf0c0bb307bcd46f4dece60b272949941f",
+      "code_bytes": 304,
+      "constants": [],
+      "relocations": [],
+      "helper_required": false
+    },
+    "softmax_max": {
+      "name": "reduce_max_12_32",
+      "bindings": [
+        {
+          "name": "out",
+          "slot": 0,
+          "access": "write",
+          "min_bytes": 48,
+          "alignment": 4
+        },
+        {
+          "name": "x",
+          "slot": 1,
+          "access": "read",
+          "min_bytes": 1536,
+          "alignment": 4
+        }
+      ],
+      "register_halfs": 28,
+      "uniform_halfs": 8,
+      "workgroup_size": 32,
+      "entry_offset": 0,
+      "target": "g13g",
+      "abi_version": 1,
+      "reserved_register_halfs": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "builtins": [
+        80
+      ],
+      "bounds_policy": "masked",
+      "numerical": "binary32; hardware FTZ and approximate transcendentals",
+      "origin": "agxforge_ir",
+      "threadgroup_bytes": 0,
+      "scratch_bytes": 0,
+      "logical_threads": 12,
+      "code_sha256": "ecdd53deee9e1c03d3883dfb3c47ffce514014b2efa41d0bdaa47aa4b78477bb",
+      "code_bytes": 178,
+      "constants": [],
+      "relocations": [],
+      "helper_required": false
+    },
+    "softmax_exp": {
+      "name": "softmax_exp",
+      "bindings": [
+        {
+          "name": "out",
+          "slot": 0,
+          "access": "write",
+          "min_bytes": 1536,
+          "alignment": 4
+        },
+        {
+          "name": "x",
+          "slot": 1,
+          "access": "read",
+          "min_bytes": 1536,
+          "alignment": 4
+        },
+        {
+          "name": "row",
+          "slot": 2,
+          "access": "read",
+          "min_bytes": 48,
+          "alignment": 4
+        }
+      ],
+      "register_halfs": 24,
+      "uniform_halfs": 12,
+      "workgroup_size": 32,
+      "entry_offset": 0,
+      "target": "g13g",
+      "abi_version": 1,
+      "reserved_register_halfs": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "builtins": [
+        80
+      ],
+      "bounds_policy": "masked",
+      "numerical": "binary32; hardware FTZ and approximate transcendentals",
+      "origin": "agxforge_ir",
+      "threadgroup_bytes": 0,
+      "scratch_bytes": 0,
+      "logical_threads": 384,
+      "code_sha256": "d8050e14d081da035f4e6ec2c191de3ff9e7a973da016697dd0e1497fadb5da6",
+      "code_bytes": 120,
+      "constants": [],
+      "relocations": [],
+      "helper_required": false
+    },
+    "softmax_sum": {
+      "name": "reduce_sum_12_32",
+      "bindings": [
+        {
+          "name": "out",
+          "slot": 0,
+          "access": "write",
+          "min_bytes": 48,
+          "alignment": 4
+        },
+        {
+          "name": "x",
+          "slot": 1,
+          "access": "read",
+          "min_bytes": 1536,
+          "alignment": 4
+        }
+      ],
+      "register_halfs": 28,
+      "uniform_halfs": 8,
+      "workgroup_size": 32,
+      "entry_offset": 0,
+      "target": "g13g",
+      "abi_version": 1,
+      "reserved_register_halfs": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "builtins": [
+        80
+      ],
+      "bounds_policy": "masked",
+      "numerical": "binary32; hardware FTZ and approximate transcendentals",
+      "origin": "agxforge_ir",
+      "threadgroup_bytes": 0,
+      "scratch_bytes": 0,
+      "logical_threads": 12,
+      "code_sha256": "e0b911eac9a9a9a0d654d8fbd8c4ec13479691efa178e077ab209199ffc76293",
+      "code_bytes": 176,
+      "constants": [],
+      "relocations": [],
+      "helper_required": false
+    },
+    "softmax_normalize": {
+      "name": "softmax_normalize",
+      "bindings": [
+        {
+          "name": "out",
+          "slot": 0,
+          "access": "write",
+          "min_bytes": 1536,
+          "alignment": 4
+        },
+        {
+          "name": "x",
+          "slot": 1,
+          "access": "read",
+          "min_bytes": 1536,
+          "alignment": 4
+        },
+        {
+          "name": "row",
+          "slot": 2,
+          "access": "read",
+          "min_bytes": 48,
+          "alignment": 4
+        }
+      ],
+      "register_halfs": 20,
+      "uniform_halfs": 12,
+      "workgroup_size": 32,
+      "entry_offset": 0,
+      "target": "g13g",
+      "abi_version": 1,
+      "reserved_register_halfs": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "builtins": [
+        80
+      ],
+      "bounds_policy": "masked",
+      "numerical": "binary32; hardware FTZ and approximate transcendentals",
+      "origin": "agxforge_ir",
+      "threadgroup_bytes": 0,
+      "scratch_bytes": 0,
+      "logical_threads": 384,
+      "code_sha256": "de073dbef332ef67c9a4064ceaa56cf0cdd77ce6def181961afed2c70e864d4e",
+      "code_bytes": 108,
+      "constants": [],
+      "relocations": [],
+      "helper_required": false
+    },
+    "attend": {
+      "name": "attention_values",
+      "bindings": [
+        {
+          "name": "out",
+          "slot": 0,
+          "access": "write",
+          "min_bytes": 3072,
+          "alignment": 4
+        },
+        {
+          "name": "probs",
+          "slot": 1,
+          "access": "read",
+          "min_bytes": 1536,
+          "alignment": 4
+        },
+        {
+          "name": "v",
+          "slot": 2,
+          "access": "read",
+          "min_bytes": 98304,
+          "alignment": 4
+        },
+        {
+          "name": "headmap",
+          "slot": 3,
+          "access": "read",
+          "min_bytes": 48,
+          "alignment": 4
+        }
+      ],
+      "register_halfs": 52,
+      "uniform_halfs": 16,
+      "workgroup_size": 32,
+      "entry_offset": 0,
+      "target": "g13g",
+      "abi_version": 1,
+      "reserved_register_halfs": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "builtins": [
+        80
+      ],
+      "bounds_policy": "masked",
+      "numerical": "binary32; hardware FTZ and approximate transcendentals",
+      "origin": "agxforge_ir",
+      "threadgroup_bytes": 0,
+      "scratch_bytes": 0,
+      "logical_threads": 768,
+      "code_sha256": "8943d35f62d9e664afe222570e716a1001774b842efb291c532884831120f4e7",
+      "code_bytes": 268,
+      "constants": [],
+      "relocations": [],
+      "helper_required": false
+    },
+    "o": {
+      "name": "conv1d_768_768",
+      "bindings": [
+        {
+          "name": "out",
+          "slot": 0,
+          "access": "write",
+          "min_bytes": 3072,
+          "alignment": 4
+        },
+        {
+          "name": "x",
+          "slot": 1,
+          "access": "read",
+          "min_bytes": 3072,
+          "alignment": 4
+        },
+        {
+          "name": "weights",
+          "slot": 2,
+          "access": "read",
+          "min_bytes": 2359296,
+          "alignment": 4
+        },
+        {
+          "name": "bias",
+          "slot": 3,
+          "access": "read",
+          "min_bytes": 3072,
+          "alignment": 4
+        }
+      ],
+      "register_halfs": 34,
+      "uniform_halfs": 16,
+      "workgroup_size": 32,
+      "entry_offset": 0,
+      "target": "g13g",
+      "abi_version": 1,
+      "reserved_register_halfs": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "builtins": [
+        80
+      ],
+      "bounds_policy": "masked",
+      "numerical": "binary32; hardware FTZ and approximate transcendentals",
+      "origin": "agxforge_ir",
+      "threadgroup_bytes": 0,
+      "scratch_bytes": 0,
+      "logical_threads": 768,
+      "code_sha256": "ce53d7502644b12ae88c1da81805a6549a0ebf852cdc5fe7dcc32e7f5b595f1b",
+      "code_bytes": 204,
+      "constants": [],
+      "relocations": [],
+      "helper_required": false
+    },
+    "residual": {
+      "name": "add",
+      "bindings": [
+        {
+          "name": "out",
+          "slot": 0,
+          "access": "write",
+          "min_bytes": 3072,
+          "alignment": 4
+        },
+        {
+          "name": "a",
+          "slot": 1,
+          "access": "read",
+          "min_bytes": 3072,
+          "alignment": 4
+        },
+        {
+          "name": "b",
+          "slot": 2,
+          "access": "read",
+          "min_bytes": 3072,
+          "alignment": 4
+        }
+      ],
+      "register_halfs": 14,
+      "uniform_halfs": 12,
+      "workgroup_size": 32,
+      "entry_offset": 0,
+      "target": "g13g",
+      "abi_version": 1,
+      "reserved_register_halfs": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "builtins": [
+        80
+      ],
+      "bounds_policy": "masked",
+      "numerical": "binary32; hardware FTZ and approximate transcendentals",
+      "origin": "agxforge_ir",
+      "threadgroup_bytes": 0,
+      "scratch_bytes": 0,
+      "logical_threads": 768,
+      "code_sha256": "270be76d77755fdb25479ad93ad2fb6ae46b51c8c8869400a4c8130521826641",
+      "code_bytes": 90,
+      "constants": [],
+      "relocations": [],
+      "helper_required": false
+    },
+    "up": {
+      "name": "conv1d_768_3072",
+      "bindings": [
+        {
+          "name": "out",
+          "slot": 0,
+          "access": "write",
+          "min_bytes": 12288,
+          "alignment": 4
+        },
+        {
+          "name": "x",
+          "slot": 1,
+          "access": "read",
+          "min_bytes": 3072,
+          "alignment": 4
+        },
+        {
+          "name": "weights",
+          "slot": 2,
+          "access": "read",
+          "min_bytes": 9437184,
+          "alignment": 4
+        },
+        {
+          "name": "bias",
+          "slot": 3,
+          "access": "read",
+          "min_bytes": 12288,
+          "alignment": 4
+        }
+      ],
+      "register_halfs": 34,
+      "uniform_halfs": 16,
+      "workgroup_size": 32,
+      "entry_offset": 0,
+      "target": "g13g",
+      "abi_version": 1,
+      "reserved_register_halfs": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "builtins": [
+        80
+      ],
+      "bounds_policy": "masked",
+      "numerical": "binary32; hardware FTZ and approximate transcendentals",
+      "origin": "agxforge_ir",
+      "threadgroup_bytes": 0,
+      "scratch_bytes": 0,
+      "logical_threads": 3072,
+      "code_sha256": "c5ab413815fb17d0c98ce0a7e0d02edc4abab9ca11f3ff15ca046f617d93942e",
+      "code_bytes": 204,
+      "constants": [],
+      "relocations": [],
+      "helper_required": false
+    },
+    "gelu": {
+      "name": "gelu_new",
+      "bindings": [
+        {
+          "name": "out",
+          "slot": 0,
+          "access": "write",
+          "min_bytes": 12288,
+          "alignment": 4
+        },
+        {
+          "name": "x",
+          "slot": 1,
+          "access": "read",
+          "min_bytes": 12288,
+          "alignment": 4
+        }
+      ],
+      "register_halfs": 32,
+      "uniform_halfs": 8,
+      "workgroup_size": 32,
+      "entry_offset": 0,
+      "target": "g13g",
+      "abi_version": 1,
+      "reserved_register_halfs": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "builtins": [
+        80
+      ],
+      "bounds_policy": "masked",
+      "numerical": "binary32; hardware FTZ and approximate transcendentals",
+      "origin": "agxforge_ir",
+      "threadgroup_bytes": 0,
+      "scratch_bytes": 0,
+      "logical_threads": 3072,
+      "code_sha256": "ff5cf569dc4d79f0426dd965aa4d24eef34a83136553355e5515dfc1320aad3b",
+      "code_bytes": 138,
+      "constants": [],
+      "relocations": [],
+      "helper_required": false
+    },
+    "down": {
+      "name": "conv1d_3072_768",
+      "bindings": [
+        {
+          "name": "out",
+          "slot": 0,
+          "access": "write",
+          "min_bytes": 3072,
+          "alignment": 4
+        },
+        {
+          "name": "x",
+          "slot": 1,
+          "access": "read",
+          "min_bytes": 12288,
+          "alignment": 4
+        },
+        {
+          "name": "weights",
+          "slot": 2,
+          "access": "read",
+          "min_bytes": 9437184,
+          "alignment": 4
+        },
+        {
+          "name": "bias",
+          "slot": 3,
+          "access": "read",
+          "min_bytes": 3072,
+          "alignment": 4
+        }
+      ],
+      "register_halfs": 34,
+      "uniform_halfs": 16,
+      "workgroup_size": 32,
+      "entry_offset": 0,
+      "target": "g13g",
+      "abi_version": 1,
+      "reserved_register_halfs": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "builtins": [
+        80
+      ],
+      "bounds_policy": "masked",
+      "numerical": "binary32; hardware FTZ and approximate transcendentals",
+      "origin": "agxforge_ir",
+      "threadgroup_bytes": 0,
+      "scratch_bytes": 0,
+      "logical_threads": 768,
+      "code_sha256": "ea771ddd65c212048213bd72f053c6ec70abf5c3eb51b9cf43ecfdf26fc95388",
+      "code_bytes": 204,
+      "constants": [],
+      "relocations": [],
+      "helper_required": false
+    },
+    "logits": {
+      "name": "gemv_50257_768_f32_False",
+      "bindings": [
+        {
+          "name": "out",
+          "slot": 0,
+          "access": "write",
+          "min_bytes": 201028,
+          "alignment": 4
+        },
+        {
+          "name": "x",
+          "slot": 1,
+          "access": "read",
+          "min_bytes": 3072,
+          "alignment": 4
+        },
+        {
+          "name": "weights",
+          "slot": 2,
+          "access": "read",
+          "min_bytes": 154389504,
+          "alignment": 4
+        }
+      ],
+      "register_halfs": 30,
+      "uniform_halfs": 12,
+      "workgroup_size": 32,
+      "entry_offset": 0,
+      "target": "g13g",
+      "abi_version": 1,
+      "reserved_register_halfs": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "builtins": [
+        80
+      ],
+      "bounds_policy": "masked",
+      "numerical": "binary32; hardware FTZ and approximate transcendentals",
+      "origin": "agxforge_ir",
+      "threadgroup_bytes": 0,
+      "scratch_bytes": 0,
+      "logical_threads": 50257,
+      "code_sha256": "66b7b431c84dd3ae76155d8c04bcc02dc6e7c0a2edefec5944060db2f327beba",
+      "code_bytes": 188,
+      "constants": [],
+      "relocations": [],
+      "helper_required": false
+    },
+    "argmax": {
+      "name": "argmax",
+      "bindings": [
+        {
+          "name": "out",
+          "slot": 0,
+          "access": "write",
+          "min_bytes": 4,
+          "alignment": 4
+        },
+        {
+          "name": "x",
+          "slot": 1,
+          "access": "read",
+          "min_bytes": 201028,
+          "alignment": 4
+        }
+      ],
+      "register_halfs": 28,
+      "uniform_halfs": 8,
+      "workgroup_size": 32,
+      "entry_offset": 0,
+      "target": "g13g",
+      "abi_version": 1,
+      "reserved_register_halfs": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "builtins": [
+        80
+      ],
+      "bounds_policy": "masked",
+      "numerical": "binary32; hardware FTZ and approximate transcendentals",
+      "origin": "agxforge_ir",
+      "threadgroup_bytes": 0,
+      "scratch_bytes": 0,
+      "logical_threads": 1,
+      "code_sha256": "0ae18699d4bd0a43e7be11301b5747e60d5624ff3b35ba9923aa311366157f2c",
+      "code_bytes": 182,
+      "constants": [],
+      "relocations": [],
+      "helper_required": false
+    }
+  }
+}

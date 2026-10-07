@@ -1,4 +1,5 @@
-# Build and check the release on macOS. Nothing here loads or dispatches a GPU program.
+# Build and check the retained release on macOS. Explicit macos-* execution targets
+# below dispatch base-M1 G13 programs; the retained release checks do not dispatch.
 #
 #   make native-tools   the decoder wrapper and the native harnesses (clang from Xcode's command-line tools)
 #   make examples       workflows 1-4: compile (CPU), simulate (CPU), and two receipt checks (evidence only)
@@ -88,3 +89,37 @@ asahi-kernels: asahi-tools
 
 asahi-isa: asahi-tools
 	$(PYTHON) examples/asahi/verify_isa.py --output results/asahi-isa
+
+# Base M1/G13G machine code loaded through a local Metal carrier archive.
+MACOS_BACKEND ?= metal
+.PHONY: macos-tools macos-support macos-probe macos-smoke macos-isa macos-kernels macos-test
+macos-tools: build/macos/libagxforge_macos.dylib build/macos/libagxforge_iogpu.dylib
+
+build/macos/libagxforge_macos.dylib: agxforge/runtime/macos.m
+	mkdir -p build/macos
+	xcrun clang -O2 -fobjc-arc -Wall -Wextra -Werror -dynamiclib -framework Foundation -framework Metal -o $@ $<
+
+build/macos/libagxforge_iogpu.dylib: agxforge/runtime/iogpu.c
+	mkdir -p build/macos
+	xcrun clang -O2 -std=c11 -Wall -Wextra -Werror -dynamiclib -framework IOKit -o $@ $<
+
+build/macos/libagxforge_support.dylib: tools/macos_support.c
+	mkdir -p build/macos
+	xcrun clang -O2 -std=c11 -Wall -Wextra -Werror -dynamiclib -framework IOKit -o $@ $<
+
+macos-support: macos-tools build/macos/libagxforge_support.dylib
+	$(PYTHON) tools/macos_support.py
+
+macos-probe: macos-tools
+	$(PYTHON) examples/macos/probe.py --backend $(MACOS_BACKEND)
+
+macos-smoke: macos-tools
+	$(PYTHON) examples/macos/smoke.py --backend $(MACOS_BACKEND) --output results/macos-$(MACOS_BACKEND)-smoke
+
+macos-isa: macos-tools
+	$(PYTHON) examples/macos/verify_isa.py --backend $(MACOS_BACKEND) --output results/macos-$(MACOS_BACKEND)-isa
+
+macos-kernels: macos-tools
+	$(PYTHON) examples/macos/verify_kernels.py --backend $(MACOS_BACKEND) --output results/macos-$(MACOS_BACKEND)-kernels
+
+macos-test: macos-tools g13-test

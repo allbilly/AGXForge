@@ -1,0 +1,167 @@
+{
+  "status": "FAIL",
+  "executor": "direct IOGPU G13",
+  "program": {
+    "name": "qmv4",
+    "bindings": [
+      {
+        "name": "out",
+        "slot": 0,
+        "access": "write",
+        "min_bytes": 132,
+        "alignment": 4
+      },
+      {
+        "name": "x",
+        "slot": 1,
+        "access": "read",
+        "min_bytes": 64,
+        "alignment": 4
+      },
+      {
+        "name": "weights",
+        "slot": 2,
+        "access": "read",
+        "min_bytes": 264,
+        "alignment": 4
+      },
+      {
+        "name": "scale",
+        "slot": 3,
+        "access": "read",
+        "min_bytes": 132,
+        "alignment": 4
+      },
+      {
+        "name": "offset",
+        "slot": 4,
+        "access": "read",
+        "min_bytes": 132,
+        "alignment": 4
+      }
+    ],
+    "register_halfs": 50,
+    "uniform_halfs": 20,
+    "workgroup_size": 32,
+    "entry_offset": 0,
+    "target": "g13g",
+    "abi_version": 1,
+    "reserved_register_halfs": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "builtins": [
+      80
+    ],
+    "bounds_policy": "masked",
+    "numerical": "binary32; hardware FTZ and approximate transcendentals",
+    "origin": "agxforge_ir",
+    "threadgroup_bytes": 0,
+    "scratch_bytes": 0,
+    "logical_threads": 33,
+    "code_sha256": "cb2cb9ba25889a9faeec54f5f6fa1dd0f8020e87fd1dd6ddbbf2c082e7f6ab7a",
+    "code_bytes": 262,
+    "constants": [],
+    "relocations": [],
+    "helper_required": false
+  },
+  "logical_threads": 33,
+  "global_threads": [
+    64,
+    1,
+    1
+  ],
+  "workgroup_size": [
+    32,
+    1,
+    1
+  ],
+  "group_count": [
+    2,
+    1,
+    1
+  ],
+  "buffers": [
+    {
+      "binding": "out",
+      "gpu_address": 90194378816,
+      "mapping_address": 90194378752,
+      "payload_offset": 64,
+      "extent": 132,
+      "allocation_bytes": 260,
+      "access": "write"
+    },
+    {
+      "binding": "x",
+      "gpu_address": 90194379136,
+      "mapping_address": 90194379072,
+      "payload_offset": 64,
+      "extent": 64,
+      "allocation_bytes": 192,
+      "access": "read"
+    },
+    {
+      "binding": "weights",
+      "gpu_address": 90194379328,
+      "mapping_address": 90194379264,
+      "payload_offset": 64,
+      "extent": 264,
+      "allocation_bytes": 392,
+      "access": "read"
+    },
+    {
+      "binding": "scale",
+      "gpu_address": 90194379776,
+      "mapping_address": 90194379712,
+      "payload_offset": 64,
+      "extent": 132,
+      "allocation_bytes": 260,
+      "access": "read"
+    },
+    {
+      "binding": "offset",
+      "gpu_address": 90194380096,
+      "mapping_address": 90194380032,
+      "payload_offset": 64,
+      "extent": 132,
+      "allocation_bytes": 260,
+      "access": "read"
+    }
+  ],
+  "shader_gpu_address": 64,
+  "usc_gpu_address": 98304,
+  "uniforms_gpu_address": 90228522912,
+  "notification_tokens": [
+    4445451376,
+    4445547504
+  ],
+  "uniform_register_halfs_reserved": 32,
+  "register_halfs_reserved": 128,
+  "template_sha256": "fc344b808d12206fcdba0316acdb95a876a13492e98a5cb14ec130be3164e4a0",
+  "uniforms.bin": {
+    "sha256": "29e064ac44d1634161114b1b19828dc201072a5254ca4469061d9ed7217aec09",
+    "bytes": 40
+  },
+  "usc.bin": {
+    "sha256": "f17d8bde105a4d4e644e527b7f1dc2cc969bd781e1cda85d238e37e2cdd74f97",
+    "bytes": 24
+  },
+  "cdm.bin": {
+    "sha256": "89129f4beb75ce4181de688380d0dd360aab7d1e703b16eacd62053adb8f7a4a",
+    "bytes": 44
+  },
+  "iogpu-submit.bin": {
+    "sha256": "9275e10a7e7c09c73fe6ec749e4a3f44476925f9bebb674c9becab9336866139",
+    "bytes": 64
+  },
+  "iogpu-pages.bin": {
+    "sha256": "02e76faafb6d659f85d88d01288337839bb129fd8973646ceae957a2112b9e7d",
+    "bytes": 32768
+  },
+  "completion": "7034f808010000002e5195ce97030000b08fbace9703000000000000000000000000000000000000f0abf9080100000035d0e294aaaaaaaa35d0e294aaaaaaaa0b000000000000000000000000000000",
+  "error": "unexpected/error IOGPU completion: kr=0x0 size=40 cookie=0x108f9abf0 bit=2 seen=1 start=12297829382107615285 end=12297829382107615285 status=0xb reserved=0x0"
+}

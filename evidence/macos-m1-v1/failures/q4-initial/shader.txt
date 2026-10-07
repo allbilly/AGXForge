@@ -1,0 +1,50 @@
+0000: 62000000                 mov_imm          r0l, 0
+0004: 72051004                 get_sr           r1, sr80 (thread_position_in_grid.x)
+0008: 620921000000             mov_imm          r2, 33, 0b0
+000e: 522842422400             if_icmp          r0l, ult, r1, r2, 1
+0014: 20c0da000000             jmp_exec_none    0xEE
+001a: 720d1004                 get_sr           r3, sr80 (thread_position_in_grid.x)
+001e: 621102000000             mov_imm          r4, 2, 0b0
+0024: 1e15468224000000         imadd            r5, r3, r4, 0
+002c: 621900000000             mov_imm          r6, 0, 0b0
+0032: 05396c0e00c01200         device_load      0, i32, x, r7, u6_u7, r3, unsigned
+003a: 3800                     wait             0
+003c: 0541600e10c01200         device_load      0, i32, x, r8, u8_u9, r3, unsigned
+0044: 3800                     wait             0
+0046: 622500000000             mov_imm          r9, 0, 0b0
+004c: 7e29520a8000             mov              r10, r9
+0052: 7e2d4c0a8000             mov              r11, r6
+0058: 420800000000             push_exec        r0l, 1
+005e: 2eb1004025030000         bfeil            r12, 0, r10, 3
+0066: 0e354a8225000000         iadd             r13, r5, r12
+006e: 0571a80e01c01200         device_load      0, i32, x, r14, u4_u5, r13, unsigned
+0076: 3800                     wait             0
+0078: 7e3d54728000             and              r15, r10, 7
+007e: 1e415e4200000000         imadd            r16, r15, 4, 0
+0086: 2ec500c025600200         bfeil            r17, 0, r14, r16
+008e: 7e4962f28000             and              r18, r17, 15
+0094: 3ecd0a442600             convert          u32_to_f, r19, r18, rte
+009a: 1ad166e22400             fmul32           r20, r19, r7
+00a0: 2ad568022500             fadd32           r21, r20, r8
+00a6: 05b1440e01c01200         device_load      0, i32, x, r22, u2_u3, r10, unsigned
+00ae: 3800                     wait             0
+00b0: 3add6ac226560200         fmadd32          r23, r21, r22, r11
+00b8: 0e61541200000000         iadd             r24, r10, 1
+00c0: 7e29700a8000             mov              r10, r24
+00c6: 7e2d6e0a8000             mov              r11, r23
+00cc: 620510000000             mov_imm          r1, 16, 0b0
+00d2: 522c70222400             while_icmp       r0l, ult, r24, r1, 1
+00d8: 00c086ffffff             jmp_exec_any     0x5E
+00de: 520e00000000             pop_exec         r0l, 1
+00e4: 4559600e00c01200         device_store     0, i32, x, r11, u0_u1, r3, unsigned, 0
+00ec: 3800                     wait             0
+00ee: 520e00000000             pop_exec         r0l, 1
+00f4: 8800                     stop
+00f6: 0800                     trap
+00f8: 0800                     trap
+00fa: 0800                     trap
+00fc: 0800                     trap
+00fe: 0800                     trap
+0100: 0800                     trap
+0102: 0800                     trap
+0104: 0800                     trap

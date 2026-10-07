@@ -1,0 +1,56 @@
+mkdir -p build/macos
+xcrun clang -O2 -std=c11 -Wall -Wextra -Werror -dynamiclib -framework IOKit -o build/macos/libagxforge_iogpu.dylib agxforge/runtime/iogpu.c
+python3 -m unittest discover -s test/g13 -v
+test_bits_select_float_arithmetic_without_apple_tools (test_compiler.Compiler.test_bits_select_float_arithmetic_without_apple_tools) ... ok
+test_every_selected_kernel_checks_capabilities (test_compiler.Compiler.test_every_selected_kernel_checks_capabilities) ... ok
+test_integer_subtraction_selects_negation_bit (test_compiler.Compiler.test_integer_subtraction_selects_negation_bit) ... ok
+test_model_kernel_builders_have_linux_compilation (test_compiler.Compiler.test_model_kernel_builders_have_linux_compilation) ... ok
+test_spills_and_shared_memory_are_rejected (test_compiler.Compiler.test_spills_and_shared_memory_are_rejected) ... ok
+test_ssa_and_terminators_are_checked (test_compiler.Compiler.test_ssa_and_terminators_are_checked) ... ok
+test_unsupported_ir_and_attributes_fail_before_execution (test_compiler.Compiler.test_unsupported_ir_and_attributes_fail_before_execution) ... ok
+test_bad_bindings_and_launch_fail_before_native_calls (test_compiler.Contract.test_bad_bindings_and_launch_fail_before_native_calls) ... ok
+test_shader_declarations_are_checked (test_compiler.Contract.test_shader_declarations_are_checked) ... ok
+test_branch_boundaries_and_truncation (test_compiler.Encoding.test_branch_boundaries_and_truncation) ... ok
+test_independent_mesa_golden_bytes (test_compiler.Encoding.test_independent_mesa_golden_bytes) ... ok
+test_register_views_and_uniform_extent (test_compiler.Encoding.test_register_views_and_uniform_extent) ... ok
+test_reject_silent_modifier_or_immediate_loss (test_compiler.Encoding.test_reject_silent_modifier_or_immediate_loss) ... ok
+test_bad_command_section_and_symbol_bounds_refused (test_macos.ArchiveBoundary.test_bad_command_section_and_symbol_bounds_refused) ... ok
+test_exact_replacement_preserves_container_and_metadata (test_macos.ArchiveBoundary.test_exact_replacement_preserves_container_and_metadata) ... ok
+test_missing_ambiguous_truncated_or_oversized_archives_refused (test_macos.ArchiveBoundary.test_missing_ambiguous_truncated_or_oversized_archives_refused) ... ok
+test_closed_buffers_and_executors_never_reach_native_calls (test_macos.LifetimeAndProfile.test_closed_buffers_and_executors_never_reach_native_calls) ... ok
+test_failed_dispatch_prevents_followup_allocation_prepare_and_submit (test_macos.LifetimeAndProfile.test_failed_dispatch_prevents_followup_allocation_prepare_and_submit) ... ok
+test_helper_template_and_capture_sources_are_identified (test_macos.LifetimeAndProfile.test_helper_template_and_capture_sources_are_identified) ... ok
+test_native_faulting_resource_profile_refused_before_allocation_or_submit (test_macos.LifetimeAndProfile.test_native_faulting_resource_profile_refused_before_allocation_or_submit) ... ok
+test_capture_parser_refuses_truncated_or_unknown_records (test_macos.NativeEnvelope.test_capture_parser_refuses_truncated_or_unknown_records) ... ok
+test_relocations_use_original_bytes_and_preserve_nonpointers (test_macos.NativeEnvelope.test_relocations_use_original_bytes_and_preserve_nonpointers) ... ok
+test_complete_bundle_passes (test_macos.NativeEvidence.test_complete_bundle_passes) ... ok
+test_empty_output_cannot_pass (test_macos.NativeEvidence.test_empty_output_cannot_pass) ... ok
+test_error_or_missing_notification_cannot_pass (test_macos.NativeEvidence.test_error_or_missing_notification_cannot_pass) ... ok
+test_missing_all_or_one_result_checks_fails (test_macos.NativeEvidence.test_missing_all_or_one_result_checks_fails) ... ok
+test_missing_output_artifacts_fail (test_macos.NativeEvidence.test_missing_output_artifacts_fail) ... ok
+test_relocated_uniforms_must_agree_with_binding (test_macos.NativeEvidence.test_relocated_uniforms_must_agree_with_binding) ... ok
+test_result_check_in_wrong_directory_fails (test_macos.NativeEvidence.test_result_check_in_wrong_directory_fails) ... ok
+test_result_check_must_match_summary (test_macos.NativeEvidence.test_result_check_must_match_summary) ... ok
+test_wrong_output_cannot_pass (test_macos.NativeEvidence.test_wrong_output_cannot_pass) ... ok
+test_empty_ring_has_bounded_timeout (test_macos.NativeNotificationParser.test_empty_ring_has_bounded_timeout) ... ok
+test_fault_duplicate_and_foreign_notifications_stop (test_macos.NativeNotificationParser.test_fault_duplicate_and_foreign_notifications_stop) ... ok
+test_invalid_ring_indices_stop_without_dequeue (test_macos.NativeNotificationParser.test_invalid_ring_indices_stop_without_dequeue) ... ok
+test_two_success_notifications_complete (test_macos.NativeNotificationParser.test_two_success_notifications_complete) ... ok
+test_close_is_idempotent_and_prevents_reallocation (test_review_regressions.ClosedExecutor.test_close_is_idempotent_and_prevents_reallocation) ... ok
+test_closed_buffer_rejects_access_and_native_record (test_review_regressions.ClosedExecutor.test_closed_buffer_rejects_access_and_native_record) ... ok
+test_closed_executor_rejects_native_operations (test_review_regressions.ClosedExecutor.test_closed_executor_rejects_native_operations) ... ok
+test_accept_reachable_counter_caps (test_review_regressions.LoopSafety.test_accept_reachable_counter_caps) ... ok
+test_reject_16_bit_counter_overflow (test_review_regressions.LoopSafety.test_reject_16_bit_counter_overflow) ... ok
+test_reject_narrowing_counter_transfers (test_review_regressions.LoopSafety.test_reject_narrowing_counter_transfers) ... ok
+test_complete_bundle_passes (test_review_regressions.ScalarEvidence.test_complete_bundle_passes) ... ok
+test_empty_output_cannot_pass (test_review_regressions.ScalarEvidence.test_empty_output_cannot_pass) ... ok
+test_missing_all_or_one_result_checks_fails (test_review_regressions.ScalarEvidence.test_missing_all_or_one_result_checks_fails) ... ok
+test_missing_output_artifacts_fail (test_review_regressions.ScalarEvidence.test_missing_output_artifacts_fail) ... ok
+test_result_check_in_wrong_directory_fails (test_review_regressions.ScalarEvidence.test_result_check_in_wrong_directory_fails) ... ok
+test_result_check_must_match_summary (test_review_regressions.ScalarEvidence.test_result_check_must_match_summary) ... ok
+test_wrong_output_cannot_pass (test_review_regressions.ScalarEvidence.test_wrong_output_cannot_pass) ... ok
+
+----------------------------------------------------------------------
+Ran 48 tests in 0.478s
+
+OK

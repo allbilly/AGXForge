@@ -1,0 +1,270 @@
+{
+  "schema_version": 1,
+  "timestamp_utc": "2026-10-07T15:03:16.290590+00:00",
+  "target": "base M1 G13G / macOS 27.0.1 build 26A434",
+  "status": "PASS for declared Metal coverage; PARTIAL direct IOGPU",
+  "bundles": {
+    "metal-smoke": {
+      "path": "results/macos-final/metal-smoke",
+      "status": "PASS",
+      "launches": 81,
+      "check_status_counts": {
+        "PASS": 81
+      },
+      "offline_audit": "PASS",
+      "artifact_manifest": "results/macos-final/metal-smoke/artifact-sha256.json",
+      "artifact_manifest_sha256": "956adc8934563903faa00b0a262f57910880266ed20d32bf24f8945bd0ea084b",
+      "artifacts": 975,
+      "tensor_checks": 0
+    },
+    "metal-isa": {
+      "path": "results/macos-final/metal-isa",
+      "status": "PASS",
+      "launches": 26,
+      "check_status_counts": {
+        "PASS": 26
+      },
+      "offline_audit": "PASS",
+      "artifact_manifest": "results/macos-final/metal-isa/artifact-sha256.json",
+      "artifact_manifest_sha256": "c05f9eb9256ed0760522c3f81af73ddd89164f5fa3c1e19287f259f434d2b450",
+      "artifacts": 293,
+      "tensor_checks": 0
+    },
+    "metal-kernels": {
+      "path": "results/macos-final/metal-kernels",
+      "status": "PASS",
+      "launches": 57,
+      "check_status_counts": {
+        "PASS": 57
+      },
+      "offline_audit": "PASS",
+      "artifact_manifest": "results/macos-final/metal-kernels/artifact-sha256.json",
+      "artifact_manifest_sha256": "2b59085f84f1470edc30d720ec0ace5c0a055b221ba5255bd7c0972aa00ded8c",
+      "artifacts": 697,
+      "tensor_checks": 0
+    },
+    "metal-model": {
+      "path": "results/macos-final/metal-model",
+      "status": "PASS",
+      "launches": 3780,
+      "check_status_counts": {
+        "PASS": 6
+      },
+      "offline_audit": "PASS",
+      "artifact_manifest": "results/macos-final/metal-model/artifact-sha256.json",
+      "artifact_manifest_sha256": "471ceaa69b5ef422da4a934e9069298d0949b2d19a86595560669a138273ce5e",
+      "artifacts": 20640,
+      "tensor_checks": 2754
+    },
+    "metal-model-relocated": {
+      "path": "results/macos-final/metal-model-relocated",
+      "status": "PASS",
+      "launches": 3780,
+      "check_status_counts": {
+        "PASS": 6
+      },
+      "offline_audit": "PASS",
+      "artifact_manifest": "results/macos-final/metal-model-relocated/artifact-sha256.json",
+      "artifact_manifest_sha256": "f5133cb0be9da11436a56e2197be0a4db65a38ff11bef01bec8d97a1e6f72a4e",
+      "artifacts": 20640,
+      "tensor_checks": 2754
+    },
+    "iogpu-smoke": {
+      "path": "results/macos-final/iogpu-smoke",
+      "status": "PASS",
+      "launches": 81,
+      "check_status_counts": {
+        "PASS": 81
+      },
+      "offline_audit": "PASS",
+      "artifact_manifest": "results/macos-final/iogpu-smoke/artifact-sha256.json",
+      "artifact_manifest_sha256": "d67b9527160d13df0b61ecfc6ea0f6300ebca6ae4712c98b980e555ed29a8ce4",
+      "artifacts": 1299,
+      "tensor_checks": 0
+    },
+    "iogpu-isa": {
+      "path": "results/macos-final/iogpu-isa",
+      "status": "PASS",
+      "launches": 26,
+      "check_status_counts": {
+        "PASS": 26
+      },
+      "offline_audit": "PASS",
+      "artifact_manifest": "results/macos-final/iogpu-isa/artifact-sha256.json",
+      "artifact_manifest_sha256": "1ff70da4e50fd60145b2db4fdbcab3fc10e791fe8f0a8dc5fc0bdb719194d04d",
+      "artifacts": 397,
+      "tensor_checks": 0
+    },
+    "iogpu-kernels": {
+      "path": "results/macos-final/iogpu-kernels",
+      "status": "FAIL",
+      "launches": 39,
+      "check_status_counts": {
+        "PASS": 39,
+        "NOT_RUN": 1
+      }
+    },
+    "metal-model-no-reference": {
+      "path": "results/macos-final/metal-model-no-reference",
+      "status": "COMPLETED_UNVERIFIED",
+      "launches": 630,
+      "check_status_counts": {
+        "COMPLETED_UNVERIFIED": 1
+      }
+    }
+  },
+  "model": {
+    "checkpoint": "Qwen/Qwen2.5-0.5B-Instruct",
+    "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "input_tokens": [
+      9707,
+      11,
+      12890
+    ],
+    "generated_tokens": [
+      369,
+      264,
+      1661,
+      2618
+    ],
+    "text": " for a good job",
+    "positions_per_verified_run": 6,
+    "dispatches_per_verified_run": 3780,
+    "tensors_per_position": 459,
+    "verified_runs": 2,
+    "logit_bound": "0.05 + 0.003 * abs(FP64 reference)",
+    "tensor_fallbacks": [],
+    "capacity": 32,
+    "prefill": "tokenwise",
+    "native_iogpu_inference": "UNAVAILABLE / NOT_RUN",
+    "max_logit_abs_error": 0.0007221746327372713
+  },
+  "relocation": {
+    "status": "PASS",
+    "tensor_pairs": 2754,
+    "all_tensor_bits_identical": true,
+    "va_slots": [
+      0,
+      7
+    ],
+    "first_launch_buffers": [
+      [
+        90889430080,
+        90889429824
+      ],
+      [
+        90889888832,
+        90889888576
+      ]
+    ]
+  },
+  "reference_disabled": {
+    "status": "PASS against recorded verified GPU tensors",
+    "run_status": "COMPLETED_UNVERIFIED",
+    "dispatches": 630,
+    "reference_entry_points": "Reference and Checkpoint.floats raise if called",
+    "tensors_bit_identical": 459,
+    "va_slot": 11,
+    "script_sha256": "9cbb01a58d93b85a7620ea1ba1bc3e3cfb6000d56fa733a2a23a15b5c138de77"
+  },
+  "hardware_free": {
+    "status": "PASS",
+    "tests": 48,
+    "command": "make macos-test",
+    "log": "build-test.log"
+  },
+  "native": {
+    "status": "PARTIAL / EXPERIMENTAL",
+    "smoke_checks": 81,
+    "isa_checks": 26,
+    "compiled_kernel_checks_passed": 39,
+    "full_kernel_suite_status": "FAIL: Q4 refused before submit",
+    "native_model": "UNAVAILABLE / NOT_RUN",
+    "profile": {
+      "max_bindings": 4,
+      "max_register_halfs": 48,
+      "workgroup_lanes": 32,
+      "os_build": "26A434"
+    },
+    "agx_metal_driver_absent": true,
+    "metal_api_calls": 0,
+    "metal_framework_absence_claimed": false,
+    "template": "agxforge/runtime/iogpu-26A434.json",
+    "template_sha256": "fc344b808d12206fcdba0316acdb95a876a13492e98a5cb14ec130be3164e4a0",
+    "fault_recovery": "UNVERIFIED: smaller health/smoke/ISA suites passed later; not a recovery guarantee",
+    "failures": [
+      {
+        "case": "q4-initial",
+        "status": "FAIL",
+        "error": "unexpected/error IOGPU completion: kr=0x0 size=40 cookie=0x10a7b42f0 bit=2 seen=1 start=1867016718333 end=1867019505291 status=0xb reserved=0x0",
+        "receipt": "failures/q4-initial/launch.json",
+        "shader_sha256": "cb2cb9ba25889a9faeec54f5f6fa1dd0f8020e87fd1dd6ddbbf2c082e7f6ab7a",
+        "full_local_bundle": "results/macos-final/native-faults/q4-initial"
+      },
+      {
+        "case": "q4-register-flag",
+        "status": "FAIL",
+        "error": "unexpected/error IOGPU completion: kr=0x0 size=40 cookie=0x10aff9870 bit=2 seen=1 start=462654031416 end=462657577458 status=0xb reserved=0x0",
+        "receipt": "failures/q4-register-flag/launch.json",
+        "shader_sha256": "cb2cb9ba25889a9faeec54f5f6fa1dd0f8020e87fd1dd6ddbbf2c082e7f6ab7a",
+        "full_local_bundle": "results/macos-final/native-faults/q4-register-flag"
+      },
+      {
+        "case": "relocated-code-store",
+        "status": "FAIL",
+        "error": "unexpected/error IOGPU completion: kr=0x0 size=40 cookie=0x10b16d970 bit=2 seen=1 start=757318062416 end=757571092833 status=0x5 reserved=0x0",
+        "receipt": "failures/relocated-code-store/launch.json",
+        "shader_sha256": "2aeec8ffdaa0dac8807201c84bcc92082cac23080890920bc1fb31d7dfb9e825",
+        "full_local_bundle": "results/macos-final/native-faults/relocated-code-store"
+      },
+      {
+        "case": "q4-captured-profile",
+        "status": "FAIL",
+        "error": "unexpected/error IOGPU completion: kr=0x0 size=40 cookie=0x10b271b70 bit=2 seen=1 start=1043005554791 end=1043008611125 status=0xb reserved=0x0",
+        "receipt": "failures/q4-captured-profile/launch.json",
+        "shader_sha256": "cb2cb9ba25889a9faeec54f5f6fa1dd0f8020e87fd1dd6ddbbf2c082e7f6ab7a",
+        "full_local_bundle": "results/macos-final/native-faults/q4-captured-profile"
+      }
+    ]
+  },
+  "provenance": {
+    "per_run_source_hashes": true,
+    "current_sources": "current-source-sha256.json",
+    "source_delta_since_runs": "iogpu.py attribution/docstring only; reproduced old hashes to verify no executable changes",
+    "full_bundles": "local ignored results/macos-final directories; compact summaries are not full standalone audits",
+    "source_baseline": "../../experimental/macos-launch/sources.json"
+  },
+  "external_reference_clone": {
+    "path": "/tmp/applegpu",
+    "origin": "https://github.com/dougallj/applegpu.git",
+    "revision": "28dd80468d4a6c94fa4dac34ed488196f5fedc5f",
+    "status": "clean clone"
+  },
+  "unsupported": [
+    "direct IOGPU Q4/larger resource layouts",
+    "direct IOGPU model inference",
+    "unmeasured macOS builds",
+    "M1 Pro/Max/Ultra and later GPUs",
+    "G13 matrix lowering",
+    "shared memory/atomics/spills",
+    "fault recovery guarantee"
+  ],
+  "retained_g17": {
+    "status": "PASS",
+    "modules": 16,
+    "tests": 184,
+    "gpu_execution": "NOT_RUN",
+    "command": ".venv-asahi/bin/python tools/release_tests.py -j 4 --timeout 300",
+    "log": "retained-tests.log",
+    "dependency_setup": "Existing pinned pydantic 2.13.4 and ml_dtypes 0.5.4 installed in the isolated environment",
+    "earlier_attempts": "Missing dependencies, then an insufficient 60-second timeout; full logs kept locally"
+  },
+  "cleanup": {
+    "intermediate_bundle_directories_removed": 13,
+    "preserved": [
+      "final verification suites",
+      "four full fault bundles",
+      "original measured store capture"
+    ]
+  }
+}

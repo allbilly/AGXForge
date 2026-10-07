@@ -1,0 +1,157 @@
+{
+  "status": "FAIL",
+  "executor": "direct IOGPU G13",
+  "program": {
+    "name": "qmv4",
+    "bindings": [
+      {
+        "name": "out",
+        "slot": 0,
+        "access": "write",
+        "min_bytes": 132,
+        "alignment": 4
+      },
+      {
+        "name": "x",
+        "slot": 1,
+        "access": "read",
+        "min_bytes": 64,
+        "alignment": 4
+      },
+      {
+        "name": "weights",
+        "slot": 2,
+        "access": "read",
+        "min_bytes": 264,
+        "alignment": 4
+      },
+      {
+        "name": "scale",
+        "slot": 3,
+        "access": "read",
+        "min_bytes": 132,
+        "alignment": 4
+      },
+      {
+        "name": "offset",
+        "slot": 4,
+        "access": "read",
+        "min_bytes": 132,
+        "alignment": 4
+      }
+    ],
+    "register_halfs": 50,
+    "uniform_halfs": 20,
+    "workgroup_size": 32,
+    "entry_offset": 0,
+    "target": "g13g",
+    "abi_version": 1,
+    "reserved_register_halfs": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "builtins": [
+      80
+    ],
+    "bounds_policy": "masked",
+    "numerical": "binary32; hardware FTZ and approximate transcendentals",
+    "origin": "agxforge_ir",
+    "threadgroup_bytes": 0,
+    "scratch_bytes": 0,
+    "logical_threads": 33,
+    "code_sha256": "cb2cb9ba25889a9faeec54f5f6fa1dd0f8020e87fd1dd6ddbbf2c082e7f6ab7a",
+    "code_bytes": 262,
+    "constants": [],
+    "relocations": [],
+    "helper_required": false
+  },
+  "logical_threads": 33,
+  "global_threads": [
+    64,
+    1,
+    1
+  ],
+  "workgroup_size": [
+    32,
+    1,
+    1
+  ],
+  "group_count": [
+    2,
+    1,
+    1
+  ],
+  "buffers": [
+    {
+      "binding": "out",
+      "gpu_address": 90194378816,
+      "mapping_address": 90194378752,
+      "payload_offset": 64,
+      "extent": 132,
+      "allocation_bytes": 260,
+      "access": "write"
+    },
+    {
+      "binding": "x",
+      "gpu_address": 90194379136,
+      "mapping_address": 90194379072,
+      "payload_offset": 64,
+      "extent": 64,
+      "allocation_bytes": 192,
+      "access": "read"
+    },
+    {
+      "binding": "weights",
+      "gpu_address": 90194379328,
+      "mapping_address": 90194379264,
+      "payload_offset": 64,
+      "extent": 264,
+      "allocation_bytes": 392,
+      "access": "read"
+    },
+    {
+      "binding": "scale",
+      "gpu_address": 90194379776,
+      "mapping_address": 90194379712,
+      "payload_offset": 64,
+      "extent": 132,
+      "allocation_bytes": 260,
+      "access": "read"
+    },
+    {
+      "binding": "offset",
+      "gpu_address": 90194380096,
+      "mapping_address": 90194380032,
+      "payload_offset": 64,
+      "extent": 132,
+      "allocation_bytes": 260,
+      "access": "read"
+    }
+  ],
+  "shader_gpu_address": 64,
+  "usc_gpu_address": 98304,
+  "uniforms_gpu_address": 90228522912,
+  "template_sha256": "fc344b808d12206fcdba0316acdb95a876a13492e98a5cb14ec130be3164e4a0",
+  "usc.bin": {
+    "sha256": "15ae439fb83f28219ac88f83bc1bba1809978354d8dee7f4db4fbe3234b1291c",
+    "bytes": 24
+  },
+  "cdm.bin": {
+    "sha256": "c6aa04421877bbcc037f3d2b2a3822edec8c1c9cb677fbc62ca28223677459ec",
+    "bytes": 44
+  },
+  "drm-command.bin": {
+    "sha256": "68dd2050e22c28e352470496a2bca5d4f387dc67a99964370d84fe4fe520b992",
+    "bytes": 64
+  },
+  "iogpu-pages.bin": {
+    "sha256": "02e76faafb6d659f85d88d01288337839bb129fd8973646ceae957a2112b9e7d",
+    "bytes": 32768
+  },
+  "completion": "30437b0a010000002e4ac4b2b2010000c243deb2b201000000000000000000000000000000000000f0427b0a01000000fd47deb2b20100008bce08b3b20100000b000000000000000000000000000000",
+  "error": "unexpected/error IOGPU completion: kr=0x0 size=40 cookie=0x10a7b42f0 bit=2 seen=1 start=1867016718333 end=1867019505291 status=0xb reserved=0x0"
+}

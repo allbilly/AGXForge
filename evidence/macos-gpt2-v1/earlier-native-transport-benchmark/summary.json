@@ -1,0 +1,911 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "checkpoint": {
+    "model_id": "openai-community/gpt2",
+    "revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+    "files": {
+      "config.json": {
+        "bytes": 665,
+        "sha256": "0daed7749b4f02b8f76240d5444551d7b08712dab4d0adb8239c56ba823bb7b4"
+      },
+      "model.safetensors": {
+        "bytes": 548105171,
+        "sha256": "248dfc3911869ec493c76e65bf2fcf7f615828b0254c12b473182f0f81d3a707"
+      },
+      "tokenizer.json": {
+        "bytes": 1355256,
+        "sha256": "8414cab924d8b9b33013f0d221c5862f365ee9be39c5c2bfae8a5a9e970478a6"
+      }
+    }
+  },
+  "scope": "same authored G13 kernels: Metal transport versus direct IOGPU transport",
+  "timing": "wall-clock token execution including GPU waits, guards, scheduling and argmax reads",
+  "excluded": [
+    "checkpoint download",
+    "model upload",
+    "pipeline creation",
+    "FP64 reference",
+    "evidence disk writes",
+    "logits readback"
+  ],
+  "rounds": 5,
+  "warmup_sequences_per_worker": 1,
+  "capacity": 32,
+  "baselines": {
+    "metal": {
+      "path": "/Users/yeren/AGXForge/results/macos-gpt2/metal-model",
+      "summary": {
+        "schema_version": 1,
+        "timestamp_utc": "2026-10-07T17:09:48.395280+00:00",
+        "status": "PASS",
+        "input_tokens": [
+          464,
+          3139,
+          286,
+          4881,
+          318
+        ],
+        "generated_tokens": [
+          262,
+          3139,
+          286,
+          262,
+          4141,
+          2066,
+          11,
+          290
+        ],
+        "checks": [
+          {
+            "position": 0,
+            "token": 464,
+            "next_token": 198,
+            "tensors": 209,
+            "status": "PASS",
+            "top_token_matches": true,
+            "host_execution_seconds": 1.1214905420001742
+          },
+          {
+            "position": 1,
+            "token": 3139,
+            "next_token": 286,
+            "tensors": 209,
+            "status": "PASS",
+            "top_token_matches": true,
+            "host_execution_seconds": 0.7476019579989952
+          },
+          {
+            "position": 2,
+            "token": 286,
+            "next_token": 262,
+            "tensors": 209,
+            "status": "PASS",
+            "top_token_matches": true,
+            "host_execution_seconds": 0.7406944170015777
+          },
+          {
+            "position": 3,
+            "token": 4881,
+            "next_token": 11,
+            "tensors": 209,
+            "status": "PASS",
+            "top_token_matches": true,
+            "host_execution_seconds": 0.8326626670004771
+          },
+          {
+            "position": 4,
+            "token": 318,
+            "next_token": 262,
+            "tensors": 209,
+            "status": "PASS",
+            "top_token_matches": true,
+            "host_execution_seconds": 0.805489917000159
+          },
+          {
+            "position": 5,
+            "token": 262,
+            "next_token": 3139,
+            "tensors": 209,
+            "status": "PASS",
+            "top_token_matches": true,
+            "host_execution_seconds": 0.7272884169997269
+          },
+          {
+            "position": 6,
+            "token": 3139,
+            "next_token": 286,
+            "tensors": 209,
+            "status": "PASS",
+            "top_token_matches": true,
+            "host_execution_seconds": 0.8423535420006374
+          },
+          {
+            "position": 7,
+            "token": 286,
+            "next_token": 262,
+            "tensors": 209,
+            "status": "PASS",
+            "top_token_matches": true,
+            "host_execution_seconds": 0.7153653329987719
+          },
+          {
+            "position": 8,
+            "token": 262,
+            "next_token": 4141,
+            "tensors": 209,
+            "status": "PASS",
+            "top_token_matches": true,
+            "host_execution_seconds": 0.7423290830010956
+          },
+          {
+            "position": 9,
+            "token": 4141,
+            "next_token": 2066,
+            "tensors": 209,
+            "status": "PASS",
+            "top_token_matches": true,
+            "host_execution_seconds": 0.6980327919991396
+          },
+          {
+            "position": 10,
+            "token": 2066,
+            "next_token": 11,
+            "tensors": 209,
+            "status": "PASS",
+            "top_token_matches": true,
+            "host_execution_seconds": 0.7628600410007493
+          },
+          {
+            "position": 11,
+            "token": 11,
+            "next_token": 290,
+            "tensors": 209,
+            "status": "PASS",
+            "top_token_matches": true,
+            "host_execution_seconds": 0.699655750000602
+          }
+        ],
+        "tensor_fallbacks": [],
+        "executor": "G13 machine code through Metal",
+        "prefill": "tokenwise",
+        "verified": true,
+        "bounds": {
+          "embedding": [
+            0,
+            0
+          ],
+          "norm": [
+            0.003,
+            0.003
+          ],
+          "projection": [
+            0.005,
+            0.003
+          ],
+          "rope": [
+            0.005,
+            0.003
+          ],
+          "cache": [
+            0.005,
+            0.003
+          ],
+          "scores": [
+            0.01,
+            0.005
+          ],
+          "probs": [
+            0.0005,
+            0.005
+          ],
+          "attention": [
+            0.005,
+            0.003
+          ],
+          "residual": [
+            0.01,
+            0.003
+          ],
+          "activation": [
+            0.01,
+            0.005
+          ],
+          "logits": [
+            0.05,
+            0.003
+          ]
+        },
+        "dispatches": 3264,
+        "completed_positions": 12,
+        "text": " the capital of the French Republic, and",
+        "teardown": "clean"
+      },
+      "summary_sha256": "b4d246d19513f1dcdd97cbe526ee32e174c0b8a9f8e9855deaa6fd78d38b8dfd",
+      "audited_launches": 3264,
+      "audited_tensors": 2508
+    },
+    "iogpu": {
+      "path": "/Users/yeren/AGXForge/results/macos-gpt2/iogpu-model-retry",
+      "summary": {
+        "schema_version": 1,
+        "timestamp_utc": "2026-10-07T17:11:22.544503+00:00",
+        "status": "PASS",
+        "input_tokens": [
+          464,
+          3139,
+          286,
+          4881,
+          318
+        ],
+        "generated_tokens": [
+          262,
+          3139,
+          286,
+          262,
+          4141,
+          2066,
+          11,
+          290
+        ],
+        "checks": [
+          {
+            "position": 0,
+            "token": 464,
+            "next_token": 198,
+            "tensors": 209,
+            "status": "PASS",
+            "top_token_matches": true,
+            "host_execution_seconds": 0.8755794579992653
+          },
+          {
+            "position": 1,
+            "token": 3139,
+            "next_token": 286,
+            "tensors": 209,
+            "status": "PASS",
+            "top_token_matches": true,
+            "host_execution_seconds": 0.7896822080001584
+          },
+          {
+            "position": 2,
+            "token": 286,
+            "next_token": 262,
+            "tensors": 209,
+            "status": "PASS",
+            "top_token_matches": true,
+            "host_execution_seconds": 0.8070630419988447
+          },
+          {
+            "position": 3,
+            "token": 4881,
+            "next_token": 11,
+            "tensors": 209,
+            "status": "PASS",
+            "top_token_matches": true,
+            "host_execution_seconds": 0.8536538329990435
+          },
+          {
+            "position": 4,
+            "token": 318,
+            "next_token": 262,
+            "tensors": 209,
+            "status": "PASS",
+            "top_token_matches": true,
+            "host_execution_seconds": 0.8120157499997731
+          },
+          {
+            "position": 5,
+            "token": 262,
+            "next_token": 3139,
+            "tensors": 209,
+            "status": "PASS",
+            "top_token_matches": true,
+            "host_execution_seconds": 0.8241386669997155
+          },
+          {
+            "position": 6,
+            "token": 3139,
+            "next_token": 286,
+            "tensors": 209,
+            "status": "PASS",
+            "top_token_matches": true,
+            "host_execution_seconds": 0.8389436669986026
+          },
+          {
+            "position": 7,
+            "token": 286,
+            "next_token": 262,
+            "tensors": 209,
+            "status": "PASS",
+            "top_token_matches": true,
+            "host_execution_seconds": 0.8319825419985136
+          },
+          {
+            "position": 8,
+            "token": 262,
+            "next_token": 4141,
+            "tensors": 209,
+            "status": "PASS",
+            "top_token_matches": true,
+            "host_execution_seconds": 0.8150698330009618
+          },
+          {
+            "position": 9,
+            "token": 4141,
+            "next_token": 2066,
+            "tensors": 209,
+            "status": "PASS",
+            "top_token_matches": true,
+            "host_execution_seconds": 0.8295382920005068
+          },
+          {
+            "position": 10,
+            "token": 2066,
+            "next_token": 11,
+            "tensors": 209,
+            "status": "PASS",
+            "top_token_matches": true,
+            "host_execution_seconds": 0.8428301250005461
+          },
+          {
+            "position": 11,
+            "token": 11,
+            "next_token": 290,
+            "tensors": 209,
+            "status": "PASS",
+            "top_token_matches": true,
+            "host_execution_seconds": 0.7983802919989103
+          }
+        ],
+        "tensor_fallbacks": [],
+        "executor": "direct IOGPU G13",
+        "prefill": "tokenwise",
+        "verified": true,
+        "bounds": {
+          "embedding": [
+            0,
+            0
+          ],
+          "norm": [
+            0.003,
+            0.003
+          ],
+          "projection": [
+            0.005,
+            0.003
+          ],
+          "rope": [
+            0.005,
+            0.003
+          ],
+          "cache": [
+            0.005,
+            0.003
+          ],
+          "scores": [
+            0.01,
+            0.005
+          ],
+          "probs": [
+            0.0005,
+            0.005
+          ],
+          "attention": [
+            0.005,
+            0.003
+          ],
+          "residual": [
+            0.01,
+            0.003
+          ],
+          "activation": [
+            0.01,
+            0.005
+          ],
+          "logits": [
+            0.05,
+            0.003
+          ]
+        },
+        "dispatches": 3264,
+        "completed_positions": 12,
+        "text": " the capital of the French Republic, and",
+        "teardown": "clean"
+      },
+      "summary_sha256": "6cd53f99ba26a7e56703a151839e3004b39f4bdd0df044b7c77ccf980b700c1b",
+      "audited_launches": 3264,
+      "audited_tensors": 2508
+    }
+  },
+  "samples": {
+    "metal": [
+      {
+        "position_seconds": [
+          0.228959584,
+          0.231744,
+          0.234635708,
+          0.246370417,
+          0.234149167,
+          0.217073959,
+          0.255387583,
+          0.239510125,
+          0.232642583,
+          0.233566416,
+          0.218050875,
+          0.253871292
+        ],
+        "next_tokens": [
+          198,
+          286,
+          262,
+          11,
+          262,
+          3139,
+          286,
+          262,
+          4141,
+          2066,
+          11,
+          290
+        ],
+        "prefill_seconds": 1.175858876,
+        "decode_seconds": 1.650102833,
+        "decode_positions": 7,
+        "decode_tokens_per_second": 4.242159858166851,
+        "total_seconds": 2.825961709,
+        "final_logits_sha256": "6520cb9b96ce17758c2fc7f630bd3f9ec2ad2d02d76f8fb1c6408e5ce9cf1b31",
+        "final_logits_max_abs_error": 0.00019782430491943614
+      },
+      {
+        "position_seconds": [
+          0.238981083,
+          0.255857042,
+          0.236329667,
+          0.229996791,
+          0.239558542,
+          0.228139708,
+          0.259973667,
+          0.265270667,
+          0.249343125,
+          0.295784959,
+          0.240756959,
+          0.218333375
+        ],
+        "next_tokens": [
+          198,
+          286,
+          262,
+          11,
+          262,
+          3139,
+          286,
+          262,
+          4141,
+          2066,
+          11,
+          290
+        ],
+        "prefill_seconds": 1.2007231250000001,
+        "decode_seconds": 1.75760246,
+        "decode_positions": 7,
+        "decode_tokens_per_second": 3.9826981125185728,
+        "total_seconds": 2.958325585,
+        "final_logits_sha256": "6520cb9b96ce17758c2fc7f630bd3f9ec2ad2d02d76f8fb1c6408e5ce9cf1b31",
+        "final_logits_max_abs_error": 0.00019782430491943614
+      },
+      {
+        "position_seconds": [
+          0.175469042,
+          0.167423958,
+          0.245629625,
+          0.227307125,
+          0.210767834,
+          0.213051583,
+          0.258940625,
+          0.263736459,
+          0.21748175,
+          0.235756166,
+          0.246688208,
+          0.235986125
+        ],
+        "next_tokens": [
+          198,
+          286,
+          262,
+          11,
+          262,
+          3139,
+          286,
+          262,
+          4141,
+          2066,
+          11,
+          290
+        ],
+        "prefill_seconds": 1.026597584,
+        "decode_seconds": 1.6716409159999999,
+        "decode_positions": 7,
+        "decode_tokens_per_second": 4.187502192007845,
+        "total_seconds": 2.6982385,
+        "final_logits_sha256": "6520cb9b96ce17758c2fc7f630bd3f9ec2ad2d02d76f8fb1c6408e5ce9cf1b31",
+        "final_logits_max_abs_error": 0.00019782430491943614
+      },
+      {
+        "position_seconds": [
+          0.210824334,
+          0.238648417,
+          0.19243825,
+          0.203420375,
+          0.214401875,
+          0.234827791,
+          0.231520542,
+          0.226833042,
+          0.23020975,
+          0.218484458,
+          0.231932167,
+          0.233172334
+        ],
+        "next_tokens": [
+          198,
+          286,
+          262,
+          11,
+          262,
+          3139,
+          286,
+          262,
+          4141,
+          2066,
+          11,
+          290
+        ],
+        "prefill_seconds": 1.059733251,
+        "decode_seconds": 1.606980084,
+        "decode_positions": 7,
+        "decode_tokens_per_second": 4.3559967355513285,
+        "total_seconds": 2.666713335,
+        "final_logits_sha256": "6520cb9b96ce17758c2fc7f630bd3f9ec2ad2d02d76f8fb1c6408e5ce9cf1b31",
+        "final_logits_max_abs_error": 0.00019782430491943614
+      },
+      {
+        "position_seconds": [
+          0.234986583,
+          0.203998292,
+          0.213165625,
+          0.219851375,
+          0.211394791,
+          0.2172585,
+          0.224629417,
+          0.22585275,
+          0.225765459,
+          0.241567125,
+          0.231711875,
+          0.225530542
+        ],
+        "next_tokens": [
+          198,
+          286,
+          262,
+          11,
+          262,
+          3139,
+          286,
+          262,
+          4141,
+          2066,
+          11,
+          290
+        ],
+        "prefill_seconds": 1.083396666,
+        "decode_seconds": 1.592315668,
+        "decode_positions": 7,
+        "decode_tokens_per_second": 4.396113246057691,
+        "total_seconds": 2.675712334,
+        "final_logits_sha256": "6520cb9b96ce17758c2fc7f630bd3f9ec2ad2d02d76f8fb1c6408e5ce9cf1b31",
+        "final_logits_max_abs_error": 0.00019782430491943614
+      }
+    ],
+    "iogpu": [
+      {
+        "position_seconds": [
+          0.161403583,
+          0.132309125,
+          0.178328041,
+          0.179059958,
+          0.159118542,
+          0.135209417,
+          0.175987208,
+          0.181769625,
+          0.176554292,
+          0.17458075,
+          0.166762708,
+          0.158568417
+        ],
+        "next_tokens": [
+          198,
+          286,
+          262,
+          11,
+          262,
+          3139,
+          286,
+          262,
+          4141,
+          2066,
+          11,
+          290
+        ],
+        "prefill_seconds": 0.810219249,
+        "decode_seconds": 1.169432417,
+        "decode_positions": 7,
+        "decode_tokens_per_second": 5.985809781088017,
+        "total_seconds": 1.979651666,
+        "final_logits_sha256": "6520cb9b96ce17758c2fc7f630bd3f9ec2ad2d02d76f8fb1c6408e5ce9cf1b31",
+        "final_logits_max_abs_error": 0.00019782430491943614
+      },
+      {
+        "position_seconds": [
+          0.165543417,
+          0.1599175,
+          0.160359584,
+          0.1590775,
+          0.170074042,
+          0.158747125,
+          0.178218042,
+          0.15998925,
+          0.159137334,
+          0.169352791,
+          0.160976791,
+          0.159806166
+        ],
+        "next_tokens": [
+          198,
+          286,
+          262,
+          11,
+          262,
+          3139,
+          286,
+          262,
+          4141,
+          2066,
+          11,
+          290
+        ],
+        "prefill_seconds": 0.814972043,
+        "decode_seconds": 1.146227499,
+        "decode_positions": 7,
+        "decode_tokens_per_second": 6.106990109822866,
+        "total_seconds": 1.961199542,
+        "final_logits_sha256": "6520cb9b96ce17758c2fc7f630bd3f9ec2ad2d02d76f8fb1c6408e5ce9cf1b31",
+        "final_logits_max_abs_error": 0.00019782430491943614
+      },
+      {
+        "position_seconds": [
+          0.16018525,
+          0.160772666,
+          0.15986375,
+          0.158913958,
+          0.169808292,
+          0.160837375,
+          0.160032709,
+          0.160415833,
+          0.160607209,
+          0.1584415,
+          0.15805325,
+          0.180355167
+        ],
+        "next_tokens": [
+          198,
+          286,
+          262,
+          11,
+          262,
+          3139,
+          286,
+          262,
+          4141,
+          2066,
+          11,
+          290
+        ],
+        "prefill_seconds": 0.809543916,
+        "decode_seconds": 1.138743043,
+        "decode_positions": 7,
+        "decode_tokens_per_second": 6.147128663511843,
+        "total_seconds": 1.948286959,
+        "final_logits_sha256": "6520cb9b96ce17758c2fc7f630bd3f9ec2ad2d02d76f8fb1c6408e5ce9cf1b31",
+        "final_logits_max_abs_error": 0.00019782430491943614
+      },
+      {
+        "position_seconds": [
+          0.171898042,
+          0.180645542,
+          0.168053625,
+          0.168082791,
+          0.173791583,
+          0.187594875,
+          0.171634958,
+          0.188497833,
+          0.168818375,
+          0.150986209,
+          0.169683458,
+          0.168772334
+        ],
+        "next_tokens": [
+          198,
+          286,
+          262,
+          11,
+          262,
+          3139,
+          286,
+          262,
+          4141,
+          2066,
+          11,
+          290
+        ],
+        "prefill_seconds": 0.862471583,
+        "decode_seconds": 1.205988042,
+        "decode_positions": 7,
+        "decode_tokens_per_second": 5.804369327237492,
+        "total_seconds": 2.068459625,
+        "final_logits_sha256": "6520cb9b96ce17758c2fc7f630bd3f9ec2ad2d02d76f8fb1c6408e5ce9cf1b31",
+        "final_logits_max_abs_error": 0.00019782430491943614
+      },
+      {
+        "position_seconds": [
+          0.17353975,
+          0.171114167,
+          0.182958875,
+          0.175371167,
+          0.166998291,
+          0.159099542,
+          0.184529667,
+          0.178832208,
+          0.149789334,
+          0.184545416,
+          0.178246041,
+          0.1586105
+        ],
+        "next_tokens": [
+          198,
+          286,
+          262,
+          11,
+          262,
+          3139,
+          286,
+          262,
+          4141,
+          2066,
+          11,
+          290
+        ],
+        "prefill_seconds": 0.86998225,
+        "decode_seconds": 1.193652708,
+        "decode_positions": 7,
+        "decode_tokens_per_second": 5.864352297016697,
+        "total_seconds": 2.0636349579999997,
+        "final_logits_sha256": "6520cb9b96ce17758c2fc7f630bd3f9ec2ad2d02d76f8fb1c6408e5ce9cf1b31",
+        "final_logits_max_abs_error": 0.00019782430491943614
+      }
+    ]
+  },
+  "order": [
+    {
+      "round": 0,
+      "backend": "metal"
+    },
+    {
+      "round": 0,
+      "backend": "iogpu"
+    },
+    {
+      "round": 1,
+      "backend": "iogpu"
+    },
+    {
+      "round": 1,
+      "backend": "metal"
+    },
+    {
+      "round": 2,
+      "backend": "metal"
+    },
+    {
+      "round": 2,
+      "backend": "iogpu"
+    },
+    {
+      "round": 3,
+      "backend": "iogpu"
+    },
+    {
+      "round": 3,
+      "backend": "metal"
+    },
+    {
+      "round": 4,
+      "backend": "metal"
+    },
+    {
+      "round": 4,
+      "backend": "iogpu"
+    }
+  ],
+  "statistics": {
+    "metal": {
+      "median_decode_tokens_per_second": 4.242159858166851,
+      "min_decode_tokens_per_second": 3.9826981125185728,
+      "max_decode_tokens_per_second": 4.396113246057691,
+      "median_prefill_seconds": 1.083396666,
+      "median_total_seconds": 2.6982385
+    },
+    "iogpu": {
+      "median_decode_tokens_per_second": 5.985809781088017,
+      "min_decode_tokens_per_second": 5.804369327237492,
+      "max_decode_tokens_per_second": 6.147128663511843,
+      "median_prefill_seconds": 0.814972043,
+      "median_total_seconds": 1.979651666
+    }
+  },
+  "iogpu_over_metal_decode_ratio": 1.4110288110817781,
+  "source_sha256": {
+    "Makefile": "300da3eef1a5059e7968aff2a544873b7199d86d98cdba7ef0e1b22c3c31522d",
+    "agxforge/g13/__init__.py": "35aa0a0f6c93b351881c6966fadb35819011f3d0cc7255dcc7a42827476b60a7",
+    "agxforge/g13/_vendor/__init__.py": "32b3891e2cf25eb0ef2caea5147ec6d4e52b457c62f4137f949ebb0b3253511f",
+    "agxforge/g13/_vendor/applegpu.py": "d9eddd814f2d34d17185640886cb1facc76e90b03bf2540d82bc0e000d89462d",
+    "agxforge/g13/_vendor/fma.py": "bc342220f04fc20227d7915af3163bf116daa9e16c49d45da8d876c20f96d539",
+    "agxforge/g13/_vendor/srgb.py": "21aafd33b0134634ec5a7bd2ec38370b876658855e83d348fe0f3b4957068205",
+    "agxforge/g13/abi.py": "d18f44ea414e905225b6a5c2eb5dc529720d2d7fe4468eef61d5e75b7c9acacd",
+    "agxforge/g13/cc.py": "d75241a4811e9048058026085d218a09145a7065c855b6fe42be70f03eb4ea6b",
+    "agxforge/g13/decode.py": "7b6460d231bbb0574f39970f18a7c690f4ebb12f9986ebe475ca36fc61047619",
+    "agxforge/g13/encode.py": "52355940845ac6c07b33924b1839774cabf31960e460716ef9c8ebe7de80e286",
+    "agxforge/g13/gpt2.py": "b731a9dac137c0207e6162b855549a431bbf5cd86d15c8980a8bcdde992ad509",
+    "agxforge/g13/gpt2_kernels.py": "a24a6c324edbe5d35ced8ed9092c56946f08235dbb299b44715d0e44c6fffe53",
+    "agxforge/g13/gpt2_reference.py": "3a8cce24756d6a22c2d96508461fc74f1c17e94209b34920efb6f04f4aed685e",
+    "agxforge/g13/ir.py": "b4cd6dd5dccde85411eb252062ba260ed5798ea19ef30d61f6069c79e1dae9cf",
+    "agxforge/g13/kernels.py": "6703867e6c59a69b564256f74f1ed86787a56c0dd81a88451899cdd9521d4048",
+    "agxforge/g13/metal.py": "b8bd16862c60758719bad1c024eaafbec11c7bac93bfcacaf0545c23e5ac5e59",
+    "agxforge/g13/qwen.py": "e298643b40012b8bc17a04f37d7f5bd40ee1f38ae7c9a846e665e3007b1287f6",
+    "agxforge/g13/qwen_reference.py": "20a7aa262a4e329e44656a582fb8aebee0c999a477db2dccc9c4933ce39921b3",
+    "agxforge/g13/smoke.py": "6f83899e5a6ffe967aa11ad0ba36271e6e7fe7269e17fba29c51ae957c928e16",
+    "agxforge/g17/ir.py": "28a485881e3219875678f8bda2691040de275846fe22fb7d589804dcb52a70bc",
+    "agxforge/runtime/iogpu-26A434.json": "fc344b808d12206fcdba0316acdb95a876a13492e98a5cb14ec130be3164e4a0",
+    "agxforge/runtime/iogpu.c": "1ef209a6352d2ec41ec8ceec73582d6b3f3f0b96a9c8abf68043b632baed5a2a",
+    "agxforge/runtime/iogpu.py": "f9ac23bf47ae8eccd7d491c9a476f8149506c2a3fc1254abe09bfedbdefb5bfa",
+    "agxforge/runtime/macos.m": "873ff61d18e540476206d9f990f66aaa325a625b0f2cd71cb84dcd7a6c053945",
+    "agxforge/runtime/macos.py": "fe02aa9b0658cddac7a8cca410aec5de7de2086c3e765838b99a7867785f83c0",
+    "build/macos/iogpu-support.bin": "0c817d783482b49301254d80eeae7bf98b3e38028ad2e4c0c37c87fc1f5176bd",
+    "build/macos/iogpu-support.json": "1442af56afb0348c976986de60884179966f27dfe1d88117a3ceae00c82f388c",
+    "build/macos/libagxforge_iogpu.dylib": "e2666022b4d497dc5de4d258ec78a3e08ac786e38599581515ca22eadd232d18",
+    "build/macos/libagxforge_macos.dylib": "9a1a6f90f9fa5ca6900e35daa8fb9e16383f8616426ea4b2714acfb112174bce",
+    "build/macos/libagxforge_support.dylib": "fa9798ea038e1e0e0d66f94f451367a8fe9f2c6d0dc09479bb5ad2a08e3e81c0",
+    "examples/asahi/01_store.py": "e1c5ad033aa0b7c8476071d3fcb011d298bb569a66868eea2fd0d134b4dbb818",
+    "examples/asahi/02_add.py": "0b4267f6938e8788210b18e649b13397d1f4a246830c118a382a521075c6b345",
+    "examples/asahi/03_mul.py": "096e370dfff82d608524857c0cbdbf2f9949ad4eee5b0fcc6d7f76bbf50cfb47",
+    "examples/asahi/download_qwen.py": "93f9bf35077fd448d56b7a8e3f1110d5e75b869cf819a93ac4b9f2d629ac7174",
+    "examples/asahi/qwen.py": "fcf072aa06e0cfcc7e84e33b1a18196ccf2818558508ac5910de6030048472f5",
+    "examples/asahi/smoke.py": "57b58375b262e3e1efbe0bab547503c22154679deb1119d40f98b1f99f53a210",
+    "examples/asahi/verify_isa.py": "ba4ae6566e985a94a20e9d611d3f8f36eb92ca4dc5debd1b463c2002b4e8e4a0",
+    "examples/asahi/verify_kernels.py": "1676839255b40b9c6a21876842632530d969687c76d8878185fdec18b9105239",
+    "examples/macos/backend.py": "8ed71f67e7dc217baf28aef5bf7ce0061f155a819b10418b4ba0c8a0c8068425",
+    "examples/macos/benchmark_gpt2.py": "96ccfeff5762ac1ac8d985e7e2aa35e9411c960feeb390131aa67ca2b75aacc6",
+    "examples/macos/download_gpt2.py": "3b13b702c7aba5e6e9b05ac5d4441530456743b489cd8d256137c417bf73c481",
+    "examples/macos/gpt2.py": "27e9818749d4770bdf101acb3305aa6f4fd68a285163b98ad529f52c5e789f2f",
+    "examples/macos/probe.py": "1530c752b4d3c92e8fbcfd4dd71a33bf8f0a0a4d5354c16da564219733be7fa2",
+    "examples/macos/qwen.py": "54f01f37aa6b5993fbc58aca25d6ef9552580a6f1576a30eed5bc6eef910a765",
+    "examples/macos/smoke.py": "f5ecfd09013c3a77d66a597a48e736ebc6a7636c0fa63095920071a7decb5964",
+    "examples/macos/verify_gpt2_kernels.py": "a98145eda3b62d6c022553c297e39f32852b4f7d26ecad77b9d3211bf6f289e9",
+    "examples/macos/verify_isa.py": "4cb1c0601e4cb94378211081c38faa9bb53bbed0caac523b92f8d6c2311de528",
+    "examples/macos/verify_kernels.py": "df6c65c3b726b8ec5fbb13c879a8369d59ae528ab369a0ee1bea23ce714ccf00",
+    "requirements-asahi.txt": "6087821c1fe2d04d4e3883f7180871390448782f1ce50355dd49b51fa8b07099",
+    "tools/asahi_evidence.py": "07ba43682f9462b6399f79afce049d23e7ff7dbeff3a87efffabb40d4b21367c",
+    "tools/macos_capture.py": "cc611566300a95f589a60ef1b373cb18657a5fecf58ec5135e7a5eec66ce1413",
+    "tools/macos_support.c": "aa8101ac01a121f4099640802afddb6115e9ce89ae0743511ef2c363ea7656cb",
+    "tools/macos_support.py": "469b97cb7d2bbaf8f170dd198a7ad695eb0458aec46838fd11977501d86e0dbf"
+  }
+}

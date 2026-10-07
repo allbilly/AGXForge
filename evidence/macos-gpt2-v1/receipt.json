@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "timestamp_utc": "2026-10-07T17:34:23.491040+00:00",
+  "target": "base M1 G13G / macOS 27.0.1 build 26A434",
+  "status": "PASS for declared GPT-2 tensor validation and compiler comparison; native reliability unresolved",
+  "bundles": {
+    "metal-model": {
+      "path": "results/macos-gpt2/compiler-validation/metal",
+      "status": "PASS",
+      "dispatches": 3264,
+      "tensor_checks": 2508,
+      "summary_sha256": "092d44fb5404f74ddbde297168d225ae4370d590ba802c7438ae7720cb05495d",
+      "artifact_manifest": "results/macos-gpt2/compiler-validation/metal/artifact-manifest.json",
+      "artifact_manifest_sha256": "4e38d85de91f8ee137f1827d4fbc18318b8f0510e09cf2fc02b8f4ddcdf80ae6"
+    },
+    "apple-model": {
+      "path": "results/macos-gpt2/compiler-validation/apple",
+      "status": "PASS",
+      "dispatches": 3264,
+      "tensor_checks": 2508,
+      "summary_sha256": "ca528cd75c16710f0ddfb947fb1da1133a6740ab6549fae11adb2b5d47ab37d0",
+      "artifact_manifest": "results/macos-gpt2/compiler-validation/apple/artifact-manifest.json",
+      "artifact_manifest_sha256": "8675116a1a471db43c4c188666ec63f8833ed7eb7532adc871485318158f7d7f"
+    },
+    "native-model": {
+      "path": "results/macos-gpt2/iogpu-model-final",
+      "status": "PASS",
+      "dispatches": 3264,
+      "tensor_checks": 2508,
+      "summary_sha256": "91c8391101d46387adaa177c90ac7febc9ef3ecda91890ef09478bc851f90e1a",
+      "artifact_manifest": "results/macos-gpt2/iogpu-model-final/artifact-manifest.json",
+      "artifact_manifest_sha256": "b034fac30bb30f51a0931f67aab12e8e9f718c5eb604e543c5614ea736a93c40"
+    },
+    "metal-kernels": {
+      "path": "results/macos-gpt2/metal-kernels",
+      "status": "PASS",
+      "dispatches": 93,
+      "tensor_checks": 0,
+      "summary_sha256": "6968fd9e8b29019a70687f1284804dc6b64bd74430265e6acb40295fedb8889c",
+      "artifact_manifest": "results/macos-gpt2/metal-kernels/artifact-manifest.json",
+      "artifact_manifest_sha256": "c9ced6bc9b61f54c1cdd4367e62e24195901892e83310ba26c62ff20dfa3c416"
+    },
+    "native-kernels": {
+      "path": "results/macos-gpt2/iogpu-kernels",
+      "status": "PASS",
+      "dispatches": 93,
+      "tensor_checks": 0,
+      "summary_sha256": "6968fd9e8b29019a70687f1284804dc6b64bd74430265e6acb40295fedb8889c",
+      "artifact_manifest": "results/macos-gpt2/iogpu-kernels/artifact-manifest.json",
+      "artifact_manifest_sha256": "de437a006de0dd62de402e28edf52b3a72e1c1e12f6e92fb8eb12d17d0a61b1c"
+    },
+    "qwen-metal": {
+      "path": "results/macos-gpt2/qwen-regression-metal",
+      "status": "PASS",
+      "dispatches": 2520,
+      "tensor_checks": 1836,
+      "summary_sha256": "a4583ca476238dbc36e3aacd5e3f41c7ef52c8a00982b4443ed89c9e9f5a14f5",
+      "artifact_manifest": null,
+      "artifact_manifest_sha256": null
+    }
+  },
+  "performance_cohorts": {
+    "compiler": {
+      "path": "results/macos-gpt2/compiler-benchmark",
+      "status": "PASS",
+      "statistics": {
+        "metal": {
+          "median_decode_tokens_per_second": 5.708954631865653,
+          "min_decode_tokens_per_second": 4.412106730356881,
+          "max_decode_tokens_per_second": 7.720308308835903,
+          "median_prefill_seconds": 1.140887667,
+          "median_total_seconds": 2.481357377
+        },
+        "apple": {
+          "median_decode_tokens_per_second": 8.585284607550545,
+          "min_decode_tokens_per_second": 5.4065578622693895,
+          "max_decode_tokens_per_second": 11.211455865603474,
+          "median_prefill_seconds": 0.672682459,
+          "median_total_seconds": 1.488031084
+        }
+      },
+      "rounds": 5,
+      "summary_sha256": "57bc228b40107247daa3d8a3603e9c5a5ff0c8ef7c27e408b110211635d62af0",
+      "apple_over_g13_metal_decode_ratio": 1.5038277865495882
+    },
+    "earlier-native-transport": {
+      "path": "results/macos-gpt2/benchmark",
+      "status": "PASS",
+      "statistics": {
+        "metal": {
+          "median_decode_tokens_per_second": 4.242159858166851,
+          "min_decode_tokens_per_second": 3.9826981125185728,
+          "max_decode_tokens_per_second": 4.396113246057691,
+          "median_prefill_seconds": 1.083396666,
+          "median_total_seconds": 2.6982385
+        },
+        "iogpu": {
+          "median_decode_tokens_per_second": 5.985809781088017,
+          "min_decode_tokens_per_second": 5.804369327237492,
+          "max_decode_tokens_per_second": 6.147128663511843,
+          "median_prefill_seconds": 0.814972043,
+          "median_total_seconds": 1.979651666
+        }
+      },
+      "rounds": 5,
+      "summary_sha256": "d490baf54938e78539a56406be79a1c3de5d92473e3e78fab7cc985f2ef1bda2",
+      "caveat": "Earlier cohort; do not combine into a simultaneous three-way comparison. Later native validation has intermittent channel errors."
+    }
+  },
+  "failures": [
+    {
+      "path": "results/macos-gpt2/iogpu-model",
+      "status": "FAIL",
+      "error": "unexpected/error IOGPU completion: kr=0x0 size=40 cookie=0x10a8f3670 bit=2 seen=1 start=9945613876166 end=9946115360916 status=0xe reserved=0x0",
+      "summary_sha256": "d4260a98e73cc21b64647a650fe050a3d516731a9b2585ab14477f600d0d086c"
+    },
+    {
+      "path": "results/macos-gpt2/qwen-regression-iogpu",
+      "status": "FAIL",
+      "error": "unexpected/error IOGPU completion: kr=0x0 size=40 cookie=0x10b8d3230 bit=2 seen=1 start=10195370145541 end=10195871334250 status=0xe reserved=0x0",
+      "summary_sha256": "cfce972f3a184b870c8f9fd98c68830d1b2d6c97aee9c3bab975e56618e055df"
+    },
+    {
+      "path": "results/macos-gpt2/apple-model",
+      "status": "FAIL",
+      "error": "position 0, layer-0-activation: outside declared bounds; sequence stopped",
+      "summary_sha256": "c1f5a0d1b8d60a602f6a6117915da516d0b5e6e2e70e4a19ec928ce3098da5c1"
+    },
+    {
+      "path": "results/macos-gpt2/validation/iogpu",
+      "status": "FAIL",
+      "error": "unexpected/error IOGPU completion: kr=0x0 size=40 cookie=0x10aaaf670 bit=2 seen=1 start=10605728118583 end=10606230104291 status=0xe reserved=0x0",
+      "summary_sha256": "8e29869d585dd7f11804ffa6b8102858b74b1e71df107f5e8c0784fae8e75d00"
+    },
+    {
+      "path": "results/macos-gpt2/validation/iogpu-retry",
+      "status": "FAIL",
+      "error": "unexpected/error IOGPU completion: kr=0x0 size=40 cookie=0x10b3af8f0 bit=2 seen=1 start=10673034928041 end=10673536712541 status=0xe reserved=0x0",
+      "summary_sha256": "864883ebccb3056806a1041ad61d27804835e24baf81279d06a0a5c32b299cd1"
+    },
+    {
+      "path": "results/macos-gpt2/full-barrier/iogpu",
+      "status": "FAIL",
+      "error": "unexpected/error IOGPU completion: kr=0x0 size=40 cookie=0x1096dad70 bit=2 seen=1 start=10941319601375 end=10941826619916 status=0xe reserved=0x0",
+      "summary_sha256": "58af991cb548a8fb375ca5750af3177879b475adfeabc950f409cee53a6cab00"
+    }
+  ],
+  "native_limit": "Intermittent driver channel errors 0xe occurred in GPT-2 and unchanged Qwen kernels. The full-barrier hypothesis failed and was reverted; no automatic retry or recovery was added.",
+  "hardware_free_checks": 66
+}

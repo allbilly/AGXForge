@@ -1,0 +1,9 @@
+{
+  "status": "PASS against recorded verified GPU tensors",
+  "run_status": "COMPLETED_UNVERIFIED",
+  "dispatches": 630,
+  "reference_entry_points": "Reference and Checkpoint.floats raise if called",
+  "tensors_bit_identical": 459,
+  "va_slot": 11,
+  "script_sha256": "9cbb01a58d93b85a7620ea1ba1bc3e3cfb6000d56fa733a2a23a15b5c138de77"
+}

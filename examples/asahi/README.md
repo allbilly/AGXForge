@@ -10,7 +10,8 @@ and scheduling run on the host.
 The measured machine is a base M1 MacBook Air, G13G B1, on kernel `7.1.13+`,
 with 16 KiB pages. See [the hardware receipt](../../evidence/asahi-m1-v1/receipt.json)
 for exact source hashes, platform identity, commands and result counts.
-Native macOS IOGPU, M1 Pro/Max/Ultra, Metal carriers, G13 matrix acceleration,
+The [macOS route](../macos/README.md) separately supports Metal carriers and
+an experimental direct IOGPU subset. M1 Pro/Max/Ultra, G13 matrix acceleration,
 shared memory, SIMD cooperation, atomics, spilling and performance tuning
 remain future work. G17 source and decoder validation are preserved; M5 GPU
 execution has not been revalidated here. Apple's firmware remains required.

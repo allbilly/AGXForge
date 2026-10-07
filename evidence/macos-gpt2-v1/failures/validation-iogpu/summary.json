@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "timestamp_utc": "2026-10-07T17:21:05.446556+00:00",
+  "status": "FAIL",
+  "input_tokens": [
+    464,
+    3139,
+    286,
+    4881,
+    318
+  ],
+  "generated_tokens": [],
+  "checks": [
+    {
+      "position": 0,
+      "token": 464,
+      "next_token": 198,
+      "tensors": 209,
+      "status": "PASS",
+      "top_token_matches": true,
+      "host_execution_seconds": 0.8771222909999778
+    },
+    {
+      "position": 1,
+      "token": 3139,
+      "next_token": 286,
+      "tensors": 209,
+      "status": "PASS",
+      "top_token_matches": true,
+      "host_execution_seconds": 0.8061640419982723
+    }
+  ],
+  "tensor_fallbacks": [],
+  "executor": "direct IOGPU G13",
+  "prefill": "tokenwise",
+  "verified": true,
+  "bounds": {
+    "embedding": [
+      0,
+      0
+    ],
+    "norm": [
+      0.003,
+      0.003
+    ],
+    "projection": [
+      0.005,
+      0.003
+    ],
+    "rope": [
+      0.005,
+      0.003
+    ],
+    "cache": [
+      0.005,
+      0.003
+    ],
+    "scores": [
+      0.01,
+      0.005
+    ],
+    "probs": [
+      0.0005,
+      0.005
+    ],
+    "attention": [
+      0.005,
+      0.003
+    ],
+    "residual": [
+      0.01,
+      0.003
+    ],
+    "activation": [
+      0.01,
+      0.005
+    ],
+    "logits": [
+      0.05,
+      0.003
+    ]
+  },
+  "error": "unexpected/error IOGPU completion: kr=0x0 size=40 cookie=0x10aaaf670 bit=2 seen=1 start=10605728118583 end=10606230104291 status=0xe reserved=0x0"
+}

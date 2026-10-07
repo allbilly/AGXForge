@@ -37,13 +37,13 @@ def bounded(n):
     return spec
 
 
-def run(output):
+def run(output, *, executor_factory=Executor, identity_factory=source_identity):
     output.mkdir(parents=True, exist_ok=False)
-    identity = source_identity()
+    identity = identity_factory()
     (output/"source-sha256.json").write_text(json.dumps(identity, indent=2)+"\n")
     report = dict(status="RUNNING", scope="compiler ISA semantics and persistent buffer reuse", checks=[])
     try:
-        with Executor(va_slot=4) as gpu:
+        with executor_factory(va_slot=4) as gpu:
             (output/"platform.json").write_text(json.dumps(gpu.platform(), indent=2)+"\n")
             def check(spec, data, expected, *, atol=0, rtol=0, classify_nan=False, reused=None):
                 p = spec.compile()
@@ -112,7 +112,7 @@ def run(output):
             for seed in range(4):
                 x=np.arange(n,dtype=np.float32)+seed*10; y=np.arange(n,dtype=np.float32)/2-seed
                 bufs=check(k.vector("sub",n),dict(a=x.tobytes(),b=y.tobytes()),x-y,reused=bufs)
-        if identity != source_identity(): raise RuntimeError("sources changed during run")
+        if identity != identity_factory(): raise RuntimeError("sources changed during run")
         report.update(status="PASS",teardown="clean")
     except BaseException as error: report.update(status="FAIL",error=str(error)); raise
     finally: (output/"summary.json").write_text(json.dumps(report,indent=2)+"\n")

@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "tensors_bit_identical": 2754,
+  "metal_tensors_bit_identical": 2754,
+  "baseline_va_slot": 0,
+  "relocated_va_slot": 7,
+  "baseline_gpu_addresses": [
+    91183334080,
+    90195230784,
+    91183333440
+  ],
+  "relocated_gpu_addresses": [
+    91183448768,
+    90195345472,
+    91183448128
+  ],
+  "launches": 3780,
+  "unique_command_and_encoder_ids": [
+    7560,
+    7560
+  ]
+}

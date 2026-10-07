@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "timestamp_utc": "2026-10-07T16:08:35.825479+00:00",
+  "target": "base M1 G13G / macOS 27.0.1 build 26A434",
+  "status": "PASS for declared Metal and direct IOGPU coverage",
+  "metal_baseline": "../macos-m1-v1/receipt.json",
+  "bundles": {
+    "iogpu-smoke": {
+      "path": "results/macos-native-fix/iogpu-smoke-final",
+      "status": "PASS",
+      "launches": 81,
+      "tensor_checks": 0,
+      "check_status_counts": {
+        "PASS": 81
+      },
+      "offline_audit": "PASS",
+      "artifact_manifest": "results/macos-native-fix/iogpu-smoke-final/artifact-sha256.json",
+      "artifact_manifest_sha256": "ec4efc1b94e729b7412292e51bb45595fa63c307baa604fa50cee586f9c92680",
+      "artifacts": 1299
+    },
+    "iogpu-isa": {
+      "path": "results/macos-native-fix/iogpu-isa-final",
+      "status": "PASS",
+      "launches": 26,
+      "tensor_checks": 0,
+      "check_status_counts": {
+        "PASS": 26
+      },
+      "offline_audit": "PASS",
+      "artifact_manifest": "results/macos-native-fix/iogpu-isa-final/artifact-sha256.json",
+      "artifact_manifest_sha256": "b8e502c1049933abc9ef8ea6a2f7387b25df710737c36215ad04411439f03ebf",
+      "artifacts": 397
+    },
+    "iogpu-kernels": {
+      "path": "results/macos-native-fix/iogpu-kernels-final",
+      "status": "PASS",
+      "launches": 57,
+      "tensor_checks": 0,
+      "check_status_counts": {
+        "PASS": 57
+      },
+      "offline_audit": "PASS",
+      "artifact_manifest": "results/macos-native-fix/iogpu-kernels-final/artifact-sha256.json",
+      "artifact_manifest_sha256": "a1a24a6970eaf0172c0b231c480fb5e44c8ce395aed2475a9ad745480a8c22db",
+      "artifacts": 925
+    },
+    "iogpu-model": {
+      "path": "results/macos-native-fix/iogpu-model-traces",
+      "status": "PASS",
+      "launches": 3780,
+      "tensor_checks": 2754,
+      "check_status_counts": {
+        "PASS": 6
+      },
+      "offline_audit": "PASS",
+      "artifact_manifest": "results/macos-native-fix/iogpu-model-traces/artifact-sha256.json",
+      "artifact_manifest_sha256": "0f7aba20b4e62a6605da9540ce08a1bdbe67baade09789e6e4cc755ed2cc4b10",
+      "artifacts": 35760
+    },
+    "iogpu-model-relocated": {
+      "path": "results/macos-native-fix/iogpu-model-relocated",
+      "status": "PASS",
+      "launches": 3780,
+      "tensor_checks": 2754,
+      "check_status_counts": {
+        "PASS": 6
+      },
+      "offline_audit": "PASS",
+      "artifact_manifest": "results/macos-native-fix/iogpu-model-relocated/artifact-sha256.json",
+      "artifact_manifest_sha256": "6ba96fcae71b2ebc6874b1d339a455d8972ed796f7cceb41a0167a54e96dcbe2",
+      "artifacts": 35760
+    }
+  },
+  "reference_disabled_control": {
+    "path": "results/macos-native-fix/iogpu-model-no-reference",
+    "status": "PASS against recorded verified GPU tensors",
+    "run_status": "COMPLETED_UNVERIFIED",
+    "dispatches": 630,
+    "reference_entry_points": "Reference and Checkpoint.floats raise if called",
+    "tensors_bit_identical": 459,
+    "va_slot": 11,
+    "script_sha256": "c14ab745c1d4ae13eec04644ade7ab4a595bc155a0e5e8868cf39e07b433f66e",
+    "offline_audit": "correctly refused COMPLETED_UNVERIFIED",
+    "artifact_manifest": "results/macos-native-fix/iogpu-model-no-reference/artifact-sha256.json",
+    "artifact_manifest_sha256": "1afe30fc16e45fc088cf70afaa417f11c9949f52ff7b51caa0f80c8c4621fb95"
+  },
+  "relocation_and_metal_comparison": {
+    "status": "PASS",
+    "tensors_bit_identical": 2754,
+    "metal_tensors_bit_identical": 2754,
+    "baseline_va_slot": 0,
+    "relocated_va_slot": 7,
+    "baseline_gpu_addresses": [
+      91183334080,
+      90195230784,
+      91183333440
+    ],
+    "relocated_gpu_addresses": [
+      91183448768,
+      90195345472,
+      91183448128
+    ],
+    "launches": 3780,
+    "unique_command_and_encoder_ids": [
+      7560,
+      7560
+    ]
+  },
+  "local_support": {
+    "schema_version": 1,
+    "build": "26A434",
+    "gpu": "Apple M1",
+    "bytes": 20480,
+    "sha256": "0c817d783482b49301254d80eeae7bf98b3e38028ad2e4c0c37c87fc1f5176bd",
+    "code_start": 20480,
+    "template_sha256": "fc344b808d12206fcdba0316acdb95a876a13492e98a5cb14ec130be3164e4a0",
+    "preparation": "local Metal pipeline creation; GPU submissions refused by interposer"
+  },
+  "hardware_free_checks": {
+    "status": "PASS",
+    "tests": 53,
+    "log": "build-test.log"
+  },
+  "retained_g17_checks": {
+    "status": "PASS",
+    "tests": 184,
+    "modules": 16,
+    "log": "../macos-m1-v1/retained-tests.log",
+    "gpu_execution": false
+  },
+  "failures": [
+    {
+      "name": "q4-erased-helpers",
+      "status": "FAIL",
+      "path": "results/macos-native-fix/q4-fresh/launch.json",
+      "error": "unexpected/error IOGPU completion: kr=0x0 size=40 cookie=0x108f9abf0 bit=2 seen=1 start=12297829382107615285 end=12297829382107615285 status=0xb reserved=0x0"
+    },
+    {
+      "name": "ring-exact-end",
+      "status": "FAIL",
+      "path": "results/macos-native-fix/iogpu-model/launches/000129-layer-4-swiglu/launch.json",
+      "error": "notification ring indices outside mapped page: 0x0"
+    },
+    {
+      "name": "oversized-captured-arena",
+      "status": "FAIL",
+      "path": "results/macos-native-fix/iogpu-model-complete/launches/001147-layer-19-gate/launch.json",
+      "error": "unexpected/error IOGPU completion: kr=0x0 size=40 cookie=0x1092ce3f0 bit=2 seen=1 start=4674906714291 end=4675409494000 status=0xe reserved=0x0"
+    },
+    {
+      "name": "reused-trace-ids",
+      "status": "FAIL",
+      "path": "results/macos-native-fix/iogpu-model-arena/launches/000731-layer-3-gate/launch.json",
+      "error": "unexpected/error IOGPU completion: kr=0x0 size=40 cookie=0x10944acb0 bit=2 seen=1 start=5082653081958 end=5083158417291 status=0xe reserved=0x0"
+    }
+  ],
+  "scope_limits": [
+    "base M1 G13G and build 26A434 only",
+    "native support setup creates Metal pipelines in a separate process; native dispatch calls no Metal APIs",
+    "8 bindings, 80 register halfwords, 32 lanes; no scratch/shared-memory ABI",
+    "larger layouts and fault recovery unverified",
+    "scalar correctness measurements, no throughput comparison"
+  ]
+}

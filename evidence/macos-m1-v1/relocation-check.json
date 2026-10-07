@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "tensor_pairs": 2754,
+  "all_tensor_bits_identical": true,
+  "va_slots": [
+    0,
+    7
+  ],
+  "first_launch_buffers": [
+    [
+      90889430080,
+      90889429824
+    ],
+    [
+      90889888832,
+      90889888576
+    ]
+  ]
+}

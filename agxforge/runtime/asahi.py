@@ -131,6 +131,8 @@ class Executor:
     def _require_open(self):
         if not self.handle:
             raise RuntimeError("executor is closed")
+        if self.poisoned:
+            raise RuntimeError("executor stopped after a failed dispatch")
 
     def __enter__(self): return self
     def __exit__(self, kind, error, traceback):

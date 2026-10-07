@@ -1,0 +1,13 @@
+0000: 72011004                 get_sr           r0, sr80 (thread_position_in_grid.x)
+0004: 62050000803f             mov_imm          r1, 1065353216, 0b0
+000a: 4509000e00c01200         device_store     0, i32, x, r1, u0_u1, r0, unsigned, 0
+0012: 3800                     wait             0
+0014: 8800                     stop
+0016: 0800                     trap
+0018: 0800                     trap
+001a: 0800                     trap
+001c: 0800                     trap
+001e: 0800                     trap
+0020: 0800                     trap
+0022: 0800                     trap
+0024: 0800                     trap

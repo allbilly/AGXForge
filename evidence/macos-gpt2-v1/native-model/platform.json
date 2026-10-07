@@ -1,0 +1,33 @@
+{
+  "system": "Darwin",
+  "macos": "27.0.1",
+  "build": "26A434",
+  "gpu": "Apple M1",
+  "driver": "IOGPU",
+  "executor": "direct IOGPU G13",
+  "kernel": {
+    "system": "Darwin",
+    "node": "MacBookAir",
+    "release": "27.0.0",
+    "version": "Darwin Kernel Version 27.0.0: Tue Aug 11 21:05:27 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T8103",
+    "machine": "arm64",
+    "processor": "arm"
+  },
+  "python": "3.14.8",
+  "page_bytes": 16384,
+  "agx_metal_absent": true,
+  "metal_api_calls": 0,
+  "arena_bytes": 671088640,
+  "arena_resource_slot": 27,
+  "support": {
+    "schema_version": 1,
+    "build": "26A434",
+    "gpu": "Apple M1",
+    "bytes": 20480,
+    "sha256": "0c817d783482b49301254d80eeae7bf98b3e38028ad2e4c0c37c87fc1f5176bd",
+    "code_start": 20480,
+    "template_sha256": "fc344b808d12206fcdba0316acdb95a876a13492e98a5cb14ec130be3164e4a0",
+    "preparation": "local Metal pipeline creation; GPU submissions refused by interposer"
+  },
+  "template_sha256": "fc344b808d12206fcdba0316acdb95a876a13492e98a5cb14ec130be3164e4a0"
+}

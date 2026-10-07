@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "g13_tensors_bit_identical": 2508,
+  "program_descriptors_identical": 21,
+  "metal": "results/macos-gpt2/compiler-validation/metal",
+  "native": "results/macos-gpt2/iogpu-model-final",
+  "native_source_difference_from_compiler_cohort": [
+    "examples/macos/benchmark_gpt2.py"
+  ],
+  "apple": {
+    "status": "PASS",
+    "apple_tensors": 2508,
+    "apple_bit_identical": 48,
+    "paired_apple_over_g13_ratios": [
+      1.2253914496379534,
+      1.5038277865495882,
+      1.4522031267549185,
+      1.4356891067759319,
+      1.4866126990006467
+    ],
+    "paired_median_ratio": 1.4522031267549185,
+    "every_pair_faster": true
+  }
+}
