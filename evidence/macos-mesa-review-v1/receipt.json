@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "regressions_per_transport": 22,
+  "full_suite_checks_per_transport": 134,
+  "software_checks": 89,
+  "helper_sha256": "fc5ed41cc991928cd1411a3bcd640a027cca47d4ed02fa25b4ff1bdb697b1004",
+  "runs": {
+    "metal": {
+      "full_bundle": "results/macos-mesa-review-metal-v1",
+      "full_audit_sha256": "ed7a19d23fff56afec78e95c9a6b6baa65c25843657f771aa2baf8d232599dce",
+      "full_audit_gzip_sha256": "e0f4b7c0be43821fcb9fa2a30cbd2f2aa405e4f41a7c667fd9c65c084d3fa952",
+      "full_launches": 134,
+      "retained_launches": 22,
+      "full_artifact_hashes": 2511
+    },
+    "native": {
+      "full_bundle": "results/macos-mesa-review-native-v1",
+      "full_audit_sha256": "49c3a0de44ee912303d3ca6cc11fa4fa5568aea3fe243a37c804b07df56338bf",
+      "full_audit_gzip_sha256": "2c03716c6c53e8c95c45872c1b194644b5a8332f3ee70a63c8070a1d97ac2687",
+      "full_launches": 134,
+      "retained_launches": 22,
+      "full_artifact_hashes": 3047
+    }
+  }
+}

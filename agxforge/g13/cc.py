@@ -8,62 +8,13 @@ The G17 compiler and its decoder validation are untouched.
 from agxforge.g17 import ir
 from .abi import Binding, G13Program
 from .encode import assemble
-
-
-class Unsupported(ValueError): pass
+from .admission import Unsupported, admit
 
 
 def compile_function(fn, *, threads, extents, workgroup_size=32):
-    if fn.threadgroup:
-        raise Unsupported("threadgroup memory/barriers require a separately verified capability level")
-    if not fn.blocks or len(set(b.label for b in fn.blocks)) != len(fn.blocks):
-        raise Unsupported("nonempty uniquely labelled CFG required")
-    if type(threads) is not int or not 0 < threads < 2**31:
-        raise Unsupported("fixed positive logical launch extent required")
+    admit(fn, threads=threads, extents=extents, workgroup_size=workgroup_size)
     buffers = sorted(fn.buffers, key=lambda b: b.slot)
-    if [b.slot for b in buffers] != list(range(len(buffers))) or not buffers:
-        raise Unsupported("G13 buffers must use dense slots")
-    if set(extents) != {b.name for b in buffers}:
-        raise Unsupported("every buffer must declare its required extent")
-    for b in buffers:
-        if b.elem not in (ir.I32, ir.F32, ir.I16, ir.F16, "bfloat"):
-            raise Unsupported(f"unsupported element {b.elem}")
     ops = [op for block in fn.blocks for op in block.ops]
-    attrs = {"builtin": {"which", "axis"}, "load": {"width", "offset", "disp", "scale", "shift16"},
-             "store_at": {"width", "offset", "disp", "scale", "shift16"},
-             "cmp": {"pred", "source_modifier", "cap"}, "csel": {"rel"}, "fcsel": {"rel"}, "icmp": {"rel"}}
-    arity = dict(const=1, builtin=0, load=2, store_at=3, phi=2, cmp=2, br=1, br_cond=3, ret=0,
-                 fadd=2, fsub=2, fmul=2, fma=3, add=2, sub=2, mul=2, madd=3,
-                 shl=2, shr=2, bitcast=1, rcp=1, rsqrt=1, exp2=1, log2=1, sin_turns=1,
-                 f16_to_f32=1, f32_to_f16_rte=1, u32_to_f32=1, i32_to_f32=1,
-                 f32_to_u32=1, f32_to_i32=1, csel=4, fcsel=4, icmp=2, fmax=2, fmin=2)
-    arity.update({k: 2 for k in ("and", "or", "xor")})
-    for op in ops:
-        if op.kind not in arity or len(op.args) != arity[op.kind]:
-            raise Unsupported(f"unsupported operation or operand count: {op.kind}")
-        if set(op.attrs) - attrs.get(op.kind, set()):
-            raise Unsupported(f"unsupported G13 attributes on {op.kind}: {sorted(op.attrs)}")
-    defined = set()
-    for block in fn.blocks:
-        seen_non_phi = False
-        for i, op in enumerate(block.ops):
-            if (op.kind in ("br", "br_cond", "ret")) != (i == len(block.ops) - 1):
-                raise Unsupported("each block must end with exactly one terminator")
-            if op.kind == "phi":
-                if seen_non_phi or len(op.args) != 2:
-                    raise Unsupported("two-input phis must precede the loop body")
-                if isinstance(op.args[0], ir.Value) and op.args[0] not in defined:
-                    raise Unsupported("phi entry must already be defined")
-            else:
-                seen_non_phi = True
-                if any(isinstance(a, ir.Value) and a not in defined for a in op.args):
-                    raise Unsupported("SSA use before definition")
-            if op.dest is not None:
-                if op.dest in defined or op.dest.op is not op:
-                    raise Unsupported("SSA definitions must be unique")
-                defined.add(op.dest)
-    if any(isinstance(a, ir.Value) and a not in defined for op in ops for a in op.args):
-        raise Unsupported("undefined phi latch")
     regs, next_reg = {}, 3  # r0 execution state; r1 scratch; r2 mask bound
     for op in ops:
         if op.dest is not None and op.kind != "cmp":

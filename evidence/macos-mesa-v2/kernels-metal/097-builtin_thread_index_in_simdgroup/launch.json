@@ -1,0 +1,81 @@
+{
+  "status": "COMPLETED",
+  "executor": "G13 machine code through Metal",
+  "program": {
+    "name": "builtin_thread_index_in_simdgroup",
+    "bindings": [
+      {
+        "name": "out",
+        "slot": 0,
+        "access": "write",
+        "min_bytes": 260,
+        "alignment": 4
+      }
+    ],
+    "register_halfs": 6,
+    "uniform_halfs": 4,
+    "workgroup_size": 32,
+    "entry_offset": 0,
+    "target": "g13g",
+    "abi_version": 1,
+    "reserved_register_halfs": [
+      0,
+      1
+    ],
+    "builtins": [
+      52,
+      80
+    ],
+    "bounds_policy": "masked",
+    "numerical": "binary32; hardware FTZ and approximate transcendentals",
+    "origin": "Mesa 26.2.4 NIR -> AGX",
+    "threadgroup_bytes": 0,
+    "scratch_bytes": 0,
+    "logical_threads": 65,
+    "code_sha256": "dc8bf7e6112658e3497589779909003924ec66852bb185dc57f37935ae09fc25",
+    "code_bytes": 52,
+    "constants": [],
+    "relocations": [],
+    "helper_required": false
+  },
+  "logical_threads": 65,
+  "global_threads": [
+    96,
+    1,
+    1
+  ],
+  "workgroup_size": [
+    32,
+    1,
+    1
+  ],
+  "group_count": [
+    3,
+    1,
+    1
+  ],
+  "buffers": [
+    {
+      "binding": "out",
+      "gpu_address": 90200652352,
+      "mapping_address": 90200652288,
+      "payload_offset": 64,
+      "extent": 260,
+      "allocation_bytes": 388,
+      "access": "write"
+    }
+  ],
+  "code_offset": 14128,
+  "code_capacity": 5652,
+  "shader.bin": {
+    "sha256": "dc8bf7e6112658e3497589779909003924ec66852bb185dc57f37935ae09fc25",
+    "bytes": 52
+  },
+  "metal-archive.bin": {
+    "sha256": "2efb31c5671acbeaadb8527035af6323ce53aada644f75cf993be8aa6965ecbf",
+    "bytes": 32160
+  },
+  "fence_completed": true,
+  "canaries_intact": true,
+  "host_submit_wait_ns": 482125
+}

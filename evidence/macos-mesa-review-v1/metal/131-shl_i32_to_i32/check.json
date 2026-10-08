@@ -1,0 +1,12 @@
+{
+  "name": "shl_i32_to_i32",
+  "logical_threads": 129,
+  "atol": 0,
+  "rtol": 0,
+  "status": "PASS",
+  "max_abs_error": 0.0,
+  "expected_dtype": "uint32",
+  "actual_dtype": "uint32",
+  "fence_completed": true,
+  "canaries_intact": true
+}

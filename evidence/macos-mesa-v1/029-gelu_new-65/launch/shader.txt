@@ -1,0 +1,27 @@
+0000: 72051004                 get_sr           r1, sr80 (thread_position_in_grid.x)
+0004: 62000000                 mov_imm          r0l, 0
+0008: 522842120001             if_icmp          r0l, ult, r1, 65, 1
+000e: 0511240e00c01200         device_load      0, i32, x, r2, u2_u3, r1, unsigned
+0016: 3800                     wait             0
+0018: 9a8d84422800             fmul32           r3.cache, r2.cache, r2.cache
+001e: 9a8d46422800             fmul32           r3.cache, r3, r2.cache
+0024: e2111327373d             mov_imm          r4.cache, 1027024659, 0b0
+002a: ba8d468224840200         fmadd32          r3.cache, r3, r4, r2.cache
+0032: e211615713c0             mov_imm          r4.cache, 3222493025, 0b0
+0038: 9a8d46822400             fmul32           r3.cache, r3, r4
+003e: 8a0d46d2                 exp2             r3.cache, r3
+0042: aa8d30602400             fadd32           r3.cache, 1.0, r3
+0048: 8a0d4682                 rcp              r3.cache, r3
+004c: 1a8944622400             fmul32           r2, r2, r3
+0052: 4511200e00c01200         device_store     0, i32, x, r2, u0_u1, r1, unsigned, 0
+005a: 3800                     wait             0
+005c: 520e00000000             pop_exec         r0l, 1
+0062: 8800                     stop
+0064: 0800                     trap
+0066: 0800                     trap
+0068: 0800                     trap
+006a: 0800                     trap
+006c: 0800                     trap
+006e: 0800                     trap
+0070: 0800                     trap
+0072: 0800                     trap

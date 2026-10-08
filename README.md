@@ -12,6 +12,12 @@ The macOS examples also run FP32 GPT-2, with independent tensor validation and
 a matched [Apple-compiled Metal comparison](examples/macos/README.md#gpt-2-and-compiler-comparison).
 Direct IOGPU has intermittent driver faults; the [GPT-2 receipts](evidence/macos-gpt2-v1/README.md)
 retain its successful runs and failures.
+An optional [Mesa/Asahi userspace compiler adapter](examples/macos/README.md#optional-mesa--asahi-compiler)
+now compiles the complete GPT-2 and BF16 Qwen graphs on M1 macOS, through both
+Metal and direct IOGPU. Each transport passed 112 kernel checks, 2,508 GPT-2
+tensor checks and 2,754 Qwen tensor checks against independent FP64 references.
+The [Mesa receipts](evidence/macos-mesa-v2/README.md) retain compiler provenance
+and audited model results. The adapter is opt-in; existing compiler defaults remain.
 
 **A native compiler and runtime for the Apple M5 GPU (G17) and the tensor units in its cores, built on a machine
 model recovered and checked by measurement.** AGXForge compiles its own IR to G17 machine code: instruction

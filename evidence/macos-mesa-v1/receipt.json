@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "scope": "AGXForge IR -> Mesa 26.2.4 NIR -> AGX -> macOS Metal",
+  "gpu_checks": 30,
+  "unit_checks": 79,
+  "full_model_verified": false,
+  "full_bundle_path": "results/macos-mesa-v3",
+  "full_bundle_manifest_sha256": "5508aff43d296229e6399835af0fe0528f4494f26b21d78b55b476b32066e2d9",
+  "full_bundle_files": 569,
+  "full_bundle_bytes": 21374020,
+  "compact_omits": [
+    "Metal carrier archives",
+    "input tensor arrays",
+    "compiler build trees",
+    "duplicated compiler source identities"
+  ],
+  "unverified": [
+    "full GPT-2/Qwen graph",
+    "Mesa code through direct IOGPU",
+    "other GPUs/OS builds",
+    "FP16/BF16",
+    "tensor instructions",
+    "throughput"
+  ],
+  "compact_normalization": "Trailing whitespace removed from human-readable shader disassembly; tokens and binary bytes unchanged"
+}

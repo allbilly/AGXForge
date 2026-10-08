@@ -6,7 +6,8 @@ from . import gpt2_kernels as g
 
 
 class GPT2Plan:
-    def __init__(self, checkpoint, capacity=32):
+    def __init__(self, checkpoint, capacity=32, *, compiler=None):
+        self.compiler_name = compiler.name if compiler is not None else "AGXForge G13"
         c = checkpoint.config
         if (c.get("model_type") != "gpt2" or c.get("activation_function") != "gelu_new"
                 or c.get("add_cross_attention", False) or not c.get("tie_word_embeddings", True)
@@ -62,14 +63,17 @@ class GPT2Plan:
             "down": g.conv1d(self.ffn, self.d), "logits": k.gemv(self.vocab, self.d, "f32"),
             "argmax": k.argmax(self.vocab)
         }
-        self.programs = {name: spec.compile() for name, spec in builders.items()}
+        self.programs = {name: compiler(spec, name) if compiler is not None else spec.compile()
+                         for name, spec in builders.items()}
+        self.compiler_provenance = compiler.descriptor() if compiler is not None else None
         # Reject programs outside the measured macOS ABI before any model allocation.
         if any(p.register_halfs > 80 or len(p.bindings) > 8 for p in self.programs.values()):
             raise ValueError("GPT-2 kernels exceed the measured macOS register/binding profile")
         self.requirements = {name: sorted(spec.required_capabilities()) for name, spec in builders.items()}
 
     def descriptor(self):
-        return dict(architecture="gpt2", capacity=self.capacity, tensor_operations="GPU only",
+        return dict(architecture="gpt2", compiler=self.compiler_name, compiler_provenance=self.compiler_provenance,
+                    capacity=self.capacity, tensor_operations="GPU only",
                     storage="FP32, original Conv1D layout", prefill="token by token through decode kernels",
                     requirements=self.requirements,
                     programs={name: program.descriptor() for name, program in self.programs.items()})

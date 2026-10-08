@@ -1,0 +1,12 @@
+{
+  "name": "add",
+  "logical_threads": 63,
+  "atol": 0,
+  "rtol": 0,
+  "status": "PASS",
+  "max_abs_error": 0.0,
+  "expected_dtype": "float32",
+  "actual_dtype": "float32",
+  "fence_completed": true,
+  "canaries_intact": true
+}

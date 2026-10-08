@@ -1,0 +1,39 @@
+shader: MESA_SHADER_COMPUTE
+name: AGXForge Mesa
+internal: true
+workgroup_size: 32, 1, 1
+max_subgroup_size: 128
+min_subgroup_size: 1
+flrp_lowered: true
+io_lowered: true
+decl_function main () (entrypoint)
+
+impl main {
+    block b0:   // preds:
+    64     %0 = @load_preamble (base=0)
+    64     %1 = @load_preamble (base=4)
+    32x3   %2 = @load_global_invocation_id
+    32     %3 = load_const (0x00000041 = 65)
+    1      %4 = ult %2.x, %3 (0x41)
+                // succs: b1 b2
+    if %4 {
+        block b1:   // preds: b0
+        32     %5 = load_const (0x00000002)
+        64     %6 = u2u64 %2.x
+        64     %7 = ishl %6, %5 (0x2)
+        64     %8 = iadd %1, %7
+        32     %9 = @load_global (%8) (access=none, align_mul=4, align_offset=0)
+        32    %10 = load_const (0x00000001)
+        32    %11 = iadd %2.x, %10 (0x1)
+        64    %12 = u2u64 %11
+        64    %13 = ishl %12, %5 (0x2)
+        64    %14 = iadd %0, %13
+                    @store_global (%9, %14) (wrmask=x, access=none, align_mul=4, align_offset=0)
+                    // succs: b3
+    } else {
+        block b2:  // preds: b0, succs: b3
+    }
+    block b3:  // preds: b1 b2, succs: b4
+    block b4:
+}
+

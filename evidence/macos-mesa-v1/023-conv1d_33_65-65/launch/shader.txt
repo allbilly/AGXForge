@@ -1,0 +1,197 @@
+0000: 72051004                 get_sr           r1, sr80 (thread_position_in_grid.x)
+0004: 62000000                 mov_imm          r0l, 0
+0008: 522842120001             if_icmp          r0l, ult, r1, 65, 1
+000e: 20c078040000             jmp_exec_none    0x486
+0014: 0511280e00c01200         device_load      0, i32, x, r2, u4_u5, r1, unsigned
+001c: 0521044d00c0f200         device_load      1, i32, xyzw, r4_r5_r6_r7, u2_u3, 0, signed
+0024: 3800                     wait             0
+0026: 3801                     wait             1
+0028: 9a8944822400             fmul32           r2.cache, r2, r4
+002e: 0e0d012068040000         iadd             r3, 65, r1.cache.sx
+0036: 0519680e00c01200         device_load      0, i32, x, r3, u4_u5, r3, unsigned
+003e: 3800                     wait             0
+0040: ba8946a224440200         fmadd32          r2.cache, r3, r5, r2
+0048: 0e0d022068080000         iadd             r3, 130, r1.cache.sx
+0050: 0519680e00c01200         device_load      0, i32, x, r3, u4_u5, r3, unsigned
+0058: 3800                     wait             0
+005a: ba8946c224440200         fmadd32          r2.cache, r3, r6, r2
+0062: 0e0d0320680c0000         iadd             r3, 195, r1.cache.sx
+006a: 0519680e00c01200         device_load      0, i32, x, r3, u4_u5, r3, unsigned
+0072: 3800                     wait             0
+0074: ba8946e224440200         fmadd32          r2.cache, r3, r7, r2
+007c: e20d04010000             mov_imm          r3.cache, 260, 0b0
+0082: 0e0d462668000000         iadd             r3, r3.sx, r1.cache.sx
+008a: 0519680e00c01200         device_load      0, i32, x, r3, u4_u5, r3, unsigned
+0092: 0521144d00c8f200         device_load      1, i32, xyzw, r4_r5_r6_r7, u2_u3, 1, signed, lsl 2
+009a: 3800                     wait             0
+009c: 3801                     wait             1
+009e: ba89468224440200         fmadd32          r2.cache, r3, r4, r2
+00a6: e20d45010000             mov_imm          r3.cache, 325, 0b0
+00ac: 0e0d462668000000         iadd             r3, r3.sx, r1.cache.sx
+00b4: 0519680e00c01200         device_load      0, i32, x, r3, u4_u5, r3, unsigned
+00bc: 3800                     wait             0
+00be: ba8946a224440200         fmadd32          r2.cache, r3, r5, r2
+00c6: e20d86010000             mov_imm          r3.cache, 390, 0b0
+00cc: 0e0d462668000000         iadd             r3, r3.sx, r1.cache.sx
+00d4: 0519680e00c01200         device_load      0, i32, x, r3, u4_u5, r3, unsigned
+00dc: 3800                     wait             0
+00de: ba8946c224440200         fmadd32          r2.cache, r3, r6, r2
+00e6: e20dc7010000             mov_imm          r3.cache, 455, 0b0
+00ec: 0e0d462668000000         iadd             r3, r3.sx, r1.cache.sx
+00f4: 0519680e00c01200         device_load      0, i32, x, r3, u4_u5, r3, unsigned
+00fc: 3800                     wait             0
+00fe: ba8946e224440200         fmadd32          r2.cache, r3, r7, r2
+0106: e20d08020000             mov_imm          r3.cache, 520, 0b0
+010c: 0e0d462668000000         iadd             r3, r3.sx, r1.cache.sx
+0114: 0519680e00c01200         device_load      0, i32, x, r3, u4_u5, r3, unsigned
+011c: 0521244d00c8f200         device_load      1, i32, xyzw, r4_r5_r6_r7, u2_u3, 2, signed, lsl 2
+0124: 3800                     wait             0
+0126: 3801                     wait             1
+0128: ba89468224440200         fmadd32          r2.cache, r3, r4, r2
+0130: e20d49020000             mov_imm          r3.cache, 585, 0b0
+0136: 0e0d462668000000         iadd             r3, r3.sx, r1.cache.sx
+013e: 0519680e00c01200         device_load      0, i32, x, r3, u4_u5, r3, unsigned
+0146: 3800                     wait             0
+0148: ba8946a224440200         fmadd32          r2.cache, r3, r5, r2
+0150: e20d8a020000             mov_imm          r3.cache, 650, 0b0
+0156: 0e0d462668000000         iadd             r3, r3.sx, r1.cache.sx
+015e: 0519680e00c01200         device_load      0, i32, x, r3, u4_u5, r3, unsigned
+0166: 3800                     wait             0
+0168: ba8946c224440200         fmadd32          r2.cache, r3, r6, r2
+0170: e20dcb020000             mov_imm          r3.cache, 715, 0b0
+0176: 0e0d462668000000         iadd             r3, r3.sx, r1.cache.sx
+017e: 0519680e00c01200         device_load      0, i32, x, r3, u4_u5, r3, unsigned
+0186: 3800                     wait             0
+0188: ba8946e224440200         fmadd32          r2.cache, r3, r7, r2
+0190: e20d0c030000             mov_imm          r3.cache, 780, 0b0
+0196: 0e0d462668000000         iadd             r3, r3.sx, r1.cache.sx
+019e: 0519680e00c01200         device_load      0, i32, x, r3, u4_u5, r3, unsigned
+01a6: 0521344d00c8f200         device_load      1, i32, xyzw, r4_r5_r6_r7, u2_u3, 3, signed, lsl 2
+01ae: 3800                     wait             0
+01b0: 3801                     wait             1
+01b2: ba89468224440200         fmadd32          r2.cache, r3, r4, r2
+01ba: e20d4d030000             mov_imm          r3.cache, 845, 0b0
+01c0: 0e0d462668000000         iadd             r3, r3.sx, r1.cache.sx
+01c8: 0519680e00c01200         device_load      0, i32, x, r3, u4_u5, r3, unsigned
+01d0: 3800                     wait             0
+01d2: ba8946a224440200         fmadd32          r2.cache, r3, r5, r2
+01da: e20d8e030000             mov_imm          r3.cache, 910, 0b0
+01e0: 0e0d462668000000         iadd             r3, r3.sx, r1.cache.sx
+01e8: 0519680e00c01200         device_load      0, i32, x, r3, u4_u5, r3, unsigned
+01f0: 3800                     wait             0
+01f2: ba8946c224440200         fmadd32          r2.cache, r3, r6, r2
+01fa: e20dcf030000             mov_imm          r3.cache, 975, 0b0
+0200: 0e0d462668000000         iadd             r3, r3.sx, r1.cache.sx
+0208: 0519680e00c01200         device_load      0, i32, x, r3, u4_u5, r3, unsigned
+0210: 3800                     wait             0
+0212: ba8946e224440200         fmadd32          r2.cache, r3, r7, r2
+021a: e20d10040000             mov_imm          r3.cache, 1040, 0b0
+0220: 0e0d462668000000         iadd             r3, r3.sx, r1.cache.sx
+0228: 0519680e00c01200         device_load      0, i32, x, r3, u4_u5, r3, unsigned
+0230: 0521444d00c8f200         device_load      1, i32, xyzw, r4_r5_r6_r7, u2_u3, 4, signed, lsl 2
+0238: 3800                     wait             0
+023a: 3801                     wait             1
+023c: ba89468224440200         fmadd32          r2.cache, r3, r4, r2
+0244: e20d51040000             mov_imm          r3.cache, 1105, 0b0
+024a: 0e0d462668000000         iadd             r3, r3.sx, r1.cache.sx
+0252: 0519680e00c01200         device_load      0, i32, x, r3, u4_u5, r3, unsigned
+025a: 3800                     wait             0
+025c: ba8946a224440200         fmadd32          r2.cache, r3, r5, r2
+0264: e20d92040000             mov_imm          r3.cache, 1170, 0b0
+026a: 0e0d462668000000         iadd             r3, r3.sx, r1.cache.sx
+0272: 0519680e00c01200         device_load      0, i32, x, r3, u4_u5, r3, unsigned
+027a: 3800                     wait             0
+027c: ba8946c224440200         fmadd32          r2.cache, r3, r6, r2
+0284: e20dd3040000             mov_imm          r3.cache, 1235, 0b0
+028a: 0e0d462668000000         iadd             r3, r3.sx, r1.cache.sx
+0292: 0519680e00c01200         device_load      0, i32, x, r3, u4_u5, r3, unsigned
+029a: 3800                     wait             0
+029c: ba8946e224440200         fmadd32          r2.cache, r3, r7, r2
+02a4: e20d14050000             mov_imm          r3.cache, 1300, 0b0
+02aa: 0e0d462668000000         iadd             r3, r3.sx, r1.cache.sx
+02b2: 0519680e00c01200         device_load      0, i32, x, r3, u4_u5, r3, unsigned
+02ba: 0521544d00c8f200         device_load      1, i32, xyzw, r4_r5_r6_r7, u2_u3, 5, signed, lsl 2
+02c2: 3800                     wait             0
+02c4: 3801                     wait             1
+02c6: ba89468224440200         fmadd32          r2.cache, r3, r4, r2
+02ce: e20d55050000             mov_imm          r3.cache, 1365, 0b0
+02d4: 0e0d462668000000         iadd             r3, r3.sx, r1.cache.sx
+02dc: 0519680e00c01200         device_load      0, i32, x, r3, u4_u5, r3, unsigned
+02e4: 3800                     wait             0
+02e6: ba8946a224440200         fmadd32          r2.cache, r3, r5, r2
+02ee: e20d96050000             mov_imm          r3.cache, 1430, 0b0
+02f4: 0e0d462668000000         iadd             r3, r3.sx, r1.cache.sx
+02fc: 0519680e00c01200         device_load      0, i32, x, r3, u4_u5, r3, unsigned
+0304: 3800                     wait             0
+0306: ba8946c224440200         fmadd32          r2.cache, r3, r6, r2
+030e: e20dd7050000             mov_imm          r3.cache, 1495, 0b0
+0314: 0e0d462668000000         iadd             r3, r3.sx, r1.cache.sx
+031c: 0519680e00c01200         device_load      0, i32, x, r3, u4_u5, r3, unsigned
+0324: 3800                     wait             0
+0326: ba8946e224440200         fmadd32          r2.cache, r3, r7, r2
+032e: e20d18060000             mov_imm          r3.cache, 1560, 0b0
+0334: 0e0d462668000000         iadd             r3, r3.sx, r1.cache.sx
+033c: 0519680e00c01200         device_load      0, i32, x, r3, u4_u5, r3, unsigned
+0344: 0521644d00c8f200         device_load      1, i32, xyzw, r4_r5_r6_r7, u2_u3, 6, signed, lsl 2
+034c: 3800                     wait             0
+034e: 3801                     wait             1
+0350: ba89468224440200         fmadd32          r2.cache, r3, r4, r2
+0358: e20d59060000             mov_imm          r3.cache, 1625, 0b0
+035e: 0e0d462668000000         iadd             r3, r3.sx, r1.cache.sx
+0366: 0519680e00c01200         device_load      0, i32, x, r3, u4_u5, r3, unsigned
+036e: 3800                     wait             0
+0370: ba8946a224440200         fmadd32          r2.cache, r3, r5, r2
+0378: e20d9a060000             mov_imm          r3.cache, 1690, 0b0
+037e: 0e0d462668000000         iadd             r3, r3.sx, r1.cache.sx
+0386: 0519680e00c01200         device_load      0, i32, x, r3, u4_u5, r3, unsigned
+038e: 3800                     wait             0
+0390: ba8946c224440200         fmadd32          r2.cache, r3, r6, r2
+0398: e20ddb060000             mov_imm          r3.cache, 1755, 0b0
+039e: 0e0d462668000000         iadd             r3, r3.sx, r1.cache.sx
+03a6: 0519680e00c01200         device_load      0, i32, x, r3, u4_u5, r3, unsigned
+03ae: 3800                     wait             0
+03b0: ba8946e224440200         fmadd32          r2.cache, r3, r7, r2
+03b8: e20d1c070000             mov_imm          r3.cache, 1820, 0b0
+03be: 0e0d462668000000         iadd             r3, r3.sx, r1.cache.sx
+03c6: 0519680e00c01200         device_load      0, i32, x, r3, u4_u5, r3, unsigned
+03ce: 0521744d00c8f200         device_load      1, i32, xyzw, r4_r5_r6_r7, u2_u3, 7, signed, lsl 2
+03d6: 3800                     wait             0
+03d8: 3801                     wait             1
+03da: ba89468224440200         fmadd32          r2.cache, r3, r4, r2
+03e2: e20d5d070000             mov_imm          r3.cache, 1885, 0b0
+03e8: 0e0d462668000000         iadd             r3, r3.sx, r1.cache.sx
+03f0: 0519680e00c01200         device_load      0, i32, x, r3, u4_u5, r3, unsigned
+03f8: 3800                     wait             0
+03fa: ba8946a224440200         fmadd32          r2.cache, r3, r5, r2
+0402: e20d9e070000             mov_imm          r3.cache, 1950, 0b0
+0408: 0e0d462668000000         iadd             r3, r3.sx, r1.cache.sx
+0410: 0519680e00c01200         device_load      0, i32, x, r3, u4_u5, r3, unsigned
+0418: 3800                     wait             0
+041a: ba8946c224440200         fmadd32          r2.cache, r3, r6, r2
+0422: e20ddf070000             mov_imm          r3.cache, 2015, 0b0
+0428: 0e0d462668000000         iadd             r3, r3.sx, r1.cache.sx
+0430: 0519680e00c01200         device_load      0, i32, x, r3, u4_u5, r3, unsigned
+0438: 3800                     wait             0
+043a: ba8946e224440200         fmadd32          r2.cache, r3, r7, r2
+0442: e20d20080000             mov_imm          r3.cache, 2080, 0b0
+0448: 0e0d462664000000         iadd             r3, r3.sx, r1.sx
+0450: 0519680e00c01200         device_load      0, i32, x, r3, u4_u5, r3, unsigned
+0458: 0521844d00c81200         device_load      1, i32, x, r4, u2_u3, 8, signed, lsl 2
+0460: 3800                     wait             0
+0462: 3801                     wait             1
+0464: ba89468224440200         fmadd32          r2.cache, r3, r4, r2
+046c: 05192c0e00c01200         device_load      0, i32, x, r3, u6_u7, r1, unsigned
+0474: 3800                     wait             0
+0476: 2a8944622400             fadd32           r2, r2, r3
+047c: 4511200e00c01200         device_store     0, i32, x, r2, u0_u1, r1, unsigned, 0
+0484: 3800                     wait             0
+0486: 520e00000000             pop_exec         r0l, 1
+048c: 8800                     stop
+048e: 0800                     trap
+0490: 0800                     trap
+0492: 0800                     trap
+0494: 0800                     trap
+0496: 0800                     trap
+0498: 0800                     trap
+049a: 0800                     trap
+049c: 0800                     trap

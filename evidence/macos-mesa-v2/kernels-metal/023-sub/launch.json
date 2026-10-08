@@ -1,0 +1,112 @@
+{
+  "status": "COMPLETED",
+  "executor": "G13 machine code through Metal",
+  "program": {
+    "name": "sub",
+    "bindings": [
+      {
+        "name": "out",
+        "slot": 0,
+        "access": "write",
+        "min_bytes": 260,
+        "alignment": 4
+      },
+      {
+        "name": "a",
+        "slot": 1,
+        "access": "read",
+        "min_bytes": 260,
+        "alignment": 4
+      },
+      {
+        "name": "b",
+        "slot": 2,
+        "access": "read",
+        "min_bytes": 260,
+        "alignment": 4
+      }
+    ],
+    "register_halfs": 8,
+    "uniform_halfs": 12,
+    "workgroup_size": 32,
+    "entry_offset": 0,
+    "target": "g13g",
+    "abi_version": 1,
+    "reserved_register_halfs": [
+      0,
+      1
+    ],
+    "builtins": [
+      80
+    ],
+    "bounds_policy": "masked",
+    "numerical": "binary32; hardware FTZ and approximate transcendentals",
+    "origin": "Mesa 26.2.4 NIR -> AGX",
+    "threadgroup_bytes": 0,
+    "scratch_bytes": 0,
+    "logical_threads": 65,
+    "code_sha256": "a4dca2a09f83525f466c4bd9a7961f1ca77fbee35f8c050b99aa0526c8f3cfd2",
+    "code_bytes": 74,
+    "constants": [],
+    "relocations": [],
+    "helper_required": false
+  },
+  "logical_threads": 65,
+  "global_threads": [
+    96,
+    1,
+    1
+  ],
+  "workgroup_size": [
+    32,
+    1,
+    1
+  ],
+  "group_count": [
+    3,
+    1,
+    1
+  ],
+  "buffers": [
+    {
+      "binding": "out",
+      "gpu_address": 90194363968,
+      "mapping_address": 90194363904,
+      "payload_offset": 64,
+      "extent": 260,
+      "allocation_bytes": 388,
+      "access": "write"
+    },
+    {
+      "binding": "a",
+      "gpu_address": 90194364480,
+      "mapping_address": 90194364416,
+      "payload_offset": 64,
+      "extent": 260,
+      "allocation_bytes": 388,
+      "access": "read"
+    },
+    {
+      "binding": "b",
+      "gpu_address": 90194364992,
+      "mapping_address": 90194364928,
+      "payload_offset": 64,
+      "extent": 260,
+      "allocation_bytes": 388,
+      "access": "read"
+    }
+  ],
+  "code_offset": 14128,
+  "code_capacity": 5652,
+  "shader.bin": {
+    "sha256": "a4dca2a09f83525f466c4bd9a7961f1ca77fbee35f8c050b99aa0526c8f3cfd2",
+    "bytes": 74
+  },
+  "metal-archive.bin": {
+    "sha256": "7b4da65a9513e3ac5e282d53e6366626d643d742d39504f69db2801c5dbc12d1",
+    "bytes": 32160
+  },
+  "fence_completed": true,
+  "canaries_intact": true,
+  "host_submit_wait_ns": 484875
+}

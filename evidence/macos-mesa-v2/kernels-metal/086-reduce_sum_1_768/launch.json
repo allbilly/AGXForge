@@ -1,0 +1,96 @@
+{
+  "status": "COMPLETED",
+  "executor": "G13 machine code through Metal",
+  "program": {
+    "name": "reduce_sum_1_768",
+    "bindings": [
+      {
+        "name": "out",
+        "slot": 0,
+        "access": "write",
+        "min_bytes": 4,
+        "alignment": 4
+      },
+      {
+        "name": "x",
+        "slot": 1,
+        "access": "read",
+        "min_bytes": 3072,
+        "alignment": 4
+      }
+    ],
+    "register_halfs": 12,
+    "uniform_halfs": 8,
+    "workgroup_size": 32,
+    "entry_offset": 0,
+    "target": "g13g",
+    "abi_version": 1,
+    "reserved_register_halfs": [
+      0,
+      1
+    ],
+    "builtins": [
+      80
+    ],
+    "bounds_policy": "masked",
+    "numerical": "binary32; hardware FTZ and approximate transcendentals",
+    "origin": "Mesa 26.2.4 NIR -> AGX",
+    "threadgroup_bytes": 0,
+    "scratch_bytes": 0,
+    "logical_threads": 1,
+    "code_sha256": "04d65bfb759dfb687eb7fa1950cb29656094e25367fba781a2c128e86b0140ab",
+    "code_bytes": 122,
+    "constants": [],
+    "relocations": [],
+    "helper_required": false
+  },
+  "logical_threads": 1,
+  "global_threads": [
+    32,
+    1,
+    1
+  ],
+  "workgroup_size": [
+    32,
+    1,
+    1
+  ],
+  "group_count": [
+    1,
+    1,
+    1
+  ],
+  "buffers": [
+    {
+      "binding": "out",
+      "gpu_address": 90196564800,
+      "mapping_address": 90196564736,
+      "payload_offset": 64,
+      "extent": 4,
+      "allocation_bytes": 132,
+      "access": "write"
+    },
+    {
+      "binding": "x",
+      "gpu_address": 90196565056,
+      "mapping_address": 90196564992,
+      "payload_offset": 64,
+      "extent": 3072,
+      "allocation_bytes": 3200,
+      "access": "read"
+    }
+  ],
+  "code_offset": 14128,
+  "code_capacity": 5652,
+  "shader.bin": {
+    "sha256": "04d65bfb759dfb687eb7fa1950cb29656094e25367fba781a2c128e86b0140ab",
+    "bytes": 122
+  },
+  "metal-archive.bin": {
+    "sha256": "42bb59c972bf3ac8c4179bbfa5e8f618bfa858df61c837164f4ca12c1f5c0e22",
+    "bytes": 32160
+  },
+  "fence_completed": true,
+  "canaries_intact": true,
+  "host_submit_wait_ns": 718292
+}

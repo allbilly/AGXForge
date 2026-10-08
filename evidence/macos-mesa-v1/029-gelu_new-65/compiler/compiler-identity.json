@@ -1,0 +1,50 @@
+{
+  "compiler_sha256": "a375a0c8c3bcacd5609cc6f9ac89c19c54578a135746527d7565c3cc370d58c7",
+  "compiler": "Mesa 26.2.4 AGX",
+  "build_identity_sha256": "a161c46bafc5e331172104604ce1e16ef770cd682dffc92bcc2346e12826d58b",
+  "protocol_sha256": "1fa9f573fde824e7f56b803d1a7e2341e6b2731f055b96b609540bce41b8e2af",
+  "code_sha256": "f731181f41af09b7dcdf489157f0b06cc95086d3b1dde7025105471870a5b56d",
+  "descriptor": {
+    "name": "gelu_new",
+    "bindings": [
+      {
+        "name": "out",
+        "slot": 0,
+        "access": "write",
+        "min_bytes": 260,
+        "alignment": 4
+      },
+      {
+        "name": "x",
+        "slot": 1,
+        "access": "read",
+        "min_bytes": 260,
+        "alignment": 4
+      }
+    ],
+    "register_halfs": 10,
+    "uniform_halfs": 8,
+    "workgroup_size": 32,
+    "entry_offset": 0,
+    "target": "g13g",
+    "abi_version": 1,
+    "reserved_register_halfs": [
+      0,
+      1
+    ],
+    "builtins": [
+      80
+    ],
+    "bounds_policy": "masked",
+    "numerical": "binary32; hardware FTZ and approximate transcendentals",
+    "origin": "Mesa 26.2.4 NIR -> AGX",
+    "threadgroup_bytes": 0,
+    "scratch_bytes": 0,
+    "logical_threads": 65,
+    "code_sha256": "f731181f41af09b7dcdf489157f0b06cc95086d3b1dde7025105471870a5b56d",
+    "code_bytes": 116,
+    "constants": [],
+    "relocations": [],
+    "helper_required": false
+  }
+}

@@ -1,0 +1,170 @@
+{
+  "status": "COMPLETED",
+  "executor": "direct IOGPU G13",
+  "program": {
+    "name": "layer_norm_apply",
+    "bindings": [
+      {
+        "name": "out",
+        "slot": 0,
+        "access": "write",
+        "min_bytes": 3072,
+        "alignment": 4
+      },
+      {
+        "name": "x",
+        "slot": 1,
+        "access": "read",
+        "min_bytes": 3072,
+        "alignment": 4
+      },
+      {
+        "name": "gain",
+        "slot": 2,
+        "access": "read",
+        "min_bytes": 3072,
+        "alignment": 4
+      },
+      {
+        "name": "bias",
+        "slot": 3,
+        "access": "read",
+        "min_bytes": 3072,
+        "alignment": 4
+      },
+      {
+        "name": "stats",
+        "slot": 4,
+        "access": "read",
+        "min_bytes": 8,
+        "alignment": 4
+      }
+    ],
+    "register_halfs": 12,
+    "uniform_halfs": 20,
+    "workgroup_size": 32,
+    "entry_offset": 0,
+    "target": "g13g",
+    "abi_version": 1,
+    "reserved_register_halfs": [
+      0,
+      1
+    ],
+    "builtins": [
+      80
+    ],
+    "bounds_policy": "masked",
+    "numerical": "binary32; hardware FTZ and approximate transcendentals",
+    "origin": "Mesa 26.2.4 NIR -> AGX",
+    "threadgroup_bytes": 0,
+    "scratch_bytes": 0,
+    "logical_threads": 768,
+    "code_sha256": "8d1b5a3973bc47ee3c91e8b6644e56ccf84db9b9b06673ea8245fd6fbee6aa58",
+    "code_bytes": 120,
+    "constants": [],
+    "relocations": [],
+    "helper_required": false
+  },
+  "logical_threads": 768,
+  "global_threads": [
+    768,
+    1,
+    1
+  ],
+  "workgroup_size": [
+    32,
+    1,
+    1
+  ],
+  "group_count": [
+    24,
+    1,
+    1
+  ],
+  "buffers": [
+    {
+      "binding": "out",
+      "gpu_address": 90195564992,
+      "mapping_address": 90195564928,
+      "payload_offset": 64,
+      "extent": 3072,
+      "allocation_bytes": 3200,
+      "access": "write"
+    },
+    {
+      "binding": "x",
+      "gpu_address": 90195568192,
+      "mapping_address": 90195568128,
+      "payload_offset": 64,
+      "extent": 3072,
+      "allocation_bytes": 3200,
+      "access": "read"
+    },
+    {
+      "binding": "gain",
+      "gpu_address": 90195571392,
+      "mapping_address": 90195571328,
+      "payload_offset": 64,
+      "extent": 3072,
+      "allocation_bytes": 3200,
+      "access": "read"
+    },
+    {
+      "binding": "bias",
+      "gpu_address": 90195574592,
+      "mapping_address": 90195574528,
+      "payload_offset": 64,
+      "extent": 3072,
+      "allocation_bytes": 3200,
+      "access": "read"
+    },
+    {
+      "binding": "stats",
+      "gpu_address": 90195577792,
+      "mapping_address": 90195577728,
+      "payload_offset": 64,
+      "extent": 8,
+      "allocation_bytes": 136,
+      "access": "read"
+    }
+  ],
+  "shader_gpu_address": 33792,
+  "usc_gpu_address": 98304,
+  "uniforms_gpu_address": 90195099552,
+  "notification_tokens": [
+    4472116848,
+    4470091696
+  ],
+  "uniform_register_halfs_reserved": 32,
+  "trace_ids": [
+    3258709665,
+    3258709666
+  ],
+  "register_halfs_reserved": 128,
+  "support_sha256": "0c817d783482b49301254d80eeae7bf98b3e38028ad2e4c0c37c87fc1f5176bd",
+  "template_sha256": "fc344b808d12206fcdba0316acdb95a876a13492e98a5cb14ec130be3164e4a0",
+  "uniforms.bin": {
+    "sha256": "bccf7019454852603364807b084bbbb1293fa974b08fb7293e7408457daaa730",
+    "bytes": 40
+  },
+  "usc.bin": {
+    "sha256": "a43f1b734657d0c7b5bebbfb4bfdd32a6f1bb40f690b37e0eeecbe7899e37721",
+    "bytes": 24
+  },
+  "cdm.bin": {
+    "sha256": "68b4443df14b1f07424642d6048b13b31b14bd04f2a1c5fc059fd11d5ca41249",
+    "bytes": 44
+  },
+  "iogpu-submit.bin": {
+    "sha256": "521a7c67529fc4e05395edc007047da7e837e5670f1394a19a061a0f20e7dc73",
+    "bytes": 64
+  },
+  "iogpu-pages.bin": {
+    "sha256": "e165398521294c6699a23b60ed4469fb18251da0b656b284e3af1bae6f8b7357",
+    "bytes": 32768
+  },
+  "completion": "70168f0a01000000954ae394ab1100008009e494ab11000000000000000000000000000000000000b02f700a010000002fc7e794ab1100008de8e794ab11000000000000000000000000000000000000",
+  "fence_completed": true,
+  "canaries_intact": true,
+  "host_submit_wait_ns": 644875
+}

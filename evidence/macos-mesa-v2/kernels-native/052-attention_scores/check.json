@@ -1,0 +1,12 @@
+{
+  "name": "attention_scores",
+  "logical_threads": 448,
+  "atol": 2e-06,
+  "rtol": 1e-05,
+  "status": "PASS",
+  "max_abs_error": 1.7371102681296158e-08,
+  "expected_dtype": "float64",
+  "actual_dtype": "float32",
+  "fence_completed": true,
+  "canaries_intact": true
+}

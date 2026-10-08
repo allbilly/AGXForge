@@ -1,0 +1,12 @@
+{
+  "gpt2": {
+    "status": "PASS",
+    "tensors_bit_identical": 2508,
+    "program_descriptors_identical": true
+  },
+  "qwen": {
+    "status": "PASS",
+    "tensors_bit_identical": 2754,
+    "program_descriptors_identical": true
+  }
+}

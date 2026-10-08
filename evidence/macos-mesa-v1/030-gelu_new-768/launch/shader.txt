@@ -1,0 +1,28 @@
+0000: 62000000                 mov_imm          r0l, 0
+0004: 620500030000             mov_imm          r1, 768, 0b0
+000a: 72091004                 get_sr           r2, sr80 (thread_position_in_grid.x)
+000e: 522844222c00             if_icmp          r0l, ult, r2, r1.discard, 1
+0014: 0509440e00c01200         device_load      0, i32, x, r1, u2_u3, r2, unsigned
+001c: 3800                     wait             0
+001e: 9a8d82222800             fmul32           r3.cache, r1.cache, r1.cache
+0024: 9a8d46222800             fmul32           r3.cache, r3, r1.cache
+002a: e2111327373d             mov_imm          r4.cache, 1027024659, 0b0
+0030: ba8d468224820200         fmadd32          r3.cache, r3, r4, r1.cache
+0038: e211615713c0             mov_imm          r4.cache, 3222493025, 0b0
+003e: 9a8d46822400             fmul32           r3.cache, r3, r4
+0044: 8a0d46d2                 exp2             r3.cache, r3
+0048: aa8d30602400             fadd32           r3.cache, 1.0, r3
+004e: 8a0d4682                 rcp              r3.cache, r3
+0052: 1a8542622400             fmul32           r1, r1, r3
+0058: 4509400e00c01200         device_store     0, i32, x, r1, u0_u1, r2, unsigned, 0
+0060: 3800                     wait             0
+0062: 520e00000000             pop_exec         r0l, 1
+0068: 8800                     stop
+006a: 0800                     trap
+006c: 0800                     trap
+006e: 0800                     trap
+0070: 0800                     trap
+0072: 0800                     trap
+0074: 0800                     trap
+0076: 0800                     trap
+0078: 0800                     trap

@@ -1,0 +1,52 @@
+shader: MESA_SHADER_COMPUTE
+name: AGXForge Mesa
+internal: true
+workgroup_size: 32, 1, 1
+max_subgroup_size: 128
+min_subgroup_size: 1
+flrp_lowered: true
+io_lowered: true
+decl_function main () (entrypoint)
+
+impl main {
+    block b0:   // preds:
+    64     %0 = @load_preamble (base=0)
+    64     %1 = @load_preamble (base=4)
+    64     %2 = @load_preamble (base=8)
+    64     %3 = @load_preamble (base=12)
+    32x3   %4 = @load_global_invocation_id
+    32     %5 = load_const (0x00000300 = 768)
+    1      %6 = ult %4.x, %5 (0x300)
+                // succs: b1 b2
+    if %6 {
+        block b1:   // preds: b0
+        32     %7 = load_const (0x00000002)
+        64     %8 = u2u64 %4.x
+        64     %9 = ishl %8, %7 (0x2)
+        64    %10 = iadd %3, %9
+        32    %11 = @load_global (%10) (access=none, align_mul=4, align_offset=0)
+        64    %12 = iadd %0, %9
+                    @store_global (%11, %12) (wrmask=x, access=none, align_mul=4, align_offset=0)
+        32    %13 = iadd %4.x, %5 (0x300)
+        64    %14 = u2u64 %13
+        64    %15 = ishl %14, %7 (0x2)
+        64    %16 = iadd %3, %15
+        32    %17 = @load_global (%16) (access=none, align_mul=4, align_offset=0)
+        64    %18 = iadd %1, %9
+                    @store_global (%17, %18) (wrmask=x, access=none, align_mul=4, align_offset=0)
+        32    %19 = load_const (0x00000600 = 1536)
+        32    %20 = iadd %4.x, %19 (0x600)
+        64    %21 = u2u64 %20
+        64    %22 = ishl %21, %7 (0x2)
+        64    %23 = iadd %3, %22
+        32    %24 = @load_global (%23) (access=none, align_mul=4, align_offset=0)
+        64    %25 = iadd %2, %9
+                    @store_global (%24, %25) (wrmask=x, access=none, align_mul=4, align_offset=0)
+                    // succs: b3
+    } else {
+        block b2:  // preds: b0, succs: b3
+    }
+    block b3:  // preds: b1 b2, succs: b4
+    block b4:
+}
+

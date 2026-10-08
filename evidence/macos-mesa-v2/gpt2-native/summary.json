@@ -1,0 +1,187 @@
+{
+  "schema_version": 1,
+  "timestamp_utc": "2026-10-07T19:51:12.890165+00:00",
+  "status": "PASS",
+  "input_tokens": [
+    464,
+    3139,
+    286,
+    4881,
+    318
+  ],
+  "generated_tokens": [
+    262,
+    3139,
+    286,
+    262,
+    4141,
+    2066,
+    11,
+    290
+  ],
+  "checks": [
+    {
+      "position": 0,
+      "token": 464,
+      "next_token": 198,
+      "tensors": 209,
+      "status": "PASS",
+      "top_token_matches": true,
+      "host_execution_seconds": 0.9398129170003813
+    },
+    {
+      "position": 1,
+      "token": 3139,
+      "next_token": 286,
+      "tensors": 209,
+      "status": "PASS",
+      "top_token_matches": true,
+      "host_execution_seconds": 0.8901891249988694
+    },
+    {
+      "position": 2,
+      "token": 286,
+      "next_token": 262,
+      "tensors": 209,
+      "status": "PASS",
+      "top_token_matches": true,
+      "host_execution_seconds": 0.9014629999983299
+    },
+    {
+      "position": 3,
+      "token": 4881,
+      "next_token": 11,
+      "tensors": 209,
+      "status": "PASS",
+      "top_token_matches": true,
+      "host_execution_seconds": 0.9225972919994092
+    },
+    {
+      "position": 4,
+      "token": 318,
+      "next_token": 262,
+      "tensors": 209,
+      "status": "PASS",
+      "top_token_matches": true,
+      "host_execution_seconds": 0.90228316700086
+    },
+    {
+      "position": 5,
+      "token": 262,
+      "next_token": 3139,
+      "tensors": 209,
+      "status": "PASS",
+      "top_token_matches": true,
+      "host_execution_seconds": 0.9208668329993088
+    },
+    {
+      "position": 6,
+      "token": 3139,
+      "next_token": 286,
+      "tensors": 209,
+      "status": "PASS",
+      "top_token_matches": true,
+      "host_execution_seconds": 0.9192785410014039
+    },
+    {
+      "position": 7,
+      "token": 286,
+      "next_token": 262,
+      "tensors": 209,
+      "status": "PASS",
+      "top_token_matches": true,
+      "host_execution_seconds": 0.8835542909982905
+    },
+    {
+      "position": 8,
+      "token": 262,
+      "next_token": 4141,
+      "tensors": 209,
+      "status": "PASS",
+      "top_token_matches": true,
+      "host_execution_seconds": 0.9077617500006454
+    },
+    {
+      "position": 9,
+      "token": 4141,
+      "next_token": 2066,
+      "tensors": 209,
+      "status": "PASS",
+      "top_token_matches": true,
+      "host_execution_seconds": 0.9220543750016077
+    },
+    {
+      "position": 10,
+      "token": 2066,
+      "next_token": 11,
+      "tensors": 209,
+      "status": "PASS",
+      "top_token_matches": true,
+      "host_execution_seconds": 0.9213946669988218
+    },
+    {
+      "position": 11,
+      "token": 11,
+      "next_token": 290,
+      "tensors": 209,
+      "status": "PASS",
+      "top_token_matches": true,
+      "host_execution_seconds": 0.9088478749981732
+    }
+  ],
+  "tensor_fallbacks": [],
+  "executor": "direct IOGPU G13",
+  "prefill": "tokenwise",
+  "verified": true,
+  "bounds": {
+    "embedding": [
+      0,
+      0
+    ],
+    "norm": [
+      0.003,
+      0.003
+    ],
+    "projection": [
+      0.005,
+      0.003
+    ],
+    "rope": [
+      0.005,
+      0.003
+    ],
+    "cache": [
+      0.005,
+      0.003
+    ],
+    "scores": [
+      0.01,
+      0.005
+    ],
+    "probs": [
+      0.0005,
+      0.005
+    ],
+    "attention": [
+      0.005,
+      0.003
+    ],
+    "residual": [
+      0.01,
+      0.003
+    ],
+    "activation": [
+      0.01,
+      0.005
+    ],
+    "logits": [
+      0.05,
+      0.003
+    ]
+  },
+  "compiler": "Mesa 26.2.4 AGX",
+  "dispatches": 3264,
+  "completed_positions": 12,
+  "text": " the capital of the French Republic, and",
+  "teardown": "clean"
+}

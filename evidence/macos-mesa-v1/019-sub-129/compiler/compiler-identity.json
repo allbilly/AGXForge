@@ -1,0 +1,57 @@
+{
+  "compiler_sha256": "a375a0c8c3bcacd5609cc6f9ac89c19c54578a135746527d7565c3cc370d58c7",
+  "compiler": "Mesa 26.2.4 AGX",
+  "build_identity_sha256": "a161c46bafc5e331172104604ce1e16ef770cd682dffc92bcc2346e12826d58b",
+  "protocol_sha256": "708174e08f6e968e75f808c3be0a2fabe27c8ce0700dbad5427ad96487fd37ee",
+  "code_sha256": "bdb307d1459ddcf1c5f253b56125721c0d39932619e2acdf1eb1668832a07b4a",
+  "descriptor": {
+    "name": "sub",
+    "bindings": [
+      {
+        "name": "out",
+        "slot": 0,
+        "access": "write",
+        "min_bytes": 516,
+        "alignment": 4
+      },
+      {
+        "name": "a",
+        "slot": 1,
+        "access": "read",
+        "min_bytes": 516,
+        "alignment": 4
+      },
+      {
+        "name": "b",
+        "slot": 2,
+        "access": "read",
+        "min_bytes": 516,
+        "alignment": 4
+      }
+    ],
+    "register_halfs": 8,
+    "uniform_halfs": 12,
+    "workgroup_size": 32,
+    "entry_offset": 0,
+    "target": "g13g",
+    "abi_version": 1,
+    "reserved_register_halfs": [
+      0,
+      1
+    ],
+    "builtins": [
+      80
+    ],
+    "bounds_policy": "masked",
+    "numerical": "binary32; hardware FTZ and approximate transcendentals",
+    "origin": "Mesa 26.2.4 NIR -> AGX",
+    "threadgroup_bytes": 0,
+    "scratch_bytes": 0,
+    "logical_threads": 129,
+    "code_sha256": "bdb307d1459ddcf1c5f253b56125721c0d39932619e2acdf1eb1668832a07b4a",
+    "code_bytes": 74,
+    "constants": [],
+    "relocations": [],
+    "helper_required": false
+  }
+}

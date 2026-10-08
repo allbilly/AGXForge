@@ -1,0 +1,12 @@
+{
+  "name": "shl_immediate_to_i16",
+  "logical_threads": 65,
+  "atol": 0,
+  "rtol": 0,
+  "status": "PASS",
+  "max_abs_error": 0.0,
+  "expected_dtype": "uint16",
+  "actual_dtype": "uint16",
+  "fence_completed": true,
+  "canaries_intact": true
+}

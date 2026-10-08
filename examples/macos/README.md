@@ -1,10 +1,98 @@
 # Base M1 / G13G on macOS
 
-Both routes run AGXForge-authored G13 machine code, including the BF16
+By default, both routes run AGXForge-authored G13 machine code, including the BF16
 Qwen2.5-0.5B-Instruct and FP32 GPT-2 graphs. Qwen shares the compiler, model planner and independent
 FP64 references with [the Asahi route](../asahi/README.md). The measured platform
 is a base M1 MacBook Air on macOS **27.0.1, build 26A434**, with 16 KiB pages.
 Other M1-family GPUs are rejected. Other macOS releases have not been validated.
+
+## Optional Mesa / Asahi compiler
+
+Mesa **26.2.4** can generate the native code while AGXForge keeps its macOS
+packaging and either Metal or direct IOGPU execution. `agxforge/g13/mesa.py` lowers existing scalar
+AGXForge IR into NIR; Mesa supplies optimization, instruction selection,
+register allocation, scheduling and encoding. No Linux DRM driver is used.
+On the Metal route, Apple's compiler creates the carrier container; Mesa's
+substituted code executes. The direct route submits Mesa's code with the existing
+IOGPU launch ABI and locally prepared driver support cache.
+
+The [Mesa receipts](../../evidence/macos-mesa-v2/README.md) record **112 passing
+kernel checks on each transport**, including lane tails, bounded reductions,
+full GPT-2 projection shapes, LayerNorm, GELU, FP16 rounding, BF16 reads, numeric
+conversions, thread builtins and ordered NaN comparisons. Full model validation
+also passes on both transports:
+
+| Model | Positions | GPU dispatches per transport | Independent FP64 tensor checks per transport | Generated text |
+|---|---:|---:|---:|---|
+| GPT-2 124M, FP32 | 12 | 3,264 | 2,508 | ` the capital of the French Republic, and` |
+| Qwen2.5-0.5B-Instruct, BF16 | 6 | 3,780 | 2,754 | ` for a good job` |
+
+Every recorded dispatch completed with intact guards; GPU argmax matched the
+FP64 graph at every position. These are correctness results. Mesa throughput
+has not been benchmarked. The [earlier 30-check proof](../../evidence/macos-mesa-v1/README.md)
+is retained separately with its original, narrower scope.
+
+The current kernel suite adds 22 review regression checks for displaced loads
+and stores, 16/32-bit shifts, immediate counts and count boundaries. Shifts
+zero-extend the source, use the low seven count bits and narrow the result after
+shifting, matching G13 semantics. The [review receipts](../../evidence/macos-mesa-review-v1/README.md)
+retain the regression outputs and compilation provenance separately from the
+earlier model runs.
+
+Build the optional compiler separately from the normal macOS tools:
+
+```sh
+brew install meson ninja llvm spirv-tools spirv-llvm-translator pkg-config
+.venv-macos/bin/python -m pip install --target build/macos/mesa-python \
+  'Mako==1.3.10' packaging PyYAML
+.venv-macos/bin/python tools/build_mesa_agx.py
+OPENBLAS_NUM_THREADS=1 .venv-macos/bin/python examples/macos/verify_gpt2_kernels.py \
+  --compiler mesa --output results/macos-mesa-kernels
+# After downloading the checkpoints using the commands below:
+OPENBLAS_NUM_THREADS=1 .venv-macos/bin/python examples/macos/gpt2.py \
+  --compiler mesa --verify --prompt 'The capital of France is' --generate 8 \
+  --output results/macos-mesa-gpt2
+OPENBLAS_NUM_THREADS=1 .venv-macos/bin/python examples/macos/qwen.py \
+  --compiler mesa --verify --token-ids 9707,11,12890 --generate 4 \
+  --output results/macos-mesa-qwen
+```
+
+Add `--backend iogpu` to select direct execution after `make macos-support`.
+The optional Make targets are `make macos-mesa-tools PYTHON=.venv-macos/bin/python`
+and `make macos-kernels PYTHON=.venv-macos/bin/python MACOS_COMPILER=mesa`.
+`--mesa-compiler PATH` selects another verified build of this same pinned adapter.
+
+The builder downloads a SHA-256-pinned Mesa release under `build/macos/`, checks
+the compiler sources against that archive and records the actual helper and
+source hashes. It adds the adapter and a small Meson fix for a duplicate macOS
+`genxml` visit; Mesa's compiler implementation is unchanged. Existing isolated
+checkouts can be supplied with `--source`, with the same source verification.
+The measured LLVM and SPIR-V translator versions are both 23.1.2; the translator
+must match LLVM's major/minor version.
+
+The adapter is opt-in: `--compiler mesa` selects it in both model runners and
+compiled kernel suites. `mesa.compile(kernel, new_output_directory)` returns a
+validated `G13Program`. Shared IR/CFG admission checks bindings and bounded
+control flow without invoking AGXForge's instruction selector, register
+allocator or encoder. Supported operations cover the existing FP32 model graphs,
+FP16 storage and arithmetic, BF16 reads, integer operations, explicit numeric
+conversions and x-axis thread builtins. BF16 stores are rejected until their
+rounding contract is established. All **89 hardware-free G13/macOS checks** pass;
+the 43 default GPT-2/Qwen program descriptors and code hashes are unchanged.
+Preambles, promoted constants, scratch/shared memory and more than eight buffers
+or 80 register halfwords are rejected. The normal G13 byte decoder remains in
+force. Unimplemented operations and tensor capabilities fail explicitly.
+Each compilation records its input IR, NIR, native bytes, ABI metadata, helper
+hash and verified build identity. The evidence auditor matches every Mesa launch
+to those compiler outputs, then checks execution images, completion, guards,
+tensor bounds and argmax. There is no automatic compiler fallback.
+
+Other GPU generations, macOS builds, tensor instructions and larger model
+variants remain unverified. This adapter does not replace the G17 compiler.
+The existing G13 and Asahi compiler defaults remain unchanged. Direct IOGPU
+remains experimental: historical intermittent driver faults are retained in the
+[GPT-2 evidence](../../evidence/macos-gpt2-v1/README.md), and no retries or fault
+recovery were added by the Mesa integration.
 
 Metal passed 81 handwritten smoke checks, 26 ISA/reuse checks, 57 compiled
 kernel checks and 2,754 intermediate tensor checks over six Qwen positions.

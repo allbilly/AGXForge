@@ -69,6 +69,8 @@ def source_identity():
               ROOT / "tools/macos_support.c", ROOT / "tools/macos_support.py",
               ROOT / "build/macos/libagxforge_support.dylib",
               ROOT / "tools/asahi_evidence.py", ROOT / "tools/macos_capture.py"]
+    paths += [ROOT / "tools/build_mesa_agx.py", ROOT / "tools/mesa_agx/bridge.c",
+              ROOT / "tools/mesa_agx/meson.build"]
     return {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
             for p in sorted(paths) if p.is_file()}
 

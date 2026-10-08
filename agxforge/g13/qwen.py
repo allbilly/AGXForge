@@ -56,7 +56,8 @@ class Checkpoint:
 
 
 class QwenPlan:
-    def __init__(self, checkpoint, capacity=32):
+    def __init__(self, checkpoint, capacity=32, *, compiler=None):
+        self.compiler_name = compiler.name if compiler is not None else "AGXForge G13"
         c = checkpoint.config
         if c["model_type"] != "qwen2" or c.get("hidden_act") != "silu" or c.get("use_sliding_window") or c.get("rope_scaling"):
             raise ValueError("only the Qwen2 scalar architecture without sliding windows or RoPE scaling is supported")
@@ -102,11 +103,14 @@ class QwenPlan:
             "down": k.gemv(self.d, self.ffn), "logits": k.gemv(self.vocab, self.d), "argmax": k.argmax(self.vocab)
         }
         # Compile EVERY selected kernel before any GPU/model allocation.
-        self.programs = {name: spec.compile() for name, spec in builders.items()}
+        self.programs = {name: compiler(spec, name) if compiler is not None else spec.compile()
+                         for name, spec in builders.items()}
+        self.compiler_provenance = compiler.descriptor() if compiler is not None else None
         self.requirements = {name: sorted(spec.required_capabilities()) for name, spec in builders.items()}
 
     def descriptor(self):
-        return dict(architecture="qwen2", capacity=self.capacity, tensor_operations="GPU only",
+        return dict(architecture="qwen2", compiler=self.compiler_name, compiler_provenance=self.compiler_provenance,
+                    capacity=self.capacity, tensor_operations="GPU only",
                     prefill="token by token through decode kernels", requirements=self.requirements,
                     programs={name: program.descriptor() for name, program in self.programs.items()})
 

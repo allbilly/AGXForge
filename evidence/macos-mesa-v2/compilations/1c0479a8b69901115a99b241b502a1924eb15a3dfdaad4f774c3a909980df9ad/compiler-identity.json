@@ -1,0 +1,65 @@
+{
+  "compiler_sha256": "ed0b4bb0376bc5fafe9570bfc0b084d5e0eca2f64c04fba49f97ec4915342f1d",
+  "compiler": "Mesa 26.2.4 AGX",
+  "bridge_protocol_version": 2,
+  "build_identity_sha256": "3bdf83c631c1bae16cfc6981a530e4d440897eb2ff9a705ede39029123cdc9c7",
+  "protocol_sha256": "74d79bc9a9aea2e87baba15e4572473cbd15a4d0142f0b52b56c48be5d761c4d",
+  "code_sha256": "7f1dce20b32601005d2f434ec1f204773b631e3b087656b088505f837e0e4b14",
+  "descriptor": {
+    "name": "split_qkv",
+    "bindings": [
+      {
+        "name": "q",
+        "slot": 0,
+        "access": "write",
+        "min_bytes": 260,
+        "alignment": 4
+      },
+      {
+        "name": "k",
+        "slot": 1,
+        "access": "write",
+        "min_bytes": 260,
+        "alignment": 4
+      },
+      {
+        "name": "v",
+        "slot": 2,
+        "access": "write",
+        "min_bytes": 260,
+        "alignment": 4
+      },
+      {
+        "name": "packed",
+        "slot": 3,
+        "access": "read",
+        "min_bytes": 780,
+        "alignment": 4
+      }
+    ],
+    "register_halfs": 6,
+    "uniform_halfs": 16,
+    "workgroup_size": 32,
+    "entry_offset": 0,
+    "target": "g13g",
+    "abi_version": 1,
+    "reserved_register_halfs": [
+      0,
+      1
+    ],
+    "builtins": [
+      80
+    ],
+    "bounds_policy": "masked",
+    "numerical": "binary32; hardware FTZ and approximate transcendentals",
+    "origin": "Mesa 26.2.4 NIR -> AGX",
+    "threadgroup_bytes": 0,
+    "scratch_bytes": 0,
+    "logical_threads": 65,
+    "code_sha256": "7f1dce20b32601005d2f434ec1f204773b631e3b087656b088505f837e0e4b14",
+    "code_bytes": 118,
+    "constants": [],
+    "relocations": [],
+    "helper_required": false
+  }
+}

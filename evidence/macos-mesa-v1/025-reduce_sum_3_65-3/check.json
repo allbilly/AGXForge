@@ -1,0 +1,15 @@
+{
+  "name": "reduce_sum_3_65",
+  "threads": 3,
+  "status": "PASS",
+  "mesa_register_halfs": 10,
+  "g13_register_halfs": 28,
+  "mesa_code_bytes": 116,
+  "g13_code_bytes": 176,
+  "atol": 2e-06,
+  "rtol": 1e-05,
+  "compiler_identity": "025-reduce_sum_3_65-3/compiler/compiler-identity.json",
+  "max_abs_error": 9.499490261077881e-08,
+  "expected_dtype": "float64",
+  "canaries_intact": true
+}

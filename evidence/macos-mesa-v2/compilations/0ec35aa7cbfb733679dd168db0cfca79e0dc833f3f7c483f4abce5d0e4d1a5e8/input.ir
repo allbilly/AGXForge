@@ -1,0 +1,6 @@
+AGXFORGE_MESA_V2 3 32
+thread 1 0 0 0 80
+load 2 1 1 0 32
+load 3 2 1 0 32
+fmul 4 2 3 0 32
+store 0 0 1 4 32

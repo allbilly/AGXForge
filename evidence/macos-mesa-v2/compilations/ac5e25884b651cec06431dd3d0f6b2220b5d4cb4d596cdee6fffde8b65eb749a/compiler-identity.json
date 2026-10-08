@@ -1,0 +1,51 @@
+{
+  "compiler_sha256": "ed0b4bb0376bc5fafe9570bfc0b084d5e0eca2f64c04fba49f97ec4915342f1d",
+  "compiler": "Mesa 26.2.4 AGX",
+  "bridge_protocol_version": 2,
+  "build_identity_sha256": "3bdf83c631c1bae16cfc6981a530e4d440897eb2ff9a705ede39029123cdc9c7",
+  "protocol_sha256": "aa5930770fe568b1f7e1037272e899457c1b4b32654c08067b6516f86b989d31",
+  "code_sha256": "f55b07c26189245b4768c429d674cb865ef985054154d92e52af9ad85d4f6a2e",
+  "descriptor": {
+    "name": "reduce_max_14_32",
+    "bindings": [
+      {
+        "name": "out",
+        "slot": 0,
+        "access": "write",
+        "min_bytes": 56,
+        "alignment": 4
+      },
+      {
+        "name": "x",
+        "slot": 1,
+        "access": "read",
+        "min_bytes": 1792,
+        "alignment": 4
+      }
+    ],
+    "register_halfs": 10,
+    "uniform_halfs": 8,
+    "workgroup_size": 32,
+    "entry_offset": 0,
+    "target": "g13g",
+    "abi_version": 1,
+    "reserved_register_halfs": [
+      0,
+      1
+    ],
+    "builtins": [
+      80
+    ],
+    "bounds_policy": "masked",
+    "numerical": "binary32; hardware FTZ and approximate transcendentals",
+    "origin": "Mesa 26.2.4 NIR -> AGX",
+    "threadgroup_bytes": 0,
+    "scratch_bytes": 0,
+    "logical_threads": 14,
+    "code_sha256": "f55b07c26189245b4768c429d674cb865ef985054154d92e52af9ad85d4f6a2e",
+    "code_bytes": 892,
+    "constants": [],
+    "relocations": [],
+    "helper_required": false
+  }
+}

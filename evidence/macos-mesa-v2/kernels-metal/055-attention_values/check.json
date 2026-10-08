@@ -1,0 +1,12 @@
+{
+  "name": "attention_values",
+  "logical_threads": 896,
+  "atol": 2e-06,
+  "rtol": 1e-05,
+  "status": "PASS",
+  "max_abs_error": 1.9015137742162125e-08,
+  "expected_dtype": "float64",
+  "actual_dtype": "float32",
+  "fence_completed": true,
+  "canaries_intact": true
+}

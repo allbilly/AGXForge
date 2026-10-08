@@ -1,0 +1,15 @@
+{
+  "name": "copy",
+  "threads": 33,
+  "status": "PASS",
+  "mesa_register_halfs": 6,
+  "g13_register_halfs": 12,
+  "mesa_code_bytes": 58,
+  "g13_code_bytes": 84,
+  "atol": 0,
+  "rtol": 0,
+  "compiler_identity": "009-copy-33/compiler/compiler-identity.json",
+  "max_abs_error": 0.0,
+  "expected_dtype": "float32",
+  "canaries_intact": true
+}

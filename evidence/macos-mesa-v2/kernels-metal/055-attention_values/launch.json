@@ -1,0 +1,128 @@
+{
+  "status": "COMPLETED",
+  "executor": "G13 machine code through Metal",
+  "program": {
+    "name": "attention_values",
+    "bindings": [
+      {
+        "name": "out",
+        "slot": 0,
+        "access": "write",
+        "min_bytes": 3584,
+        "alignment": 4
+      },
+      {
+        "name": "probs",
+        "slot": 1,
+        "access": "read",
+        "min_bytes": 1792,
+        "alignment": 4
+      },
+      {
+        "name": "v",
+        "slot": 2,
+        "access": "read",
+        "min_bytes": 16384,
+        "alignment": 4
+      },
+      {
+        "name": "headmap",
+        "slot": 3,
+        "access": "read",
+        "min_bytes": 56,
+        "alignment": 4
+      }
+    ],
+    "register_halfs": 18,
+    "uniform_halfs": 16,
+    "workgroup_size": 32,
+    "entry_offset": 0,
+    "target": "g13g",
+    "abi_version": 1,
+    "reserved_register_halfs": [
+      0,
+      1
+    ],
+    "builtins": [
+      80
+    ],
+    "bounds_policy": "masked",
+    "numerical": "binary32; hardware FTZ and approximate transcendentals",
+    "origin": "Mesa 26.2.4 NIR -> AGX",
+    "threadgroup_bytes": 0,
+    "scratch_bytes": 0,
+    "logical_threads": 896,
+    "code_sha256": "4ff4fb52a08fa52bf87936037373744d48243e63a2ba334fbda6ab30dc467ce6",
+    "code_bytes": 188,
+    "constants": [],
+    "relocations": [],
+    "helper_required": false
+  },
+  "logical_threads": 896,
+  "global_threads": [
+    896,
+    1,
+    1
+  ],
+  "workgroup_size": [
+    32,
+    1,
+    1
+  ],
+  "group_count": [
+    28,
+    1,
+    1
+  ],
+  "buffers": [
+    {
+      "binding": "out",
+      "gpu_address": 90196474176,
+      "mapping_address": 90196474112,
+      "payload_offset": 64,
+      "extent": 3584,
+      "allocation_bytes": 3712,
+      "access": "write"
+    },
+    {
+      "binding": "probs",
+      "gpu_address": 90196478016,
+      "mapping_address": 90196477952,
+      "payload_offset": 64,
+      "extent": 1792,
+      "allocation_bytes": 1920,
+      "access": "read"
+    },
+    {
+      "binding": "v",
+      "gpu_address": 90197262400,
+      "mapping_address": 90197262336,
+      "payload_offset": 64,
+      "extent": 16384,
+      "allocation_bytes": 16512,
+      "access": "read"
+    },
+    {
+      "binding": "headmap",
+      "gpu_address": 90196480064,
+      "mapping_address": 90196480000,
+      "payload_offset": 64,
+      "extent": 56,
+      "allocation_bytes": 184,
+      "access": "read"
+    }
+  ],
+  "code_offset": 14128,
+  "code_capacity": 5652,
+  "shader.bin": {
+    "sha256": "4ff4fb52a08fa52bf87936037373744d48243e63a2ba334fbda6ab30dc467ce6",
+    "bytes": 188
+  },
+  "metal-archive.bin": {
+    "sha256": "85c05c22795d338c3a0beb92d98a821d7840cf8b7495ef4e2985a08a7777bf54",
+    "bytes": 32160
+  },
+  "fence_completed": true,
+  "canaries_intact": true,
+  "host_submit_wait_ns": 530250
+}

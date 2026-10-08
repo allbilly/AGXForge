@@ -1,0 +1,12 @@
+{
+  "name": "reduce_max_3_65",
+  "logical_threads": 3,
+  "atol": 2e-06,
+  "rtol": 1e-05,
+  "status": "PASS",
+  "max_abs_error": 0.0,
+  "expected_dtype": "float32",
+  "actual_dtype": "float32",
+  "fence_completed": true,
+  "canaries_intact": true
+}

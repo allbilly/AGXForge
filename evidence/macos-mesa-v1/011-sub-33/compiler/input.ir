@@ -1,0 +1,6 @@
+AGXFORGE_MESA_V1 3 33
+thread 1 0 0 0 0
+load 2 1 1 0 32
+load 3 2 1 0 32
+fsub 4 2 3 0 0
+store 0 0 1 4 32

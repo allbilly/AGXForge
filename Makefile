@@ -92,7 +92,8 @@ asahi-isa: asahi-tools
 
 # Base M1/G13G machine code loaded through a local Metal carrier archive.
 MACOS_BACKEND ?= metal
-.PHONY: macos-tools macos-support macos-probe macos-smoke macos-isa macos-kernels macos-test
+MACOS_COMPILER ?= g13
+.PHONY: macos-tools macos-support macos-probe macos-smoke macos-isa macos-kernels macos-test macos-mesa-tools
 macos-tools: build/macos/libagxforge_macos.dylib build/macos/libagxforge_iogpu.dylib
 
 build/macos/libagxforge_macos.dylib: agxforge/runtime/macos.m
@@ -120,6 +121,9 @@ macos-isa: macos-tools
 	$(PYTHON) examples/macos/verify_isa.py --backend $(MACOS_BACKEND) --output results/macos-$(MACOS_BACKEND)-isa
 
 macos-kernels: macos-tools
-	$(PYTHON) examples/macos/verify_kernels.py --backend $(MACOS_BACKEND) --output results/macos-$(MACOS_BACKEND)-kernels
+	$(PYTHON) examples/macos/verify_kernels.py --backend $(MACOS_BACKEND) --compiler $(MACOS_COMPILER) --output results/macos-$(MACOS_BACKEND)-$(MACOS_COMPILER)-kernels
+
+macos-mesa-tools:
+	$(PYTHON) tools/build_mesa_agx.py
 
 macos-test: macos-tools g13-test

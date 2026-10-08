@@ -1,0 +1,15 @@
+{
+  "name": "add",
+  "threads": 31,
+  "status": "PASS",
+  "mesa_register_halfs": 8,
+  "g13_register_halfs": 14,
+  "mesa_code_bytes": 74,
+  "g13_code_bytes": 90,
+  "atol": 0,
+  "rtol": 0,
+  "compiler_identity": "002-add-31/compiler/compiler-identity.json",
+  "max_abs_error": 0.0,
+  "expected_dtype": "float32",
+  "canaries_intact": true
+}

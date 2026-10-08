@@ -32,10 +32,13 @@ def category(name):
 
 
 def run(args, *, executor_factory=Executor, identity_factory=source_identity, executor_name="native Asahi DRM",
-        plan_factory=QwenPlan, model_factory=Qwen, reference_factory=Reference):
+        plan_factory=QwenPlan, model_factory=Qwen, reference_factory=Reference, compiler_factory=None,
+        execution_compiler=None):
     output = args.output; output.mkdir(parents=True, exist_ok=False)
     checkpoint = Checkpoint(args.checkpoint)
-    plan = plan_factory(checkpoint, args.capacity)
+    compiler = compiler_factory(output/"compiler") if compiler_factory is not None else None
+    plan = (plan_factory(checkpoint, args.capacity, compiler=compiler) if compiler is not None else
+            plan_factory(checkpoint, args.capacity))
     tokenizer = Tokenizer.from_file(str(args.checkpoint/"tokenizer.json"))
     history = [int(t) for t in args.token_ids.split(",")] if args.token_ids else tokenizer.encode(args.prompt).ids
     if not history or any(t < 0 or t >= plan.vocab for t in history) or len(history)+args.generate-1 > plan.capacity:
@@ -48,6 +51,7 @@ def run(args, *, executor_factory=Executor, identity_factory=source_identity, ex
     report = dict(schema_version=1, timestamp_utc=datetime.now(timezone.utc).isoformat(), status="RUNNING",
                   input_tokens=list(history), generated_tokens=[], checks=[], tensor_fallbacks=[],
                   executor=executor_name, prefill="tokenwise", verified=args.verify, bounds=BOUNDS)
+    report["compiler"] = execution_compiler or getattr(plan, "compiler_name", "AGXForge G13")
     oracle = reference_factory(checkpoint, plan) if args.verify else None
     try:
         with executor_factory(timeout_ms=30000, va_slot=args.va_slot) as gpu:
@@ -106,7 +110,8 @@ def run(args, *, executor_factory=Executor, identity_factory=source_identity, ex
 
 def main(*, executor_factory=Executor, identity_factory=source_identity, executor_name="native Asahi DRM", argv=None,
          plan_factory=QwenPlan, model_factory=Qwen, reference_factory=Reference,
-         default_checkpoint=None, description=None):
+         default_checkpoint=None, description=None, compiler_factory=None, execution_compiler=None,
+         argument_extensions=None):
     parser = argparse.ArgumentParser(description=description or __doc__)
     parser.add_argument("--checkpoint", type=Path, default=default_checkpoint or ROOT/"models/asahi/qwen2.5-0.5b")
     parser.add_argument("--output", type=Path, required=True)
@@ -116,11 +121,13 @@ def main(*, executor_factory=Executor, identity_factory=source_identity, executo
     parser.add_argument("--capacity", type=int, default=32)
     parser.add_argument("--va-slot", type=int, choices=range(16), default=0)
     parser.add_argument("--verify", action="store_true", help="check intermediate tensors and logits against FP64")
+    if argument_extensions is not None: argument_extensions(parser)
     args = parser.parse_args(argv)
     if not 1 <= args.generate <= args.capacity: parser.error("generate must be 1..capacity")
     result = run(args, executor_factory=executor_factory, identity_factory=identity_factory,
                  executor_name=executor_name, plan_factory=plan_factory, model_factory=model_factory,
-                 reference_factory=reference_factory)
+                 reference_factory=reference_factory, compiler_factory=compiler_factory,
+                 execution_compiler=execution_compiler)
     print(f"{result['status']}: {result['completed_positions']} token positions, {result['dispatches']} native dispatches")
     print(result["text"])
 

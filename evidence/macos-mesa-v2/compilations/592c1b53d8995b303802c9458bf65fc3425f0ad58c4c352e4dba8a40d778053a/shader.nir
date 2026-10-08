@@ -1,0 +1,80 @@
+shader: MESA_SHADER_COMPUTE
+name: AGXForge Mesa
+internal: true
+workgroup_size: 32, 1, 1
+max_subgroup_size: 128
+min_subgroup_size: 1
+flrp_lowered: true
+io_lowered: true
+decl_function main () (entrypoint)
+
+impl main {
+    block b0:   // preds:
+    64     %0 = @load_preamble (base=0)
+    64     %1 = @load_preamble (base=4)
+    64     %2 = @load_preamble (base=8)
+    64     %3 = @load_preamble (base=12)
+    32x3   %4 = @load_global_invocation_id
+    32     %5 = load_const (0x00000300 = 768)
+    1      %6 = ult %4.x, %5 (0x300)
+                // succs: b1 b7
+    if %6 {
+        block b1:   // preds: b0
+        32     %7 = load_const (0x00000002)
+        32     %8 = load_const (0x00000006)
+        32     %9 = ushr %4.x, %8 (0x6)
+        64    %10 = u2u64 %9
+        64    %11 = ishl %10, %7 (0x2)
+        64    %12 = iadd %3, %11
+        32    %13 = @load_global (%12) (access=none, align_mul=4, align_offset=0)
+        32    %14 = ishl %13, %8 (0x6)
+        32    %15 = load_const (0x0000003f = 63)
+        32    %16 = iand %4.x, %15 (0x3f)
+        32    %17 = iadd %14, %16
+        32    %18 = load_const (0x00000000 = 0.000000)
+        32    %19 = load_const (0x00000020 = 32)
+        32    %20 = load_const (0x00000005)
+        32    %21 = ishl %9, %20 (0x5)
+                    // succs: b2
+        loop {
+            block b2:   // preds: b1 b5
+            32    %22 = phi b1: %18 (0x0), b5: %35
+            32    %23 = phi b1: %18 (0x0), b5: %37
+            32    %24 = iadd %21, %23
+            64    %25 = u2u64 %24
+            64    %26 = ishl %25, %7 (0x2)
+            64    %27 = iadd %1, %26
+            32    %28 = @load_global (%27) (access=none, align_mul=4, align_offset=0)
+            32    %29 = imul %23, %5 (0x300)
+            32    %30 = iadd %29, %17
+            64    %31 = u2u64 %30
+            64    %32 = ishl %31, %7 (0x2)
+            64    %33 = iadd %2, %32
+            32    %34 = @load_global (%33) (access=none, align_mul=4, align_offset=0)
+            32    %35 = ffma %28, %34, %22
+            32    %36 = load_const (0x00000001)
+            32    %37 = iadd %23, %36 (0x1)
+            1     %38 = uge %37, %19 (0x20)
+                        // succs: b3 b4
+            if %38 {
+                block b3:// preds: b2
+                break
+                // succs: b6
+            } else {
+                block b4:  // preds: b2, succs: b5
+            }
+            block b5:  // preds: b4, succs: b2
+        }
+        block b6:   // preds: b3
+        64    %39 = u2u64 %4.x
+        64    %40 = ishl %39, %7 (0x2)
+        64    %41 = iadd %0, %40
+                    @store_global (%35, %41) (wrmask=x, access=none, align_mul=4, align_offset=0)
+                    // succs: b8
+    } else {
+        block b7:  // preds: b0, succs: b8
+    }
+    block b8:  // preds: b6 b7, succs: b9
+    block b9:
+}
+

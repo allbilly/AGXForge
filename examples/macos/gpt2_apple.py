@@ -18,4 +18,4 @@ if __name__ == "__main__":
         return Executor(plans[-1], **kwargs)
     main(executor_factory=executor, identity_factory=source_identity, executor_name=EXECUTOR_NAME,
          plan_factory=planner, model_factory=GPT2, reference_factory=Reference,
-         default_checkpoint=ROOT/"models/macos/gpt2", description=__doc__)
+         default_checkpoint=ROOT/"models/macos/gpt2", description=__doc__, execution_compiler="Apple Metal")

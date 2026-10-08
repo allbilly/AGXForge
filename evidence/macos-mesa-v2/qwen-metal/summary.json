@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "timestamp_utc": "2026-10-07T20:01:29.278187+00:00",
+  "status": "PASS",
+  "input_tokens": [
+    9707,
+    11,
+    12890
+  ],
+  "generated_tokens": [
+    369,
+    264,
+    1661,
+    2618
+  ],
+  "checks": [
+    {
+      "position": 0,
+      "token": 9707,
+      "next_token": 271,
+      "tensors": 459,
+      "status": "PASS",
+      "top_token_matches": true,
+      "host_execution_seconds": 3.8062508330003766
+    },
+    {
+      "position": 1,
+      "token": 11,
+      "next_token": 358,
+      "tensors": 459,
+      "status": "PASS",
+      "top_token_matches": true,
+      "host_execution_seconds": 2.0404800830001477
+    },
+    {
+      "position": 2,
+      "token": 12890,
+      "next_token": 369,
+      "tensors": 459,
+      "status": "PASS",
+      "top_token_matches": true,
+      "host_execution_seconds": 2.01259916699928
+    },
+    {
+      "position": 3,
+      "token": 369,
+      "next_token": 264,
+      "tensors": 459,
+      "status": "PASS",
+      "top_token_matches": true,
+      "host_execution_seconds": 2.040781916999549
+    },
+    {
+      "position": 4,
+      "token": 264,
+      "next_token": 1661,
+      "tensors": 459,
+      "status": "PASS",
+      "top_token_matches": true,
+      "host_execution_seconds": 2.000647041000775
+    },
+    {
+      "position": 5,
+      "token": 1661,
+      "next_token": 2618,
+      "tensors": 459,
+      "status": "PASS",
+      "top_token_matches": true,
+      "host_execution_seconds": 2.032111625001562
+    }
+  ],
+  "tensor_fallbacks": [],
+  "executor": "G13 machine code through Metal",
+  "prefill": "tokenwise",
+  "verified": true,
+  "bounds": {
+    "embedding": [
+      0,
+      0
+    ],
+    "norm": [
+      0.003,
+      0.003
+    ],
+    "projection": [
+      0.005,
+      0.003
+    ],
+    "rope": [
+      0.005,
+      0.003
+    ],
+    "cache": [
+      0.005,
+      0.003
+    ],
+    "scores": [
+      0.01,
+      0.005
+    ],
+    "probs": [
+      0.0005,
+      0.005
+    ],
+    "attention": [
+      0.005,
+      0.003
+    ],
+    "residual": [
+      0.01,
+      0.003
+    ],
+    "activation": [
+      0.01,
+      0.005
+    ],
+    "logits": [
+      0.05,
+      0.003
+    ]
+  },
+  "compiler": "Mesa 26.2.4 AGX",
+  "dispatches": 3780,
+  "completed_positions": 6,
+  "text": " for a good job",
+  "teardown": "clean"
+}

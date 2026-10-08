@@ -1,0 +1,12 @@
+{
+  "name": "conv1d_65_31",
+  "logical_threads": 31,
+  "atol": 2e-06,
+  "rtol": 1e-05,
+  "status": "PASS",
+  "max_abs_error": 2.696640086230495e-08,
+  "expected_dtype": "float64",
+  "actual_dtype": "float32",
+  "fence_completed": true,
+  "canaries_intact": true
+}

@@ -1,0 +1,17 @@
+0000: 72051004                 get_sr           r1, sr80 (thread_position_in_grid.x)
+0004: 62000000                 mov_imm          r0l, 0
+0008: 522842120002             if_icmp          r0l, ult, r1, 129, 1
+000e: 0511240e00c01200         device_load      0, i32, x, r2, u2_u3, r1, unsigned
+0016: 3800                     wait             0
+0018: 4511204e00c01200         device_store     1, i32, x, r2, u0_u1, r1, unsigned, 0
+0020: 3801                     wait             1
+0022: 520e00000000             pop_exec         r0l, 1
+0028: 8800                     stop
+002a: 0800                     trap
+002c: 0800                     trap
+002e: 0800                     trap
+0030: 0800                     trap
+0032: 0800                     trap
+0034: 0800                     trap
+0036: 0800                     trap
+0038: 0800                     trap

@@ -1,0 +1,15 @@
+{
+  "name": "conv1d_33_65",
+  "threads": 65,
+  "status": "PASS",
+  "mesa_register_halfs": 16,
+  "g13_register_halfs": 34,
+  "mesa_code_bytes": 1182,
+  "g13_code_bytes": 204,
+  "atol": 3e-06,
+  "rtol": 1e-05,
+  "compiler_identity": "023-conv1d_33_65-65/compiler/compiler-identity.json",
+  "max_abs_error": 4.6754778770807803e-08,
+  "expected_dtype": "float64",
+  "canaries_intact": true
+}

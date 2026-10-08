@@ -1,0 +1,299 @@
+The Meson build system
+Version: 1.12.1
+Source dir: /Users/yeren/AGXForge/build/macos/mesa-source/mesa-26.2.4
+Build dir: /Users/yeren/AGXForge/build/macos/mesa-26.2.4
+Build type: native build
+Project name: mesa
+Project version: 26.2.4
+C compiler for the host machine: cc (clang 21.0.0 "Apple clang version 21.0.0 (clang-2100.3.34.2)")
+C linker for the host machine: cc ld64 27037.1
+C++ compiler for the host machine: c++ (clang 21.0.0 "Apple clang version 21.0.0 (clang-2100.3.34.2)")
+C++ linker for the host machine: c++ ld64 27037.1
+Host machine cpu family: aarch64
+Host machine cpu: aarch64
+Objective-C compiler for the host machine: clang (clang 23.1.2)
+Objective-C linker for the host machine: clang ld64 27037.1
+Checking for size of "void*" : 8 (cached)
+Checking if "-mtls-dialect=gnu2" runs: DID NOT COMPILE
+Checking if "-mtls-dialect=desc" runs: DID NOT COMPILE
+Dependency libglvnd for host machine skipped: feature glvnd disabled
+Program glslangValidator found: NO
+Dependency libva for host machine skipped: feature gallium-va disabled
+Program python3.16 found: NO
+Program python3.15 found: NO
+Program python3.14 found: YES 3.14.8 3.14.8 (/Users/yeren/AGXForge/.venv-asahi/bin/python3.14)
+Fetching value of define "ETIME" : 101 (cached)
+Compiler for C supports arguments -gsplit-dwarf: YES (cached)
+Compiler for C supports link arguments -Wl,--gdb-index: NO (cached)
+Checking for function "bswap32" : YES (cached)
+Checking for function "bswap64" : YES (cached)
+Checking for function "clz" : YES (cached)
+Checking for function "clzll" : YES (cached)
+Checking for function "ctz" : YES (cached)
+Checking for function "expect" : YES (cached)
+Checking for function "ffs" : YES (cached)
+Checking for function "ffsll" : YES (cached)
+Checking for function "popcount" : YES (cached)
+Checking for function "popcountll" : YES (cached)
+Checking for function "unreachable" : YES (cached)
+Checking for function "types_compatible_p" : YES (cached)
+Checking for function "__builtin_add_overflow" : YES (cached)
+Checking for function "__builtin_add_overflow_p" : NO (cached)
+Checking for function "__builtin_sub_overflow_p" : NO (cached)
+Checking for function "__builtin_arm_get_fpscr" : NO (cached)
+Checking for function "__builtin_arm_set_fpscr" : NO (cached)
+Checking for function "__builtin_aarch64_get_fpcr" : NO (cached)
+Checking for function "__builtin_aarch64_set_fpcr" : NO (cached)
+Compiler for C supports function attribute const: YES (cached)
+Compiler for C supports function attribute flatten: YES (cached)
+Compiler for C supports function attribute malloc: YES (cached)
+Compiler for C supports function attribute pure: YES (cached)
+Compiler for C supports function attribute unused: YES (cached)
+Compiler for C supports function attribute warn_unused_result: YES (cached)
+Compiler for C supports function attribute weak: YES (cached)
+Compiler for C supports function attribute format: YES (cached)
+Compiler for C supports function attribute packed: YES (cached)
+Compiler for C supports function attribute returns_nonnull: YES (cached)
+Compiler for C supports function attribute alias: NO (cached)
+Compiler for C supports function attribute noreturn: YES (cached)
+Compiler for C supports function attribute optimize: NO (cached)
+Compiler for C supports function attribute cold: YES (cached)
+Compiler for C supports function attribute visibility:hidden: YES (cached)
+Checking if "__uint128_t" compiles: YES (cached)
+Checking for function "reallocarray" : NO (cached)
+Checking for function "fmemopen" : YES (cached)
+Checking if "gc-sections" links: NO (cached)
+Compiler for C supports arguments -Werror=implicit-function-declaration: YES (cached)
+Compiler for C supports arguments -Werror=missing-prototypes: YES (cached)
+Compiler for C supports arguments -Werror=return-type: YES (cached)
+Compiler for C supports arguments -Werror=empty-body: YES (cached)
+Compiler for C supports arguments -Werror=incompatible-pointer-types: YES (cached)
+Compiler for C supports arguments -Werror=int-conversion: YES (cached)
+Compiler for C supports arguments -Wimplicit-fallthrough: YES (cached)
+Compiler for C supports arguments -Wmisleading-indentation: YES (cached)
+Compiler for C supports arguments -Wno-error=maybe-uninitialized: NO (cached)
+Compiler for C supports arguments -Wno-missing-field-initializers: YES (cached)
+Compiler for C supports arguments -Wno-format-truncation: YES (cached)
+Compiler for C supports arguments -Wno-nonnull-compare: NO (cached)
+Compiler for C supports arguments -fno-math-errno: YES (cached)
+Compiler for C supports arguments -fno-trapping-math: YES (cached)
+Compiler for C supports arguments -Qunused-arguments: YES (cached)
+Compiler for C supports arguments -fno-common: YES (cached)
+Compiler for C supports arguments -Wno-unknown-pragmas: YES (cached)
+Compiler for C supports arguments -Wno-microsoft-enum-value: YES (cached)
+Compiler for C supports arguments -Wno-unused-function: YES (cached)
+Compiler for C supports arguments -Werror=format: YES (cached)
+Compiler for C supports arguments -Wformat-security: YES (cached)
+Compiler for C supports arguments -Werror=thread-safety: YES (cached)
+Compiler for C supports arguments -Wno-unused-variable: YES (cached)
+Compiler for C supports arguments -Wno-unused-but-set-variable: YES (cached)
+Compiler for C supports arguments /wd4189: NO (cached)
+Compiler for C++ supports arguments -Werror=return-type: YES (cached)
+Compiler for C++ supports arguments -Werror=empty-body: YES (cached)
+Compiler for C++ supports arguments -Wmisleading-indentation: YES (cached)
+Compiler for C++ supports arguments -Wno-error=maybe-uninitialized: NO (cached)
+Compiler for C++ supports arguments -Wno-non-virtual-dtor: YES (cached)
+Compiler for C++ supports arguments -Wno-missing-field-initializers: YES (cached)
+Compiler for C++ supports arguments -Wno-format-truncation: YES (cached)
+Compiler for C++ supports arguments -fno-math-errno: YES (cached)
+Compiler for C++ supports arguments -fno-trapping-math: YES (cached)
+Compiler for C++ supports arguments -Qunused-arguments: YES (cached)
+Compiler for C++ supports arguments -flifetime-dse=1: NO (cached)
+Compiler for C++ supports arguments -Wno-unknown-pragmas: YES (cached)
+Compiler for C++ supports arguments -Wno-microsoft-enum-value: YES (cached)
+Compiler for C++ supports arguments -Werror=format: YES (cached)
+Compiler for C++ supports arguments -Wformat-security: YES (cached)
+Compiler for C++ supports arguments -Wno-unused-variable: YES (cached)
+Compiler for C++ supports arguments -Wno-unused-but-set-variable: YES (cached)
+Compiler for C++ supports arguments /wd4189: NO (cached)
+Compiler for C supports arguments -Wno-override-init: YES (cached)
+Compiler for C supports arguments -Wno-initializer-overrides: YES (cached)
+Compiler for C supports arguments -Werror=pointer-arith: YES (cached)
+Compiler for C supports arguments -Werror=vla: YES (cached)
+Compiler for C supports arguments -Werror=gnu-empty-initializer: YES (cached)
+Compiler for C supports arguments -Wgnu-pointer-arith: YES (cached)
+Compiler for C++ supports arguments -Werror=pointer-arith: YES (cached)
+Compiler for C++ supports arguments -Werror=vla: YES (cached)
+Compiler for C++ supports arguments -Werror=gnu-empty-initializer: YES (cached)
+Compiler for C++ supports arguments -Wgnu-pointer-arith: YES (cached)
+Compiler for C supports arguments -Werror=date-time: YES (cached)
+Compiler for C supports arguments -Werror=gnu-alignof-expression: YES (cached)
+Compiler for C supports arguments -Werror=ignored-qualifiers: YES (cached)
+Compiler for C supports arguments -Werror=implicit-fallthrough: YES (cached)
+Compiler for C supports arguments -Werror=int-conversion: YES (cached)
+Compiler for C supports arguments -Werror=missing-prototypes: YES (cached)
+Compiler for C supports arguments -Werror=pragma-pack: YES (cached)
+Compiler for C supports arguments -Werror=pragma-pack-suspicious-include: YES (cached)
+Compiler for C supports arguments -Werror=sizeof-array-div: YES (cached)
+Compiler for C supports arguments -Werror=string-plus-int: YES (cached)
+Compiler for C supports arguments -Werror=unreachable-code-loop-increment: YES (cached)
+Compiler for C++ supports arguments -D_LIBCPP_ENABLE_THREAD_SAFETY_ANNOTATIONS: YES (cached)
+Compiler for C++ supports arguments -Werror=date-time: YES (cached)
+Compiler for C++ supports arguments -Werror=gnu-alignof-expression: YES (cached)
+Compiler for C++ supports arguments -Werror=ignored-qualifiers: YES (cached)
+Compiler for C++ supports arguments -Werror=implicit-fallthrough: YES (cached)
+Compiler for C++ supports arguments -Werror=pragma-pack: YES (cached)
+Compiler for C++ supports arguments -Werror=pragma-pack-suspicious-include: YES (cached)
+Compiler for C++ supports arguments -Werror=sizeof-array-div: YES (cached)
+Compiler for C++ supports arguments -Werror=string-plus-int: YES (cached)
+Compiler for C++ supports arguments -Werror=unreachable-code-loop-increment: YES (cached)
+Compiler for C++ supports arguments -Werror=missing-prototypes: YES (cached)
+Checking for function "__builtin_ia32_clflushopt" : NO (cached)
+Checking if "GCC atomic builtins" compiles: YES (cached)
+Checking if "GCC atomic builtins required -latomic" links: YES (cached)
+Checking if "GCC 64bit atomics" with dependency  links: YES (cached)
+Library ws2_32 found: NO
+Header "sys/sysmacros.h" has symbol "major" : NO (cached)
+Header "sys/mkdev.h" has symbol "major" : NO (cached)
+Check usable header "sched.h" : YES (cached)
+Checking for function "sched_getaffinity" : NO (cached)
+Check usable header "sys/sysctl.h" : YES (cached)
+Check usable header "xlocale.h" : YES (cached)
+Check usable header "linux/futex.h" : NO (cached)
+Check usable header "endian.h" : NO (cached)
+Check usable header "dlfcn.h" : YES (cached)
+Check usable header "sys/shm.h" : YES (cached)
+Check usable header "cet.h" : YES (cached)
+Check usable header "pthread_np.h" : NO (cached)
+Check usable header "poll.h" : YES (cached)
+Check usable header "sys/inotify.h" : NO (cached)
+Check usable header "linux/udmabuf.h" : NO (cached)
+Checking for function "strtof" : YES (cached)
+Checking for function "mkostemp" : YES (cached)
+Checking for function "memfd_create" : NO (cached)
+Checking for function "random_r" : NO (cached)
+Checking for function "flock" : YES (cached)
+Checking for function "strtok_r" : YES (cached)
+Checking for function "getrandom" : NO (cached)
+Checking for function "qsort_s" : NO (cached)
+Checking for function "posix_fallocate" : NO (cached)
+Checking for function "secure_getenv" : NO (cached)
+Checking for function "sysconf" : YES (cached)
+Checking if "GNU qsort_r" links: NO (cached)
+Checking if "BSD qsort_r" links: YES (cached)
+Header "time.h" has symbol "struct timespec" : YES (cached)
+Checking for function "thrd_create" : NO (cached)
+Header "errno.h" has symbol "program_invocation_name" : NO (cached)
+Header "math.h" has symbol "issignaling" : NO (cached)
+Checking for function "posix_memalign" : YES (cached)
+Checking whether type "struct dirent" has member "d_type" : YES (cached)
+Checking if "strtod has locale support" links: YES (cached)
+Checking if "Bsymbolic" links: NO (cached)
+Checking if "version-script" links: NO (cached)
+Checking if "dynamic-list" links: NO (cached)
+Compiler for C supports link arguments -Wl,--build-id=sha1: NO (cached)
+Checking for function "dlopen" : YES (cached)
+Checking for function "dladdr" with dependency : YES (cached)
+Checking for function "dl_iterate_phdr" : NO (cached)
+Checking for function "clock_gettime" : YES (cached)
+Dependency zlib for host machine found: YES 1.2.12 (cached)
+Found pkg-config: YES (/opt/homebrew/bin/pkg-config) 3.0.7
+WARNING: Found CMake '/Users/yeren/Library/Python/3.9/bin/cmake' but couldn't run it
+Found CMake: NO
+Run-time dependency libdisplay-info found: NO  (tried pkg-config, framework and cmake)
+Dependency libzstd for host machine found: YES 1.5.7 (cached)
+Dependency threads for host machine found: YES unknown (cached)
+Checking for function "pthread_setaffinity_np" with dependency threads: NO (cached)
+Library expat found: YES
+Library m found: YES
+Run-time dependency libudev found: NO  (tried pkg-config, framework and cmake)
+llvm-config found: YES (/opt/homebrew/opt/llvm/bin/llvm-config) 23.1.2
+Run-time dependency LLVM (modules: all-targets, bitwriter, core, coverage, engine, executionengine, instcombine, irreader, libdriver, linker, lto, mcdisassembler, mcjit, native, option, scalaropts, target, transformutils, abi, all-targets, coroutines, frontenddriver, frontendhlsl, lto, windowsdriver) found: YES 23.1.2
+Dependency LLVMSPIRVLib for host machine found: YES 23.1.0.0 (cached)
+Dependency SPIRV-Tools for host machine found: YES 2026.4.1 (cached)
+Library clang-cpp found: YES
+Dependency lua54 for host machine found: YES 5.5.1 (cached)
+Dependency libelf for host machine found: YES 0.8.13 (cached)
+Run-time dependency valgrind found: NO  (tried pkg-config)
+Program bison found: YES (/usr/bin/bison)
+Program bison found: NO found 2.3 but need: '> 2.3' (/usr/bin/bison)
+Program flex found: YES (/usr/bin/flex)
+Program ln found: YES (/bin/ln)
+Library System found: YES
+Library sensors found: NO
+Program nm found: YES (/usr/bin/nm)
+Program symbols-check.py found: YES (/opt/homebrew/opt/python@3.14/bin/python3.14 /Users/yeren/AGXForge/build/macos/mesa-source/mesa-26.2.4/bin/symbols-check.py)
+Program install_megadrivers.py found: YES (/opt/homebrew/opt/python@3.14/bin/python3.14 /Users/yeren/AGXForge/build/macos/mesa-source/mesa-26.2.4/bin/install_megadrivers.py)
+Compiler for C supports arguments -Wno-error: YES (cached)
+Checking whether type "spvtools::LinkerOptions" has member "SetAllowPtrTypeMismatch(true)" with dependency SPIRV-Tools: YES (cached)
+Compiler for C supports link arguments -fPIC: YES (cached)
+Program decode.py found: YES (/Users/yeren/AGXForge/build/macos/mesa-source/mesa-26.2.4/src/compiler/isaspec/decode.py)
+Program encode.py found: YES (/Users/yeren/AGXForge/build/macos/mesa-source/mesa-26.2.4/src/compiler/isaspec/encode.py)
+Dependency IOKit for host machine found: YES unknown (cached)
+Program sphinx-build skipped: feature html-docs disabled
+Build targets in project: 51
+
+mesa 26.2.4
+
+  Directories
+    prefix         : /opt/homebrew
+    libdir         : lib
+    includedir     : include
+
+  Common C and C++ arguments
+    c_cpp_args     :
+
+  OpenGL
+    OpenGL         : NO
+    ES1            : NO
+    ES2            : NO
+    GLVND          : NO
+
+  DRI
+    Platform       : apple
+    Driver dir     : /opt/homebrew/lib/dri
+
+  GLX
+    Enabled        : NO
+    Provider       : None
+
+  EGL
+    Enabled        : NO
+
+  GBM
+    Enabled        : NO
+
+  Vulkan
+    Drivers        : NO
+
+  Video
+    Codecs         : all_free av1dec av1enc vp9dec mpeg12dec jpegdec
+    APIs           : NO
+    Encoding       : YES
+
+  LLVM
+    Required       : enabled
+    Version        : 23.1.2
+
+  Gallium
+    Enabled        : NO
+
+  Perfetto
+    Enabled        : NO
+
+  Teflon (TensorFlow Lite delegate)
+    Enabled        : NO
+
+  User defined options
+    build-tests    : false
+    buildtype      : release
+    egl            : disabled
+    gallium-drivers: 
+    gbm            : disabled
+    gles1          : disabled
+    gles2          : disabled
+    glx            : disabled
+    llvm           : enabled
+    opengl         : false
+    platforms      : 
+    shader-cache   : disabled
+    tools          : asahi
+    vulkan-drivers : 
+
+Found ninja-1.13.2 at /opt/homebrew/bin/ninja
+Generating targets:   0%|          | 0/51 eta ?                                               Writing build.ninja:   0%|          | 0/498 eta ?                                                 Cleaning... 0 files.
+ninja: Entering directory `/Users/yeren/AGXForge/build/macos/mesa-26.2.4'
+[1/2] Compiling C object agxforge-bridge/agxforge_mesa.p/bridge.c.o
+[2/2] Linking target agxforge-bridge/agxforge_mesa
+ld: warning: ignoring duplicate libraries: '-lSystem', '-lz'
+Built /Users/yeren/AGXForge/build/macos/mesa-26.2.4/agxforge-bridge/agxforge_mesa

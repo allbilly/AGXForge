@@ -1,0 +1,101 @@
+{
+  "schema_version": 2,
+  "status": "PASS",
+  "compiler": "Mesa 26.2.4 AGX",
+  "gpu": "Apple M1",
+  "macos": "27.0.1",
+  "build": "26A434",
+  "throughput_benchmarked": false,
+  "runs": {
+    "kernels-metal": {
+      "full_bundle": "results/macos-mesa-full-kernels-v3",
+      "full_audit_sha256": "aead6eda0a2a296309de4a77fe745c16c0f803b709660640ab217215ddc8e18b",
+      "artifact_hashes": 2121,
+      "launches": 112,
+      "tensor_checks": 0,
+      "compilation_records": 112,
+      "kernel_checks": 112
+    },
+    "kernels-native": {
+      "full_bundle": "results/macos-mesa-native-kernels-v1",
+      "full_audit_sha256": "de0ab78d90facc584f2ad50b0a1e0b53783e21c119804b9313e7079982588549",
+      "artifact_hashes": 2569,
+      "launches": 112,
+      "tensor_checks": 0,
+      "compilation_records": 112,
+      "kernel_checks": 112
+    },
+    "gpt2-metal": {
+      "full_bundle": "results/macos-mesa-gpt2-metal-v2",
+      "full_audit_sha256": "75e1871c4b6673aef02c9e4b440e2ecf49771dee34e18386225fc78e5ab658d3",
+      "artifact_hashes": 18237,
+      "launches": 3264,
+      "tensor_checks": 2508,
+      "compilation_records": 21,
+      "positions": 12,
+      "generated_tokens": [
+        262,
+        3139,
+        286,
+        262,
+        4141,
+        2066,
+        11,
+        290
+      ],
+      "text": " the capital of the French Republic, and"
+    },
+    "gpt2-native": {
+      "full_bundle": "results/macos-mesa-gpt2-native-v1",
+      "full_audit_sha256": "f022dc17448a689d2b56fd135e637b38e5ff6d3d25c9c17cdd2878c14575fc97",
+      "artifact_hashes": 31293,
+      "launches": 3264,
+      "tensor_checks": 2508,
+      "compilation_records": 21,
+      "positions": 12,
+      "generated_tokens": [
+        262,
+        3139,
+        286,
+        262,
+        4141,
+        2066,
+        11,
+        290
+      ],
+      "text": " the capital of the French Republic, and"
+    },
+    "qwen-metal": {
+      "full_bundle": "results/macos-mesa-qwen-metal-v2",
+      "full_audit_sha256": "c2ba9c834cf71c63c34fcebf99d20b0d730733eee38211197e29d3550e9347c1",
+      "artifact_hashes": 20794,
+      "launches": 3780,
+      "tensor_checks": 2754,
+      "compilation_records": 22,
+      "positions": 6,
+      "generated_tokens": [
+        369,
+        264,
+        1661,
+        2618
+      ],
+      "text": " for a good job"
+    },
+    "qwen-native": {
+      "full_bundle": "results/macos-mesa-qwen-native-v1",
+      "full_audit_sha256": "fa994deeaeb25c76b8c4d02aa53f88725629a6fa480abfecd289e0c667e9f05c",
+      "artifact_hashes": 35914,
+      "launches": 3780,
+      "tensor_checks": 2754,
+      "compilation_records": 22,
+      "positions": 6,
+      "generated_tokens": [
+        369,
+        264,
+        1661,
+        2618
+      ],
+      "text": " for a good job"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+AGXFORGE_MESA_V2 3 4864
+thread 1 0 0 0 80
+imm 2 896 0 0 32
+mul 3 1 2 0 32
+imm 4 0 0 0 32
+imm 5 0 0 0 32
+phi_seed 6 5 0 0 32
+phi_seed 7 4 0 0 32
+loop_begin 0 0 0 0 0
+phi_load 6 0 0 0 0
+phi_load 7 0 0 0 0
+add 8 3 6 0 32
+load 9 2 8 0 16
+imm 15 16 0 0 32
+shl 10 9 15 0 32
+load 11 1 6 0 32
+fma 12 10 11 7 32
+imm 16 1 0 0 32
+add 13 6 16 0 32
+imm 17 896 0 0 32
+cmp 14 13 17 0 0
+phi_store 6 13 0 0 0
+phi_store 7 12 0 0 0
+loop_end 0 14 0 0 0
+store 0 0 1 7 32

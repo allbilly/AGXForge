@@ -1,0 +1,32 @@
+0000: 72051004                 get_sr           r1, sr80 (thread_position_in_grid.x)
+0004: 62000000                 mov_imm          r0l, 0
+0008: 522842f20100             if_icmp          r0l, ult, r1, 31, 1
+000e: 20c070000000             jmp_exec_none    0x7E
+0014: 620900000000             mov_imm          r2, 0, 0b0
+001a: 620d00000000             mov_imm          r3, 0, 0b0
+0020: 420800000000             push_exec        r0l, 1
+0026: 1e1186f601420600         imadd            r4, r3.cache.sx, 31, r1.sx
+002e: 0521880e00c01200         device_load      0, i32, x, r4, u4_u5, r4, unsigned
+0036: 0529644e00c01200         device_load      1, i32, x, r5, u2_u3, r3, unsigned
+003e: 3800                     wait             0
+0040: 3801                     wait             1
+0042: 3a8948a224440200         fmadd32          r2, r4, r5, r2
+004a: 0e0d461600000000         iadd             r3, r3.sx, 1
+0052: 522c46120001             while_icmp       r0l, ult, r3, 65, 1
+0058: 00c0ceffffff             jmp_exec_any     0x26
+005e: 520e00000000             pop_exec         r0l, 1
+0064: 05192c0e00c01200         device_load      0, i32, x, r3, u6_u7, r1, unsigned
+006c: 3800                     wait             0
+006e: 2a8944622400             fadd32           r2, r2, r3
+0074: 4511200e00c01200         device_store     0, i32, x, r2, u0_u1, r1, unsigned, 0
+007c: 3800                     wait             0
+007e: 520e00000000             pop_exec         r0l, 1
+0084: 8800                     stop
+0086: 0800                     trap
+0088: 0800                     trap
+008a: 0800                     trap
+008c: 0800                     trap
+008e: 0800                     trap
+0090: 0800                     trap
+0092: 0800                     trap
+0094: 0800                     trap

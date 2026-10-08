@@ -1,0 +1,12 @@
+{
+  "name": "reduce_sum_3_65",
+  "logical_threads": 3,
+  "atol": 2e-06,
+  "rtol": 1e-05,
+  "status": "PASS",
+  "max_abs_error": 2.5890767574310303e-07,
+  "expected_dtype": "float64",
+  "actual_dtype": "float32",
+  "fence_completed": true,
+  "canaries_intact": true
+}

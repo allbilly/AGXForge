@@ -1,0 +1,23 @@
+{
+  "argmax": "compilations/bcd9b8bba361a20eb00fa0bfa48170fdcf281538d0c142683d478dee9b0965a8",
+  "attend": "compilations/592c1b53d8995b303802c9458bf65fc3425f0ad58c4c352e4dba8a40d778053a",
+  "down": "compilations/680d77712300fe76d4bc1f47596f4e4f843c86c4a82c82d2f8257b85981ed16a",
+  "embedding": "compilations/c913bb1739ba425347b538ca846c88da875a5677659d2c7b9283bc942cc61081",
+  "gelu": "compilations/92abfa90216002f38dbc12fe6bbb607241f53c9cf177d311e43bdcb73b7488d6",
+  "kv_write": "compilations/c644ffd2f326ca0ad08a84b66cd4278ca5a0cba9f603b5ccc9c63f5ad9e4a43b",
+  "logits": "compilations/ff32ab47e1ffc5b4fafea526c94b57622cec7f35663516af6a89dbe07d9e1728",
+  "norm_apply": "compilations/9236ecee37a253e5b4adcdf026fa7a8f4a2c0011cf520d3c719ce251ca7732ff",
+  "norm_stats": "compilations/a771447a37d88be4ef841b07ff4136ead46e3665a2a50c3fce9d113e6102592b",
+  "o": "compilations/8d6fe309ae71fd5d53bf8f0984bdcea926cf85a788ad9fac44c6ad2e24846155",
+  "position_embedding": "compilations/653d4310af5e0a5c26ad4121e70efed28e042a42769cba11efe4f6ea6e0d82dd",
+  "qkv": "compilations/12e730fbc1bb040a51dfa997f5ba00e9c02d89495fa764d01f805d9380ca07c8",
+  "residual": "compilations/ab49575883e0a36e565d2add5d8ca2a8bf992c9a1f0751c63cb060e9d0d6bc4d",
+  "scores": "compilations/5b2ccd4e9ab1c9739ed693ca3dbaac0cb756895d4d1264b8fb202d888315d1b6",
+  "softmax_exp": "compilations/94419f8b9e0f1a7b7d95b1def169e17df23bbc9fdc3dc0c868b8409daa3b96df",
+  "softmax_max": "compilations/e792955c9ac221740654a9959171c5bcc70ab5a35e1639e0b989f7c42a73aaaa",
+  "softmax_normalize": "compilations/6c7878d60a7a364578f117fa085dfc7560ab7255cb8d5590f0e57a2aa85d911b",
+  "softmax_sum": "compilations/f8e5131fa3191e033b32496e9ba09aec93999fd92ec04dabce8cbbd91d1e0d27",
+  "split": "compilations/7d6d12b268c21fc2ef6c5bb9b606e8727b7ad905b0a42e20fc1faa8cc631e048",
+  "sum": "compilations/4833167baa5291998050fd3a6c2835329f573baf7a06cfcb8e6239536a6e6a51",
+  "up": "compilations/e43d2870936f1d004cf52c82c13dc620a481c3577a7899328e4669bb36ac4ab1"
+}

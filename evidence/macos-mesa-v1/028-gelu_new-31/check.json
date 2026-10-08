@@ -1,0 +1,15 @@
+{
+  "name": "gelu_new",
+  "threads": 31,
+  "status": "PASS",
+  "mesa_register_halfs": 10,
+  "g13_register_halfs": 32,
+  "mesa_code_bytes": 116,
+  "g13_code_bytes": 138,
+  "atol": 2e-05,
+  "rtol": 0.0002,
+  "compiler_identity": "028-gelu_new-31/compiler/compiler-identity.json",
+  "max_abs_error": 1.0480505352461478e-13,
+  "expected_dtype": "float64",
+  "canaries_intact": true
+}

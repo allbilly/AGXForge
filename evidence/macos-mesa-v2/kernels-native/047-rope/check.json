@@ -1,0 +1,12 @@
+{
+  "name": "rope",
+  "logical_threads": 896,
+  "atol": 2e-05,
+  "rtol": 0.0002,
+  "status": "PASS",
+  "max_abs_error": 0.0,
+  "expected_dtype": "float64",
+  "actual_dtype": "float32",
+  "fence_completed": true,
+  "canaries_intact": true
+}

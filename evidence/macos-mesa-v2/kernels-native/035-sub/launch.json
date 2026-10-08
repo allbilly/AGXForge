@@ -1,0 +1,138 @@
+{
+  "status": "COMPLETED",
+  "executor": "direct IOGPU G13",
+  "program": {
+    "name": "sub",
+    "bindings": [
+      {
+        "name": "out",
+        "slot": 0,
+        "access": "write",
+        "min_bytes": 516,
+        "alignment": 4
+      },
+      {
+        "name": "a",
+        "slot": 1,
+        "access": "read",
+        "min_bytes": 516,
+        "alignment": 4
+      },
+      {
+        "name": "b",
+        "slot": 2,
+        "access": "read",
+        "min_bytes": 516,
+        "alignment": 4
+      }
+    ],
+    "register_halfs": 8,
+    "uniform_halfs": 12,
+    "workgroup_size": 32,
+    "entry_offset": 0,
+    "target": "g13g",
+    "abi_version": 1,
+    "reserved_register_halfs": [
+      0,
+      1
+    ],
+    "builtins": [
+      80
+    ],
+    "bounds_policy": "masked",
+    "numerical": "binary32; hardware FTZ and approximate transcendentals",
+    "origin": "Mesa 26.2.4 NIR -> AGX",
+    "threadgroup_bytes": 0,
+    "scratch_bytes": 0,
+    "logical_threads": 129,
+    "code_sha256": "bdb307d1459ddcf1c5f253b56125721c0d39932619e2acdf1eb1668832a07b4a",
+    "code_bytes": 74,
+    "constants": [],
+    "relocations": [],
+    "helper_required": false
+  },
+  "logical_threads": 129,
+  "global_threads": [
+    160,
+    1,
+    1
+  ],
+  "workgroup_size": [
+    32,
+    1,
+    1
+  ],
+  "group_count": [
+    5,
+    1,
+    1
+  ],
+  "buffers": [
+    {
+      "binding": "out",
+      "gpu_address": 90195274944,
+      "mapping_address": 90195274880,
+      "payload_offset": 64,
+      "extent": 516,
+      "allocation_bytes": 644,
+      "access": "write"
+    },
+    {
+      "binding": "a",
+      "gpu_address": 90195275648,
+      "mapping_address": 90195275584,
+      "payload_offset": 64,
+      "extent": 516,
+      "allocation_bytes": 644,
+      "access": "read"
+    },
+    {
+      "binding": "b",
+      "gpu_address": 90195276352,
+      "mapping_address": 90195276288,
+      "payload_offset": 64,
+      "extent": 516,
+      "allocation_bytes": 644,
+      "access": "read"
+    }
+  ],
+  "shader_gpu_address": 24256,
+  "usc_gpu_address": 98304,
+  "uniforms_gpu_address": 90195099552,
+  "notification_tokens": [
+    4472116848,
+    4470091696
+  ],
+  "uniform_register_halfs_reserved": 32,
+  "trace_ids": [
+    3258709553,
+    3258709554
+  ],
+  "register_halfs_reserved": 128,
+  "support_sha256": "0c817d783482b49301254d80eeae7bf98b3e38028ad2e4c0c37c87fc1f5176bd",
+  "template_sha256": "fc344b808d12206fcdba0316acdb95a876a13492e98a5cb14ec130be3164e4a0",
+  "uniforms.bin": {
+    "sha256": "fa17637ee81f638166e9d1621bec8bea957a9fbada5fda99092ddd1e8ae7e3b9",
+    "bytes": 24
+  },
+  "usc.bin": {
+    "sha256": "b7461447cf592d360a8ff38791ce9ec4dcf4dfa973ed102847435cefa7a54bfa",
+    "bytes": 24
+  },
+  "cdm.bin": {
+    "sha256": "5e3157bae37a5a69a22196a3c25d26a9bdbb17732db4c821657183c7d101bbdf",
+    "bytes": 44
+  },
+  "iogpu-submit.bin": {
+    "sha256": "521a7c67529fc4e05395edc007047da7e837e5670f1394a19a061a0f20e7dc73",
+    "bytes": 64
+  },
+  "iogpu-pages.bin": {
+    "sha256": "cf8c4e6a301db5b0584c6ddc0af63f90929ad527418ae50e27eeede52fe7e495",
+    "bytes": 32768
+  },
+  "completion": "70168f0a01000000f4f1a332ab1100007b9ea432ab11000000000000000000000000000000000000b02f700a01000000e858a832ab1100008876a832ab11000000000000000000000000000000000000",
+  "fence_completed": true,
+  "canaries_intact": true,
+  "host_submit_wait_ns": 475875
+}

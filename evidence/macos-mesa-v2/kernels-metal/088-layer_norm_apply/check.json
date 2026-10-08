@@ -1,0 +1,12 @@
+{
+  "name": "layer_norm_apply",
+  "logical_threads": 768,
+  "atol": 2e-06,
+  "rtol": 1e-05,
+  "status": "PASS",
+  "max_abs_error": 2.588564487204792e-07,
+  "expected_dtype": "float64",
+  "actual_dtype": "float32",
+  "fence_completed": true,
+  "canaries_intact": true
+}

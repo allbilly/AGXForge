@@ -7,7 +7,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 import numpy as np
 from agxforge.g13 import kernels as k, gpt2_kernels as g
 from examples.asahi.verify_kernels import run
-from examples.macos.backend import select_backend, source_identity
+from examples.macos.backend import select_backend, select_compiler, source_identity, add_backend_options
 
 
 def extra_checks(check, rng):
@@ -41,9 +41,19 @@ def extra_checks(check, rng):
 
 
 if __name__ == "__main__":
-    _, Executor, name, argv = select_backend()
+    argv = sys.argv[1:]
+    _, Executor, name, _ = select_backend(argv)
+    compiler_factory, _ = select_compiler(argv)
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, required=True)
+    add_backend_options(parser)
     args = parser.parse_args(argv)
-    result = run(args.output, executor_factory=Executor, identity_factory=source_identity, extra_checks=extra_checks)
-    print(f"PASS: {len(result['checks'])} compiled kernel checks; {name}")
+    selected_checks = extra_checks
+    if compiler_factory is not None:
+        from examples.macos.verify_mesa import extra_checks as mesa_checks
+        def selected_checks(check, rng):
+            extra_checks(check, rng)
+            mesa_checks(check, rng)
+    result = run(args.output, executor_factory=Executor, identity_factory=source_identity, extra_checks=selected_checks,
+                 compiler_factory=compiler_factory)
+    print(f"PASS: {len(result['checks'])} {result['compiler']} kernel checks; {name}")

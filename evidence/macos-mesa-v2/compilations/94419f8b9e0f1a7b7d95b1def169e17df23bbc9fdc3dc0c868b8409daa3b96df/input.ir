@@ -1,0 +1,11 @@
+AGXFORGE_MESA_V2 3 384
+thread 1 0 0 0 80
+imm 2 5 0 0 32
+shr 3 1 2 0 32
+load 4 1 1 0 32
+load 5 2 3 0 32
+fsub 6 4 5 0 32
+imm 7 1069066811 0 0 32
+fmul 8 6 7 0 32
+exp2 9 8 0 0 32
+store 0 0 1 9 32

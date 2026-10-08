@@ -28,10 +28,14 @@ def compare(actual, expected, atol=0, rtol=0):
     return bool(passed), float(np.max(error, initial=0))
 
 
-def run(output, *, executor_factory=Executor, identity_factory=source_identity, extra_checks=None):
+def run(output, *, executor_factory=Executor, identity_factory=source_identity, extra_checks=None,
+        compiler_factory=None):
     output = Path(output); output.mkdir(parents=True, exist_ok=False)
     sources = identity_factory()
     report = dict(schema_version=1, status="RUNNING", scope="AGXForge IR -> G13 -> GPU", checks=[])
+    compiler = compiler_factory(output/"compiler") if compiler_factory is not None else None
+    report["compiler"] = compiler.name if compiler is not None else "AGXForge G13"
+    if compiler is not None: report["scope"] = "AGXForge IR -> Mesa NIR -> AGX -> GPU"
     (output / "source-sha256.json").write_text(json.dumps(sources, indent=2) + "\n")
     rng = np.random.default_rng(213)
     gpu = None
@@ -39,7 +43,7 @@ def run(output, *, executor_factory=Executor, identity_factory=source_identity, 
         with executor_factory() as gpu:
             (output / "platform.json").write_text(json.dumps(gpu.platform(), indent=2) + "\n")
             def check(spec, data, expected, atol=0, rtol=0, dtype=np.float32):
-                p = spec.compile()
+                p = compiler(spec, f"{len(report['checks'])+1:03d}-{spec.function.name}") if compiler is not None else spec.compile()
                 row = dict(name=p.name, logical_threads=spec.threads, atol=atol, rtol=rtol, status="NOT_RUN")
                 report["checks"].append(row)
                 path = output / f"{len(report['checks']):03d}-{p.name}"
@@ -118,6 +122,7 @@ def run(output, *, executor_factory=Executor, identity_factory=source_identity, 
             if extra_checks: extra_checks(check, rng)
         if sources != identity_factory(): raise RuntimeError("sources changed during verification")
         report["status"] = "PASS"; report["teardown"] = "clean"
+        if compiler is not None: report["compiler_provenance"] = compiler.descriptor()
     except BaseException as error:
         report.update(status="FAIL", error=str(error)); raise
     finally:

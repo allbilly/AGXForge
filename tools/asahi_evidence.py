@@ -17,6 +17,39 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def mesa_compilation_records(root):
+    """Tie executable bytes to native compiler outputs, not just an origin label."""
+    from agxforge.g13.abi import Binding, G13Program
+    from agxforge.g13.mesa import from_binary
+    sources = json.loads((root/"source-sha256.json").read_text())
+    records = {}
+    for path in sorted(root.rglob("compiler-identity.json")):
+        identity = json.loads(path.read_text())
+        folder = path.parent
+        build = json.loads((folder/"build-identity.json").read_text())
+        if (identity.get("compiler") != "Mesa 26.2.4 AGX" or
+                identity.get("compiler_sha256") != build.get("compiler_sha256") or
+                identity.get("build_identity_sha256") != sha(folder/"build-identity.json") or
+                not build.get("archive_verified") or not build.get("compiler_sources_verified")):
+            raise ValueError("Mesa compiler/build identity mismatch")
+        if (build.get("adapter_sha256") != sources.get("tools/mesa_agx/bridge.c") or
+                build.get("adapter_sha256") != build["sources"].get("agxforge-bridge/bridge.c")):
+            raise ValueError("Mesa adapter/source identity mismatch")
+        if (identity.get("protocol_sha256") != sha(folder/"input.ir") or
+                identity.get("code_sha256") != sha(folder/"shader.bin")):
+            raise ValueError("Mesa IR/code identity mismatch")
+        descriptor = identity["descriptor"]
+        fields = {key: descriptor[key] for key in G13Program.__dataclass_fields__ if key != "code"}
+        fields["bindings"] = tuple(Binding(**b) for b in fields["bindings"])
+        for key in ("reserved_register_halfs", "builtins"): fields[key] = tuple(fields[key])
+        program = G13Program(code=(folder/"shader.bin").read_bytes(), **fields)
+        from_binary(program, program.code, json.loads((folder/"metadata.json").read_text()))
+        if descriptor.get("origin") != "Mesa 26.2.4 NIR -> AGX" or descriptor.get("code_sha256") != program.code_hash:
+            raise ValueError("Mesa descriptor/code mismatch")
+        records.setdefault(program.code_hash, []).append(descriptor)
+    return records
+
+
 def audit(root, manifest=None, *, expected_executor=None):
     summary = json.loads((root/"summary.json").read_text())
     if summary["status"] != "PASS": raise ValueError("bundle does not record a correctness pass")
@@ -30,11 +63,20 @@ def audit(root, manifest=None, *, expected_executor=None):
     launches = list(root.rglob("launch.json"))
     expected_launches = summary.get("dispatches", len(checks))
     if len(launches) != expected_launches: raise ValueError("launch count disagrees with receipt")
+    mesa_records = None
     for path in launches:
         launch = json.loads(path.read_text()); p=launch["program"]
         if launch["status"] != "COMPLETED" or not launch.get("fence_completed") or not launch.get("canaries_intact"):
             raise ValueError(f"incomplete/unguarded launch: {path}")
         executor = launch.get("executor")
+        if p.get("origin") == "Mesa 26.2.4 NIR -> AGX":
+            if mesa_records is None: mesa_records = mesa_compilation_records(root)
+            if p not in mesa_records.get(p["code_sha256"], []):
+                raise ValueError("Mesa launch has no matching compilation receipt")
+            if summary.get("compiler", "Mesa 26.2.4 AGX") != "Mesa 26.2.4 AGX":
+                raise ValueError("Mesa execution contradicts summary compiler")
+        elif summary.get("compiler") == "Mesa 26.2.4 AGX":
+            raise ValueError("Mesa run contains a shader from another compiler")
         if expected_executor is not None and executor != expected_executor:
             raise ValueError(f"launch executor differs from requested backend: {path}")
         apple_baseline = executor == "Apple-compiled scalar Metal"

@@ -1,0 +1,18 @@
+{
+  "system": "Darwin",
+  "kernel": {
+    "system": "Darwin",
+    "node": "MacBookAir",
+    "release": "27.0.0",
+    "version": "Darwin Kernel Version 27.0.0: Tue Aug 11 21:05:27 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T8103",
+    "machine": "arm64",
+    "processor": "arm"
+  },
+  "macos": "27.0.1",
+  "build": "26A434",
+  "gpu": "Apple M1",
+  "driver": "Metal",
+  "executor": "G13 machine code through Metal",
+  "page_bytes": 16384,
+  "python": "3.14.8"
+}

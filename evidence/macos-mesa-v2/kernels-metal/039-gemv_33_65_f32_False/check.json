@@ -1,0 +1,12 @@
+{
+  "name": "gemv_33_65_f32_False",
+  "logical_threads": 33,
+  "atol": 2e-06,
+  "rtol": 1e-05,
+  "status": "PASS",
+  "max_abs_error": 9.33597624763749e-08,
+  "expected_dtype": "float64",
+  "actual_dtype": "float32",
+  "fence_completed": true,
+  "canaries_intact": true
+}

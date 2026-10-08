@@ -1,0 +1,1 @@
+{"compiler":"Mesa 26.2.4 AGX","register_halfs":24,"uniform_halfs":20,"binary_size":630,"main_size":630,"main_offset":0,"has_preamble":false,"scratch_bytes":0,"threadgroup_bytes":0,"rodata_halfs":0,"workgroup_size":[32,1,1]}
